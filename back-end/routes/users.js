@@ -27,10 +27,11 @@ router.post('/login', async function(req, res, next) {
   }
 });
 
-router.post('/update-profile', async function(req, res, next) {
+router.post('/update-profile',checkAuthenticationHeader, async function(req, res, next) {
   try{
   console.log(req.body);
-  let resp = await updateProfile(req.body);
+
+  let resp = await updateProfile({...req.body,_id:req._id});
   console.log('resp is',resp);
   res.json({message:resp});
   }catch(error){

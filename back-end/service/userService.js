@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const { default: mongoose } = require('mongoose');
 const { User, Address } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 
@@ -73,22 +74,31 @@ async function getProfile(_id) {
   }
 }
 
-function updateProfile(userDetails) {
+async function updateProfile(userDetails) {
   return new Promise((resolve, reject) => {
-    const dob = userDetails.dob.split('-');
-    const datatoUpdate = {
-      fullname: userDetails.fullname,
-      phone: userDetails.phone,
-      gender: userDetails.gender,
-      dob: new Date(dob[0], dob[1] - 1, dob[2]),
-      about: userDetails.about,
-      address_1: userDetails.address_1,
-      address_2: userDetails.address_2,
-      city: userDetails.city,
-      country: userDetails.country,
-      profile_pic_url: userDetails.profile_pic_url,
-    };
-    User.updateOne({ _id: userDetails.user_id }, datatoUpdate).exec()
+    console.log('userdetails are',userDetails);
+
+    const address = {
+      street:userDetails.address.street,
+      city: userDetails.address.city,
+      state: userDetails.address.state,
+      zip: userDetails.address.zip
+    }
+    const addressfilter = {_id:userDetails.address._id|| new mongoose.mongo.ObjectId()};
+    const doc = Address.findOneAndUpdate(addressfilter, address, {
+      new: true,
+      upsert: true // Make this update into an upsert
+    }).then(doc=>{
+      const dob = userDetails.dob.split('-');
+      const datatoUpdate = {
+        name: userDetails.name,
+        phone: userDetails.phone,
+        gender: userDetails.gender,
+        dob: new Date(dob[0], dob[1] - 1, dob[2]),
+        about: userDetails.about,
+        address: doc._id
+      };
+      User.updateOne({ _id: userDetails._id }, datatoUpdate).exec()
       .then((created) => {
         console.log(created);
         if (created.modifiedCount > 0) {
@@ -99,9 +109,12 @@ function updateProfile(userDetails) {
       })
       .catch((error) => {
         console.log('error occured', error);
-        reject(new Error('User already registered'));
+        reject(new Error(error.message));
       });
   });
+    })
+
+
 }
 
 
