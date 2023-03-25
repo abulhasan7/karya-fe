@@ -6,7 +6,7 @@ module.exports =  (Schema) =>
         type: String,
     },
     verified: {
-        type: checkbox,
+        type: Boolean,
     },
     phone: {
         type: String,
@@ -15,7 +15,7 @@ module.exports =  (Schema) =>
         type: String,
     },
     workingHours: {
-        type: TimeRanges,
+        type: String,
     },
     avgRating: {
         type: Number,
@@ -32,7 +32,7 @@ module.exports =  (Schema) =>
         default: 0
     },
     services: {
-        type: Array,
+        type: Schema.Types.ObjectId, ref: 'Services',
     },
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',

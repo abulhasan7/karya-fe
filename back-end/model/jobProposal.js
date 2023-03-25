@@ -16,8 +16,9 @@ module.exports =  (Schema) =>
     },
     status: {
         type: picklist ,
+        //enum
     },
     serviceProvider: {
-        type: Schema.Types.ObjectId, ref: 'serviceProvider',
+        type: Schema.Types.ObjectId, ref: 'ServiceProvider',
       },
 });

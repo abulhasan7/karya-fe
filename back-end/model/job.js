@@ -15,7 +15,7 @@ module.exports =  (Schema) =>
         type: Number,
     },
     acceptedProposal: {
-        type: Checkbox,
+        type: Schema.Types.ObjectId, ref: 'JobProposal',
     },
     attachments: {
         type: Array,
@@ -35,12 +35,12 @@ module.exports =  (Schema) =>
         type: Schema.Types.ObjectId, ref: 'Address',
       },
     user: {
-        type: Schema.Types.ObjectId, ref: 'user',
+        type: Schema.Types.ObjectId, ref: 'User',
       },
     serviceProvider: {
-        type: Schema.Types.ObjectId, ref: 'serviceProvider',
+        type: Schema.Types.ObjectId, ref: 'ServiceProvider',
       },
     services: {
-        type: Schema.Types.ObjectId, ref: 'services',
+        type: Schema.Types.ObjectId, ref: 'Services',
       },
 });

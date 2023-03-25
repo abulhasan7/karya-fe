@@ -7,6 +7,6 @@ module.exports =  (Schema) =>
     },
 
     servicepPovider: {
-        type: Schema.Types.ObjectId, ref: 'servicepPovider',
+        type: Schema.Types.ObjectId, ref: 'ServicePovider',
       },
 });
