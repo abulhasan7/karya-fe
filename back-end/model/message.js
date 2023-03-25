@@ -1,17 +1,17 @@
 module.exports =  (Schema) =>
    ({ from: {
-        type: String,
-    },
+    type: Schema.Types.ObjectId, ref: 'User',
+},
     to: {
-        type: String,
+        type: Schema.Types.ObjectId, ref: 'User',
     },
-    Message: {
-        type: picklist ,
+    message: {
+        type: String ,
     },
     timeStamp: {
         type: datetime,
     },
     jobProposal: {
-        type: Schema.Types.ObjectId, ref: 'jobProposal',
+        type: Schema.Types.ObjectId, ref: 'JobProposal',
       },
 });
