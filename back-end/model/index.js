@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const user = require('./user');
 const address = require('./address');
 const jobProposal = require('./jobProposal');
+const job = require('./job');
+const message = require('./message');
+const service = require('./service');
+const serviceProvider = require('./serviceProvider');
 
 const { Schema } = mongoose;
 
@@ -31,7 +35,7 @@ mongoose.connect("mongodb+srv://admin:admin@cluster0.rggudu0.mongodb.net/?retryW
     },
   });
 
-  const serviceProviderSchema = new Schema(ServiceProvider);
+  const serviceProviderSchema = new Schema(serviceProvider(Schema));
   serviceProviderSchema.set('toJSON', {
     transform(doc, ret, options) {
       delete ret._id;
@@ -39,7 +43,7 @@ mongoose.connect("mongodb+srv://admin:admin@cluster0.rggudu0.mongodb.net/?retryW
     },
   });
 
-  const servicesSchema = new Schema(services);
+  const servicesSchema = new Schema(service(Schema));
   servicesSchema.set('toJSON', {
     transform(doc, ret, options) {
       delete ret._id;
@@ -47,7 +51,7 @@ mongoose.connect("mongodb+srv://admin:admin@cluster0.rggudu0.mongodb.net/?retryW
     },
   });
 
-  const jobSchema = new Schema(job);
+  const jobSchema = new Schema(job(Schema));
   jobSchema.set('toJSON', {
     transform(doc, ret, options) {
       delete ret._id;
@@ -55,7 +59,7 @@ mongoose.connect("mongodb+srv://admin:admin@cluster0.rggudu0.mongodb.net/?retryW
     },
   });
 
-  const jobProposalSchema = new Schema(jobProposal);
+  const jobProposalSchema = new Schema(jobProposal(Schema));
   jobProposalSchema.set('toJSON', {
     transform(doc, ret, options) {
       delete ret._id;
@@ -63,7 +67,7 @@ mongoose.connect("mongodb+srv://admin:admin@cluster0.rggudu0.mongodb.net/?retryW
     },
   });
 
-  const messageSchema = new Schema(message);
+  const messageSchema = new Schema(message(Schema));
   messageSchema.set('toJSON', {
     transform(doc, ret, options) {
       delete ret._id;
@@ -74,18 +78,18 @@ mongoose.connect("mongodb+srv://admin:admin@cluster0.rggudu0.mongodb.net/?retryW
   const User = mongoose.model('User', userSchema);
   const Address = mongoose.model('Address', addressSchema);
   const ServiceProvider = mongoose.model('ServiceProvider', serviceProviderSchema);
-  const Services = mongoose.model('Services', serviceProviderSchema);
-  const job = mongoose.model('job', serviceProviderSchema);
-  const jobProposal = mongoose.model('jobProposal', serviceProviderSchema);
-  const message = mongoose.model('message', serviceProviderSchema);
+  const Service = mongoose.model('Services', servicesSchema);
+  const Job = mongoose.model('job', jobSchema);
+  const JobProposal = mongoose.model('jobProposal', jobProposalSchema);
+  const Message = mongoose.model('message', messageSchema);
 
 
   module.exports = {
     User,
     Address,
     ServiceProvider,
-    Services,
-    job,
-    jobProposal,
-    message
+    Service,
+    Job,
+    JobProposal,
+    Message
   }
