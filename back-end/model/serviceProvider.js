@@ -5,6 +5,9 @@ module.exports =  (Schema) =>
     email: {
         type: String,
     },
+    password: {
+        type: String,
+    },
     verified: {
         type: Boolean,
         default: false
