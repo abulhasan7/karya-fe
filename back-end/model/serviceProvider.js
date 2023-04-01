@@ -7,6 +7,7 @@ module.exports =  (Schema) =>
     },
     verified: {
         type: Boolean,
+        default: false
     },
     phone: {
         type: String,
@@ -31,9 +32,10 @@ module.exports =  (Schema) =>
         type: Number,
         default: 0
     },
-    services: {
+    //todo tuple
+    services: [{
         type: Schema.Types.ObjectId, ref: 'Services',
-    },
+    }],
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
       },

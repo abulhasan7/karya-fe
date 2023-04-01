@@ -1,8 +1,6 @@
-module.exports =  (Schema) =>
-   ({ jobId: {
-        type: String,
-    },
-    Description: {
+module.exports = (Schema) =>
+({
+    description: {
         type: String,
     },
     hours: {
@@ -15,10 +13,10 @@ module.exports =  (Schema) =>
         type: Number,
     },
     status: {
-        type: picklist ,
+        type: String,
         //enum
     },
     serviceProvider: {
         type: Schema.Types.ObjectId, ref: 'ServiceProvider',
-      },
+    },
 });

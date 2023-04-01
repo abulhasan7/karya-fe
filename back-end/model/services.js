@@ -5,8 +5,7 @@ module.exports =  (Schema) =>
     description : {
         type: String,
     },
-
-    servicepPovider: {
-        type: Schema.Types.ObjectId, ref: 'ServicePovider',
-      },
+    serviceProviders: [{
+        type: Schema.Types.ObjectId, ref: 'ServiceProvider',
+    }],
 });

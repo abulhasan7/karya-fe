@@ -1,15 +1,22 @@
-module.exports =  (Schema) =>
-   ({ name: {
+module.exports = (Schema) =>
+({
+    name: {
         type: String,
     },
-    Desrciption : {
+    description: {
         type: String,
     },
+    attachmentUrls: [
+        {
+            type: String,
+        }
+    ],
     estimatedTime: {
+        //In hours
         type: Number,
     },
     estimatedBudget: {
-        type:  Number,
+        type: Number,
     },
     estimatedHourlyBudget: {
         type: Number,
@@ -17,30 +24,24 @@ module.exports =  (Schema) =>
     acceptedProposal: {
         type: Schema.Types.ObjectId, ref: 'JobProposal',
     },
-    attachments: {
-        type: Array,
-    },
     status: {
-        type: Array,
+        type: String,
+        //todo enum
     },
     userRating: {
         type: Number,
-        default: 0
-    },
-    noOfJobsActive: {
-        type: Number,
-        default: 0
+        default: 10
     },
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
-      },
+    },
     user: {
         type: Schema.Types.ObjectId, ref: 'User',
-      },
+    },
     serviceProvider: {
         type: Schema.Types.ObjectId, ref: 'ServiceProvider',
-      },
-    services: {
-        type: Schema.Types.ObjectId, ref: 'Services',
-      },
+    },
+    services: [{
+        type: Schema.Types.ObjectId, ref: 'Service',
+    }],
 });
