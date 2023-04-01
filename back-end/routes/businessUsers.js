@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var {register,login,updateProfile,getProfile}= require('../service/businessUserService');
-var {checkAuthenticationHeader} = require('../util/jwtUtil');
+var {checkBusinessAuthenticationHeader} = require('../util/jwtUtil');
 
 router.post('/register', async function(req, res, next) {
   try{
@@ -27,7 +27,7 @@ router.post('/login', async function(req, res, next) {
   }
 });
 
-router.post('/update-profile',checkAuthenticationHeader, async function(req, res, next) {
+router.post('/update-profile',checkBusinessAuthenticationHeader, async function(req, res, next) {
   try{
   console.log(req.body);
 
@@ -40,7 +40,7 @@ router.post('/update-profile',checkAuthenticationHeader, async function(req, res
   }
 });
 
-router.get('/get-profile',checkAuthenticationHeader, async function(req, res, next) {
+router.get('/get-profile',checkBusinessAuthenticationHeader, async function(req, res, next) {
   try{
   let resp = await getProfile(req._id);
   console.log('resp is',resp);

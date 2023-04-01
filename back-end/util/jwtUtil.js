@@ -62,4 +62,4 @@ function checkBusinessAuthenticationHeader(req, res, next) {
   
   next();
 }
-module.exports = { generateToken, generateTokenForBusiness, checkAuthenticationHeader };
+module.exports = { generateToken, generateTokenForBusiness, checkBusinessAuthenticationHeader, checkAuthenticationHeader };
