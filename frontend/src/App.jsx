@@ -1,26 +1,26 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/react-in-jsx-scope */
-import logo from './logo.svg';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ButtonAppBar from './components/navbar/navbar';
 import './App.css';
 
+const theme = createTheme({
+	palette: {
+		mode: 'light',
+		primary: {
+			main: '#ee2b57',
+		},
+		secondary: {
+			main: '#f50057',
+		},
+	},
+});
 function App() {
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
+		<ThemeProvider theme={theme}>
+			<ButtonAppBar />
+		</ThemeProvider>
 	);
 }
 
