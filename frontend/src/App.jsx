@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/react-in-jsx-scope */
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ButtonAppBar from './components/navbar/navbar';
+import MenuBar from './components/menubar/MenuBar';
 import './App.css';
 
 const theme = createTheme({
@@ -19,7 +19,7 @@ const theme = createTheme({
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<ButtonAppBar />
+			<MenuBar />
 		</ThemeProvider>
 	);
 }
