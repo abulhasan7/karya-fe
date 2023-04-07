@@ -3,22 +3,41 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 // import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import { Link } from 'react-router-dom';
-// import Typography from '@mui/material/Typography';
+// import { Link } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import IconButton from '@mui/material/IconButton';
 // import MenuIcon from '@mui/icons-material/Menu';
+import HubIcon from '@mui/icons-material/Hub';
 import './MenuBar.css';
-import logo from '../../karya-logo.png';
+// import logo from '../../logo.png';
 
 export default function MenuBar() {
 	return (
 		<nav>
-			<AppBar position="static">
+			<AppBar position="static" color="transparent">
 				<Toolbar>
-					<Link to="/">
-						<img className="header__logo" src={logo} alt="Karya" />
-					</Link>
+					<HubIcon
+						sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+						color="primary"
+					/>
+					<Typography
+						variant="h6"
+						noWrap
+						component="a"
+						href="/"
+						sx={{
+							mr: 2,
+							display: { xs: 'none', md: 'flex' },
+							fontFamily: 'monospace',
+							fontWeight: 700,
+							letterSpacing: '.3rem',
+							color: 'primary',
+							textDecoration: 'none !important',
+						}}
+					>
+						karya
+					</Typography>
 				</Toolbar>
 			</AppBar>
 		</nav>
