@@ -1,0 +1,27 @@
+.ls-bg {
+	background-color: honeydew;
+	display: flex;
+	flex-direction: column;
+	padding: 10%;
+	align-items: center;
+}
+
+.ls-search-container {
+	width: 40%;
+	display: flex;
+	padding: 35px;
+}
+
+.ls-search-container > * {
+}
+.ls-search {
+	width: 80%;
+}
+
+.ls-services {
+	display: flex;
+}
+
+.ls-services > * {
+	padding: 25px;
+}

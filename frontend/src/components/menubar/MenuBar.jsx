@@ -24,7 +24,7 @@ export default function MenuBar() {
 					<Typography
 						variant="h6"
 						noWrap
-						component="a"
+						component="h6"
 						href="/"
 						sx={{
 							mr: 2,
@@ -33,7 +33,6 @@ export default function MenuBar() {
 							fontWeight: 700,
 							letterSpacing: '.3rem',
 							color: 'primary',
-							textDecoration: 'none !important',
 						}}
 					>
 						karya
