@@ -9,10 +9,6 @@ module.exports = (Schema) =>
     message: {
         type: String,
     },
-    timeStamp: {
-        type: Date,
-        default: Date.now
-    },
     jobProposal: {
         type: Schema.Types.ObjectId, ref: 'JobProposal',
     },

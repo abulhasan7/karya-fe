@@ -28,6 +28,10 @@ module.exports =  (Schema) =>
         type: Number,
         default: 0
     },
+    isAdmin:{
+        type: Boolean,
+        default: false
+    },
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
       },

@@ -9,7 +9,7 @@ async function register(ServiceProviderDetails){
         bcrypt
           .hash(ServiceProviderDetails.password, 10)
           .then((hashedValue) => {
-            const createdServiceProvider = new ServiceProviderDetails({
+            const createdServiceProvider = new ServiceProvider({
               name: ServiceProviderDetails.name,
               email: ServiceProviderDetails.email,
               password: hashedValue,
@@ -21,7 +21,7 @@ async function register(ServiceProviderDetails){
           })
           .then((createdServiceProvider) => {
             console.log(createdServiceProvider);
-            const token = jwtUtil.generateTokenForBusiness(createdUser._id);
+            const token = jwtUtil.generateTokenForBusiness(createdServiceProvider._id);
             resolve({ token });
           })
           .catch((error) => {
@@ -64,7 +64,7 @@ async function login(ServiceProviderDetails) {
 async function getProfile(_id) {
   try {
     console.log('getProfile with _id', _id);
-    const dbData = await ServiceProviderDetails.findOne({ _id }, { __v: 0 }).exec();
+    const dbData = await ServiceProvider.findOne({ _id }, { __v: 0 }).exec();
     console.log('dbdata', dbData);
     if (!dbData) {
       throw new Error('ServiceProvider not found');

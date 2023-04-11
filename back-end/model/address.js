@@ -1,4 +1,5 @@
-module.exports = {
+module.exports = (Schema) =>
+({
     street: {
         type: String
     },
@@ -10,5 +11,6 @@ module.exports = {
     },
     zip: {
         type: Number
-    }
-};
+    },
+    
+});

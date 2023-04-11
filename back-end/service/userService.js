@@ -31,7 +31,7 @@ async function register(userDetails){
 async function login(userDetails) {
   try {
     console.log('logincalled with ', userDetails);
-    const dbData = await User.findOne({ email: userDetails.email }, { __v: 0 }).exec();
+    const dbData = await User.findOne({ email: userDetails.email,isAdmin:false }, { __v: 0 }).exec();
     console.log('dbdata', dbData);
     if (!dbData) {
       throw new Error('User not found');
