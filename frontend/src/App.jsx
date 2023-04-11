@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuBar from './components/menubar/MenuBar';
 import LandingSearch from './components/landingSearch/LandingSearch';
 import './App.css';
+import Chat from './pages/chat/Chat';
 
 const theme = createTheme({
 	palette: {
@@ -20,8 +21,7 @@ const theme = createTheme({
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<MenuBar />
-			<LandingSearch />
+			<Chat />
 		</ThemeProvider>
 	);
 }

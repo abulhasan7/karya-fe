@@ -21,6 +21,8 @@
 		"react/jsx-indent-props": [2, "tab"],
 		"eol-last": 0,
 		"operator-linebreak": "off",
+		"import/no-extraneous-dependencies": "off",
+		"no-unused-vars": "off",
 		"max-len": 1,
 		"react/self-closing-comp": "off",
 		"react/jsx-closing-tag-location": "off",
@@ -29,6 +31,7 @@
 		"react/jsx-wrap-multilines": 0,
 		"react/jsx-curly-newline": 0,
 		"react/jsx-no-bind": 0,
+		"react/react-in-jsx-scope": 0,
 		"no-console": ["warn", { "allow": ["error"] }]
 	}
 }
