@@ -6,6 +6,7 @@ import MenuBar from './components/menubar/MenuBar';
 import LandingSearch from './components/landingSearch/LandingSearch';
 import './App.css';
 import Chat from './pages/chat/Chat';
+import JobCreator from './components/jobCreator/JobCreator';
 
 const theme = createTheme({
 	palette: {
@@ -21,7 +22,7 @@ const theme = createTheme({
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<Chat />
+			<JobCreator />
 		</ThemeProvider>
 	);
 }
