@@ -7,6 +7,7 @@ import LandingSearch from './components/landingSearch/LandingSearch';
 import './App.css';
 import Chat from './pages/chat/Chat';
 import JobCreator from './components/jobCreator/JobCreator';
+import BusinessCardView from './components/businessCardView/BusinessCardView';
 
 const theme = createTheme({
 	palette: {
@@ -22,7 +23,7 @@ const theme = createTheme({
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<JobCreator />
+			<BusinessCardView />
 		</ThemeProvider>
 	);
 }
