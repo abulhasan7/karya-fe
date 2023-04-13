@@ -1,5 +1,6 @@
-module.exports =  (Schema) =>
-   ({ name: {
+module.exports = (Schema) =>
+({
+    name: {
         type: String,
     },
     email: {
@@ -19,7 +20,12 @@ module.exports =  (Schema) =>
         type: String,
     },
     workingHours: {
-        type: String,
+        open: {
+            type: String,
+        },
+        close: {
+            type: String
+        }
     },
     avgRating: {
         type: Number,
@@ -38,8 +44,12 @@ module.exports =  (Schema) =>
     //todo tuple
     services: [{
         type: Schema.Types.ObjectId, ref: 'Services',
+        rate: {
+            type: Number,
+            default: 0
+        }
     }],
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
-      },
+    },
 });
