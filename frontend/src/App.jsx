@@ -9,6 +9,7 @@ import Chat from './pages/chat/Chat';
 import JobCreator from './components/jobCreator/JobCreator';
 import BusinessCardView from './components/businessCardView/BusinessCardView';
 import UserLogin from './pages/userLogin/UserLogin';
+import UserSignup from './pages/userSignup/UserSignup';
 
 const theme = createTheme({
 	palette: {

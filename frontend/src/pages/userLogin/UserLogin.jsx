@@ -86,10 +86,11 @@ export default function UserLogin() {
 							fullWidth
 							variant="contained"
 							sx={{ mt: 3, mb: 2 }}
+							size="small"
 						>
 							Sign In
 						</Button>
-						<Grid container>
+						<Grid container justifyContent="flex-end">
 							<Grid item>
 								<Link href="/" variant="body2">
 									New here? Sign Up
