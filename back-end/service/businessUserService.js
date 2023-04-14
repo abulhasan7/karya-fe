@@ -1,34 +1,34 @@
 const bcrypt = require('bcrypt');
 const { default: mongoose } = require('mongoose');
-const { ServiceProvider, Address } = require('../model/index');
+const { ServiceProvider, Address, Service, ServiceToRate } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 
 
-async function register(ServiceProviderDetails){
-    return new Promise((resolve, reject) => {
-        bcrypt
-          .hash(ServiceProviderDetails.password, 10)
-          .then((hashedValue) => {
-            const createdServiceProvider = new ServiceProvider({
-              name: ServiceProviderDetails.name,
-              email: ServiceProviderDetails.email,
-              password: hashedValue,
-              address: ServiceProviderDetails.address,
-              about: ServiceProviderDetails.about,
-              workingHours: ServiceProviderDetails.workingHours
-            });
-            return createdServiceProvider.save();
-          })
-          .then((createdServiceProvider) => {
-            console.log(createdServiceProvider);
-            const token = jwtUtil.generateTokenForBusiness(createdServiceProvider._id);
-            resolve({ token });
-          })
-          .catch((error) => {
-            console.log('error occured', error);
-            reject(new Error('User already registered'));
-          });
+async function register(ServiceProviderDetails) {
+  return new Promise((resolve, reject) => {
+    bcrypt
+      .hash(ServiceProviderDetails.password, 10)
+      .then((hashedValue) => {
+        const createdServiceProvider = new ServiceProvider({
+          name: ServiceProviderDetails.name,
+          email: ServiceProviderDetails.email,
+          password: hashedValue,
+          address: ServiceProviderDetails.address,
+          about: ServiceProviderDetails.about,
+          workingHours: ServiceProviderDetails.workingHours
+        });
+        return createdServiceProvider.save();
+      })
+      .then((createdServiceProvider) => {
+        console.log(createdServiceProvider);
+        const token = jwtUtil.generateTokenForBusiness(createdServiceProvider._id,false);
+        resolve({ token });
+      })
+      .catch((error) => {
+        console.log('error occured', error);
+        reject(new Error('User already registered'));
       });
+  });
 }
 
 async function login(ServiceProviderDetails) {
@@ -48,7 +48,7 @@ async function login(ServiceProviderDetails) {
       } else {
         const obj = {
           token: jwtUtil.generateTokenForBusiness(
-            dbData._id), 
+            dbData._id,dbData.verified),
           profile: dbData,
         };
         obj.profile.user_id = dbData._id;
@@ -78,50 +78,71 @@ async function getProfile(_id) {
 }
 
 //todo 
-async function updateProfile(ServiceProviderDetails) {
-  return new Promise((resolve, reject) => {
-    console.log('userdetails are',userDetails);
+async function updateProfile(serviceProviderDetails) {
+  console.log('ServiceProviderDetails are', serviceProviderDetails);
 
-    const address = {
-      street:userDetails.address.street,
-      city: userDetails.address.city,
-      state: userDetails.address.state,
-      zip: userDetails.address.zip
-    }
-    const addressfilter = {_id:userDetails.address._id|| new mongoose.mongo.ObjectId()};
-    const doc = Address.findOneAndUpdate(addressfilter, address, {
-      new: true,
-      upsert: true // Make this update into an upsert
-    }).then(doc=>{
-      const dob = userDetails.dob.split('-');
-      const datatoUpdate = {
-        name: userDetails.name,
-        phone: userDetails.phone,
-        gender: userDetails.gender,
-        dob: new Date(dob[0], dob[1] - 1, dob[2]),
-        about: userDetails.about,
-        address: doc._id
-      };
-      User.updateOne({ _id: userDetails._id }, datatoUpdate).exec()
-      .then((created) => {
-        console.log(created);
-        if (created.modifiedCount > 0) {
-          resolve('User Profile updated successfully');
-        } else {
-          throw new Error('User not found or No Changes');
-        }
-      })
-      .catch((error) => {
-        console.log('error occured', error);
-        reject(new Error(error.message));
-      });
-  });
-    })
+  const address = {
+    street: serviceProviderDetails.address.street,
+    city: serviceProviderDetails.address.city,
+    state: serviceProviderDetails.address.state,
+    zip: serviceProviderDetails.address.zip
+  }
+  //TODO ADD A SERVICE
+  const addressfilter = { _id: serviceProviderDetails.address._id || new mongoose.mongo.ObjectId() };
+  const doc = await Address.findOneAndUpdate(addressfilter, address, {
+    new: true,
+    upsert: true // Make this update into an upsert
+  })
+  const services1 = await ServiceToRate.insertMany(serviceProviderDetails.services, { ordered: false })
+  let services11 = [];
+  services1.forEach(service => services11.push(service._id))
+  console.log("services 1", services1);
+  const datatoUpdate = {
+    name: serviceProviderDetails.name,
+    phone: serviceProviderDetails.phone,
+    about: serviceProviderDetails.about,
+    address: doc._id,
+    workingHours: serviceProviderDetails.workingHours,
+    services: services11
+  };
+  // await ServiceProvider.collection.bulkWrite()
+  const created = await ServiceProvider.updateOne({ _id: serviceProviderDetails._id }, datatoUpdate).exec();
+  console.log('services11',services11)
+  services1.forEach(ser => {
+    Service.updateOne({ _id: ser.service }, { $addToSet: { serviceProviders: serviceProviderDetails._id } 
+    }).exec()});
+  if (created.modifiedCount > 0) {
+    return 'ServiceProvider Profile updated successfully';
+  } else {
+    throw new Error('ServiceProvider not found or No Changes');
+  }
 
 
 }
 
 
+async function addService(serviceDetails) {
+  return new Promise((resolve, reject) => {
+    const service = new Service({
+      name: serviceDetails.name,
+      description: serviceDetails.description,
+      // serviceProviders: [serviceDetails._id]
+    });
+    service.save()
+      .then((e) => { console.log(e), resolve("Service Added successfully") })
+      .catch((error) => {
+        console.log('error occured', error);
+        reject(new Error('Either Service Name or Description is duplicate'));
+      })
+  });
+}
+
+async function getServices() {
+  const services = await Service.find().exec();
+  console.log("services are", services);
+  return services;
+}
+
 module.exports = {
-    register,login,getProfile,updateProfile
+  register, login, getProfile, updateProfile, addService, getServices
 }
