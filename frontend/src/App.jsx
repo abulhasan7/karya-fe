@@ -4,6 +4,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuBar from './components/menubar/MenuBar';
 import LandingSearch from './components/landingSearch/LandingSearch';
+import LandingPage from './pages/landingPage/LandingPage';
 import './App.css';
 import Chat from './pages/chat/Chat';
 import JobCreator from './components/jobCreator/JobCreator';
@@ -15,7 +16,8 @@ const theme = createTheme({
 	palette: {
 		mode: 'light',
 		primary: {
-			main: '#fc5647',
+			main: '#f77367',
+			contrastText: '#fff',
 		},
 		secondary: {
 			main: '#f50057',
