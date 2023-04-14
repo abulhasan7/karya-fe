@@ -86,7 +86,7 @@ function checkBusinessAuthenticationHeaderForVerified(req, res, next) {
         if(decoded.isBusiness){
           isError = false;
         }
-        if(!decoded.verfied){
+        if(!decoded.verified){
           throw new Error('Business not verified');
 
         }

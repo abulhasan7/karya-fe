@@ -109,7 +109,7 @@ async function updateProfile(serviceProviderDetails) {
   const created = await ServiceProvider.updateOne({ _id: serviceProviderDetails._id }, datatoUpdate).exec();
   console.log('services11',services11)
   services1.forEach(ser => {
-    Service.updateOne({ _id: ser.service }, { $push: { serviceProviders: serviceProviderDetails._id } 
+    Service.updateOne({ _id: ser.service }, { $addToSet: { serviceProviders: serviceProviderDetails._id } 
     }).exec()});
   if (created.modifiedCount > 0) {
     return 'ServiceProvider Profile updated successfully';
@@ -137,7 +137,7 @@ async function addService(serviceDetails) {
   });
 }
 
-async function getServices(serviceDetails) {
+async function getServices() {
   const services = await Service.find().exec();
   console.log("services are", services);
   return services;
