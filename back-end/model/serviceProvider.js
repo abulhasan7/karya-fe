@@ -43,12 +43,8 @@ module.exports = (Schema) =>
     },
     //todo tuple
     services: [{
-        type: Schema.Types.ObjectId, ref: 'Services',
-        rate: {
-            type: Number,
-            default: 0
-        }
-    }],
+        type: Schema.Types.ObjectId, ref: 'ServiceToRate' }
+    ],
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
     },
