@@ -26,11 +26,11 @@ module.exports = (Schema) =>
     },
     status: {
         type: String,
-        //todo enum
+        enum: ["POSTED","ACCEPTING-PROPOSALS","PROPOSAL-ACCEPTED","IN-PROGRESS","DELAYED","COMPLETED"]
     },
     userRating: {
         type: Number,
-        default: 10
+        default: 0
     },
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
@@ -41,7 +41,7 @@ module.exports = (Schema) =>
     serviceProvider: {
         type: Schema.Types.ObjectId, ref: 'ServiceProvider',
     },
-    services: [{
+    service: {
         type: Schema.Types.ObjectId, ref: 'Service',
-    }],
+    },
 });

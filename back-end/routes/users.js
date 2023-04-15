@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var {register,login,updateProfile,getProfile}= require('../service/userService');
+var {register,login,updateProfile,getProfile,postJob,getJob,getJobs}= require('../service/userService');
 var {checkAuthenticationHeader} = require('../util/jwtUtil');
 var {getServices} = require('../service/businessUserService');
 
@@ -27,6 +27,43 @@ router.post('/login', async function(req, res, next) {
     res.json({error:error.message})
   }
 });
+
+router.post('/post-job', async function(req, res, next) {
+  try{
+  console.log(req.body);
+  let resp = await postJob({...req.body,user:req._id});
+  console.log('resp is',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred",error);
+    res.json({error:error.message})
+  }
+});
+
+router.get('/get-jobs', async function(req, res, next) {
+  try{
+  console.log(req.body);
+  let resp = await getJobs(req._id);
+  console.log('resp is',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred",error);
+    res.json({error:error.message})
+  }
+});
+
+router.get('/get-job', async function(req, res, next) {
+  try{
+  console.log(req.query.jobId);
+  let resp = await getJob(req.query.jobId);
+  console.log('resp is',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred",error);
+    res.json({error:error.message})
+  }
+});
+
 
 router.post('/update-profile',checkAuthenticationHeader, async function(req, res, next) {
   try{

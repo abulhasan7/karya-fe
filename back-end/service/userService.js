@@ -1,37 +1,37 @@
 const bcrypt = require('bcrypt');
 const { default: mongoose } = require('mongoose');
-const { User, Address } = require('../model/index');
+const { User, Address, Job } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 
 
-async function register(userDetails){
-    return new Promise((resolve, reject) => {
-        bcrypt
-          .hash(userDetails.password, 10)
-          .then((hashedValue) => {
-            const createUser = new User({
-              name: userDetails.name,
-              email: userDetails.email,
-              password: hashedValue,
-            });
-            return createUser.save();
-          })
-          .then((createdUser) => {
-            console.log(createdUser);
-            const token = jwtUtil.generateToken(createdUser._id);
-            resolve({ token });
-          })
-          .catch((error) => {
-            console.log('error occured', error);
-            reject(new Error('User already registered'));
-          });
+async function register(userDetails) {
+  return new Promise((resolve, reject) => {
+    bcrypt
+      .hash(userDetails.password, 10)
+      .then((hashedValue) => {
+        const createUser = new User({
+          name: userDetails.name,
+          email: userDetails.email,
+          password: hashedValue,
+        });
+        return createUser.save();
+      })
+      .then((createdUser) => {
+        console.log(createdUser);
+        const token = jwtUtil.generateToken(createdUser._id);
+        resolve({ token });
+      })
+      .catch((error) => {
+        console.log('error occured', error);
+        reject(new Error('User already registered'));
       });
+  });
 }
 
 async function login(userDetails) {
   try {
     console.log('logincalled with ', userDetails);
-    const dbData = await User.findOne({ email: userDetails.email,isAdmin:false }, { __v: 0 }).exec();
+    const dbData = await User.findOne({ email: userDetails.email, isAdmin: false }, { __v: 0 }).exec();
     console.log('dbdata', dbData);
     if (!dbData) {
       throw new Error('User not found');
@@ -45,7 +45,7 @@ async function login(userDetails) {
       } else {
         const obj = {
           token: jwtUtil.generateToken(
-            dbData._id), 
+            dbData._id),
           profile: dbData,
         };
         obj.profile.user_id = dbData._id;
@@ -76,19 +76,19 @@ async function getProfile(_id) {
 
 async function updateProfile(userDetails) {
   return new Promise((resolve, reject) => {
-    console.log('userdetails are',userDetails);
+    console.log('userdetails are', userDetails);
 
     const address = {
-      street:userDetails.address.street,
+      street: userDetails.address.street,
       city: userDetails.address.city,
       state: userDetails.address.state,
       zip: userDetails.address.zip
     }
-    const addressfilter = {_id:userDetails.address._id|| new mongoose.mongo.ObjectId()};
+    const addressfilter = { _id: userDetails.address._id || new mongoose.mongo.ObjectId() };
     const doc = Address.findOneAndUpdate(addressfilter, address, {
       new: true,
       upsert: true // Make this update into an upsert
-    }).then(doc=>{
+    }).then(doc => {
       const dob = userDetails.dob.split('-');
       const datatoUpdate = {
         name: userDetails.name,
@@ -99,25 +99,72 @@ async function updateProfile(userDetails) {
         address: doc._id
       };
       User.updateOne({ _id: userDetails._id }, datatoUpdate).exec()
-      .then((created) => {
-        console.log(created);
-        if (created.modifiedCount > 0) {
-          resolve('User Profile updated successfully');
-        } else {
-          throw new Error('User not found or No Changes');
-        }
-      })
-      .catch((error) => {
-        console.log('error occured', error);
-        reject(new Error(error.message));
-      });
-  });
-    })
+        .then((created) => {
+          console.log(created);
+          if (created.modifiedCount > 0) {
+            resolve('User Profile updated successfully');
+          } else {
+            throw new Error('User not found or No Changes');
+          }
+        })
+        .catch((error) => {
+          console.log('error occured', error);
+          reject(new Error(error.message));
+        });
+    });
+  })
 
+
+}
+
+async function postJob(jobDetails) {
+  const address = {
+    street: jobDetails.address.street,
+    city: jobDetails.address.city,
+    state: jobDetails.address.state,
+    zip: jobDetails.address.zip
+  }
+  const addressfilter = { _id: jobDetails.address._id || new mongoose.mongo.ObjectId() };
+  const doc = Address.findOneAndUpdate(addressfilter, address, {
+    new: true,
+    upsert: true // Make this update into an upsert
+  })
+  let job = new Job({
+    name: jobDetails.name,
+    description: jobDetails.description,
+    attachmentUrls: jobDetails.attachmentUrls,
+    estimatedTime: jobDetails.estimatedTime,
+    estimatedBudget: jobDetails.estimatedBudget,
+    estimatedHourlyBudget: jobDetails.estimatedHourlyBudget,
+    status: "POSTED",
+    address: doc._id,
+    user: jobDetails.user,
+    service: jobDetails.service
+  })
+  let jobsaved = await job.save();
+  return "Job created successfully"
+}
+
+async function getJobs(_id) {
+  let jobs = Job.find({user:_id}).exec();
+  if(jobs){
+    return jobs;
+  }else{
+    throw new Error("No Jobs found for the user");
+  }
+}
+
+async function getJob(_id) {
+  let job = Job.findOne({_id}).exec();
+  if(job){
+    return job;
+  }else{
+    throw new Error("No Jobs found for the id");
+  }
 
 }
 
 
 module.exports = {
-    register,login,getProfile,updateProfile
+  register, login, getProfile, updateProfile,postJob, getJob,getJobs
 }
