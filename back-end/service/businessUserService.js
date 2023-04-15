@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { default: mongoose } = require('mongoose');
-const { ServiceProvider, Address, Service, ServiceToRate } = require('../model/index');
+const { ServiceProvider, Address, Service, ServiceToRate, JobProposal, Job } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 
 
@@ -137,12 +137,36 @@ async function addService(serviceDetails) {
   });
 }
 
+async function postProposal(jobDetails) {
+
+  let job = new JobProposal({
+    description: jobDetails.description,
+    hours: jobDetails.hours,
+    hourlyRate: jobDetails.hourlyRate,
+    price: jobDetails.price,
+    status: "POSTED",
+    serviceProvider: jobDetails._id,
+    job: jobDetails.job
+  })
+  let jobsaved = await job.save();
+  return "Job proposal created successfully"
+}
 async function getServices() {
   const services = await Service.find().exec();
   console.log("services are", services);
   return services;
 }
 
+async function getJobs(_id) {
+  console.log("_id is ",_id)
+  let jobs = Job.find({serviceProvider:_id}).exec();
+  if(jobs && jobs.length>0){
+    return jobs;
+  }else{
+    throw new Error("No Jobs found for the service provider");
+  }
+}
+
 module.exports = {
-  register, login, getProfile, updateProfile, addService, getServices
+  register, login, getProfile, getJobs, postProposal,updateProfile, addService, getServices
 }
