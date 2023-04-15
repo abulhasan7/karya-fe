@@ -142,23 +142,32 @@ async function postJob(jobDetails) {
     service: jobDetails.service
   })
   let jobsaved = await job.save();
+  console.log("user",jobDetails.user)
+  let u = await User.updateOne(
+    { _id: jobDetails.user },
+     { $inc: 
+      { noOfJobsPosted: 1,
+       noOfJobsActive: 1 
+      } 
+    });
+    console.log("u is",u)
   return "Job created successfully"
 }
 
 async function getJobs(_id) {
-  let jobs = Job.find({user:_id}).exec();
-  if(jobs){
+  let jobs = Job.find({ user: _id }).exec();
+  if (jobs) {
     return jobs;
-  }else{
+  } else {
     throw new Error("No Jobs found for the user");
   }
 }
 
 async function getJob(_id) {
-  let job = Job.findOne({_id}).exec();
-  if(job){
+  let job = Job.findOne({ _id }).exec();
+  if (job) {
     return job;
-  }else{
+  } else {
     throw new Error("No Jobs found for the id");
   }
 
@@ -166,5 +175,5 @@ async function getJob(_id) {
 
 
 module.exports = {
-  register, login, getProfile, updateProfile,postJob, getJob,getJobs
+  register, login, getProfile, updateProfile, postJob, getJob, getJobs
 }

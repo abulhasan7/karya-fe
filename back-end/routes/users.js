@@ -28,7 +28,7 @@ router.post('/login', async function(req, res, next) {
   }
 });
 
-router.post('/post-job', async function(req, res, next) {
+router.post('/post-job',checkAuthenticationHeader, async function(req, res, next) {
   try{
   console.log(req.body);
   let resp = await postJob({...req.body,user:req._id});
@@ -40,7 +40,7 @@ router.post('/post-job', async function(req, res, next) {
   }
 });
 
-router.get('/get-jobs', async function(req, res, next) {
+router.get('/get-jobs',checkAuthenticationHeader, async function(req, res, next) {
   try{
   console.log(req.body);
   let resp = await getJobs(req._id);
@@ -52,7 +52,7 @@ router.get('/get-jobs', async function(req, res, next) {
   }
 });
 
-router.get('/get-job', async function(req, res, next) {
+router.get('/get-job',checkAuthenticationHeader, async function(req, res, next) {
   try{
   console.log(req.query.jobId);
   let resp = await getJob(req.query.jobId);
