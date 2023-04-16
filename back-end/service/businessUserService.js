@@ -21,7 +21,7 @@ async function register(ServiceProviderDetails) {
       })
       .then((createdServiceProvider) => {
         console.log(createdServiceProvider);
-        const token = jwtUtil.generateTokenForBusiness(createdServiceProvider._id,false);
+        const token = jwtUtil.generateTokenForBusiness(createdServiceProvider._id, false);
         resolve({ token });
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ async function login(ServiceProviderDetails) {
       } else {
         const obj = {
           token: jwtUtil.generateTokenForBusiness(
-            dbData._id,dbData.verified),
+            dbData._id, dbData.verified),
           profile: dbData,
         };
         obj.profile.user_id = dbData._id;
@@ -65,7 +65,8 @@ async function getProfile(_id) {
   try {
     console.log('getProfile with _id', _id);
     const dbData = await ServiceProvider.findOne({ _id }, { __v: 0 }).exec();
-    console.log('dbdata', dbData);
+    const a = await dbData.populate({ path: 'services', model: 'ServiceToRate', populate: { path: 'service', model: 'Service' } });
+    console.log('dbdata', a);
     if (!dbData) {
       throw new Error('ServiceProvider not found');
     } else {
@@ -107,10 +108,12 @@ async function updateProfile(serviceProviderDetails) {
   };
   // await ServiceProvider.collection.bulkWrite()
   const created = await ServiceProvider.updateOne({ _id: serviceProviderDetails._id }, datatoUpdate).exec();
-  console.log('services11',services11)
+  console.log('services11', services11)
   services1.forEach(ser => {
-    Service.updateOne({ _id: ser.service }, { $addToSet: { serviceProviders: serviceProviderDetails._id } 
-    }).exec()});
+    Service.updateOne({ _id: ser.service }, {
+      $addToSet: { serviceProviders: serviceProviderDetails._id }
+    }).exec()
+  });
   if (created.modifiedCount > 0) {
     return 'ServiceProvider Profile updated successfully';
   } else {
@@ -149,24 +152,51 @@ async function postProposal(jobDetails) {
     job: jobDetails.job
   })
   let jobsaved = await job.save();
+  let jobprop = await Job.updateOne({ _id: jobDetails.job }, { $push: { proposals: jobsaved._id } })
   return "Job proposal created successfully"
 }
 async function getServices() {
-  const services = await Service.find().exec();
+  const services = await Service.find().populate('serviceProviders').exec();
   console.log("services are", services);
   return services;
 }
 
 async function getJobs(_id) {
-  console.log("_id is ",_id)
-  let jobs = Job.find({serviceProvider:_id}).exec();
-  if(jobs && jobs.length>0){
+  console.log("_id is ", _id)
+  let jobs = await Job.find({ serviceProvider: _id }).exec();
+  if (jobs && jobs.length > 0) {
     return jobs;
-  }else{
+  } else {
     throw new Error("No Jobs found for the service provider");
   }
 }
 
+async function getAllOpenJobs() {
+  let jobs = await Job.find({ status: "POSTED" }).exec();
+  if (jobs && jobs.length > 0) {
+    return jobs;
+  } else {
+    throw new Error("No Open jobs found");
+  }
+}
+async function getAllOpenJobsByCategory(_id) {
+  console.log("_id is ", _id)
+  let jobs = await Job.find({ service: _id }).exec();
+  if (jobs && jobs.length > 0) {
+    return jobs;
+  } else {
+    throw new Error("No open jobs found for the category");
+  }
+}
+async function updateStatus(body) {
+  let jobs = await Job.updateOne({ _id: body.jobId, status: body.status }).exec();
+  if (jobs) {
+    return jobs;
+  } else {
+    throw new Error("No Jobs found for the id");
+  }
+}
+
 module.exports = {
-  register, login, getProfile, getJobs, postProposal,updateProfile, addService, getServices
+  register, login, getProfile, getAllOpenJobs, getAllOpenJobsByCategory, updateStatus, getJobs, postProposal, updateProfile, addService, getServices
 }

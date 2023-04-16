@@ -71,8 +71,8 @@ async function approveBusiness(_id) {
     try {
        const dbData = await ServiceProvider.updateOne({_id},{verified:true}).exec();
        console.log('dbdata', dbData);
-       if (!dbData || dbData.length ==0) {
-           throw new Error('No Pending Business Found');
+       if (dbData.modifiedCount == 0) {
+           throw new Error('No Business Found with the given id');
        } else {
            return "Business successfully approved";
        }

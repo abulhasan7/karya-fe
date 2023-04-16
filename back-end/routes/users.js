@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var {register,login,updateProfile,getProfile,postJob,getJob,getJobs}= require('../service/userService');
+var {register,login,updateProfile,getProfile,acceptProposal,postJob,getJob,getJobs, getJobsByStatus}= require('../service/userService');
 var {checkAuthenticationHeader} = require('../util/jwtUtil');
 var {getServices} = require('../service/businessUserService');
 
@@ -42,8 +42,13 @@ router.post('/post-job',checkAuthenticationHeader, async function(req, res, next
 
 router.get('/get-jobs',checkAuthenticationHeader, async function(req, res, next) {
   try{
-  console.log(req.body);
-  let resp = await getJobs(req._id);
+  console.log(req.query);
+  let resp;
+  if(req.query.status){
+    resp = await getJobsByStatus(req._id,req.query.status);
+  }else{
+    resp = await getJobs(req._id);
+  }
   console.log('resp is',resp);
   res.json({message:resp});
   }catch(error){
@@ -56,6 +61,18 @@ router.get('/get-job',checkAuthenticationHeader, async function(req, res, next) 
   try{
   console.log(req.query.jobId);
   let resp = await getJob(req.query.jobId);
+  console.log('resp is',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred",error);
+    res.json({error:error.message})
+  }
+});
+
+router.post('/accept-proposal',checkAuthenticationHeader, async function(req, res, next) {
+  try{
+  console.log(req.body);
+  let resp = await acceptProposal(req.body);
   console.log('resp is',resp);
   res.json({message:resp});
   }catch(error){

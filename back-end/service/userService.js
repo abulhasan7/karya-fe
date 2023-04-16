@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { default: mongoose } = require('mongoose');
-const { User, Address, Job } = require('../model/index');
+const { User, Address, Job, JobProposal } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 
 
@@ -125,10 +125,12 @@ async function postJob(jobDetails) {
     zip: jobDetails.address.zip
   }
   const addressfilter = { _id: jobDetails.address._id || new mongoose.mongo.ObjectId() };
-  const doc = Address.findOneAndUpdate(addressfilter, address, {
+  const doc = await Address.findOneAndUpdate(addressfilter, address, {
     new: true,
     upsert: true // Make this update into an upsert
   })
+  console.log("doc is",doc);
+
   let job = new Job({
     name: jobDetails.name,
     description: jobDetails.description,
@@ -155,7 +157,7 @@ async function postJob(jobDetails) {
 }
 
 async function getJobs(_id) {
-  let jobs = Job.find({ user: _id }).exec();
+  let jobs = await Job.find({ user: _id }).exec();
   if (jobs) {
     return jobs;
   } else {
@@ -163,8 +165,17 @@ async function getJobs(_id) {
   }
 }
 
+async function getJobsByStatus(_id,status) {
+  let jobs = await Job.find({ user: _id,status }).exec();
+  if (jobs && jobs.length>0) {
+    return jobs;
+  } else {
+    throw new Error("No Jobs found for the user with status "+status);
+  }
+}
+
 async function getJob(_id) {
-  let job = Job.findOne({ _id }).exec();
+  let job = await Job.findOne({ _id }).populate(['proposals','acceptedProposal','address','serviceProvider','service']).exec();
   if (job) {
     return job;
   } else {
@@ -173,7 +184,17 @@ async function getJob(_id) {
 
 }
 
+async function acceptProposal(body) {
+  let jobs = await Job.updateOne({_id:body.jobId},{status:"PROPOSAL-ACCEPTED",acceptedProposal:body.jobProposalId, serviceProvider:body.serviceProviderId}).exec();
+  let jobProposal = await JobProposal.updateOne({_id:body.jobProposalId},{status:"ACCEPTED"}).exec();
+  if(jobs){
+    return jobs;
+  }else{
+    throw new Error("No Jobs found for the id");
+  }
+}
+
 
 module.exports = {
-  register, login, getProfile, updateProfile, postJob, getJob, getJobs
+  register, login, getProfile, getJobsByStatus,updateProfile, postJob, getJob, getJobs,acceptProposal
 }

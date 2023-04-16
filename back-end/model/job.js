@@ -24,9 +24,12 @@ module.exports = (Schema) =>
     acceptedProposal: {
         type: Schema.Types.ObjectId, ref: 'JobProposal',
     },
+    proposals: [{
+        type: Schema.Types.ObjectId, ref: 'JobProposal',
+    }],
     status: {
         type: String,
-        enum: ["POSTED","ACCEPTING-PROPOSALS","PROPOSAL-ACCEPTED","IN-PROGRESS","DELAYED","COMPLETED"]
+        enum: ["POSTED","PROPOSAL-ACCEPTED","SCHEDULED","IN-PROGRESS","DELAYED","COMPLETED"]
     },
     userRating: {
         type: Number,

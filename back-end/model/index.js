@@ -80,9 +80,9 @@ const User = mongoose.model('User', userSchema);
 const Address = mongoose.model('Address', addressSchema);
 const ServiceProvider = mongoose.model('ServiceProvider', serviceProviderSchema);
 const Service = mongoose.model('Service', servicesSchema);
-const Job = mongoose.model('job', jobSchema);
-const JobProposal = mongoose.model('jobProposal', jobProposalSchema);
-const Message = mongoose.model('message', messageSchema);
+const Job = mongoose.model('Job', jobSchema);
+const JobProposal = mongoose.model('JobProposal', jobProposalSchema);
+const Message = mongoose.model('Message', messageSchema);
 const ServiceToRate = mongoose.model('ServiceToRate',serviceToRateSchema);
 
 module.exports = {
