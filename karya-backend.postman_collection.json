@@ -1,0 +1,1994 @@
+{
+	"info": {
+		"_postman_id": "6f135a3c-49e9-4161-9062-29aedfa34104",
+		"name": "karya-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ADMIN login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"abul@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/admin/users/login",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"admin",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"abul@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/login",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c-+L4NhuSHCOzVDDlFtXKqHQQ0k4g\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:06:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Invalid Password\"\n}"
+				},
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"abul@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/login",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "342"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"156-pVQWnpMWRzWOTVuZsYGTw9U6vE8\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:12:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2Nzg5MjkxMjB9.VoNhxEvdJWDq_yBtzhw7NFDMaR7pW_kQ3ym5WRKjqsk\",\n        \"profile\": {\n            \"name\": \"abul hasan\",\n            \"email\": \"abul@gmail.com\",\n            \"password\": \"$2b$10$Vk6vaNpvNuezKVbu/kUfLuehqLdBSU7njFjKV00p3CvsdTqJRuwNe\",\n            \"noOfJobsPosted\": 0,\n            \"noOfJobsActive\": 0\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "ADMIN get pending businesses",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDI4OWE2ZDM5MjUyYTFiZjY4N2Y5YzYiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODExNzE4ODd9.3SUmVjwpNULS1ojsj4i4liIMG_0x2dT5BZOgleSoruE",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{localurl}}/admin/users/get-pending-business",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"admin",
+						"users",
+						"get-pending-business"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get profile",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2Nzg5MjkxMjB9.VoNhxEvdJWDq_yBtzhw7NFDMaR7pW_kQ3ym5WRKjqsk",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localurl}}/users/get-profile",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "170"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"aa-Clgxt8IRbWPHs5r/ThU9Xtx4rPY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:24:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"name\": \"abul hasan\",\n        \"email\": \"abul@gmail.com\",\n        \"password\": \"$2b$10$Vk6vaNpvNuezKVbu/kUfLuehqLdBSU7njFjKV00p3CvsdTqJRuwNe\",\n        \"noOfJobsPosted\": 0,\n        \"noOfJobsActive\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "ADMIN approve business",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{admintoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\":\"643b3e772322ef3623fc046c\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/admin/users/approve-pending-business",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"admin",
+						"users",
+						"approve-pending-business"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get profile",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2Nzg5MjkxMjB9.VoNhxEvdJWDq_yBtzhw7NFDMaR7pW_kQ3ym5WRKjqsk",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localurl}}/users/get-profile",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "170"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"aa-Clgxt8IRbWPHs5r/ThU9Xtx4rPY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:24:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"name\": \"abul hasan\",\n        \"email\": \"abul@gmail.com\",\n        \"password\": \"$2b$10$Vk6vaNpvNuezKVbu/kUfLuehqLdBSU7njFjKV00p3CvsdTqJRuwNe\",\n        \"noOfJobsPosted\": 0,\n        \"noOfJobsActive\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "USER register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"hasan\",\r\n    \"email\":\"hasan@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/register",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER - login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"hasan@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/login",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"abul@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/login",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c-+L4NhuSHCOzVDDlFtXKqHQQ0k4g\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:06:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Invalid Password\"\n}"
+				},
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"abul@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/login",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "342"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"156-pVQWnpMWRzWOTVuZsYGTw9U6vE8\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:12:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2Nzg5MjkxMjB9.VoNhxEvdJWDq_yBtzhw7NFDMaR7pW_kQ3ym5WRKjqsk\",\n        \"profile\": {\n            \"name\": \"abul hasan\",\n            \"email\": \"abul@gmail.com\",\n            \"password\": \"$2b$10$Vk6vaNpvNuezKVbu/kUfLuehqLdBSU7njFjKV00p3CvsdTqJRuwNe\",\n            \"noOfJobsPosted\": 0,\n            \"noOfJobsActive\": 0\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "USER - getprofile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{localurl}}/users/get-profile",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"get-profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get profile",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2Nzg5MjkxMjB9.VoNhxEvdJWDq_yBtzhw7NFDMaR7pW_kQ3ym5WRKjqsk",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localurl}}/users/get-profile",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "170"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"aa-Clgxt8IRbWPHs5r/ThU9Xtx4rPY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:24:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"name\": \"abul hasan\",\n        \"email\": \"abul@gmail.com\",\n        \"password\": \"$2b$10$Vk6vaNpvNuezKVbu/kUfLuehqLdBSU7njFjKV00p3CvsdTqJRuwNe\",\n        \"noOfJobsPosted\": 0,\n        \"noOfJobsActive\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "USER - update profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Hasan\",\r\n    \"phone\":\"9700008147\",\r\n    \"gender\":\"male\",\r\n    \"dob\":\"2000-10-01\",\r\n    \"about\":\"bla bla bla\",\r\n    \"address\":{\r\n        \"street\":\"101 E San Fernando St\",\r\n        \"city\":\"San Jose\",\r\n        \"state\":\"California\",\r\n        \"zip\": 95112\r\n    }\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/update-profile",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"update-profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER - GET SERVICES",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Carpenting\",\r\n    \"description\":\"This is to perform all kinds of Carpenting works\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/get-services",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"get-services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER - post a job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Hasan's Carpentry job at home\",\r\n    \"description\":\"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\r\n    \"attachmentUrls\":[\"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\", \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"],\r\n    \"estimatedTime\":\"20\",\r\n    \"estimatedBudget\":\"200\",\r\n    \"estimatedHourlyBudget\":10,\r\n    \"address\":{\r\n        \"street\":\"101 E San Fernando St\",\r\n        \"city\":\"San Jose\",\r\n        \"state\":\"California\",\r\n        \"zip\": 95112\r\n    },\r\n    \"service\":\"643b3eef2322ef3623fc0473\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/post-job",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"post-job"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - post a job",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Abul Hasan's Carpentry job at home\",\r\n    \"description\":\"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\r\n    \"attachmentUrls\":[\"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\", \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"],\r\n    \"estimatedTime\":\"20\",\r\n    \"estimatedBudget\":\"200\",\r\n    \"estimatedHourlyBudget\":10,\r\n    \"address\":{\r\n        \"street\":\"101 E San Fernando St\",\r\n        \"city\":\"San Jose\",\r\n        \"state\":\"California\",\r\n        \"zip\": 95112\r\n    },\r\n    \"service\":\"64389a44cd4e72bd3d048cc3\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/post-job",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"post-job"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26-pTZuiSHVzrzA5NsLCVDpLroHFDU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 Apr 2023 04:40:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Job created successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "USER - ACCEPT PROPOSAL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobId\":\"643b4523dc71f74e85cdf50b\",\r\n    \"jobProposalId\":\"643b45ae19dd5b168e5b4b03\",\r\n    \"serviceProviderId\":\"643b3e772322ef3623fc046c\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/accept-proposal",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"accept-proposal"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - post a job",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Abul Hasan's Carpentry job at home\",\r\n    \"description\":\"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\r\n    \"attachmentUrls\":[\"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\", \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"],\r\n    \"estimatedTime\":\"20\",\r\n    \"estimatedBudget\":\"200\",\r\n    \"estimatedHourlyBudget\":10,\r\n    \"address\":{\r\n        \"street\":\"101 E San Fernando St\",\r\n        \"city\":\"San Jose\",\r\n        \"state\":\"California\",\r\n        \"zip\": 95112\r\n    },\r\n    \"service\":\"64389a44cd4e72bd3d048cc3\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/post-job",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"post-job"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26-pTZuiSHVzrzA5NsLCVDpLroHFDU\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 Apr 2023 04:40:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Job created successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "USER - getjobs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/get-jobs",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"get-jobs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - get jobs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/get-jobs",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-jobs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "664"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"298-XVK077Yl6DZ3EmAKA5mvX12uqeY\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 Apr 2023 04:41:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": [\n        {\n            \"_id\": \"643a2ac67eabda59a192b9e6\",\n            \"name\": \"Abul Hasan's Carpentry job at home\",\n            \"description\": \"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\n            \"attachmentUrls\": [\n                \"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\",\n                \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"\n            ],\n            \"estimatedTime\": 20,\n            \"estimatedBudget\": 200,\n            \"estimatedHourlyBudget\": 10,\n            \"status\": \"POSTED\",\n            \"userRating\": 0,\n            \"service\": \"64389a44cd4e72bd3d048cc3\",\n            \"createdAt\": \"2023-04-15T04:40:38.219Z\",\n            \"updatedAt\": \"2023-04-15T04:40:38.219Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "USER - getjobs by status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/get-jobs?status=POSTED",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"get-jobs"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "POSTED"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - getjobs by status",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{usertoken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/get-jobs?status=POSTED",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-jobs"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "POSTED"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38-Z4A1/m28iCQYvmA0Za72vUCtGjs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Apr 2023 00:35:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"No Jobs found for the user with statusPOSTED\"\n}"
+				}
+			]
+		},
+		{
+			"name": "USER - get a job",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/get-job?jobId=643b4523dc71f74e85cdf50b",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"get-job"
+					],
+					"query": [
+						{
+							"key": "jobId",
+							"value": "643b4523dc71f74e85cdf50b"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - get a job",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/get-job?jobId=643a2ac67eabda59a192b9e6",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-job"
+							],
+							"query": [
+								{
+									"key": "jobId",
+									"value": "643a2ac67eabda59a192b9e6"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "662"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"296-k98RMlPtaGLHKGMVWs9GaC/zSpI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 Apr 2023 04:45:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"_id\": \"643a2ac67eabda59a192b9e6\",\n        \"name\": \"Abul Hasan's Carpentry job at home\",\n        \"description\": \"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\n        \"attachmentUrls\": [\n            \"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\",\n            \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"\n        ],\n        \"estimatedTime\": 20,\n        \"estimatedBudget\": 200,\n        \"estimatedHourlyBudget\": 10,\n        \"status\": \"POSTED\",\n        \"userRating\": 0,\n        \"service\": \"64389a44cd4e72bd3d048cc3\",\n        \"createdAt\": \"2023-04-15T04:40:38.219Z\",\n        \"updatedAt\": \"2023-04-15T04:40:38.219Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "business login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"mohammed@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/login",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"abul@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/login",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c-+L4NhuSHCOzVDDlFtXKqHQQ0k4g\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:06:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Invalid Password\"\n}"
+				},
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"abul@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/login",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "342"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"156-pVQWnpMWRzWOTVuZsYGTw9U6vE8\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:12:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2Nzg5MjkxMjB9.VoNhxEvdJWDq_yBtzhw7NFDMaR7pW_kQ3ym5WRKjqsk\",\n        \"profile\": {\n            \"name\": \"abul hasan\",\n            \"email\": \"abul@gmail.com\",\n            \"password\": \"$2b$10$Vk6vaNpvNuezKVbu/kUfLuehqLdBSU7njFjKV00p3CvsdTqJRuwNe\",\n            \"noOfJobsPosted\": 0,\n            \"noOfJobsActive\": 0\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "BUSINESS- business register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Mohammed's Shoppe\",\r\n    \"email\":\"mohammed@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/register",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business getprofile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{businesstoken}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "{{localurl}}/business/users/get-profile",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"get-profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "get profile",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2Nzg5MjkxMjB9.VoNhxEvdJWDq_yBtzhw7NFDMaR7pW_kQ3ym5WRKjqsk",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{localurl}}/users/get-profile",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "170"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"aa-Clgxt8IRbWPHs5r/ThU9Xtx4rPY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 01:24:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"name\": \"abul hasan\",\n        \"email\": \"abul@gmail.com\",\n        \"password\": \"$2b$10$Vk6vaNpvNuezKVbu/kUfLuehqLdBSU7njFjKV00p3CvsdTqJRuwNe\",\n        \"noOfJobsPosted\": 0,\n        \"noOfJobsActive\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "business update profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{businesstoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mohammed's Shoppe\",\r\n    \"phone\": \"9700008147\",\r\n    \"about\": \"bla bla bla\",\r\n    \"workingHours\": {\r\n        \"open\": \"9AM\",\r\n        \"close\": \"5PM\"\r\n    },\r\n    \"services\": [\r\n        {\r\n            \"service\": \"643b3eef2322ef3623fc0473\",\r\n            \"rate\": 51\r\n        },\r\n                {\r\n            \"service\": \"643b3efa2322ef3623fc0475\",\r\n            \"rate\": 60\r\n        },\r\n                {\r\n            \"service\": \"643b3f222322ef3623fc0477\",\r\n            \"rate\": 70\r\n        }\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"101 E San Fernando St\",\r\n        \"city\": \"San Jose\",\r\n        \"state\": \"California\",\r\n        \"zip\": 95112\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/update-profile",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"update-profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business - add a service",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{businesstoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Gardening\",\r\n    \"description\":\"This is to perform all kinds of Gardening works\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/add-service",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"add-service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business - post a proposal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{businesstoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"I want to post a proposal that you shouldn't be able to refuse at all\",\r\n    \"hours\":20,\r\n    \"hourlyRate\":9,\r\n    \"price\":180,\r\n    \"job\":\"643b4523dc71f74e85cdf50b\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/post-proposal",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"post-proposal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business - update status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{businesstoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"jobId\":\"643b4523dc71f74e85cdf50b\",\r\n    \"status\":\"SCHEDULED\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/update-status",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"update-status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business - GET JOBS serviced by Service provider",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{businesstoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/get-jobs",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"get-jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business - GET ALL OPEN JOBS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{businesstoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/get-all-open-jobs",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"get-all-open-jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business - GET ALL OPEN JOBS BY CATEGORY",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{businesstoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/business/users/get-all-open-jobs?category=643b3eef2322ef3623fc0473",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"business",
+						"users",
+						"get-all-open-jobs"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "643b3eef2322ef3623fc0473"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER - getjobs Copy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/get-jobs",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"get-jobs"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - get jobs",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/get-jobs",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-jobs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "664"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"298-XVK077Yl6DZ3EmAKA5mvX12uqeY\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 Apr 2023 04:41:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": [\n        {\n            \"_id\": \"643a2ac67eabda59a192b9e6\",\n            \"name\": \"Abul Hasan's Carpentry job at home\",\n            \"description\": \"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\n            \"attachmentUrls\": [\n                \"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\",\n                \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"\n            ],\n            \"estimatedTime\": 20,\n            \"estimatedBudget\": 200,\n            \"estimatedHourlyBudget\": 10,\n            \"status\": \"POSTED\",\n            \"userRating\": 0,\n            \"service\": \"64389a44cd4e72bd3d048cc3\",\n            \"createdAt\": \"2023-04-15T04:40:38.219Z\",\n            \"updatedAt\": \"2023-04-15T04:40:38.219Z\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localurl",
+			"value": "http://localhost:3000",
+			"type": "default"
+		},
+		{
+			"key": "usertoken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNiM2RmOTIzMjJlZjM2MjNmYzA0NjIiLCJpYXQiOjE2ODE2MDQwODl9.WUExMlGT85QBBYOy944wb54DzcH5BPJUsWuS-3m4_l0",
+			"type": "default"
+		},
+		{
+			"key": "businesstoken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDNiM2U3NzIzMjJlZjM2MjNmYzA0NmMiLCJpc0J1c2luZXNzIjp0cnVlLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTY4MTYwNDIyNn0.s8PVraGe25to4isyy4JfngwIrBcDME8uZ5AKvBfiuDI",
+			"type": "default"
+		},
+		{
+			"key": "admintoken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDI4OWE2ZDM5MjUyYTFiZjY4N2Y5YzYiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODE1MzU3NzF9.AtsrvM5qgFS2UDVl1CCJv6M22XC4qg02oFnMrYL1hYc",
+			"type": "default"
+		}
+	]
+}
