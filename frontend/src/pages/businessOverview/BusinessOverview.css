@@ -1,0 +1,12 @@
+.bso-main-container {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+.bso-details-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

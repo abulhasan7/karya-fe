@@ -11,6 +11,7 @@ import JobCreator from './components/jobCreator/JobCreator';
 import BusinessCardView from './components/businessCardView/BusinessCardView';
 import UserLogin from './pages/userLogin/UserLogin';
 import UserSignup from './pages/userSignup/UserSignup';
+import BusinessOverview from './pages/businessOverview/BusinessOverview';
 
 const theme = createTheme({
 	palette: {
