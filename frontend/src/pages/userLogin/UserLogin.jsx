@@ -12,12 +12,45 @@ import Button from '@mui/material/Button';
 // import MenuIcon from '@mui/icons-material/Menu';
 import HubIcon from '@mui/icons-material/Hub';
 import './UserLogin.css';
+import { useState } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { Alert, AlertTitle } from '@mui/material';
 
 export default function UserLogin() {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [message, setMessage] = useState('');
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const data = new FormData(event.currentTarget);
+		console.log('email is', email);
+		console.log('password is', password);
+		if (email == '' || password == '') {
+			let alertmessage = (<Alert severity="error" onClose={() => setMessage('')}>
+				<AlertTitle>Error</AlertTitle>
+				Either username or password is empty
+			</Alert>)
+			setMessage(alertmessage);
+			setTimeout(() => {
+				setMessage('')
+			}, 2000);
+		} else {
+			const data = {
+				email: email,
+				password: password
+			}
+			axios.post(API_URL + '/users/login', data)
+				.then(response => {
+					console.log(response.data);
+				})
+				.catch(error => {
+					console.error(error);
+				});		// axios.
+		}
 	};
+
+
 
 	return (
 		<div className="u-login-container">
@@ -49,6 +82,7 @@ export default function UserLogin() {
 			</div>
 			<div className="u-login-form-container">
 				<Paper className="u-login-form" elevation={12}>
+					{message}
 					<Typography component="h1" variant="h6">
 						Sign in
 					</Typography>
@@ -68,6 +102,7 @@ export default function UserLogin() {
 							name="email"
 							autoComplete="email"
 							autoFocus
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<TextField
 							margin="normal"
@@ -79,6 +114,7 @@ export default function UserLogin() {
 							type="password"
 							id="password"
 							autoComplete="current-password"
+							onChange={(e) => setPassword(e.target.value)}
 						/>
 
 						<Button
@@ -87,6 +123,7 @@ export default function UserLogin() {
 							variant="contained"
 							sx={{ mt: 3, mb: 2 }}
 							size="small"
+							onClick={handleSubmit}
 						>
 							Sign In
 						</Button>
