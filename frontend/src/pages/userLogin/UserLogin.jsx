@@ -14,8 +14,8 @@ import HubIcon from '@mui/icons-material/Hub';
 import './UserLogin.css';
 import { useState } from 'react';
 import axios from 'axios';
-import { API_URL } from '../../constants';
 import { Alert, AlertTitle } from '@mui/material';
+import { API_URL } from '../../constants';
 
 export default function UserLogin() {
 	const [email, setEmail] = useState('');
@@ -26,31 +26,32 @@ export default function UserLogin() {
 		event.preventDefault();
 		console.log('email is', email);
 		console.log('password is', password);
-		if (email == '' || password == '') {
-			let alertmessage = (<Alert severity="error" onClose={() => setMessage('')}>
-				<AlertTitle>Error</AlertTitle>
-				Either username or password is empty
-			</Alert>)
+		if (email === '' || password === '') {
+			const alertmessage = (
+				<Alert severity="error" onClose={() => setMessage('')}>
+					<AlertTitle>Error</AlertTitle>
+					Either username or password is empty
+				</Alert>
+			);
 			setMessage(alertmessage);
 			setTimeout(() => {
-				setMessage('')
+				setMessage('');
 			}, 2000);
 		} else {
 			const data = {
-				email: email,
-				password: password
-			}
-			axios.post(API_URL + '/users/login', data)
-				.then(response => {
+				email,
+				password,
+			};
+			axios
+				.post(`${API_URL}/users/login`, data)
+				.then((response) => {
 					console.log(response.data);
 				})
-				.catch(error => {
+				.catch((error) => {
 					console.error(error);
-				});		// axios.
+				}); // axios.
 		}
 	};
-
-
 
 	return (
 		<div className="u-login-container">
@@ -61,8 +62,8 @@ export default function UserLogin() {
 						width: 80,
 						display: { xs: 'none', md: 'flex' },
 						mr: 1,
+						color: '#f77367',
 					}}
-					color="primary"
 				/>
 				<Typography
 					variant="h1"
@@ -121,7 +122,7 @@ export default function UserLogin() {
 							type="submit"
 							fullWidth
 							variant="contained"
-							sx={{ mt: 3, mb: 2 }}
+							sx={{ mt: 3, mb: 2, backgroundColor: '#f77367' }}
 							size="small"
 							onClick={handleSubmit}
 						>
@@ -129,7 +130,13 @@ export default function UserLogin() {
 						</Button>
 						<Grid container justifyContent="flex-end">
 							<Grid item>
-								<Link href="/" variant="body2">
+								<Link
+									href="/"
+									variant="body2"
+									sx={{
+										color: '#f77367',
+									}}
+								>
 									New here? Sign Up
 								</Link>
 							</Grid>

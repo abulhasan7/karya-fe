@@ -1,0 +1,23 @@
+.hiw-main-container {
+	background-color: #dfebed;
+	display: flex;
+	flex-direction: column;
+	padding: 5%;
+}
+
+.hiw-info {
+	margin-top: 25px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	align-items: center;
+	justify-items: center;
+}
+
+.hiw-step {
+	padding: 10px;
+	width: 70%;
+}
+
+.hiw-step > * {
+	margin-top: 15px;
+}

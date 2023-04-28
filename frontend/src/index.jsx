@@ -2,20 +2,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import { Provider } from 'react-redux';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from './redux/store';
+import LandingPage from './pages/landingPage/LandingPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const theme = createTheme({
+	palette: {
+		mode: 'light',
+		primary: {
+			main: '#f77367',
+			contrastText: '#fff',
+		},
+		secondary: {
+			main: '#dfebed',
+		},
+	},
+});
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <App />,
+		element: (
+			<ThemeProvider theme={theme}>
+				<App />
+			</ThemeProvider>
+		),
+	},
+	{
+		path: '/home',
+		element: (
+			<ThemeProvider theme={theme}>
+				<LandingPage />
+			</ThemeProvider>
+		),
 	},
 ]);
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>
 	</React.StrictMode>,
 );
 

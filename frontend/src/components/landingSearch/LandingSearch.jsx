@@ -42,7 +42,7 @@ export default function LandingSearch() {
 						fontStyle: 'normal',
 						fontSize: '56px',
 						// letterSpacing: '.3rem',
-						color: 'primary',
+						color: '#2b4450',
 					}}
 				>
 					Karya - get things done.
