@@ -1297,6 +1297,361 @@
 			]
 		},
 		{
+			"name": "USER - get signed url",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/get-signed-url",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"get-signed-url"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - get a job",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/get-job?jobId=643a2ac67eabda59a192b9e6",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-job"
+							],
+							"query": [
+								{
+									"key": "jobId",
+									"value": "643a2ac67eabda59a192b9e6"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "662"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"296-k98RMlPtaGLHKGMVWs9GaC/zSpI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 Apr 2023 04:45:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"_id\": \"643a2ac67eabda59a192b9e6\",\n        \"name\": \"Abul Hasan's Carpentry job at home\",\n        \"description\": \"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\n        \"attachmentUrls\": [\n            \"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\",\n            \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"\n        ],\n        \"estimatedTime\": 20,\n        \"estimatedBudget\": 200,\n        \"estimatedHourlyBudget\": 10,\n        \"status\": \"POSTED\",\n        \"userRating\": 0,\n        \"service\": \"64389a44cd4e72bd3d048cc3\",\n        \"createdAt\": \"2023-04-15T04:40:38.219Z\",\n        \"updatedAt\": \"2023-04-15T04:40:38.219Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "GENERIC - get messages",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/messages?jobProposal=643b45ae19dd5b168e5b4b03",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"messages"
+					],
+					"query": [
+						{
+							"key": "jobProposal",
+							"value": "643b45ae19dd5b168e5b4b03"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - get a job",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/get-job?jobId=643a2ac67eabda59a192b9e6",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-job"
+							],
+							"query": [
+								{
+									"key": "jobId",
+									"value": "643a2ac67eabda59a192b9e6"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "662"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"296-k98RMlPtaGLHKGMVWs9GaC/zSpI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 Apr 2023 04:45:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"_id\": \"643a2ac67eabda59a192b9e6\",\n        \"name\": \"Abul Hasan's Carpentry job at home\",\n        \"description\": \"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\n        \"attachmentUrls\": [\n            \"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\",\n            \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"\n        ],\n        \"estimatedTime\": 20,\n        \"estimatedBudget\": 200,\n        \"estimatedHourlyBudget\": 10,\n        \"status\": \"POSTED\",\n        \"userRating\": 0,\n        \"service\": \"64389a44cd4e72bd3d048cc3\",\n        \"createdAt\": \"2023-04-15T04:40:38.219Z\",\n        \"updatedAt\": \"2023-04-15T04:40:38.219Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "GENERIC - post messages",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"from\":\"643b3df92322ef3623fc0462\",\r\n    \"to\":\"643b3df92322ef3623fc0462\",\r\n    \"message\":\"Would you be ready to get it?\",\r\n    \"jobProposal\":\"643b45ae19dd5b168e5b4b03\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/messages",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - get a job",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDExMzAwYTkyYTYxYWFmZDQ4N2IyMjQiLCJpYXQiOjE2NzkwMTUzOTJ9.hmjwANVL1fmHXYaaMDRpotjbx_YvRCrOh9BFORU2i3U",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/get-job?jobId=643a2ac67eabda59a192b9e6",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-job"
+							],
+							"query": [
+								{
+									"key": "jobId",
+									"value": "643a2ac67eabda59a192b9e6"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "662"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"296-k98RMlPtaGLHKGMVWs9GaC/zSpI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 15 Apr 2023 04:45:10 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": {\n        \"_id\": \"643a2ac67eabda59a192b9e6\",\n        \"name\": \"Abul Hasan's Carpentry job at home\",\n        \"description\": \"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\n        \"attachmentUrls\": [\n            \"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\",\n            \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"\n        ],\n        \"estimatedTime\": 20,\n        \"estimatedBudget\": 200,\n        \"estimatedHourlyBudget\": 10,\n        \"status\": \"POSTED\",\n        \"userRating\": 0,\n        \"service\": \"64389a44cd4e72bd3d048cc3\",\n        \"createdAt\": \"2023-04-15T04:40:38.219Z\",\n        \"updatedAt\": \"2023-04-15T04:40:38.219Z\"\n    }\n}"
+				}
+			]
+		},
+		{
 			"name": "business login",
 			"request": {
 				"method": "POST",

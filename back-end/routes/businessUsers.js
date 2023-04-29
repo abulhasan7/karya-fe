@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var {register,login,updateProfile,updateStatus,getJobs,getAllOpenJobs,getAllOpenJobsByCategory, getProfile,addService,getServices, postProposal}= require('../service/businessUserService');
 var {checkBusinessAuthenticationHeader,checkBusinessAuthenticationHeaderForVerified} = require('../util/jwtUtil');
+var {generateSignedUrl} = require('../util/s3');
 
 router.post('/register', async function(req, res, next) {
   try{
@@ -128,6 +129,20 @@ router.get('/get-profile',checkBusinessAuthenticationHeader, async function(req,
   res.json({message:resp});
   }catch(error){
     console.log("error occurred",error);
+    res.json({error:error.message})
+  }
+});
+
+
+router.get('/get-signed-url',checkBusinessAuthenticationHeader, async function(req, res, next) {
+  try{
+  console.log(req.body);
+
+  let resp = await generateSignedUrl();
+  console.log('resp iss ',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred here",error);
     res.json({error:error.message})
   }
 });

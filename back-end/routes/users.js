@@ -3,7 +3,7 @@ var router = express.Router();
 var {register,login,updateProfile,getProfile,acceptProposal,postJob,getJob,getJobs, getJobsByStatus}= require('../service/userService');
 var {checkAuthenticationHeader} = require('../util/jwtUtil');
 var {getServices} = require('../service/businessUserService');
-
+var {generateSignedUrl} = require('../util/s3');
 router.post('/register', async function(req, res, next) {
   try{
   console.log(req.body);
@@ -119,4 +119,16 @@ router.get('/get-services',checkAuthenticationHeader, async function(req, res, n
   }
 });
 
+router.get('/get-signed-url',checkAuthenticationHeader, async function(req, res, next) {
+  try{
+  console.log(req.body);
+
+  let resp = await generateSignedUrl();
+  console.log('resp iss ',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred here",error);
+    res.json({error:error.message})
+  }
+});
 module.exports = router;
