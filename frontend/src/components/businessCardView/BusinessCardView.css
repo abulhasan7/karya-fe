@@ -6,3 +6,13 @@
 	width: 200px;
 	height: 200px;
 }
+
+.bv-review {
+	display: flex;
+	align-items: center;
+	justify-items: center;
+}
+
+.bv-review > * {
+	padding: 3px;
+}

@@ -9,6 +9,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
 import LandingPage from './pages/landingPage/LandingPage';
+import SearchResults from './pages/searchResultsPage/SearchResults';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = createTheme({
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
 		element: (
 			<ThemeProvider theme={theme}>
 				<LandingPage />
+			</ThemeProvider>
+		),
+	},
+	{
+		path: '/search',
+		element: (
+			<ThemeProvider theme={theme}>
+				<SearchResults />
 			</ThemeProvider>
 		),
 	},
