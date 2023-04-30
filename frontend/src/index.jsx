@@ -11,6 +11,7 @@ import store from './redux/store';
 import LandingPage from './pages/landingPage/LandingPage';
 import SearchResults from './pages/searchResultsPage/SearchResults';
 import Chat from './pages/chat/Chat';
+import JobCreator from './components/jobCreator/JobCreator';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = createTheme({
