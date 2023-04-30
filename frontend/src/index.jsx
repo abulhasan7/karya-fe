@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
 import LandingPage from './pages/landingPage/LandingPage';
 import SearchResults from './pages/searchResultsPage/SearchResults';
+import Chat from './pages/chat/Chat';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = createTheme({
@@ -46,6 +47,14 @@ const router = createBrowserRouter([
 		element: (
 			<ThemeProvider theme={theme}>
 				<SearchResults />
+			</ThemeProvider>
+		),
+	},
+	{
+		path: '/chat',
+		element: (
+			<ThemeProvider theme={theme}>
+				<Chat />
 			</ThemeProvider>
 		),
 	},
