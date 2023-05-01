@@ -15,8 +15,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Carousel from 'react-material-ui-carousel';
+import LaunchIcon from '@mui/icons-material/Launch';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
+import ChatIcon from '@mui/icons-material/Chat';
 import Button from '@mui/material/Button';
 import { Divider } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -294,8 +296,40 @@ export default function BusinessOverview() {
 						</div>
 					</div>
 				</div>
-				<div>
-					<Paper></Paper>
+				<div className="bso-side-card">
+					<Paper
+						sx={{
+							width: '300px',
+							padding: '15px',
+						}}
+					>
+						<Button
+							variant="contained"
+							size="small"
+							sx={{
+								textTransform: 'unset',
+								width: '100%',
+								mb: '10px',
+							}}
+							endIcon={<LaunchIcon />}
+						>
+							Visit Website
+						</Button>
+						<Divider />
+
+						<Button
+							variant="contained"
+							size="small"
+							sx={{
+								textTransform: 'unset',
+								width: '100%',
+								mt: '10px',
+							}}
+							endIcon={<ChatIcon />}
+						>
+							Connect over chat
+						</Button>
+					</Paper>
 				</div>
 			</div>
 		</div>
