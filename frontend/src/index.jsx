@@ -13,6 +13,7 @@ import SearchResults from './pages/searchResultsPage/SearchResults';
 import Chat from './pages/chat/Chat';
 import JobCreator from './components/jobCreator/JobCreator';
 import BusinessOverview from './pages/businessOverview/BusinessOverview';
+import JobOverview from './pages/jobOverview/JobOverview';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = createTheme({
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
 		path: '/',
 		element: (
 			<ThemeProvider theme={theme}>
-				<BusinessOverview />
+				<JobOverview />
 			</ThemeProvider>
 		),
 	},
