@@ -9,8 +9,8 @@ async function getMessages(jobProposal){
     throw new Error('No messages found for the job proposal');
 }
 
-async function postMessage(from,to, jobProposal){
-    let message = new Message(from,to,jobProposal);
+async function postMessage(body){
+    let message = new Message(body);
     message.save();
 }
 
