@@ -1,0 +1,27 @@
+.jp-card-container {
+	display: grid;
+	grid-template-columns: 2fr 0.5fr;
+}
+
+.jp-review {
+	display: flex;
+	align-items: center;
+	justify-items: center;
+}
+
+.jp-review > * {
+	padding: 3px;
+}
+
+.jp-card-actions {
+	display: flex;
+	flex-direction: column;
+	height: '100%';
+	justify-content: space-evenly;
+	margin-top: 10px;
+}
+
+.jp-card-actions > * {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}

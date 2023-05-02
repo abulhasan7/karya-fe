@@ -14,6 +14,7 @@ import Chat from './pages/chat/Chat';
 import JobCreator from './components/jobCreator/JobCreator';
 import BusinessOverview from './pages/businessOverview/BusinessOverview';
 import JobOverview from './pages/jobOverview/JobOverview';
+import JobProposalCard from './components/jobProposalCard/JobProposalCard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = createTheme({
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
 		path: '/',
 		element: (
 			<ThemeProvider theme={theme}>
-				<JobOverview />
+				<App />
 			</ThemeProvider>
 		),
 	},
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
 		element: (
 			<ThemeProvider theme={theme}>
 				<Chat />
+			</ThemeProvider>
+		),
+	},
+	{
+		path: '/dev',
+		element: (
+			<ThemeProvider theme={theme}>
+				<JobOverview />
 			</ThemeProvider>
 		),
 	},
