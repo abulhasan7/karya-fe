@@ -2,6 +2,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/react-in-jsx-scope */
 import { useSelector } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ThemeProvider } from '@emotion/react';
+import { createTheme } from '@mui/material';
+
 import MenuBar from './components/menubar/MenuBar';
 import LandingSearch from './components/landingSearch/LandingSearch';
 import LandingPage from './pages/landingPage/LandingPage';
@@ -13,50 +17,44 @@ import UserLogin from './pages/userLogin/UserLogin';
 import UserSignup from './pages/userSignup/UserSignup';
 import BusinessOverview from './pages/businessOverview/BusinessOverview';
 import Protected from './protected';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ThemeProvider } from '@emotion/react';
 import JobOverview from './pages/jobOverview/JobOverview';
 import SearchResults from './pages/searchResultsPage/SearchResults';
-import { createTheme } from '@mui/material';
 
 function App() {
 	const loggedIn = useSelector((state) => state.user.token);
-	console.log("loggedIn is"+loggedIn);
+	console.log(`loggedIn is${loggedIn}`);
 
-	
-const theme = createTheme({
-	palette: {
-		mode: 'light',
-		primary: {
-			main: '#f77367',
-			contrastText: '#fff',
+	const theme = createTheme({
+		palette: {
+			mode: 'light',
+			primary: {
+				main: '#f77367',
+				contrastText: '#fff',
+			},
+			secondary: {
+				main: '#dfebed',
+			},
 		},
-		secondary: {
-			main: '#dfebed',
-		},
-	},
-});
+	});
 
 	const router = createBrowserRouter([
 		{
 			path: '/',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<JobOverview /> 
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<JobOverview />
+					</ThemeProvider>
 				</Protected>
 			),
-			
 		},
 		{
 			path: '/login',
 			element: (
 				<ThemeProvider theme={theme}>
-					<UserLogin /> 
+					<UserLogin />
 				</ThemeProvider>
 			),
-			
 		},
 		{
 			path: '/home',
@@ -76,7 +74,7 @@ const theme = createTheme({
 		},
 		{
 			path: '/chat',
-			element:(
+			element: (
 				<ThemeProvider theme={theme}>
 					<Chat />
 				</ThemeProvider>
@@ -91,9 +89,7 @@ const theme = createTheme({
 			),
 		},
 	]);
-	return (
-		<RouterProvider router={router} />
-	)
+	return <RouterProvider router={router} />;
 	// return router;
 }
 

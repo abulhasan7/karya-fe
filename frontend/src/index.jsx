@@ -18,63 +18,10 @@ import UserLogin from './pages/userLogin/UserLogin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-
-// const theme = createTheme({
-// 	palette: {
-// 		mode: 'light',
-// 		primary: {
-// 			main: '#f77367',
-// 			contrastText: '#fff',
-// 		},
-// 		secondary: {
-// 			main: '#dfebed',
-// 		},
-// 	},
-// });
-
-// const loggedIn = useSelector((state) => state.login.loggedIn);
-// let content;
-// 	if (!loggedIn) content = <UserLogin theme={theme}></UserLogin>;
-
-// const router = createBrowserRouter([
-// 	{
-// 		path: '/',
-// 		element: content ? content :(
-// 			<ThemeProvider theme={theme}>
-// 				<JobOverview />
-// 			</ThemeProvider>
-// 		),
-		
-// 	},
-// 	{
-// 		path: '/home',
-// 		element: content?content:(
-// 			<ThemeProvider theme={theme}>
-// 				<LandingPage />
-// 			</ThemeProvider>
-// 		),
-// 	},
-// 	{
-// 		path: '/search',
-// 		element: content?content:(
-// 			<ThemeProvider theme={theme}>
-// 				<SearchResults />
-// 			</ThemeProvider>
-// 		),
-// 	},
-// 	{
-// 		path: '/chat',
-// 		element: content?content:(
-// 			<ThemeProvider theme={theme}>
-// 				<Chat />
-// 			</ThemeProvider>
-// 		),
-// 	},
-// ]);
 root.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<App/>
+			<App />
 		</Provider>
 	</React.StrictMode>,
 );

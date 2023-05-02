@@ -27,15 +27,15 @@ export default function LandingSearch() {
 	const [services, setServides] = useState([]);
 	useEffect(() => {
 		axios
-		.get(`${API_URL}/users/get-services`,{
-			headers:{
-				'Authorization':token
-			}
-		})
-		.then((response) => {
-			console.log('response is',response.data.message);
-			setServides(response.data.message);
-		})
+			.get(`${API_URL}/users/get-services`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				setServides(response.data.message);
+			});
 	}, []);
 	return (
 		<section className="ls-bg">
