@@ -16,11 +16,16 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Alert, AlertTitle } from '@mui/material';
 import { API_URL } from '../../constants';
+import { updateUser } from '../../redux/slices/userStateSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserLogin() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [message, setMessage] = useState('');
+    const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -36,7 +41,7 @@ export default function UserLogin() {
 			setMessage(alertmessage);
 			setTimeout(() => {
 				setMessage('');
-			}, 2000);
+			}, 3000);
 		} else {
 			const data = {
 				email,
@@ -45,7 +50,23 @@ export default function UserLogin() {
 			axios
 				.post(`${API_URL}/users/login`, data)
 				.then((response) => {
-					console.log(response.data);
+					console.log(response.data.error);
+					if(response.data.error){
+						const alertmessage = (
+							<Alert severity="error" onClose={() => setMessage('')}>
+								<AlertTitle>Error</AlertTitle>
+								{response.data.error}
+							</Alert>
+						);
+						setMessage(alertmessage);
+						setTimeout(() => {
+							setMessage('');
+						}, 3000);
+					}else{
+						console.log('payload is',response.data.message);
+						dispatch(updateUser(response.data.message));
+						navigate('/');
+					}
 				})
 				.catch((error) => {
 					console.error(error);

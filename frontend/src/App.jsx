@@ -12,17 +12,81 @@ import BusinessCardView from './components/businessCardView/BusinessCardView';
 import UserLogin from './pages/userLogin/UserLogin';
 import UserSignup from './pages/userSignup/UserSignup';
 import BusinessOverview from './pages/businessOverview/BusinessOverview';
+import Protected from './protected';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ThemeProvider } from '@emotion/react';
+import JobOverview from './pages/jobOverview/JobOverview';
+import SearchResults from './pages/searchResultsPage/SearchResults';
+import { createTheme } from '@mui/material';
 
 function App() {
-	const loggedIn = useSelector((state) => state.login.loggedIn);
-	let content;
-	if (!loggedIn) content = <UserLogin></UserLogin>;
-	else content = <LandingPage></LandingPage>;
+	const loggedIn = useSelector((state) => state.user.token);
+	console.log("loggedIn is"+loggedIn);
+
+	
+const theme = createTheme({
+	palette: {
+		mode: 'light',
+		primary: {
+			main: '#f77367',
+			contrastText: '#fff',
+		},
+		secondary: {
+			main: '#dfebed',
+		},
+	},
+});
+
+	const router = createBrowserRouter([
+		{
+			path: '/',
+			element: (
+				<Protected isLoggedIn={loggedIn}>
+				<ThemeProvider theme={theme}>
+					<JobOverview /> 
+				</ThemeProvider>
+				</Protected>
+			),
+			
+		},
+		{
+			path: '/login',
+			element: (
+				<ThemeProvider theme={theme}>
+					<UserLogin /> 
+				</ThemeProvider>
+			),
+			
+		},
+		{
+			path: '/home',
+			element: (
+				<ThemeProvider theme={theme}>
+					<LandingPage />
+				</ThemeProvider>
+			),
+		},
+		{
+			path: '/search',
+			element: (
+				<ThemeProvider theme={theme}>
+					<SearchResults />
+				</ThemeProvider>
+			),
+		},
+		{
+			path: '/chat',
+			element:(
+				<ThemeProvider theme={theme}>
+					<Chat />
+				</ThemeProvider>
+			),
+		},
+	]);
 	return (
-		<div className="App">
-			<div>{content} </div>
-		</div>
-	);
+		<RouterProvider router={router} />
+	)
+	// return router;
 }
 
 export default App;
