@@ -1,6 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/react-in-jsx-scope */
 import { useSelector } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
@@ -84,7 +81,7 @@ function App() {
 			path: '/dev',
 			element: (
 				<ThemeProvider theme={theme}>
-					<JobOverview />
+					<MenuBar />
 				</ThemeProvider>
 			),
 		},

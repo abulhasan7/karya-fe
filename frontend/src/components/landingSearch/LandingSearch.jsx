@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
 
 import Typography from '@mui/material/Typography';
