@@ -14,19 +14,29 @@ import RoofingIcon from '@mui/icons-material/Roofing';
 // import IconButton from '@mui/material/IconButton';
 // import MenuIcon from '@mui/icons-material/Menu';
 import './LandingSearch.css';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 // import { fontSize } from '@mui/system';
 // import logo from '../../logo.png';
 
 export default function LandingSearch() {
-	const top100Films = [
-		{ title: 'The Shawshank Redemption', year: 1994 },
-		{ title: 'The Godfather', year: 1972 },
-		{ title: 'The Godfather: Part II', year: 1974 },
-		{ title: 'The Dark Knight', year: 2008 },
-		{ title: '12 Angry Men', year: 1957 },
-		{ title: "Schindler's List", year: 1993 },
-		{ title: 'Pulp Fiction', year: 1994 },
-	];
+	const token = useSelector((state) => state.user.token);
+	const [services, setServides] = useState([]);
+	useEffect(() => {
+		axios
+		.get(`${API_URL}/users/get-services`,{
+			headers:{
+				'Authorization':token
+			}
+		})
+		.then((response) => {
+			console.log('response is',response.data.message);
+			setServides(response.data.message);
+		})
+	}, []);
 	return (
 		<section className="ls-bg">
 			<div>
@@ -55,7 +65,7 @@ export default function LandingSearch() {
 					id="free-solo-2-demo"
 					disableClearable
 					size="small"
-					options={top100Films.map((option) => option.title)}
+					options={services.map((option) => option.name)}
 					renderInput={(params) => (
 						<TextField
 							{...params}
