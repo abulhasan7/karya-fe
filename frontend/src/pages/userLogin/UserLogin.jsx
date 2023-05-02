@@ -65,7 +65,7 @@ export default function UserLogin() {
 					}else{
 						console.log('payload is',response.data.message);
 						dispatch(updateUser(response.data.message));
-						navigate('/');
+						navigate('/home');
 					}
 				})
 				.catch((error) => {

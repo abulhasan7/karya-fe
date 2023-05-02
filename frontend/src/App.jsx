@@ -82,6 +82,14 @@ const theme = createTheme({
 				</ThemeProvider>
 			),
 		},
+		{
+			path: '/dev',
+			element: (
+				<ThemeProvider theme={theme}>
+					<JobOverview />
+				</ThemeProvider>
+			),
+		},
 	]);
 	return (
 		<RouterProvider router={router} />
