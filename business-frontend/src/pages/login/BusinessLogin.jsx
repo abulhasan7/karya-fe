@@ -158,7 +158,7 @@ export default function BusinessLogin() {
 										color: '#385170',
 									}}
 								>
-									New here? Sign Up
+									New here? Register your business.
 								</Link>
 							</Grid>
 						</Grid>

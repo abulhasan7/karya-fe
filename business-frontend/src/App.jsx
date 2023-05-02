@@ -4,6 +4,7 @@ import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 
 import BusinessLogin from './pages/login/BusinessLogin';
+import BusinessSignup from './pages/signup/BusinessSignup';
 import Protected from './protected';
 import './App.css';
 
@@ -40,6 +41,14 @@ function App() {
 			element: (
 				<ThemeProvider theme={theme}>
 					<BusinessLogin />
+				</ThemeProvider>
+			),
+		},
+		{
+			path: '/signup',
+			element: (
+				<ThemeProvider theme={theme}>
+					<BusinessSignup />
 				</ThemeProvider>
 			),
 		},
