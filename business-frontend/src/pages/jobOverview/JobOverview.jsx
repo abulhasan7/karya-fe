@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import MenuBar from '../../components/menubar/MenuBar';
 
 import './JobOverview.css';
+import ProposalCreator from '../../components/proposalCreator/ProposalCreator';
 
 export default function JobOverview() {
 	function generate(element) {
@@ -159,19 +160,7 @@ export default function JobOverview() {
 							padding: '15px',
 						}}
 					>
-						<Button
-							size="small"
-							variant="contained"
-							sx={{
-								textTransform: 'unset',
-								backgroundColor: '#385170',
-								width: '100%',
-								mb: '10px',
-							}}
-							endIcon={<ReceiptIcon />}
-						>
-							Create Proposal
-						</Button>
+						<ProposalCreator />
 						<Divider />
 					</Paper>
 				</div>
