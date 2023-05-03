@@ -1,0 +1,27 @@
+.job-card-container {
+	display: grid;
+	grid-template-columns: 2fr 0.5fr;
+}
+
+.job-review {
+	display: flex;
+	align-items: center;
+	justify-items: center;
+}
+
+.job-review > * {
+	padding: 3px;
+}
+
+.job-card-actions {
+	display: flex;
+	flex-direction: column;
+	height: '100%';
+	justify-content: space-evenly;
+	margin-top: 10px;
+}
+
+.job-card-actions > * {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
