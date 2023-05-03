@@ -3,9 +3,7 @@ import * as React from 'react';
 import { Divider, Typography, Paper } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ReceiptIcon from '@mui/icons-material/Receipt';
 import ListItemText from '@mui/material/ListItemText';
-import Button from '@mui/material/Button';
 
 import MenuBar from '../../components/menubar/MenuBar';
 
