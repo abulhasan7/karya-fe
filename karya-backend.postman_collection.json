@@ -731,7 +731,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Hasan's Carpentry job at home\",\r\n    \"description\":\"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\r\n    \"attachmentUrls\":[\"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\", \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"],\r\n    \"estimatedTime\":\"20\",\r\n    \"estimatedBudget\":\"200\",\r\n    \"estimatedHourlyBudget\":10,\r\n    \"address\":{\r\n        \"street\":\"101 E San Fernando St\",\r\n        \"city\":\"San Jose\",\r\n        \"state\":\"California\",\r\n        \"zip\": 95112\r\n    },\r\n    \"service\":\"643b3eef2322ef3623fc0473\"\r\n\r\n}",
+					"raw": "{\r\n    \"name\":\"Hasan's Carpentry job at home\",\r\n    \"description\":\"net to do a kind of carpenty job at my home which includes bla bla bla and bla\",\r\n    \"attachmentUrls\":[\"https://media.gettyimages.com/id/166270889/photo/front-door.jpg?s=612x612&w=gi&k=20&c=PMJ0uiFUf14483gqRXRRzNLBty3qjfqFBQVK82ikDqs=\", \"https://www.energy.gov/sites/default/files/styles/full_article_width/public/door_5481543.jpg?itok=l_TeNrgh\"],\r\n    \"estimatedTime\":\"20\",\r\n    \"estimatedBudget\":\"200\",\r\n    \"estimatedHourlyBudget\":10,\r\n    \"service\":\"643b3eef2322ef3623fc0473\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1825,7 +1825,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Mohammed's Shoppe\",\r\n    \"email\":\"mohammed@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"raw": "{\r\n    \"name\":\"Tuba's Shoppe\",\r\n    \"email\":\"tuba@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1951,7 +1951,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Mohammed's Shoppe\",\r\n    \"phone\": \"9700008147\",\r\n    \"about\": \"bla bla bla\",\r\n    \"workingHours\": {\r\n        \"open\": \"9AM\",\r\n        \"close\": \"5PM\"\r\n    },\r\n    \"services\": [\r\n        {\r\n            \"service\": \"643b3eef2322ef3623fc0473\",\r\n            \"rate\": 51\r\n        },\r\n                {\r\n            \"service\": \"643b3efa2322ef3623fc0475\",\r\n            \"rate\": 60\r\n        },\r\n                {\r\n            \"service\": \"643b3f222322ef3623fc0477\",\r\n            \"rate\": 70\r\n        }\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"101 E San Fernando St\",\r\n        \"city\": \"San Jose\",\r\n        \"state\": \"California\",\r\n        \"zip\": 95112\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Mohammed's Carpentry Services\",\r\n    \"phone\": \"345-345-5082\",\r\n    \"about\": \"We provide all kind of carpentry services for all your needs. Right from creating houses to dining tables to cupboards and lots more. Our services are best in class and customer focused. Please contact us for more information\",\r\n    \"workingHours\": {\r\n        \"open\": \"9AM\",\r\n        \"close\": \"5PM\"\r\n    },\r\n    \"services\": [\r\n        {\r\n            \"service\": \"643b3eef2322ef3623fc0473\",\r\n            \"rate\": 51\r\n        },\r\n                {\r\n            \"service\": \"643b3efa2322ef3623fc0475\",\r\n            \"rate\": 60\r\n        },\r\n                {\r\n            \"service\": \"643b3f222322ef3623fc0477\",\r\n            \"rate\": 70\r\n        }\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"101 E San Fernando St\",\r\n        \"city\": \"San Jose\",\r\n        \"state\": \"California\",\r\n        \"zip\": 95112\r\n    },\r\n    \"primaryImage\":\"https://media.istockphoto.com/id/481628382/photo/carpenter-taking-measurement.jpg?s=612x612&w=0&k=20&c=l2cAPfJL2bGltBasmnqUlsz2OHv6H6bUzjzhx0feOJg=\",\r\n    \"secondaryImages\":[\r\n        \"https://www.designingbuildings.co.uk/w/images/5/5e/Carpenter-carving-wood.jpg\",\r\n        \"https://images.unsplash.com/photo-1499744349893-0c6de53516e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1985,7 +1985,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Gardening\",\r\n    \"description\":\"This is to perform all kinds of Gardening works\"\r\n\r\n}",
+					"raw": "{\r\n    \"name\":\"Gardening\",\r\n    \"description\":\"This is to perform all kinds of Gardening works\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -2019,7 +2019,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"description\":\"I want to post a proposal that you shouldn't be able to refuse at all\",\r\n    \"hours\":20,\r\n    \"hourlyRate\":9,\r\n    \"price\":180,\r\n    \"job\":\"643b4523dc71f74e85cdf50b\"\r\n\r\n}",
+					"raw": "{\r\n    \"description\":\"I want to post a proposal that you shouldn't be able to refuse at all\",\r\n    \"hours\":20,\r\n    \"hourlyRate\":9,\r\n    \"price\":180,\r\n    \"job\":\"643b4523dc71f74e85cdf50b\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
