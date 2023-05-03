@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var {register,login,updateProfile,getProfile,acceptProposal,postJob,getJob,getJobs, getJobsByStatus}= require('../service/userService');
 var {checkAuthenticationHeader} = require('../util/jwtUtil');
-var {getServices} = require('../service/businessUserService');
+var {getServices, getServiceProviders} = require('../service/businessUserService');
 var {generateSignedUrl} = require('../util/s3');
 router.post('/register', async function(req, res, next) {
   try{
@@ -111,6 +111,19 @@ router.get('/get-services',checkAuthenticationHeader, async function(req, res, n
   console.log(req.body);
 
   let resp = await getServices();
+  console.log('resp iss ',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred here",error);
+    res.json({error:error.message})
+  }
+});
+
+router.get('/get-service-providers',checkAuthenticationHeader, async function(req, res, next) {
+  try{
+  console.log(req.body);
+
+  let resp = await getServiceProviders(req.query.service);
   console.log('resp iss ',resp);
   res.json({message:resp});
   }catch(error){

@@ -6,12 +6,39 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import MenuBar from '../../components/menubar/MenuBar';
 import BusinessCardView from '../../components/businessCardView/BusinessCardView';
 import './SearchResults.css';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { useSelector } from 'react-redux';
 
 export default function SearchResults() {
+	const token = useSelector((state) => state.user.token);
+
+	const location = useLocation();
+	console.log('location is', location);
+	const searchText = location.state || "";
+	const [businesses, setBusinesses] = useState([]);
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
 		googleMapsApiKey: 'AIzaSyB18edUXRN-PEU4Dy_O7Qz_7Gr-5zgoA2E',
 	});
+
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/users/get-service-providers?service=${searchText}`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				if (response.data.message) {
+					setBusinesses(response.data.message[0].serviceProviders);
+				}
+			});
+	}, []);
 
 	const center = {
 		lat: 37.33548,
@@ -70,11 +97,11 @@ export default function SearchResults() {
 							color: '#2b4450',
 						}}
 					>
-						Here are your matching service providers
+						Here are your matching service providers for {searchText} service
 					</Typography>
-					<BusinessCardView />
-					<BusinessCardView />
-					<BusinessCardView />
+					{
+						businesses.map(business => <BusinessCardView data={business}/>)
+					}
 				</div>
 				<div>
 					{isLoaded && (
