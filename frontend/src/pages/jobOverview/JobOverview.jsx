@@ -11,8 +11,31 @@ import MenuBar from '../../components/menubar/MenuBar';
 
 import './JobOverview.css';
 import JobProposalCard from '../../components/jobProposalCard/JobProposalCard';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 export default function JobOverview() {
+	let { id } = useParams();
+	const token = useSelector((state) => state.user.token);
+	const [job,setJob] = useState('');
+	console.log('id is',id);
+
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/users/get-job?jobId=${id}`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				setJob(response.data.message);
+			});
+	}, []);
 	function generate(element) {
 		return [0, 1, 2].map((value) =>
 			React.cloneElement(element, {
@@ -41,7 +64,7 @@ export default function JobOverview() {
 								color: 'primary',
 							}}
 						>
-							Job Title will go here
+							{job.name}
 						</Typography>
 
 						<Typography
@@ -53,7 +76,7 @@ export default function JobOverview() {
 							}}
 							color="text.secondary"
 						>
-							Number of active job proposals will go here
+							{job.proposals?job.proposals.length:0 } Active Proposals
 						</Typography>
 					</div>
 					<Divider />
@@ -90,14 +113,7 @@ export default function JobOverview() {
 									color: 'text.secondary',
 								}}
 							>
-								Our craftsman services might be varied, but they
-								all come with the same promise of quality,
-								dedication and durability. Licensed and insured,
-								SwiftVoltage, Inc. is an experienced contractor
-								with trained professionals in residential and
-								commercial standards. We offer a 5-year
-								guarantee for all services rendered from the day
-								of delivery.
+								{job.description}
 							</Typography>
 						</div>
 					</div>
@@ -124,7 +140,7 @@ export default function JobOverview() {
 						<br />
 						<div>
 							<List dense>
-								{generate(
+								
 									<ListItem>
 										<ListItemText
 											primaryTypographyProps={{
@@ -143,11 +159,55 @@ export default function JobOverview() {
 													color: 'text.secondary',
 												},
 											}}
-											primary="Single-line item"
-											secondary="Secondary text"
+											primary={"Estimated Time"}
+											secondary={job.estimatedTime+" hour(s)"}
 										/>
 									</ListItem>,
-								)}
+									<ListItem>
+										<ListItemText
+											primaryTypographyProps={{
+												sx: {
+													fontFamily: 'National Bold',
+													fontWeight: 600,
+													fontStyle: 'normal',
+													fontSize: '15px',
+												},
+											}}
+											secondaryTypographyProps={{
+												sx: {
+													fontFamily: 'National Bold',
+													fontWeight: 400,
+													fontStyle: 'normal',
+													color: 'text.secondary',
+												},
+											}}
+											primary={"Estimated Hourly Budget"}
+											secondary={job.estimatedHourlyBudget+" $"}
+										/>
+									</ListItem>,
+									<ListItem>
+										<ListItemText
+											primaryTypographyProps={{
+												sx: {
+													fontFamily: 'National Bold',
+													fontWeight: 600,
+													fontStyle: 'normal',
+													fontSize: '15px',
+												},
+											}}
+											secondaryTypographyProps={{
+												sx: {
+													fontFamily: 'National Bold',
+													fontWeight: 400,
+													fontStyle: 'normal',
+													color: 'text.secondary',
+												},
+											}}
+											primary={"Estimated Budget"}
+											secondary={job.estimatedBudget+" $"}
+										/>
+									</ListItem>
+								
 							</List>
 						</div>
 					</div>

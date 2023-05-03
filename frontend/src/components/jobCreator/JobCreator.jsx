@@ -17,10 +17,24 @@ import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 
 import './JobCreator.css';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function JobCreator() {
 	const [open, setOpen] = React.useState(false);
-
+	const token = useSelector((state) => state.user.token);
+	const [title,setTitle] = React.useState('');
+	const [service,setService] = useState('');
+	const [services,setServices] = useState([]);
+	const [description,setDescription] = useState('');
+	const [hours,setHours] = useState('');
+	const [hourlyBudget,setHourlyBudget] = useState('');
+	const [overallBudget,setOverallBudget] = useState('');
+	const navigate = useNavigate();
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
@@ -28,6 +42,50 @@ export default function JobCreator() {
 	const handleClose = () => {
 		setOpen(false);
 	};
+
+	const handleService = (e) =>{
+		console.log('handleservice is',e);
+		setService(e.target.value);
+	}
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/users/get-services`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				setServices(response.data.message);
+			});
+	}, []);
+
+	const handleSubmit= ()=>{
+		console.log('service is',service);
+		console.log("title"+title+service+description+overallBudget);
+		const s = services.find(s=>s.name==service)
+			axios
+				.post(`${API_URL}/users/post-job`,{
+					name:title,
+					description,
+					estimatedTime:hours,
+					estimatedBudget: overallBudget,
+					estimatedHourlyBudget: hourlyBudget,
+					service: s._id
+				}, {
+					headers: {
+						Authorization: token,
+					}
+					
+
+				})
+				.then((response) => {
+					console.log('response is', response.data.message);
+					if (response.data.message) {
+						navigate(`/job-overview/${response.data.message}`);
+					}
+				});
+	}
 
 	return (
 		<div>
@@ -47,7 +105,9 @@ export default function JobCreator() {
 					Lets get things done. A few steps before that.
 				</DialogTitle>
 				<DialogContent>
-					<HorizontalLinearStepper />
+					<HorizontalLinearStepper setTitle={setTitle} setService={handleService} 
+					setDescription={setDescription} setHours={setHours} setHourlyBudget={setHourlyBudget} setOverallBudget={setOverallBudget}
+					handleSubmit={handleSubmit} services={services}/>
 				</DialogContent>
 			</Dialog>
 		</div>
@@ -56,16 +116,8 @@ export default function JobCreator() {
 
 const steps = ['Some details.', 'More details please.', 'Estimates.'];
 
-export function HorizontalLinearStepper() {
-	const top100Films = [
-		{ title: 'The Shawshank Redemption', year: 1994 },
-		{ title: 'The Godfather', year: 1972 },
-		{ title: 'The Godfather: Part II', year: 1974 },
-		{ title: 'The Dark Knight', year: 2008 },
-		{ title: '12 Angry Men', year: 1957 },
-		{ title: "Schindler's List", year: 1993 },
-		{ title: 'Pulp Fiction', year: 1994 },
-	];
+export function HorizontalLinearStepper({setTitle,setService,setDescription,setHours,setHourlyBudget,setOverallBudget,handleSubmit,services}) {
+
 	const [activeStep, setActiveStep] = React.useState(0);
 
 	const handleNext = () => {
@@ -79,6 +131,11 @@ export function HorizontalLinearStepper() {
 	const handleReset = () => {
 		setActiveStep(0);
 	};
+	const handleSubmit2 = () => {
+		handleSubmit();
+		// setActiveStep(0);
+		// console.log(title+":"+service+":"+description+":"+hours)
+	};
 
 	const contentFormStepOne = (
 		<TextField
@@ -90,18 +147,19 @@ export function HorizontalLinearStepper() {
 			id="outlined-required"
 			label="Title"
 			placeholder="Give your job a nice descriptive title."
+			onChange={(e)=>setTitle(e.target.value)}
 		/>
 	);
 
 	const contentFormStepTwo = (
 		<div>
 			<Autocomplete
-				multiple
+				// multiple
 				id="tags-outlined"
-				options={top100Films}
+				options={services}
 				size="small"
-				getOptionLabel={(option) => option.title}
-				defaultValue={[top100Films[3]]}
+				getOptionLabel={(option) => option.name}
+				// defaultValue={[top100Films[3]]}
 				filterSelectedOptions
 				renderInput={(params) => (
 					<TextField
@@ -111,6 +169,7 @@ export function HorizontalLinearStepper() {
 						{...params}
 						label="Categories"
 						placeholder="Select categories which apply to your job."
+						onSelect={setService}
 					/>
 				)}
 			/>
@@ -126,6 +185,8 @@ export function HorizontalLinearStepper() {
 				rows={6}
 				placeholder="Please provide as many details here are possible."
 				variant="standard"
+				onChange={(e)=>setDescription(e.target.value)}
+
 			/>
 		</div>
 	);
@@ -141,6 +202,7 @@ export function HorizontalLinearStepper() {
 				id="outlined-required"
 				label="Estimated hours required."
 				placeholder="How many hours do you think the job requires?"
+				onChange={(e)=>setHours(e.target.value)}
 			/>
 			<br />
 			<br />
@@ -153,6 +215,7 @@ export function HorizontalLinearStepper() {
 				id="outlined-required"
 				label="Estimated hourly budget in $"
 				placeholder="What's your hourly budget in $?"
+				onChange={(e)=>setHourlyBudget(e.target.value)}
 			/>
 			<br />
 			<br />
@@ -165,9 +228,11 @@ export function HorizontalLinearStepper() {
 				id="outlined-required"
 				label="Overall budget if applicable."
 				placeholder="What's your soft budget overall in $?"
+				onChange={(e)=>setOverallBudget(e.target.value)}
 			/>
 		</div>
 	);
+
 	return (
 		<Box sx={{ width: '100%' }}>
 			<Stepper activeStep={activeStep}>
@@ -190,6 +255,7 @@ export function HorizontalLinearStepper() {
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Box sx={{ flex: '1 1 auto' }} />
 						<Button onClick={handleReset}>Reset</Button>
+						<Button onClick={handleSubmit2}>Submit</Button>
 					</Box>
 				</React.Fragment>
 			) : (
