@@ -9,6 +9,7 @@ import Protected from './protected';
 import './App.css';
 import JobCardView from './components/jobCardView/JobCardView';
 import JobsListingPage from './pages/jobsListingPage/JobsListingPage';
+import MenuBar from './components/menubar/MenuBar';
 
 function App() {
 	const loggedIn = useSelector((state) => state.business.token);
