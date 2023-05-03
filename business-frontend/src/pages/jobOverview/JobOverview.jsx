@@ -10,7 +10,6 @@ import Button from '@mui/material/Button';
 import MenuBar from '../../components/menubar/MenuBar';
 
 import './JobOverview.css';
-import JobProposalCard from '../../components/jobProposalCard/JobProposalCard';
 
 export default function JobOverview() {
 	function generate(element) {
@@ -152,30 +151,30 @@ export default function JobOverview() {
 						</div>
 					</div>
 					<Divider />
-					<div className="bso-details-highlights">
-						<div>
-							<Typography
-								variant="h4"
-								noWrap
-								component="h4"
-								sx={{
-									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
-									fontWeight: 600,
-									fontStyle: 'normal',
-									fontSize: '18px',
-									// letterSpacing: '.3rem',
-									color: 'primary',
-								}}
-							>
-								Proposals
-							</Typography>
-						</div>
-						<JobProposalCard />
-						<JobProposalCard />
-					</div>
 				</div>
-				<div className="jo-side-card"></div>
+				<div className="jo-side-card">
+					<Paper
+						sx={{
+							width: '300px',
+							padding: '15px',
+						}}
+					>
+						<Button
+							size="small"
+							variant="contained"
+							sx={{
+								textTransform: 'unset',
+								backgroundColor: '#385170',
+								width: '100%',
+								mb: '10px',
+							}}
+							endIcon={<ReceiptIcon />}
+						>
+							Create Proposal
+						</Button>
+						<Divider />
+					</Paper>
+				</div>
 			</div>
 		</div>
 	);
