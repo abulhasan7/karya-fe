@@ -8,6 +8,7 @@ import BusinessSignup from './pages/signup/BusinessSignup';
 import Protected from './protected';
 import './App.css';
 import JobCardView from './components/jobCardView/JobCardView';
+import JobsListingPage from './pages/jobsListingPage/JobsListingPage';
 
 function App() {
 	const loggedIn = useSelector((state) => state.business.token);
@@ -57,7 +58,7 @@ function App() {
 			path: '/dev',
 			element: (
 				<ThemeProvider theme={theme}>
-					<JobCardView />
+					<JobsListingPage />
 				</ThemeProvider>
 			),
 		},

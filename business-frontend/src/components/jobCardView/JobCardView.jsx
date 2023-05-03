@@ -54,7 +54,17 @@ export default function JobCardView() {
 								Address and then some service logos | Maybe
 								Estimates
 							</Typography>
-							<Typography variant="body2">
+							<Typography
+								sx={{
+									display: { xs: 'none', md: 'flex' },
+									fontFamily: 'National Bold',
+									fontWeight: 400,
+									fontStyle: 'normal',
+									fontSize: '16px',
+									// letterSpacing: '.3rem',
+								}}
+								variant="body2"
+							>
 								Job Description
 							</Typography>
 						</div>
