@@ -10,6 +10,7 @@ import './App.css';
 import JobCardView from './components/jobCardView/JobCardView';
 import JobsListingPage from './pages/jobsListingPage/JobsListingPage';
 import MenuBar from './components/menubar/MenuBar';
+import JobOverview from './pages/jobOverview/JobOverview';
 
 function App() {
 	const loggedIn = useSelector((state) => state.business.token);
@@ -59,7 +60,7 @@ function App() {
 			path: '/dev',
 			element: (
 				<ThemeProvider theme={theme}>
-					<JobsListingPage />
+					<JobOverview />
 				</ThemeProvider>
 			),
 		},

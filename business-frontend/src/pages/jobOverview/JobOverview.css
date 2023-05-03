@@ -1,0 +1,19 @@
+.jo-main-container {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	margin: 8%;
+}
+
+.jo-details {
+	padding: 15px;
+}
+
+.jo-details > * {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.jo-side-card {
+	margin-left: 20%;
+	margin-top: 25%;
+}
