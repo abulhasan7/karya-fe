@@ -103,6 +103,22 @@ function App() {
 				</ThemeProvider>
 			),
 		},
+		{
+			path: '/create-job',
+			element: (
+				<ThemeProvider theme={theme}>
+					<JobCreator />
+				</ThemeProvider>
+			),
+		},
+		{
+			path: '/job-overview',
+			element: (
+				<ThemeProvider theme={theme}>
+					<JobOverview />
+				</ThemeProvider>
+			),
+		},
 	]);
 	return <RouterProvider router={router} />;
 	// return router;

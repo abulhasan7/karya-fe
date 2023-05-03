@@ -118,18 +118,18 @@ async function updateProfile(userDetails) {
 }
 
 async function postJob(jobDetails) {
-  const address = {
-    street: jobDetails.address.street,
-    city: jobDetails.address.city,
-    state: jobDetails.address.state,
-    zip: jobDetails.address.zip
-  }
-  const addressfilter = { _id: jobDetails.address._id || new mongoose.mongo.ObjectId() };
-  const doc = await Address.findOneAndUpdate(addressfilter, address, {
-    new: true,
-    upsert: true // Make this update into an upsert
-  })
-  console.log("doc is",doc);
+  // const address = {
+  //   street: jobDetails.address.street,
+  //   city: jobDetails.address.city,
+  //   state: jobDetails.address.state,
+  //   zip: jobDetails.address.zip
+  // }
+  // const addressfilter = { _id: jobDetails.address._id || new mongoose.mongo.ObjectId() };
+  // const doc = await Address.findOneAndUpdate(addressfilter, address, {
+  //   new: true,
+  //   upsert: true // Make this update into an upsert
+  // })
+  // console.log("doc is",doc);
 
   let job = new Job({
     name: jobDetails.name,
@@ -139,7 +139,7 @@ async function postJob(jobDetails) {
     estimatedBudget: jobDetails.estimatedBudget,
     estimatedHourlyBudget: jobDetails.estimatedHourlyBudget,
     status: "POSTED",
-    address: doc._id,
+    // address: doc._id,
     user: jobDetails.user,
     service: jobDetails.service
   })
