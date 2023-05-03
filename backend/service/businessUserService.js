@@ -161,6 +161,12 @@ async function getServices() {
   return services;
 }
 
+async function getServiceProviders(service) {
+  const services = await Service.find({ name: service }).populate({ path: 'serviceProviders', model: 'ServiceProvider', populate: { path: 'address', model: 'Address' } }).exec();
+  console.log("services are", services);
+  return services;
+}
+
 async function getJobs(_id) {
   console.log("_id is ", _id)
   let jobs = await Job.find({ serviceProvider: _id }).exec();
@@ -198,5 +204,5 @@ async function updateStatus(body) {
 }
 
 module.exports = {
-  register, login, getProfile, getAllOpenJobs, getAllOpenJobsByCategory, updateStatus, getJobs, postProposal, updateProfile, addService, getServices
+  register, login, getProfile, getAllOpenJobs, getServiceProviders, getAllOpenJobsByCategory, updateStatus, getJobs, postProposal, updateProfile, addService, getServices
 }

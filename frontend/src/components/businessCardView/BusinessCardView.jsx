@@ -10,7 +10,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Rating from '@mui/material/Rating';
 import './BusinessCardView.css';
 
-export default function BusinessCardView() {
+export default function BusinessCardView({data}) {
 	return (
 		<Card sx={{ minWidth: 275, maxWidth: 888, height: 200, margin: 5 }}>
 			<CardContent>
@@ -32,7 +32,7 @@ export default function BusinessCardView() {
 								// letterSpacing: '.3rem',
 							}}
 						>
-							Dugarry Construction
+							{data.name}
 						</Typography>
 						<div className="bv-review">
 							<Rating
@@ -59,15 +59,15 @@ export default function BusinessCardView() {
 								}}
 								color="text.secondary"
 							>
-								200 Reviews
+								//TODO 200 Reviews
 							</Typography>
 						</div>
 
 						<Typography sx={{ mb: 1.5 }} color="text.secondary">
-							Address and then some service logos
+						{data.address.street +", "+data.address.city + ", "+data.address.state+", "+data.address.zip}
 						</Typography>
 						<Typography variant="body2">
-							Business Description
+							{data.about}
 						</Typography>
 					</div>
 				</div>

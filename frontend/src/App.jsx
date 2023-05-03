@@ -85,6 +85,15 @@ function App() {
 				</ThemeProvider>
 			),
 		},
+		
+		{
+			path: '/search-services',
+			element: (
+				<ThemeProvider theme={theme}>
+					<SearchResults />
+				</ThemeProvider>
+			),
+		},
 	]);
 	return <RouterProvider router={router} />;
 	// return router;
