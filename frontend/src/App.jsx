@@ -113,7 +113,7 @@ function App() {
 			),
 		},
 		{
-			path: '/job-overview',
+			path: '/job-overview/:id',
 			element: (
 				<ThemeProvider theme={theme}>
 					<JobOverview />

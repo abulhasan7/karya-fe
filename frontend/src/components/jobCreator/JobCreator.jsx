@@ -22,6 +22,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function JobCreator() {
 	const [open, setOpen] = React.useState(false);
@@ -33,7 +34,7 @@ export default function JobCreator() {
 	const [hours,setHours] = useState('');
 	const [hourlyBudget,setHourlyBudget] = useState('');
 	const [overallBudget,setOverallBudget] = useState('');
-
+	const navigate = useNavigate();
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
@@ -81,7 +82,7 @@ export default function JobCreator() {
 				.then((response) => {
 					console.log('response is', response.data.message);
 					if (response.data.message) {
-						// setBusinesses(response.data.message[0].serviceProviders);
+						navigate(`/job-overview/${response.data.message}`);
 					}
 				});
 	}

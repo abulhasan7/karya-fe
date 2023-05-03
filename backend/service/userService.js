@@ -153,7 +153,7 @@ async function postJob(jobDetails) {
       } 
     });
     console.log("u is",u)
-  return "Job created successfully"
+  return job._id;
 }
 
 async function getJobs(_id) {
