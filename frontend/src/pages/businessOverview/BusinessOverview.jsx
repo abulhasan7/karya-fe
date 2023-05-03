@@ -28,15 +28,13 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import HubIcon from '@mui/icons-material/Hub';
 import './BusinessOverview.css';
 import MenuBar from '../../components/menubar/MenuBar';
+import { useLocation } from 'react-router-dom';
 
 export default function BusinessOverview() {
-	function generate(element) {
-		return [0, 1, 2].map((value) =>
-			React.cloneElement(element, {
-				key: value,
-			}),
-		);
-	}
+	const location = useLocation();
+	const businessData = location.state;
+	console.log("businessdata is", businessData);
+
 	const Item = styled(Paper)(({ theme }) => ({
 		backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
 		...theme.typography.body2,
@@ -62,7 +60,7 @@ export default function BusinessOverview() {
 			<div className="bso-main-container">
 				<div className="bso-details">
 					<div className="bso-details-header">
-						<Avatar sx={{ height: '70px', width: '70px' }} />
+						<Avatar sx={{ height: '90px', width: '90px' }} src ={businessData.primaryImage}/>
 						<div>
 							<div className="bso-name">
 								<Typography
@@ -80,7 +78,7 @@ export default function BusinessOverview() {
 										color: 'primary',
 									}}
 								>
-									Alon Design and Remodeling
+									{businessData.name}
 								</Typography>
 							</div>
 							<div className="bso-review-con">
@@ -105,7 +103,7 @@ export default function BusinessOverview() {
 									}}
 									color="text.secondary"
 								>
-									200 Reviews
+									//TODO 200 Reviews
 								</Typography>
 							</div>
 						</div>
@@ -212,14 +210,14 @@ export default function BusinessOverview() {
 						</div>
 
 						<List dense>
-							{generate(
-								<ListItem>
+							{
+								businessData.services.map(i => (<ListItem>
 									<ListItemText
-										primary="Single-line item"
-										secondary="Secondary text"
+										primary={i.service.name}
+										secondary={i.rate+' $/hr'}
 									/>
-								</ListItem>,
-							)}
+								</ListItem>))
+							}
 						</List>
 					</div>
 					<Divider />
@@ -255,15 +253,7 @@ export default function BusinessOverview() {
 									// letterSpacing: '.3rem',
 									color: 'text.secondary',
 								}}
-							>
-								Our craftsman services might be varied, but they
-								all come with the same promise of quality,
-								dedication and durability. Licensed and insured,
-								SwiftVoltage, Inc. is an experienced contractor
-								with trained professionals in residential and
-								commercial standards. We offer a 5-year
-								guarantee for all services rendered from the day
-								of delivery.
+							>{ businessData.about }
 							</Typography>
 						</div>
 					</div>
@@ -289,7 +279,7 @@ export default function BusinessOverview() {
 						</div>
 						<div className="bso-img-carousel">
 							<Carousel>
-								{items.map((item, i) => (
+								{businessData.secondaryImages.map((item, i) => (
 									<ItemImage item={item} />
 								))}
 							</Carousel>
@@ -340,11 +330,12 @@ function ItemImage(props) {
 	return (
 		<Paper
 			sx={{
-				height: '200px',
+				height: 500,
+				width: 500
+				
 			}}
 		>
-			<h2>{props.item.name}</h2>
-			<p>{props.item.description}</p>
+		<img src={props.item} height={500} width={500}></img>
 		</Paper>
 	);
 }

@@ -48,4 +48,11 @@ module.exports = (Schema) =>
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
     },
+    primaryImage: {
+        type: String,
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSAczsR8dlOMtNeUDQXeariQTixFl_dTyUUhW6TeTr1Q&usqp=CAU&ec=48665698"
+    },
+    secondaryImages: [{
+        type: String
+    }]
 });
