@@ -9,14 +9,16 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Rating from '@mui/material/Rating';
 import './BusinessCardView.css';
+import { useNavigate } from 'react-router-dom';
 
-export default function BusinessCardView({data}) {
+export default function BusinessCardView({ data }) {
+	const navigate = useNavigate();
 	return (
-		<Card sx={{ minWidth: 275, maxWidth: 888, height: 200, margin: 5 }}>
+		<Card sx={{ minWidth: 275, maxWidth: 888, height: 200, margin: 5 }} onClick={() => navigate('/business-overview', { state: data })}>
 			<CardContent>
 				<div className="bv-card-container">
 					<div className="bv-img">
-						<img src="" alt="img goes here"></img>
+						<img src={data.primaryImage} alt="img goes here" height={150} width={150}></img>
 					</div>
 					<div>
 						<Typography
@@ -64,7 +66,7 @@ export default function BusinessCardView({data}) {
 						</div>
 
 						<Typography sx={{ mb: 1.5 }} color="text.secondary">
-						{data.address.street +", "+data.address.city + ", "+data.address.state+", "+data.address.zip}
+							{data.address.street + ", " + data.address.city + ", " + data.address.state + ", " + data.address.zip}
 						</Typography>
 						<Typography variant="body2">
 							{data.about}

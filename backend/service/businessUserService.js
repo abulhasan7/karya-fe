@@ -104,7 +104,9 @@ async function updateProfile(serviceProviderDetails) {
     about: serviceProviderDetails.about,
     address: doc._id,
     workingHours: serviceProviderDetails.workingHours,
-    services: services11
+    services: services11,
+    primaryImage:serviceProviderDetails.primaryImage,
+    secondaryImages: serviceProviderDetails.secondaryImages
   };
   // await ServiceProvider.collection.bulkWrite()
   const created = await ServiceProvider.updateOne({ _id: serviceProviderDetails._id }, datatoUpdate).exec();
@@ -162,7 +164,7 @@ async function getServices() {
 }
 
 async function getServiceProviders(service) {
-  const services = await Service.find({ name: service }).populate({ path: 'serviceProviders', model: 'ServiceProvider', populate: { path: 'address', model: 'Address' } }).exec();
+  const services = await Service.find({ name: service }).populate({ path: 'serviceProviders', model: 'ServiceProvider', populate: [{ path: 'address', model: 'Address' }, { path: 'services', model: 'ServiceToRate',populate:{ path: 'service', model: 'Service' } }] }).exec();
   console.log("services are", services);
   return services;
 }

@@ -94,6 +94,15 @@ function App() {
 				</ThemeProvider>
 			),
 		},
+		
+		{
+			path: '/business-overview',
+			element: (
+				<ThemeProvider theme={theme}>
+					<BusinessOverview />
+				</ThemeProvider>
+			),
+		},
 	]);
 	return <RouterProvider router={router} />;
 	// return router;
