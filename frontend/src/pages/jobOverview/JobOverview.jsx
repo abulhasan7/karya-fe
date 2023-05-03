@@ -175,28 +175,7 @@ export default function JobOverview() {
 						<JobProposalCard />
 					</div>
 				</div>
-				<div className="jo-side-card">
-					<Paper
-						sx={{
-							width: '300px',
-							padding: '15px',
-						}}
-					>
-						<Button
-							variant="contained"
-							size="small"
-							sx={{
-								textTransform: 'unset',
-								width: '100%',
-								mb: '10px',
-							}}
-							endIcon={<ReceiptIcon />}
-						>
-							Create Job Proposal
-						</Button>
-						<Divider />
-					</Paper>
-				</div>
+				<div className="jo-side-card"></div>
 			</div>
 		</div>
 	);

@@ -81,11 +81,11 @@ function App() {
 			path: '/dev',
 			element: (
 				<ThemeProvider theme={theme}>
-					<MenuBar />
+					<JobOverview />
 				</ThemeProvider>
 			),
 		},
-		
+
 		{
 			path: '/search-services',
 			element: (
@@ -94,7 +94,7 @@ function App() {
 				</ThemeProvider>
 			),
 		},
-		
+
 		{
 			path: '/business-overview',
 			element: (

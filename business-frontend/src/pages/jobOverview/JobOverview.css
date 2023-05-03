@@ -1,7 +1,7 @@
 .jo-main-container {
 	display: grid;
 	grid-template-columns: 2fr 1fr;
-	margin: 8%;
+	margin: 5%;
 }
 
 .jo-details {
