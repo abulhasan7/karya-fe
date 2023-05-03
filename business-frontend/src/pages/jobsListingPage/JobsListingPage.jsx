@@ -5,10 +5,12 @@ import Typography from '@mui/material/Typography';
 // import MenuBar from '../../components/menubar/MenuBar';
 import JobCardView from '../../components/jobCardView/JobCardView';
 import './JobsListingPage.css';
+import MenuBar from '../../components/menubar/MenuBar';
 
 export default function JobsListingPage() {
 	return (
 		<div>
+			<MenuBar />
 			<div className="jl-main-container">
 				<div></div>
 				<div className="sr-result-cards">
