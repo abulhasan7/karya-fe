@@ -16,6 +16,7 @@ import BusinessOverview from './pages/businessOverview/BusinessOverview';
 import Protected from './protected';
 import JobOverview from './pages/jobOverview/JobOverview';
 import SearchResults from './pages/searchResultsPage/SearchResults';
+import JobsListingPage from './pages/jobsListingPage/JobsListingPage';
 
 function App() {
 	const loggedIn = useSelector((state) => state.user.token);
@@ -81,7 +82,7 @@ function App() {
 			path: '/dev',
 			element: (
 				<ThemeProvider theme={theme}>
-					<JobOverview />
+					<JobsListingPage />
 				</ThemeProvider>
 			),
 		},
