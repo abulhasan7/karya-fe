@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 // import MenuBar from '../../components/menubar/MenuBar';
 import JobCardView from '../../components/jobCardView/JobCardView';
 import './JobsListingPage.css';
-import MenuBar from '../../components/menubar/MenuBar';
+
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -45,7 +45,7 @@ export default function JobsListingPage() {
 							fontFamily:
 								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 							fontSize: '32px',
-							fontWeight: '300',
+							fontWeight: '700',
 							fontSize: '28px',
 							// letterSpacing: '.3rem',
 							color: '#2b4450',
