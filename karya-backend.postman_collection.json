@@ -1173,6 +1173,130 @@
 			]
 		},
 		{
+			"name": "USER - getjobs by not status",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{usertoken}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localurl}}/users/get-jobs?notstatus=POSTED",
+					"host": [
+						"{{localurl}}"
+					],
+					"path": [
+						"users",
+						"get-jobs"
+					],
+					"query": [
+						{
+							"key": "notstatus",
+							"value": "POSTED"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "USER - getjobs by status",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{usertoken}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localurl}}/users/get-jobs?status=POSTED",
+							"host": [
+								"{{localurl}}"
+							],
+							"path": [
+								"users",
+								"get-jobs"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "POSTED"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38-Z4A1/m28iCQYvmA0Za72vUCtGjs\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Apr 2023 00:35:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"No Jobs found for the user with statusPOSTED\"\n}"
+				}
+			]
+		},
+		{
 			"name": "USER - get a job",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
