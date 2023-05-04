@@ -840,7 +840,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"jobId\":\"643b4523dc71f74e85cdf50b\",\r\n    \"jobProposalId\":\"643b45ae19dd5b168e5b4b03\",\r\n    \"serviceProviderId\":\"643b3e772322ef3623fc046c\"\r\n}",
+					"raw": "{\r\n    \"status\":\"ACCEPTED\",\r\n    \"jobId\":\"643b4523dc71f74e85cdf50b\",\r\n    \"jobProposalId\":\"643b45ae19dd5b168e5b4b03\",\r\n    \"serviceProviderId\":\"643b3e772322ef3623fc046c\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -848,13 +848,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{localurl}}/users/accept-proposal",
+					"raw": "{{localurl}}/users/update-proposal",
 					"host": [
 						"{{localurl}}"
 					],
 					"path": [
 						"users",
-						"accept-proposal"
+						"update-proposal"
 					]
 				}
 			},
@@ -2019,7 +2019,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"description\":\"I want to post a proposal that you shouldn't be able to refuse at all\",\r\n    \"hours\":20,\r\n    \"hourlyRate\":9,\r\n    \"price\":180,\r\n    \"job\":\"643b4523dc71f74e85cdf50b\"\r\n}",
+					"raw": "{\r\n    \"description\":\"I want to post a proposal that you shouldn't be able to refuse at all\",\r\n    \"hours\":20,\r\n    \"hourlyRate\":9,\r\n    \"price\":180,\r\n    \"job\":\"6452e5d3ba0bf595d0f195b2\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
