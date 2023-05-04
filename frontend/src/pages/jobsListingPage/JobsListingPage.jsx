@@ -6,8 +6,29 @@ import Typography from '@mui/material/Typography';
 import JobCardView from '../../components/jobCardView/JobCardView';
 import './JobsListingPage.css';
 import MenuBar from '../../components/menubar/MenuBar';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../constants';
 
 export default function JobsListingPage() {
+
+	const token = useSelector((state) => state.user.token);
+	const [jobs, setJobs] = useState([]);
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/users/get-jobs?nostatus=COMPLETED`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				setJobs(response.data.message);
+			});
+	},[])
+
 	return (
 		<div>
 			<MenuBar />
@@ -30,9 +51,8 @@ export default function JobsListingPage() {
 					>
 						Jobs posted by you.
 					</Typography>
-					<JobCardView />
-					<JobCardView />
-					<JobCardView />
+					{jobs.map(j=><JobCardView job={j}/>)}
+					
 				</div>
 			</div>
 		</div>

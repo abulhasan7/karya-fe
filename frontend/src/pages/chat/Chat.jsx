@@ -134,8 +134,8 @@ export default function Chat() {
 							info="Active 10 mins ago"
 						/>
 						<ConversationHeader.Actions>
-							<VoiceCallButton />
-							<VideoCallButton />
+							<VoiceCallButton disabled/>
+							<VideoCallButton disabled/>
 							<InfoButton />
 						</ConversationHeader.Actions>
 					</ConversationHeader>

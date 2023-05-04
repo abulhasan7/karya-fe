@@ -96,6 +96,7 @@ export default function LandingSearch() {
 			</div>
 			<div className="ls-services">
 				<Button
+				onClick= {()=>navigate('/search-services', {state:'Handyperson' })}
 					size="large"
 					startIcon={<BusinessCenterIcon />}
 					sx={{
@@ -107,6 +108,8 @@ export default function LandingSearch() {
 					Handyperson
 				</Button>
 				<Button
+								onClick= {()=>navigate('/search-services', {state:'Landscaping' })}
+
 					size="large"
 					startIcon={<GrassIcon />}
 					sx={{
@@ -118,6 +121,7 @@ export default function LandingSearch() {
 					Landscaping
 				</Button>
 				<Button
+												onClick= {()=>navigate('/search-services', {state:'Plumbing' })}
 					size="large"
 					startIcon={<PlumbingIcon />}
 					sx={{
@@ -129,6 +133,7 @@ export default function LandingSearch() {
 					Plumbing
 				</Button>
 				<Button
+																onClick= {()=>navigate('/search-services', {state:'Electrical' })}
 					size="large"
 					startIcon={<ElectricalServicesIcon />}
 					sx={{
@@ -140,6 +145,8 @@ export default function LandingSearch() {
 					Electrical
 				</Button>
 				<Button
+				//TODO update this one
+																				onClick= {()=>navigate('/search-services', {state:'Carpenting' })}
 					size="large"
 					startIcon={<RoofingIcon />}
 					sx={{

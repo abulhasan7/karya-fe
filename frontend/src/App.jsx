@@ -120,6 +120,14 @@ function App() {
 				</ThemeProvider>
 			),
 		},
+		{
+			path: '/jobs-listing',
+			element: (
+				<ThemeProvider theme={theme}>
+					<JobsListingPage />
+				</ThemeProvider>
+			),
+		},
 	]);
 	return <RouterProvider router={router} />;
 	// return router;

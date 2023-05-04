@@ -174,6 +174,16 @@ async function getJobsByStatus(_id,status) {
   }
 }
 
+async function getJobsNEByStatus(_id,status) {
+  let jobs = await Job.find({ user: _id,status:{$ne:status} }).exec();
+  if (jobs && jobs.length>0) {
+    return jobs;
+  } else {
+    throw new Error("No Jobs found for the user with status "+status);
+  }
+}
+
+
 async function getJob(_id) {
   // const a = await dbData.populate({ path: 'services', model: 'ServiceToRate', populate: { path: 'service', model: 'Service' } });
 
@@ -211,5 +221,5 @@ async function acceptProposal(body) {
 
 
 module.exports = {
-  register, login, getProfile, getJobsByStatus,updateProfile, postJob, getJob, getJobs,acceptProposal
+  register, login, getProfile, getJobsByStatus,updateProfile, postJob, getJob, getJobs,acceptProposal,getJobsNEByStatus
 }

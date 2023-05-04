@@ -105,6 +105,7 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 							variant="body2"
 						>
 							{proposal.description}
+							{'hours: '+proposal.hours +" :hourlyRate "+proposal.hourlyRate+" hours "+proposal.hours}
 						</Typography>
 					</div>
 					<div className="jp-card-actions">
