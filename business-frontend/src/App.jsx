@@ -11,6 +11,7 @@ import JobCardView from './components/jobCardView/JobCardView';
 import JobsListingPage from './pages/jobsListingPage/JobsListingPage';
 import MenuBar from './components/menubar/MenuBar';
 import JobOverview from './pages/jobOverview/JobOverview';
+import ProposalCreator from './components/proposalCreator/ProposalCreator';
 
 function App() {
 	const loggedIn = useSelector((state) => state.business.token);
@@ -41,6 +42,16 @@ function App() {
 			),
 		},
 		{
+		path: '/home',
+		element: (
+			<Protected isLoggedIn={loggedIn}>
+				<ThemeProvider theme={theme}>
+					<JobsListingPage />
+				</ThemeProvider>
+			</Protected>
+		),
+	},
+		{
 			path: '/login',
 			element: (
 				<ThemeProvider theme={theme}>
@@ -64,6 +75,14 @@ function App() {
 				</ThemeProvider>
 			),
 		},
+		{
+			path: '/create-proposal',
+			element: (
+				<ThemeProvider theme={theme}>
+					<ProposalCreator />
+				</ThemeProvider>
+			),
+		}
 	]);
 	return <RouterProvider router={router} />;
 	// return router;

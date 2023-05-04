@@ -4,8 +4,10 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import './JobCardView.css';
+import { useNavigate } from 'react-router-dom';
 
-export default function JobCardView() {
+export default function JobCardView({job}) {
+	const navigate = useNavigate();
 	return (
 		<Card
 			sx={{
@@ -33,7 +35,7 @@ export default function JobCardView() {
 									// letterSpacing: '.3rem',
 								}}
 							>
-								Construction Job Data Title
+								{job.name}
 							</Typography>
 							<div className="job-review">
 								<Typography
@@ -46,13 +48,12 @@ export default function JobCardView() {
 									}}
 									color="text.secondary"
 								>
-									0 active proposals
+									{job.proposals.length} active proposals
 								</Typography>
 							</div>
 
 							<Typography sx={{ mb: 1.5 }} color="text.secondary">
-								Address and then some service logos | Maybe
-								Estimates
+								{'estimatedBudget'+job.estimatedBudget+"estimatedHourlyBudget: "+job.estimatedHourlyBudget+"estimatedTime:"+job.estimatedTime}
 							</Typography>
 							<Typography
 								sx={{
@@ -65,7 +66,7 @@ export default function JobCardView() {
 								}}
 								variant="body2"
 							>
-								Job Description
+								{job.description}
 							</Typography>
 						</div>
 					</div>
@@ -77,6 +78,7 @@ export default function JobCardView() {
 								textTransform: 'unset',
 								backgroundColor: '#385170',
 							}}
+							onClick={()=>navigate('/create-proposal',{state:job})}
 						>
 							Create Proposal
 						</Button>

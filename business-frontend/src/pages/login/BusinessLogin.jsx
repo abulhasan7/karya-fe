@@ -46,7 +46,7 @@ export default function BusinessLogin() {
 				password,
 			};
 			axios
-				.post(`${API_URL}/users/login`, data)
+				.post(`${API_URL}/business/users/login`, data)
 				.then((response) => {
 					console.log(response.data.error);
 					if (response.data.error) {

@@ -45,6 +45,13 @@ module.exports = (Schema) =>
     services: [{
         type: Schema.Types.ObjectId, ref: 'ServiceToRate' }
     ],
+    proposals: [{
+        type: Schema.Types.ObjectId, ref: 'Job' }
+    ],
+    jobs: [{
+        type: Schema.Types.ObjectId, ref: 'Job' }
+    ],
+    
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
     },

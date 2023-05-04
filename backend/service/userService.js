@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { default: mongoose } = require('mongoose');
-const { User, Address, Job, JobProposal } = require('../model/index');
+const { User, Address, Job, JobProposal, ServiceProvider } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 
 
@@ -203,6 +203,7 @@ async function acceptProposal(body) {
   if(body.status=='ACCEPTED'){
     let jobs = await Job.updateOne({_id:body.jobId},{status:"PROPOSAL-ACCEPTED",acceptedProposal:body.jobProposalId, serviceProvider:body.serviceProviderId}).exec();
     let jobProposal = await JobProposal.updateOne({_id:body.jobProposalId},{status:"ACCEPTED"}).exec();
+    let sp = await ServiceProvider.updateOne({ _id: body.serviceProviderId }, { $addToSet: { jobs: body.jobId } })
     if(jobs){
       return 'Proposal Accepted successfully';
     }else{

@@ -105,7 +105,7 @@ async function updateProfile(serviceProviderDetails) {
     address: doc._id,
     workingHours: serviceProviderDetails.workingHours,
     services: services11,
-    primaryImage:serviceProviderDetails.primaryImage,
+    primaryImage: serviceProviderDetails.primaryImage,
     secondaryImages: serviceProviderDetails.secondaryImages
   };
   // await ServiceProvider.collection.bulkWrite()
@@ -155,6 +155,7 @@ async function postProposal(jobDetails) {
   })
   let jobsaved = await job.save();
   let jobprop = await Job.updateOne({ _id: jobDetails.job }, { $push: { proposals: jobsaved._id } })
+  let sp = await ServiceProvider.updateOne({ _id: jobDetails._id }, { $push: { proposals: jobDetails.job } })
   return "Job proposal created successfully"
 }
 async function getServices() {
@@ -164,7 +165,7 @@ async function getServices() {
 }
 
 async function getServiceProviders(service) {
-  const services = await Service.find({ name: service }).populate({ path: 'serviceProviders', model: 'ServiceProvider', populate: [{ path: 'address', model: 'Address' }, { path: 'services', model: 'ServiceToRate',populate:{ path: 'service', model: 'Service' } }] }).exec();
+  const services = await Service.find({ name: service }).populate({ path: 'serviceProviders', model: 'ServiceProvider', populate: [{ path: 'address', model: 'Address' }, { path: 'services', model: 'ServiceToRate', populate: { path: 'service', model: 'Service' } }] }).exec();
   console.log("services are", services);
   return services;
 }

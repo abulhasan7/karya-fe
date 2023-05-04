@@ -6,8 +6,47 @@ import Typography from '@mui/material/Typography';
 import JobCardView from '../../components/jobCardView/JobCardView';
 import './JobsListingPage.css';
 import MenuBar from '../../components/menubar/MenuBar';
+import { API_URL } from '../../../../business-frontend/src/constants';
+import axios from 'axios';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 export default function JobsListingPage() {
+
+	
+	const token = useSelector((state) => state.business.token);
+	const [profile,setProfile] = useState(useSelector((state) => state.business.profile));
+	console.log('profile is',JSON.stringify(profile));
+	const [jobs, setJobs] = useState([]);
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/business/users/get-all-open-jobs`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				setJobs(response.data.message)
+				// setJobs(response.data.message.filter(d=>!profile.includes(d._id)));
+			});
+	},[])
+
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/business/users/get-profile`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response of get profile is', response.data.message);
+				// setJobs(response.data.message)
+				// setJobs(response.data.message.filter(d=>!profile.includes(d._id)));
+				setProfile(response.data.message);
+			});
+	},[])
 	return (
 		<div>
 			<MenuBar />
@@ -30,9 +69,8 @@ export default function JobsListingPage() {
 					>
 						Relevant jobs near you.
 					</Typography>
-					<JobCardView />
-					<JobCardView />
-					<JobCardView />
+					{jobs.filter(j=>profile.proposals && !profile.proposals.includes(j._id)).map(j=><JobCardView job={j}/>)}
+					{/* <JobCardView /> */}
 				</div>
 			</div>
 		</div>
