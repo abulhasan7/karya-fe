@@ -9,8 +9,38 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Rating from '@mui/material/Rating';
 import './JobProposalCard.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { useSelector } from 'react-redux';
 
-export default function JobProposalCard() {
+export default function JobProposalCard({proposal,isAccepted,trigger}) {
+	console.log('proposal is',proposal);
+	const [proposalState,setProposalState] = useState(proposal.status);
+	const token = useSelector((state) => state.user.token);
+
+	const update = (status) => {
+		axios
+			.post(`${API_URL}/users/update-proposal`,{
+				status:status,
+				jobId:proposal.job,
+				jobProposalId:proposal._id,
+				serviceProviderId:proposal.serviceProvider._id
+			}, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				setProposalState(status);
+				if(status='ACCEPTED'){
+					trigger('m')
+				}
+			});
+	};
+
 	return (
 		<Card sx={{ width: 750, maxWidth: 888, height: 200, margin: 5 }}>
 			<CardContent>
@@ -29,7 +59,7 @@ export default function JobProposalCard() {
 								// letterSpacing: '.3rem',
 							}}
 						>
-							Proposal made by Dugarry Construction
+							Proposal made by {proposal.serviceProvider.name}
 						</Typography>
 						<div className="jp-review">
 							<Rating
@@ -61,7 +91,7 @@ export default function JobProposalCard() {
 						</div>
 
 						<Typography sx={{ mb: 1.5 }} color="text.secondary">
-							Address and then some service logos
+								{proposal.serviceProvider.address.street + ", "+proposal.serviceProvider.address.city + ", "+ proposal.serviceProvider.address.state + ", "+ proposal.serviceProvider.address.zip}
 						</Typography>
 						<Typography
 							sx={{
@@ -74,7 +104,7 @@ export default function JobProposalCard() {
 							}}
 							variant="body2"
 						>
-							Proposal Description
+							{proposal.description}
 						</Typography>
 					</div>
 					<div className="jp-card-actions">
@@ -85,6 +115,8 @@ export default function JobProposalCard() {
 								textTransform: 'unset',
 							}}
 							color="success"
+							disabled={proposalState=='ACCEPTED' || isAccepted}
+							onClick={()=>update('ACCEPTED')}
 						>
 							Accept
 						</Button>
@@ -95,6 +127,9 @@ export default function JobProposalCard() {
 								textTransform: 'unset',
 							}}
 							color="error"
+							disabled={proposalState=='REJECTED' || isAccepted}
+							onClick={()=>update('REJECTED')}
+
 						>
 							Reject
 						</Button>

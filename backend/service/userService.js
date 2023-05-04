@@ -175,7 +175,12 @@ async function getJobsByStatus(_id,status) {
 }
 
 async function getJob(_id) {
-  let job = await Job.findOne({ _id }).populate(['proposals','acceptedProposal','address','serviceProvider','service']).exec();
+  // const a = await dbData.populate({ path: 'services', model: 'ServiceToRate', populate: { path: 'service', model: 'Service' } });
+
+  let job = await Job.findOne({ _id }).populate([{path:'proposals', model:'JobProposal',populate:{path:'serviceProvider',model:'ServiceProvider',populate:{path:'address',model:'Address'}}},
+  {path:'acceptedProposal', model:'JobProposal',populate:{path:'serviceProvider',model:'ServiceProvider',populate:{path:'address',model:'Address'}}},{path:'address',model:'Address'},{path:'serviceProvider',model:'ServiceProvider'},{path:'service',model:'Service'}]).exec();
+
+  // let job = await Job.findOne({ _id }).populate(['proposals','acceptedProposal','address','serviceProvider','service']).exec();
   if (job) {
     return job;
   } else {
@@ -185,13 +190,23 @@ async function getJob(_id) {
 }
 
 async function acceptProposal(body) {
-  let jobs = await Job.updateOne({_id:body.jobId},{status:"PROPOSAL-ACCEPTED",acceptedProposal:body.jobProposalId, serviceProvider:body.serviceProviderId}).exec();
-  let jobProposal = await JobProposal.updateOne({_id:body.jobProposalId},{status:"ACCEPTED"}).exec();
-  if(jobs){
-    return jobs;
+  if(body.status=='ACCEPTED'){
+    let jobs = await Job.updateOne({_id:body.jobId},{status:"PROPOSAL-ACCEPTED",acceptedProposal:body.jobProposalId, serviceProvider:body.serviceProviderId}).exec();
+    let jobProposal = await JobProposal.updateOne({_id:body.jobProposalId},{status:"ACCEPTED"}).exec();
+    if(jobs){
+      return 'Proposal Accepted successfully';
+    }else{
+      throw new Error("No Jobs found for the id");
+    }
   }else{
-    throw new Error("No Jobs found for the id");
+    let jobProposal = await JobProposal.updateOne({_id:body.jobProposalId},{status:"REJECTED"}).exec();
+    if(jobProposal){
+      return 'Proposal Rejected successfully';
+    }else{
+      throw new Error("No Jobs found for the id");
+    }
   }
+
 }
 
 

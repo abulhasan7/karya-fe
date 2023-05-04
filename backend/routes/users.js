@@ -69,7 +69,7 @@ router.get('/get-job',checkAuthenticationHeader, async function(req, res, next) 
   }
 });
 
-router.post('/accept-proposal',checkAuthenticationHeader, async function(req, res, next) {
+router.post('/update-proposal',checkAuthenticationHeader, async function(req, res, next) {
   try{
   console.log(req.body);
   let resp = await acceptProposal(req.body);

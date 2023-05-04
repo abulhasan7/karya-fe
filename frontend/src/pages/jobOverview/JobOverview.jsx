@@ -22,6 +22,7 @@ export default function JobOverview() {
 	let { id } = useParams();
 	const token = useSelector((state) => state.user.token);
 	const [job,setJob] = useState('');
+	const [trigger,setTrigger] = useState('');
 	console.log('id is',id);
 
 	useEffect(() => {
@@ -35,7 +36,7 @@ export default function JobOverview() {
 				console.log('response is', response.data.message);
 				setJob(response.data.message);
 			});
-	}, []);
+	}, [trigger]);
 	function generate(element) {
 		return [0, 1, 2].map((value) =>
 			React.cloneElement(element, {
@@ -212,8 +213,36 @@ export default function JobOverview() {
 						</div>
 					</div>
 					<Divider />
+					{
+					job.acceptedProposal &&
+
+					<div className="bso-details-highlights">
+					<div>
+						
+						<Typography
+							variant="h4"
+							noWrap
+							component="h4"
+							sx={{
+								display: { xs: 'none', md: 'flex' },
+								fontFamily: 'National Bold',
+								fontWeight: 600,
+								fontStyle: 'normal',
+								fontSize: '18px',
+								// letterSpacing: '.3rem',
+								color: 'primary',
+							}}
+						>
+							{'Accepted Proposal'}
+						</Typography>
+					</div>
+					<JobProposalCard proposal={job.acceptedProposal} isAccepted={true}/>
+				</div>
+					}
+					{!job.acceptedProposal &&
 					<div className="bso-details-highlights">
 						<div>
+							
 							<Typography
 								variant="h4"
 								noWrap
@@ -228,12 +257,12 @@ export default function JobOverview() {
 									color: 'primary',
 								}}
 							>
-								Proposals
+								{'Proposals'}
 							</Typography>
 						</div>
-						<JobProposalCard />
-						<JobProposalCard />
+						{job.proposals && job.proposals.map(j=><JobProposalCard proposal={j} trigger={setTrigger}/>)}
 					</div>
+					}
 				</div>
 				<div className="jo-side-card"></div>
 			</div>
