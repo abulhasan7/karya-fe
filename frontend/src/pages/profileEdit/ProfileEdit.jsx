@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
 
 import { updateUser } from '../../redux/slices/userStateSlice';
 import { API_URL } from '../../constants';
@@ -433,12 +434,14 @@ function ProfileEdit() {
 							/> */}
 						</div>
 						<hr />
-						<button
-							className="submit-button"
+						<Button
+							variant="contained"
+							sx={{ mt: 3, mb: 2, backgroundColor: '#f77367' }}
+							size="small"
 							onClick={handleFormSubmit}
 						>
 							Save Changes
-						</button>
+						</Button>
 					</form>
 				</Container>
 			</Box>
