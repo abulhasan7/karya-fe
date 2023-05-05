@@ -20,8 +20,9 @@ import './ProfileEdit.css';
 
 function ProfileEdit() {
 	const dispatch = useDispatch();
-	//const [user, setUser] = useState({});
-	const user = useSelector((state) => state.user.profile);
+	const userProfile = useSelector((state) => state.user.profile);
+	const [user, setUser] = useState(userProfile);
+
 	const [newPicture, setNewPicture] = useState('');
 	const [newPictureURL, setNewPictureURL] = useState('');
 	const token = useSelector((state) => state.user.token);
@@ -58,28 +59,29 @@ function ProfileEdit() {
 		try {
 			// if newProfilePicture is set skip this.
 			if (newPictureURL) {
-				const req = await fetch(`${API_URL}/misc/get-signed-url`, {
+				const req = await fetch(`${API_URL}/users/get-signed-url`, {
 					method: 'GET',
 					mode: 'cors',
 					cache: 'no-cache',
 					credentials: 'same-origin',
 					headers: {
 						'Content-Type': 'application/json',
-						'x-auth-token': token,
+						'Authorization': token,
 						// 'Content-Type': 'application/x-www-form-urlencoded',
 					},
 					redirect: 'follow',
 					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 				});
 				const resp = await req.json();
-				await fetch(resp.data, {
+				console.log('resp is',resp);
+				await fetch(resp.message, {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'multipart/form-data',
 					},
 					body: newPicture,
 				});
-				[newURL] = resp.data.split('?');
+				[newURL] = resp.message.split('?');
 			}
 			let userBody = {};
 			if (newURL.length > 0) {
@@ -94,7 +96,7 @@ function ProfileEdit() {
 			}
 
 			const userUpdateRequest = await fetch(
-				`${API_URL}/users/update-user`,
+				`${API_URL}/users/update-profile`,
 				{
 					method: 'POST',
 					mode: 'cors',
@@ -102,7 +104,7 @@ function ProfileEdit() {
 					credentials: 'same-origin',
 					headers: {
 						'Content-Type': 'application/json',
-						'x-auth-token': token,
+						'Authorization': token,
 					},
 					redirect: 'follow',
 					referrerPolicy: 'no-referrer',
@@ -112,9 +114,9 @@ function ProfileEdit() {
 			const userUpdateResp = await userUpdateRequest.json();
 			setNewPicture('');
 			setNewPictureURL('');
-			console.log(userUpdateResp);
-			dispatch(updateUser(userUpdateResp.data));
-			setTimeout(window.location.assign('/user'), 100);
+			console.log(userBody);
+			dispatch(updateUser({profile:userBody,token}));
+			setTimeout(window.location.assign('/profile'), 100);
 		} catch (err) {
 			console.log(err);
 		}
@@ -251,35 +253,24 @@ function ProfileEdit() {
                              */}
 						</div>
 						<hr />
-						<div className="input-group">
+						{/* <div className="input-group">
 							<label className="label"> Date Of Birth </label>
 							<LocalizationProvider dateAdapter={AdapterDayjs}>
 								<DemoContainer components={['DatePicker']}>
 									<DatePicker
-										value={user.date_of_birth}
+										value={new Date(user.dob)}
 										onChange={(e) => {
 											setUser({
 												...user,
-												date_of_birth: e.target.value,
+												dob: e.target.value,
 											});
 										}}
 									/>
 								</DemoContainer>
 							</LocalizationProvider>
-
-							{/* <input
-								type="date"
-								value={user.date_of_birth}
-								onChange={(e) => {
-									setUser({
-										...user,
-										date_of_birth: e.target.value,
-									});
-								}}
-							/> */}
-						</div>
+						</div> */}
 						<hr />
-						<div className="input-group">
+						{/* <div className="input-group">
 							<label className="label"> Email </label>
 							<TextField
 								margin="normal"
@@ -294,17 +285,9 @@ function ProfileEdit() {
 									});
 								}}
 							/>
-							{/* <input
-								type="text"
-								value={user.email}
-								onChange={(e) => {
-									setUser({
-										...user,
-										email: e.target.value,
-									});
-								}}
-							/> */}
-						</div>
+			
+							
+						</div> */}
 						<hr />
 						<div className="input-group">
 							<label className="label"> Phone Number </label>
@@ -312,11 +295,11 @@ function ProfileEdit() {
 								margin="normal"
 								size="small"
 								required
-								value={user.phone_number}
+								value={user.phone}
 								onChange={(e) => {
 									setUser({
 										...user,
-										phone_number: e.target.value,
+										phone: e.target.value,
 									});
 								}}
 							/>
@@ -338,11 +321,13 @@ function ProfileEdit() {
 								margin="normal"
 								size="small"
 								required
-								value={user.street_address}
+								value={user.address && user.address.street}
 								onChange={(e) => {
+									const address = user.address || {};
+									address.street = e.target.value;
 									setUser({
 										...user,
-										street_address: e.target.value,
+										address
 									});
 								}}
 							/>
@@ -358,6 +343,91 @@ function ProfileEdit() {
 							/> */}
 						</div>
 						<hr />
+						<div className="input-group">
+							<label className="label"> City </label>
+							<TextField
+								margin="normal"
+								size="small"
+								required
+								value={user.address && user.address.city}
+								onChange={(e) => {
+									const address = user.address || {};
+									address.city = e.target.value;
+									setUser({
+										...user,
+										address,
+									});
+								}}
+							/>
+							{/* <input
+								type="text"
+								value={user.street_address}
+								onChange={(e) => {
+									setUser({
+										...user,
+										street_address: e.target.value,
+									});
+								}}
+							/> */}
+						</div>
+						<hr />
+						<div className="input-group">
+							<label className="label"> State </label>
+							<TextField
+								margin="normal"
+								size="small"
+								required
+								value={user.address && user.address.state}
+								onChange={(e) => {
+									const address = user.address || {};
+									address.state = e.target.value;
+									setUser({
+										...user,
+										address
+									});
+								}}
+							/>
+							{/* <input
+								type="text"
+								value={user.street_address}
+								onChange={(e) => {
+									setUser({
+										...user,
+										street_address: e.target.value,
+									});
+								}}
+							/> */}
+						</div>
+						<hr />
+						<hr />
+						<div className="input-group">
+							<label className="label"> Zip </label>
+							<TextField
+								margin="normal"
+								size="small"
+								required
+								value={user.address && user.address.zip}
+								onChange={(e) => {
+									const address = user.address || {};
+									address.zip = e.target.value;
+									setUser({
+										...user,
+										address
+									});
+								}}
+							/>
+							{/* <input
+								type="text"
+								value={user.street_address}
+								onChange={(e) => {
+									setUser({
+										...user,
+										street_address: e.target.value,
+									});
+								}}
+							/> */}
+						</div>
+						<hr/>
 						<div className="input-group">
 							<label className="label" value={user.country}>
 								Country

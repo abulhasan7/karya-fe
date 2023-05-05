@@ -90,12 +90,13 @@ async function updateProfile(userDetails) {
       new: true,
       upsert: true // Make this update into an upsert
     }).then(doc => {
-      const dob = userDetails.dob.split('-');
+      // const dob = userDetails.dob.split('-');
       const datatoUpdate = {
+        picture: userDetails.picture, 
         name: userDetails.name,
         phone: userDetails.phone,
         gender: userDetails.gender,
-        dob: new Date(dob[0], dob[1] - 1, dob[2]),
+        dob: new Date(userDetails.dob),
         about: userDetails.about,
         address: doc._id
       };

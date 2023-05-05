@@ -14,6 +14,9 @@ module.exports =  (Schema) =>
     gender: {
         type: String,
     },
+    picture: {
+        type: String,
+    },
     dob: {
         type: Date,
     },
