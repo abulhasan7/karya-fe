@@ -7,7 +7,7 @@ import './JobCardView.css';
 import { useNavigate } from 'react-router-dom';
 import ProposalCreator from '../proposalCreator/ProposalCreator';
 
-export default function JobCardView({ job }) {
+export default function JobCardView({ job,trigger }) {
 	const navigate = useNavigate();
 	return (
 		<Card
@@ -77,7 +77,7 @@ export default function JobCardView({ job }) {
 						</div>
 					</div>
 					<div className="job-card-actions">
-						<ProposalCreator job={job} />
+						<ProposalCreator job={job} trigger={trigger}/>
 					</div>
 				</div>
 			</CardContent>

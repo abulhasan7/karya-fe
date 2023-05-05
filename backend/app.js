@@ -10,7 +10,7 @@ var businessRouter = require('./routes/businessUsers');
 var adminRouter = require('./routes/adminUsers');
 
 
-require('dotenv').config();
+require('dotenv').config({ path: require('find-config')('.env') })
 
 const cors = require('cors');
 

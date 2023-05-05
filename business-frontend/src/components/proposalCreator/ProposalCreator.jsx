@@ -13,7 +13,7 @@ import './ProposalCreator.css';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
-export default function ProposalCreator({ job }) {
+export default function ProposalCreator({ job,trigger }) {
 	const [open, setOpen] = React.useState(false);
 	const [description, setDescription] = React.useState('');
 	const [estimatedHours, setEstimatedHours] = React.useState('');
@@ -35,7 +35,8 @@ export default function ProposalCreator({ job }) {
 				hours:estimatedHours,
 				hourlyRate:estimatedHourlyRate,
 				price:estimatedOverallRate,
-				job:job._id
+				job:job._id,
+				toNumber: job.user.phone
 			}, {
 				headers: {
 					Authorization: token,
@@ -44,6 +45,8 @@ export default function ProposalCreator({ job }) {
 			.then((response) => {
 				console.log('response is', response.data.message);
 				// setJobs(response.data.message);
+				handleClose();
+				trigger();
 			});
 	};
 	return (
