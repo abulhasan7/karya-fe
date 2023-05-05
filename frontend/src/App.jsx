@@ -17,6 +17,8 @@ import Protected from './protected';
 import JobOverview from './pages/jobOverview/JobOverview';
 import SearchResults from './pages/searchResultsPage/SearchResults';
 import JobsListingPage from './pages/jobsListingPage/JobsListingPage';
+import Profile from './pages/profile/Profile';
+import ProfileEdit from './pages/profileEdit/ProfileEdit';
 
 function App() {
 	const loggedIn = useSelector((state) => state.user.token);
@@ -79,10 +81,18 @@ function App() {
 			),
 		},
 		{
+			path: '/user-edit',
+			element: (
+				<ThemeProvider theme={theme}>
+					<ProfileEdit />
+				</ThemeProvider>
+			),
+		},
+		{
 			path: '/dev',
 			element: (
 				<ThemeProvider theme={theme}>
-					<JobsListingPage />
+					<Profile />
 				</ThemeProvider>
 			),
 		},

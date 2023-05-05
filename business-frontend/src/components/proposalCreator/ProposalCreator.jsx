@@ -9,18 +9,16 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 
 import './ProposalCreator.css';
-import { useLocation } from 'react-router-dom';
+
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
-export default function ProposalCreator() {
+export default function ProposalCreator({ job }) {
 	const [open, setOpen] = React.useState(false);
-	const location = useLocation();
-	const job = location.state;
-	const [description,setDescription] = React.useState('');
-	const [estimatedHours,setEstimatedHours] = React.useState('');
-	const [estimatedHourlyRate,setEstimatedHourlyRate] = React.useState('');
-	const [estimatedOverallRate,setEstimatedOverallRate] = React.useState('');
+	const [description, setDescription] = React.useState('');
+	const [estimatedHours, setEstimatedHours] = React.useState('');
+	const [estimatedHourlyRate, setEstimatedHourlyRate] = React.useState('');
+	const [estimatedOverallRate, setEstimatedOverallRate] = React.useState('');
 	const token = useSelector((state) => state.business.token);
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -37,8 +35,7 @@ export default function ProposalCreator() {
 				hours:estimatedHours,
 				hourlyRate:estimatedHourlyRate,
 				price:estimatedOverallRate,
-				job:job._id,
-				toNumber: job.user.phone
+				job:job._id
 			}, {
 				headers: {
 					Authorization: token,
@@ -48,7 +45,7 @@ export default function ProposalCreator() {
 				console.log('response is', response.data.message);
 				// setJobs(response.data.message);
 			});
-	}
+	};
 	return (
 		<div>
 			<Button
@@ -76,7 +73,12 @@ export default function ProposalCreator() {
 						To express interest in this job, please enter below
 						details. We will send updates occasionally.
 					</DialogContentText>
-					<ProposalCreationForm setDescription={setDescription} setEstimatedHourlyRate={setEstimatedHourlyRate} setEstimatedHours={setEstimatedHours} setEstimatedOverallRate={setEstimatedOverallRate} />
+					<ProposalCreationForm
+						setDescription={setDescription}
+						setEstimatedHourlyRate={setEstimatedHourlyRate}
+						setEstimatedHours={setEstimatedHours}
+						setEstimatedOverallRate={setEstimatedOverallRate}
+					/>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose}>Cancel</Button>
@@ -87,7 +89,12 @@ export default function ProposalCreator() {
 	);
 }
 
-export function ProposalCreationForm({setDescription,setEstimatedHourlyRate,setEstimatedHours,setEstimatedOverallRate}) {
+export function ProposalCreationForm({
+	setDescription,
+	setEstimatedHourlyRate,
+	setEstimatedHours,
+	setEstimatedOverallRate,
+}) {
 	return (
 		<div className="prop-form">
 			<div>
@@ -102,7 +109,7 @@ export function ProposalCreationForm({setDescription,setEstimatedHourlyRate,setE
 					rows={6}
 					placeholder="Please provide as many details here are possible."
 					variant="standard"
-					onChange={(e)=>setDescription(e.target.value)}
+					onChange={(e) => setDescription(e.target.value)}
 				/>
 			</div>
 			<div>
@@ -116,8 +123,7 @@ export function ProposalCreationForm({setDescription,setEstimatedHourlyRate,setE
 					label="Estimated hours required."
 					placeholder="How many hours do you think the job requires?"
 					helperText="User has estimated so and so"
-					onChange={(e)=>setEstimatedHours(e.target.value)}
-
+					onChange={(e) => setEstimatedHours(e.target.value)}
 				/>
 			</div>
 			<div>
@@ -131,7 +137,7 @@ export function ProposalCreationForm({setDescription,setEstimatedHourlyRate,setE
 					label="Estimated hourly rate in $"
 					placeholder="What's your hourly rate in $?"
 					helperText="User has estimated so and so"
-					onChange={(e)=>setEstimatedHourlyRate(e.target.value)}
+					onChange={(e) => setEstimatedHourlyRate(e.target.value)}
 				/>
 			</div>
 			<div>
@@ -145,7 +151,7 @@ export function ProposalCreationForm({setDescription,setEstimatedHourlyRate,setE
 					label="Overall rate if applicable."
 					placeholder="What's your soft rate overall in $?"
 					helperText="User has estimated so and so"
-					onChange={(e)=>setEstimatedOverallRate(e.target.value)}
+					onChange={(e) => setEstimatedOverallRate(e.target.value)}
 				/>
 			</div>
 		</div>

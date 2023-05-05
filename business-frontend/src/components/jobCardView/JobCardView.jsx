@@ -5,8 +5,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import './JobCardView.css';
 import { useNavigate } from 'react-router-dom';
+import ProposalCreator from '../proposalCreator/ProposalCreator';
 
-export default function JobCardView({job}) {
+export default function JobCardView({ job }) {
 	const navigate = useNavigate();
 	return (
 		<Card
@@ -53,7 +54,12 @@ export default function JobCardView({job}) {
 							</div>
 
 							<Typography sx={{ mb: 1.5 }} color="text.secondary">
-								{'estimatedBudget'+job.estimatedBudget+"estimatedHourlyBudget: "+job.estimatedHourlyBudget+"estimatedTime:"+job.estimatedTime}
+								{'estimatedBudget' +
+									job.estimatedBudget +
+									'estimatedHourlyBudget: ' +
+									job.estimatedHourlyBudget +
+									'estimatedTime:' +
+									job.estimatedTime}
 							</Typography>
 							<Typography
 								sx={{
@@ -71,17 +77,7 @@ export default function JobCardView({job}) {
 						</div>
 					</div>
 					<div className="job-card-actions">
-						<Button
-							size="small"
-							variant="contained"
-							sx={{
-								textTransform: 'unset',
-								backgroundColor: '#385170',
-							}}
-							onClick={()=>navigate('/create-proposal',{state:job})}
-						>
-							Create Proposal
-						</Button>
+						<ProposalCreator job={job} />
 					</div>
 				</div>
 			</CardContent>

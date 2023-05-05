@@ -6,12 +6,11 @@ import Button from '@mui/material/Button';
 import './JobCardView.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function JobCardView({job}) {
+export default function JobCardView({ job }) {
 	const navigate = useNavigate();
 	return (
 		<Card
-		onClick={()=>navigate(`/job-overview/${job._id}`)}
-
+			onClick={() => navigate(`/job-overview/${job._id}`)}
 			sx={{
 				minWidth: 275,
 				maxWidth: 888,
@@ -21,7 +20,6 @@ export default function JobCardView({job}) {
 			}}
 		>
 			<CardContent>
-
 				<div className="job-card-container">
 					<div>
 						<div>
@@ -31,7 +29,8 @@ export default function JobCardView({job}) {
 								component="h3"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 700,
 									fontStyle: 'normal',
 									fontSize: '20px',
@@ -44,7 +43,8 @@ export default function JobCardView({job}) {
 								<Typography
 									sx={{
 										display: { xs: 'none', md: 'flex' },
-										fontFamily: 'National',
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 										fontStyle: 'normal',
 										fontSize: '14px',
 										// letterSpaci
@@ -55,13 +55,26 @@ export default function JobCardView({job}) {
 								</Typography>
 							</div>
 
-							<Typography sx={{ mb: 1.5 }} color="text.secondary">
-								{'estimatedTime'+job.estimatedTime+"estimatedHourlyBudget"+job.estimatedHourlyBudget+"estimatedBudget"+job.estimatedBudget}
+							<Typography
+								sx={{
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									mb: 1.5,
+								}}
+								color="text.secondary"
+							>
+								{'estimatedTime' +
+									job.estimatedTime +
+									'estimatedHourlyBudget' +
+									job.estimatedHourlyBudget +
+									'estimatedBudget' +
+									job.estimatedBudget}
 							</Typography>
 							<Typography
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 400,
 									fontStyle: 'normal',
 									fontSize: '16px',
