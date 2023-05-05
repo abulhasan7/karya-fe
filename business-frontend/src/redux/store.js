@@ -6,7 +6,7 @@ import businessStateSlice from './slices/businessStateSlice';
 const persistMiddleware = (store) => (next) => (action) => {
 	const result = next(action);
 	sessionStorage.setItem('token', store.getState().business.token);
-	sessionStorage.setItem('profile', store.getState().business.profile);
+	sessionStorage.setItem('profile', JSON.stringify(store.getState().business.profile));
 	sessionStorage.setItem('global-state', JSON.stringify(store.getState()));
 	return result;
 };

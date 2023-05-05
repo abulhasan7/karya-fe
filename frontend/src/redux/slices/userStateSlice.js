@@ -6,7 +6,7 @@ import {
 export const userStateSlice = createSlice({
 	name: 'user',
 	initialState: {
-		profile: sessionStorage.getItem('profile'),
+		profile: JSON.parse(sessionStorage.getItem('profile')),
 		token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : '',
 	},
 	reducers: {

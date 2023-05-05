@@ -9,8 +9,9 @@ import MenuBar from '../../components/menubar/MenuBar';
 import JobsListingPage from '../jobsListingPage/JobsListingPage';
 
 export default function Profile() {
-	const user = useSelector((state) => state.user.user);
-
+	const profile = useSelector((state) => state.user.profile);
+	const token = useSelector((state) => state.user.token);
+	console.log('profile is',profile)
 	return (
 		<div>
 			<MenuBar />
@@ -26,7 +27,7 @@ export default function Profile() {
 						/>
 					</div>
 					<div className="user-profile-name">
-						<span>John Doe</span>
+						<span>{profile.name}</span>
 						<IconButton
 							aria-label="edit"
 							onClick={() => {

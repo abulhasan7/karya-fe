@@ -6,7 +6,7 @@ import {
 export const businessStateSlice = createSlice({
 	name: 'business',
 	initialState: {
-		profile: sessionStorage.getItem('profile')?sessionStorage.getItem('profile'):[],
+		profile: sessionStorage.getItem('profile')?JSON.parse(sessionStorage.getItem('profile')):{},
 		token: sessionStorage.getItem('token') ? sessionStorage.getItem('token') : '',
 	},
 	reducers: {
