@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const { default: mongoose } = require('mongoose');
 const { User, Address, Job, JobProposal, ServiceProvider } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
+const { sendMessage } = require('./twilioService');
 
 
 async function register(userDetails) {
@@ -157,7 +158,7 @@ async function postJob(jobDetails) {
 }
 
 async function getJobs(_id) {
-  let jobs = await Job.find({ user: _id }).exec();
+  let jobs = await Job.find({ user: _id }).populate('serviceProvider').exec();
   if (jobs) {
     return jobs;
   } else {
@@ -166,7 +167,7 @@ async function getJobs(_id) {
 }
 
 async function getJobsByStatus(_id,status) {
-  let jobs = await Job.find({ user: _id,status }).exec();
+  let jobs = await Job.find({ user: _id,status }).populate('serviceProvider').exec();
   if (jobs && jobs.length>0) {
     return jobs;
   } else {
@@ -175,7 +176,7 @@ async function getJobsByStatus(_id,status) {
 }
 
 async function getJobsNEByStatus(_id,status) {
-  let jobs = await Job.find({ user: _id,status:{$ne:status} }).exec();
+  let jobs = await Job.find({ user: _id,status:{$ne:status} }).populate('serviceProvider').exec();
   if (jobs && jobs.length>0) {
     return jobs;
   } else {
@@ -204,19 +205,18 @@ async function acceptProposal(body) {
     let jobs = await Job.updateOne({_id:body.jobId},{status:"PROPOSAL-ACCEPTED",acceptedProposal:body.jobProposalId, serviceProvider:body.serviceProviderId}).exec();
     let jobProposal = await JobProposal.updateOne({_id:body.jobProposalId},{status:"ACCEPTED"}).exec();
     let sp = await ServiceProvider.updateOne({ _id: body.serviceProviderId }, { $addToSet: { jobs: body.jobId } })
-    if(jobs){
-      return 'Proposal Accepted successfully';
-    }else{
+    if(!jobs){
       throw new Error("No Jobs found for the id");
     }
   }else{
     let jobProposal = await JobProposal.updateOne({_id:body.jobProposalId},{status:"REJECTED"}).exec();
-    if(jobProposal){
-      return 'Proposal Rejected successfully';
-    }else{
+    if(!jobProposal){
       throw new Error("No Jobs found for the id");
     }
+
   }
+  sendMessage(body.toNumber,`Proposal for jobId: #${body.jobId} ${body.status} by the user`);
+  return `Proposal ${body.status} successfully`
 
 }
 

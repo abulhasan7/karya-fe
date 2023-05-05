@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const { default: mongoose } = require('mongoose');
 const { ServiceProvider, Address, Service, ServiceToRate, JobProposal, Job } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
+const { sendMessage } = require('./twilioService');
 
 
 async function register(ServiceProviderDetails) {
@@ -156,6 +157,7 @@ async function postProposal(jobDetails) {
   let jobsaved = await job.save();
   let jobprop = await Job.updateOne({ _id: jobDetails.job }, { $push: { proposals: jobsaved._id } })
   let sp = await ServiceProvider.updateOne({ _id: jobDetails._id }, { $push: { proposals: jobDetails.job } })
+  sendMessage(jobDetails.toNumber,`New proposal submitted for your job: #"${jobDetails.job}"`);
   return "Job proposal created successfully"
 }
 async function getServices() {
@@ -181,7 +183,7 @@ async function getJobs(_id) {
 }
 
 async function getAllOpenJobs() {
-  let jobs = await Job.find({ status: "POSTED" }).exec();
+  let jobs = await Job.find({ status: "POSTED" }).populate('user').exec();
   if (jobs && jobs.length > 0) {
     return jobs;
   } else {

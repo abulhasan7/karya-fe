@@ -26,7 +26,8 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 				status:status,
 				jobId:proposal.job,
 				jobProposalId:proposal._id,
-				serviceProviderId:proposal.serviceProvider._id
+				serviceProviderId:proposal.serviceProvider._id,
+				toNumber: proposal.serviceProvider.phone
 			}, {
 				headers: {
 					Authorization: token,
@@ -34,8 +35,9 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 			})
 			.then((response) => {
 				console.log('response is', response.data.message);
+				console.log('status is',status);
 				setProposalState(status);
-				if(status='ACCEPTED'){
+				if(status=='ACCEPTED'){
 					trigger('m')
 				}
 			});
@@ -91,7 +93,7 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 						</div>
 
 						<Typography sx={{ mb: 1.5 }} color="text.secondary">
-								{proposal.serviceProvider.address.street + ", "+proposal.serviceProvider.address.city + ", "+ proposal.serviceProvider.address.state + ", "+ proposal.serviceProvider.address.zip}
+								{proposal.serviceProvider.address && proposal.serviceProvider.address.street + ", "+proposal.serviceProvider.address.city + ", "+ proposal.serviceProvider.address.state + ", "+ proposal.serviceProvider.address.zip}
 						</Typography>
 						<Typography
 							sx={{

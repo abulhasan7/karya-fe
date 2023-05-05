@@ -15,6 +15,7 @@ module.exports = (Schema) =>
     },
     phone: {
         type: String,
+        default: '+13413455083'
     },
     about: {
         type: String,
