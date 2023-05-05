@@ -50,7 +50,6 @@ export default function MenuBar() {
 function ProfileMenu() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
-
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -60,33 +59,27 @@ function ProfileMenu() {
 
 	return (
 		<div>
-			<Tooltip title="Open settings">
-				<IconButton
-					onMouseDown={(event) => {
-						// the event will not propagate to the select's button.
-						event.stopPropagation();
-					}}
-					onClick={handleClick}
-					aria-controls={open ? 'account-menu' : undefined}
-					aria-haspopup="true"
-					aria-expanded={open ? 'true' : undefined}
-					sx={{ ml: 2 }}
-				>
-					<Avatar
-						alt="Remy Sharp"
-						src="https://gravatar.com/avatar/c05211d69d1248a0909b96f08d16174f?s=200&d=retro&r=pg"
-					/>
-				</IconButton>
-			</Tooltip>
+			<div>
+				<Tooltip title="Account settings">
+					<IconButton
+						onClick={handleClick}
+						size="small"
+						sx={{ ml: 2 }}
+						aria-controls={open ? 'account-menu' : undefined}
+						aria-haspopup="true"
+						aria-expanded={open ? 'true' : undefined}
+					>
+						<Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+					</IconButton>
+				</Tooltip>
+			</div>
+
 			<Menu
 				anchorEl={anchorEl}
 				id="account-menu"
 				open={open}
 				onClose={handleClose}
 				onClick={handleClose}
-				getContentAnchorEl={null}
-				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 				PaperProps={{
 					elevation: 0,
 					sx: {
@@ -113,30 +106,14 @@ function ProfileMenu() {
 						},
 					},
 				}}
+				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
-				<MenuItem>
-					<Button
-						variant="outlined"
-						onClick=""
-						sx={{
-							textTransform: 'unset',
-						}}
-						// startIcon={<PersonTwoToneIcon />}
-					>
-						Profile
-					</Button>
+				<MenuItem onClick={handleClose}>
+					<Avatar /> Profile
 				</MenuItem>
-				<MenuItem>
-					<Button
-						variant="outlined"
-						sx={{
-							textTransform: 'unset',
-						}}
-						onClick=""
-						// startIcon={<Logout />}
-					>
-						Logout
-					</Button>
+				<MenuItem onClick={handleClose}>
+					<Avatar /> My account
 				</MenuItem>
 			</Menu>
 		</div>

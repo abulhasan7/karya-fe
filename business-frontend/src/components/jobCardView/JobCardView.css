@@ -1,6 +1,9 @@
 .job-card-container {
-	display: grid;
-	grid-template-columns: 2fr 0.5fr;
+}
+
+.job-title {
+	display: flex;
+	justify-content: space-between;
 }
 
 .job-review {
