@@ -31,7 +31,7 @@ export default function MenuBar() {
 	};
 	return (
 		<nav>
-			<AppBar position="static" color="transparent">
+			<AppBar position="static">
 				<div className="menu-container">
 					<div className="menu-title">
 						<HubIcon
@@ -39,7 +39,7 @@ export default function MenuBar() {
 								display: { xs: 'none', md: 'flex' },
 								mr: 1,
 							}}
-							color="primary"
+							color=""
 						/>
 						<Typography
 							variant="h6"
