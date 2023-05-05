@@ -46,7 +46,6 @@ export default function JobsListingPage() {
 								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 							fontSize: '32px',
 							fontWeight: '700',
-							fontSize: '28px',
 							// letterSpacing: '.3rem',
 							color: '#2b4450',
 						}}

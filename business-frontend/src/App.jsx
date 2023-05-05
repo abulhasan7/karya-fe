@@ -12,6 +12,7 @@ import JobsListingPage from './pages/jobsListingPage/JobsListingPage';
 import MenuBar from './components/menubar/MenuBar';
 import JobOverview from './pages/jobOverview/JobOverview';
 import ProposalCreator from './components/proposalCreator/ProposalCreator';
+import Profile from './pages/profile/Profile';
 
 function App() {
 	const loggedIn = useSelector((state) => state.business.token);
@@ -42,15 +43,15 @@ function App() {
 			),
 		},
 		{
-		path: '/home',
-		element: (
-			<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<JobsListingPage />
-				</ThemeProvider>
-			</Protected>
-		),
-	},
+			path: '/home',
+			element: (
+				<Protected isLoggedIn={loggedIn}>
+					<ThemeProvider theme={theme}>
+						<JobsListingPage />
+					</ThemeProvider>
+				</Protected>
+			),
+		},
 		{
 			path: '/login',
 			element: (
@@ -71,7 +72,7 @@ function App() {
 			path: '/dev',
 			element: (
 				<ThemeProvider theme={theme}>
-					<JobOverview />
+					<Profile />
 				</ThemeProvider>
 			),
 		},
@@ -82,7 +83,7 @@ function App() {
 					<ProposalCreator />
 				</ThemeProvider>
 			),
-		}
+		},
 	]);
 	return <RouterProvider router={router} />;
 	// return router;
