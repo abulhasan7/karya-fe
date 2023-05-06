@@ -6,6 +6,15 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import {
+	deepPurple,
+	cyan,
+	teal,
+	amber,
+	indigo,
+	green,
+	blueGrey,
+} from '@mui/material/colors';
 
 import Button from '@mui/material/Button';
 import { CardActionArea, CardHeader, Chip } from '@mui/material';
@@ -23,6 +32,70 @@ export default function JobCardView({ job, trigger }) {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	const getStatusChip = (status) => {
+		console.log(job.status);
+		if (status === 'Posted')
+			return (
+				<Chip
+					sx={{ bgcolor: '#9575cd', color: 'white' }}
+					label="Posted"
+				/>
+			);
+		if (status === 'Accepted')
+			return <Chip sx={{ bgcolor: '#26c6da' }} label="Accepted" />;
+		if (status === 'In Progress')
+			return <Chip sx={{ bgcolor: '#26a69a' }} label="In Progress" />;
+		if (status === 'Delayed')
+			return <Chip sx={{ bgcolor: '#ffe082' }} label="Delayed" />;
+		if (status === 'Completed')
+			return (
+				<Chip
+					sx={{ bgcolor: '#3f51b5', color: 'white' }}
+					label="Completed"
+				/>
+			);
+		if (status === 'Closed - Complete')
+			return (
+				<Chip
+					sx={{ bgcolor: '#2e7d32', color: 'white' }}
+					label="Closed - Complete"
+				/>
+			);
+		if (status === 'Closed - Incomplete')
+			return (
+				<Chip
+					sx={{ bgcolor: '#607d8b', color: 'white' }}
+					label="Closed - Incomplete"
+				/>
+			);
+
+		if (status === 'PROPOSAL-ACCEPTED')
+			return (
+				<Chip
+					sx={{ bgcolor: '#607d8b', color: 'white' }}
+					label="Closed - Incomplete"
+				/>
+			);
+	};
+
+	const getCardActions = (status) => {
+		if (status === 'Accepted') return getMarkInProgressButton();
+		if (status === 'In Progress') return getMarkCompletedButton();
+		if (status === 'PROPOSAL-ACCEPTED') return getMarkCompletedButton();
+	};
+
+	const getMarkInProgressButton = () => {
+		return <MenuItem onClick={markInProgress}>Mark 'In Progress'</MenuItem>;
+	};
+
+	const getMarkCompletedButton = () => {
+		return <MenuItem onClick={markCompleted}>Mark 'Completed'</MenuItem>;
+	};
+
+	const markInProgress = () => {};
+	const markCompleted = () => {};
+
 	return (
 		<Card
 			sx={{
@@ -64,7 +137,7 @@ export default function JobCardView({ job, trigger }) {
 						>
 							{job.name}
 						</Typography>
-						<Chip sx={{}} color="success" label="Status" />
+						{getStatusChip(job.status)}
 					</div>
 				}
 				subheader={`${job.proposals.length} active proposals`}
@@ -73,24 +146,32 @@ export default function JobCardView({ job, trigger }) {
 				<div className="job-card-container">
 					<div>
 						<div>
-							<Typography sx={{ mb: 1.5 }} color="text.secondary">
-								{'estimatedBudget' +
+							<Typography
+								sx={{
+									mb: '7px',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									fontSize: '14px',
+									// letterSpacing: '.3rem',
+								}}
+								color="text.secondary"
+							>
+								{'Estimated Budget($): ' +
 									job.estimatedBudget +
-									'estimatedHourlyBudget: ' +
+									' || Estimated Hourly Budget($): ' +
 									job.estimatedHourlyBudget +
-									'estimatedTime:' +
+									' || Estimated Time(hrs): ' +
 									job.estimatedTime}
 							</Typography>
 							<Typography
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
-									fontWeight: 400,
-									fontStyle: 'normal',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									// fontWeight: 400,
 									fontSize: '16px',
 									// letterSpacing: '.3rem',
 								}}
-								variant="body2"
 							>
 								{job.description}
 							</Typography>
@@ -110,7 +191,7 @@ export default function JobCardView({ job, trigger }) {
 				open={open}
 				onClose={handleClose}
 			>
-				<MenuItem> Create Proposal</MenuItem>
+				{getCardActions(job.status)}
 			</Menu>
 			{/* <Chip
 				sx={{
