@@ -52,7 +52,8 @@ export default function JobOverview() {
 							sx={{
 								mr: 2,
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 900,
 								fontStyle: 'normal',
 								fontSize: '32px',
@@ -66,7 +67,8 @@ export default function JobOverview() {
 						<Typography
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontStyle: 'normal',
 								fontSize: '14px',
 							}}
@@ -85,7 +87,8 @@ export default function JobOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -102,7 +105,8 @@ export default function JobOverview() {
 								variant="p"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 400,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -123,7 +127,8 @@ export default function JobOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -141,7 +146,8 @@ export default function JobOverview() {
 									<ListItemText
 										primaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 600,
 												fontStyle: 'normal',
 												fontSize: '15px',
@@ -149,7 +155,8 @@ export default function JobOverview() {
 										}}
 										secondaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 400,
 												fontStyle: 'normal',
 												color: 'text.secondary',
@@ -166,7 +173,8 @@ export default function JobOverview() {
 									<ListItemText
 										primaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 600,
 												fontStyle: 'normal',
 												fontSize: '15px',
@@ -174,9 +182,9 @@ export default function JobOverview() {
 										}}
 										secondaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 400,
-												fontStyle: 'normal',
 												color: 'text.secondary',
 											},
 										}}
@@ -191,7 +199,8 @@ export default function JobOverview() {
 									<ListItemText
 										primaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 600,
 												fontStyle: 'normal',
 												fontSize: '15px',
@@ -199,7 +208,8 @@ export default function JobOverview() {
 										}}
 										secondaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 400,
 												fontStyle: 'normal',
 												color: 'text.secondary',
@@ -222,7 +232,8 @@ export default function JobOverview() {
 									component="h4"
 									sx={{
 										display: { xs: 'none', md: 'flex' },
-										fontFamily: 'National Bold',
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 										fontWeight: 600,
 										fontStyle: 'normal',
 										fontSize: '18px',
@@ -248,7 +259,8 @@ export default function JobOverview() {
 									component="h4"
 									sx={{
 										display: { xs: 'none', md: 'flex' },
-										fontFamily: 'National Bold',
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 										fontWeight: 600,
 										fontStyle: 'normal',
 										fontSize: '18px',

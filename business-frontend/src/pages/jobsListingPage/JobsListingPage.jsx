@@ -13,13 +13,13 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 export default function JobsListingPage() {
-
-	
 	const token = useSelector((state) => state.business.token);
-	const [profile,setProfile] = useState(useSelector((state) => state.business.profile));
-	console.log('profile is',JSON.stringify(profile));
+	const [profile, setProfile] = useState(
+		useSelector((state) => state.business.profile),
+	);
+	console.log('profile is', JSON.stringify(profile));
 	const [jobs, setJobs] = useState([]);
-	const [trigger,setTrigger] = useState([]);
+	const [trigger, setTrigger] = useState([]);
 	useEffect(() => {
 		axios
 			.get(`${API_URL}/business/users/get-all-open-jobs`, {
@@ -29,10 +29,10 @@ export default function JobsListingPage() {
 			})
 			.then((response) => {
 				console.log('response is', response.data.message);
-				setJobs(response.data.message)
+				setJobs(response.data.message);
 				// setJobs(response.data.message.filter(d=>!profile.includes(d._id)));
 			});
-	},[trigger])
+	}, [trigger]);
 
 	useEffect(() => {
 		axios
@@ -42,12 +42,15 @@ export default function JobsListingPage() {
 				},
 			})
 			.then((response) => {
-				console.log('response of get profile is', response.data.message);
+				console.log(
+					'response of get profile is',
+					response.data.message,
+				);
 				// setJobs(response.data.message)
 				// setJobs(response.data.message.filter(d=>!profile.includes(d._id)));
 				setProfile(response.data.message);
 			});
-	},[trigger])
+	}, [trigger]);
 	return (
 		<div>
 			<MenuBar />
@@ -60,7 +63,8 @@ export default function JobsListingPage() {
 						component="h2"
 						sx={{
 							display: { xs: 'none', md: 'flex' },
-							fontFamily: 'National Bold',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 							fontWeight: 700,
 							fontStyle: 'normal',
 							fontSize: '28px',
@@ -70,7 +74,15 @@ export default function JobsListingPage() {
 					>
 						Relevant jobs near you.
 					</Typography>
-					{jobs.filter(j=>profile.proposals && !profile.proposals.includes(j._id)).map(j=><JobCardView job={j} trigger={setTrigger}/>)}
+					{jobs
+						.filter(
+							(j) =>
+								profile.proposals &&
+								!profile.proposals.includes(j._id),
+						)
+						.map((j) => (
+							<JobCardView job={j} trigger={setTrigger} />
+						))}
 					{/* <JobCardView /> */}
 				</div>
 			</div>

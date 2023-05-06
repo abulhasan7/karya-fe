@@ -15,30 +15,34 @@ import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
 
-export default function JobProposalCard({proposal,isAccepted,trigger}) {
-	console.log('proposal is',proposal);
-	const [proposalState,setProposalState] = useState(proposal.status);
+export default function JobProposalCard({ proposal, isAccepted, trigger }) {
+	console.log('proposal is', proposal);
+	const [proposalState, setProposalState] = useState(proposal.status);
 	const token = useSelector((state) => state.user.token);
 
 	const update = (status) => {
 		axios
-			.post(`${API_URL}/users/update-proposal`,{
-				status:status,
-				jobId:proposal.job,
-				jobProposalId:proposal._id,
-				serviceProviderId:proposal.serviceProvider._id,
-				toNumber: proposal.serviceProvider.phone
-			}, {
-				headers: {
-					Authorization: token,
+			.post(
+				`${API_URL}/users/update-proposal`,
+				{
+					status: status,
+					jobId: proposal.job,
+					jobProposalId: proposal._id,
+					serviceProviderId: proposal.serviceProvider._id,
+					toNumber: proposal.serviceProvider.phone,
 				},
-			})
+				{
+					headers: {
+						Authorization: token,
+					},
+				},
+			)
 			.then((response) => {
 				console.log('response is', response.data.message);
-				console.log('status is',status);
+				console.log('status is', status);
 				setProposalState(status);
-				if(status=='ACCEPTED'){
-					trigger('m')
+				if (status == 'ACCEPTED') {
+					trigger('m');
 				}
 			});
 	};
@@ -54,7 +58,8 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 							component="h3"
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 700,
 								fontStyle: 'normal',
 								fontSize: '18px',
@@ -81,7 +86,8 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 							<Typography
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontStyle: 'normal',
 									fontSize: '12px',
 									// letterSpaci
@@ -93,12 +99,20 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 						</div>
 
 						<Typography sx={{ mb: 1.5 }} color="text.secondary">
-								{proposal.serviceProvider.address && proposal.serviceProvider.address.street + ", "+proposal.serviceProvider.address.city + ", "+ proposal.serviceProvider.address.state + ", "+ proposal.serviceProvider.address.zip}
+							{proposal.serviceProvider.address &&
+								proposal.serviceProvider.address.street +
+									', ' +
+									proposal.serviceProvider.address.city +
+									', ' +
+									proposal.serviceProvider.address.state +
+									', ' +
+									proposal.serviceProvider.address.zip}
 						</Typography>
 						<Typography
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 400,
 								fontStyle: 'normal',
 								fontSize: '16px',
@@ -107,7 +121,12 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 							variant="body2"
 						>
 							{proposal.description}
-							{'hours: '+proposal.hours +" :hourlyRate "+proposal.hourlyRate+" hours "+proposal.hours}
+							{'hours: ' +
+								proposal.hours +
+								' :hourlyRate ' +
+								proposal.hourlyRate +
+								' hours ' +
+								proposal.hours}
 						</Typography>
 					</div>
 					<div className="jp-card-actions">
@@ -118,8 +137,8 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 								textTransform: 'unset',
 							}}
 							color="success"
-							disabled={proposalState=='ACCEPTED' || isAccepted}
-							onClick={()=>update('ACCEPTED')}
+							disabled={proposalState == 'ACCEPTED' || isAccepted}
+							onClick={() => update('ACCEPTED')}
 						>
 							Accept
 						</Button>
@@ -130,9 +149,8 @@ export default function JobProposalCard({proposal,isAccepted,trigger}) {
 								textTransform: 'unset',
 							}}
 							color="error"
-							disabled={proposalState=='REJECTED' || isAccepted}
-							onClick={()=>update('REJECTED')}
-
+							disabled={proposalState == 'REJECTED' || isAccepted}
+							onClick={() => update('REJECTED')}
 						>
 							Reject
 						</Button>

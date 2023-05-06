@@ -25,10 +25,10 @@ export default function LandingSearch() {
 	const token = useSelector((state) => state.user.token);
 	const [services, setServices] = useState([]);
 	const navigate = useNavigate();
-	const [searchText, setSearchText] = useState("");
+	const [searchText, setSearchText] = useState('');
 
-	function setSearch(e){
-		console.log("values is",e.target.value);
+	function setSearch(e) {
+		console.log('values is', e.target.value);
 		setSearchText(e.target.value);
 	}
 	useEffect(() => {
@@ -53,7 +53,8 @@ export default function LandingSearch() {
 					sx={{
 						mr: 2,
 						display: { xs: 'none', md: 'flex' },
-						fontFamily: 'National Bold',
+						fontFamily:
+							"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 						fontWeight: 700,
 						fontStyle: 'normal',
 						fontSize: '56px',
@@ -80,7 +81,7 @@ export default function LandingSearch() {
 								...params.InputProps,
 								type: 'search',
 							}}
-							onSelect = {setSearch}
+							onSelect={setSearch}
 						/>
 					)}
 				/>
@@ -89,14 +90,18 @@ export default function LandingSearch() {
 					sx={{
 						textTransform: 'unset',
 					}}
-					onClick= {()=>navigate('/search-services', {state:searchText })}
+					onClick={() =>
+						navigate('/search-services', { state: searchText })
+					}
 				>
 					Search
 				</Button>
 			</div>
 			<div className="ls-services">
 				<Button
-				onClick= {()=>navigate('/search-services', {state:'Handyperson' })}
+					onClick={() =>
+						navigate('/search-services', { state: 'Handyperson' })
+					}
 					size="large"
 					startIcon={<BusinessCenterIcon />}
 					sx={{
@@ -108,8 +113,9 @@ export default function LandingSearch() {
 					Handyperson
 				</Button>
 				<Button
-								onClick= {()=>navigate('/search-services', {state:'Landscaping' })}
-
+					onClick={() =>
+						navigate('/search-services', { state: 'Landscaping' })
+					}
 					size="large"
 					startIcon={<GrassIcon />}
 					sx={{
@@ -121,7 +127,9 @@ export default function LandingSearch() {
 					Landscaping
 				</Button>
 				<Button
-												onClick= {()=>navigate('/search-services', {state:'Plumbing' })}
+					onClick={() =>
+						navigate('/search-services', { state: 'Plumbing' })
+					}
 					size="large"
 					startIcon={<PlumbingIcon />}
 					sx={{
@@ -133,7 +141,9 @@ export default function LandingSearch() {
 					Plumbing
 				</Button>
 				<Button
-																onClick= {()=>navigate('/search-services', {state:'Electrical' })}
+					onClick={() =>
+						navigate('/search-services', { state: 'Electrical' })
+					}
 					size="large"
 					startIcon={<ElectricalServicesIcon />}
 					sx={{
@@ -145,8 +155,10 @@ export default function LandingSearch() {
 					Electrical
 				</Button>
 				<Button
-				//TODO update this one
-																				onClick= {()=>navigate('/search-services', {state:'Carpenting' })}
+					//TODO update this one
+					onClick={() =>
+						navigate('/search-services', { state: 'Carpenting' })
+					}
 					size="large"
 					startIcon={<RoofingIcon />}
 					sx={{
