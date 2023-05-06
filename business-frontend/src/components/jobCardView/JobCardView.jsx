@@ -6,15 +6,6 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import {
-	deepPurple,
-	cyan,
-	teal,
-	amber,
-	indigo,
-	green,
-	blueGrey,
-} from '@mui/material/colors';
 
 import Button from '@mui/material/Button';
 import { CardActionArea, CardHeader, Chip } from '@mui/material';
@@ -98,6 +89,7 @@ export default function JobCardView({ job, trigger }) {
 
 	return (
 		<Card
+			onClick={() => navigate(`/job-overview/${job._id}`)}
 			sx={{
 				minWidth: 400,
 				maxWidth: 700,

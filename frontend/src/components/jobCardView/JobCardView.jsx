@@ -1,106 +1,193 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { CardActionArea, CardHeader, Chip } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import './JobCardView.css';
+import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
+
+import './JobCardView.css';
 
 export default function JobCardView({ job }) {
 	const navigate = useNavigate();
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const open = Boolean(anchorEl);
+	const handleClick = (event) => {
+		setAnchorEl(event.currentTarget);
+	};
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	const getStatusChip = (status) => {
+		console.log(job.status);
+		if (status === 'Posted')
+			return (
+				<Chip
+					sx={{ bgcolor: '#9575cd', color: 'white' }}
+					label="Posted"
+				/>
+			);
+		if (status === 'Accepted')
+			return <Chip sx={{ bgcolor: '#26c6da' }} label="Accepted" />;
+		if (status === 'In Progress')
+			return <Chip sx={{ bgcolor: '#26a69a' }} label="In Progress" />;
+		if (status === 'Delayed')
+			return <Chip sx={{ bgcolor: '#ffe082' }} label="Delayed" />;
+		if (status === 'Completed')
+			return (
+				<Chip
+					sx={{ bgcolor: '#3f51b5', color: 'white' }}
+					label="Completed"
+				/>
+			);
+		if (status === 'Closed - Complete')
+			return (
+				<Chip
+					sx={{ bgcolor: '#2e7d32', color: 'white' }}
+					label="Closed - Complete"
+				/>
+			);
+		if (status === 'Closed - Incomplete')
+			return (
+				<Chip
+					sx={{ bgcolor: '#607d8b', color: 'white' }}
+					label="Closed - Incomplete"
+				/>
+			);
+
+		if (status === 'PROPOSAL-ACCEPTED')
+			return (
+				<Chip
+					sx={{ bgcolor: '#607d8b', color: 'white' }}
+					label="Closed - Incomplete"
+				/>
+			);
+	};
+
+	const getCardActions = (status) => {
+		if (status === 'Complete') return getMarkClosedCompleteButton();
+		return getMarkClosedIncompleteButton();
+	};
+
+	const getMarkClosedCompleteButton = () => {
+		return (
+			<MenuItem onClick={markClosedComplete}>
+				Mark 'Closed Complete'
+			</MenuItem>
+		);
+	};
+
+	const getMarkClosedIncompleteButton = () => {
+		return (
+			<MenuItem onClick={markClosedIncomplete}>
+				Mark 'Closed Incomplete'
+			</MenuItem>
+		);
+	};
+
+	const markClosedComplete = () => {};
+	const markClosedIncomplete = () => {};
+
 	return (
 		<Card
 			onClick={() => navigate(`/job-overview/${job._id}`)}
 			sx={{
-				minWidth: 275,
-				maxWidth: 888,
-				height: 200,
+				minWidth: 400,
+				maxWidth: 700,
+				height: 225,
 				margin: 5,
 				// backgroundColor: '#ececec',
 			}}
 		>
+			<CardHeader
+				action={
+					<IconButton
+						aria-label="more"
+						id="long-button"
+						aria-controls={open ? 'long-menu' : undefined}
+						aria-expanded={open ? 'true' : undefined}
+						aria-haspopup="true"
+						onClick={handleClick}
+					>
+						<MoreVertIcon />
+					</IconButton>
+				}
+				title={
+					<div className="job-title">
+						<Typography
+							variant="h3"
+							noWrap
+							component="h3"
+							sx={{
+								display: { xs: 'none', md: 'flex' },
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+								fontWeight: 600,
+								fontStyle: 'normal',
+								fontSize: '22px',
+								// letterSpacing: '.3rem',
+							}}
+						>
+							{job.name}
+						</Typography>
+						{getStatusChip(job.status)}
+					</div>
+				}
+				subheader={`${job.proposals.length} active proposals`}
+			/>
 			<CardContent>
 				<div className="job-card-container">
 					<div>
 						<div>
 							<Typography
-								variant="h3"
-								noWrap
-								component="h3"
 								sx={{
-									display: { xs: 'none', md: 'flex' },
+									mb: '7px',
 									fontFamily:
 										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-									fontWeight: 700,
-									fontStyle: 'normal',
-									fontSize: '20px',
+									fontSize: '14px',
 									// letterSpacing: '.3rem',
-								}}
-							>
-								{job.name}
-							</Typography>
-							<div className="job-review">
-								<Typography
-									sx={{
-										display: { xs: 'none', md: 'flex' },
-										fontFamily:
-											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-										fontStyle: 'normal',
-										fontSize: '14px',
-										// letterSpaci
-									}}
-									color="text.secondary"
-								>
-									{job.proposals.length} active proposals
-								</Typography>
-							</div>
-
-							<Typography
-								sx={{
-									fontFamily:
-										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-									mb: 1.5,
 								}}
 								color="text.secondary"
 							>
-								{'estimatedTime' +
-									job.estimatedTime +
-									'estimatedHourlyBudget' +
+								{'Estimated Budget($): ' +
+									job.estimatedBudget +
+									' || Estimated Hourly Budget($): ' +
 									job.estimatedHourlyBudget +
-									'estimatedBudget' +
-									job.estimatedBudget}
+									' || Estimated Time(hrs): ' +
+									job.estimatedTime}
 							</Typography>
+
 							<Typography
 								sx={{
 									display: { xs: 'none', md: 'flex' },
 									fontFamily:
 										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-									fontWeight: 400,
-									fontStyle: 'normal',
 									fontSize: '16px',
 									// letterSpacing: '.3rem',
 								}}
-								variant="body2"
 							>
 								{job.description}
 							</Typography>
 						</div>
 					</div>
-					<div className="job-card-actions">
-						<Button
-							size="small"
-							// variant="contained"
-							sx={{
-								textTransform: 'unset',
-								// backgroundColor: '#385170',
-							}}
-							color="error"
-						>
-							{job.status}
-						</Button>
-					</div>
 				</div>
 			</CardContent>
+			<Menu
+				id="long-menu"
+				MenuListProps={{
+					'aria-labelledby': 'long-button',
+				}}
+				anchorEl={anchorEl}
+				open={open}
+				onClose={handleClose}
+			>
+				{getCardActions(job.status)}
+			</Menu>
 		</Card>
 	);
 }

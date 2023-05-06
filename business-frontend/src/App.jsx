@@ -28,27 +28,6 @@ function App() {
 			secondary: {
 				main: '#dfebed',
 			},
-			deepPurple: {
-				contrastText: '#ececec',
-			},
-			cyan: {
-				contrastText: '#ececec',
-			},
-			teal: {
-				contrastText: '#ececec',
-			},
-			amber: {
-				contrastText: '#ececec',
-			},
-			indigo: {
-				contrastText: '#ececec',
-			},
-			green: {
-				contrastText: '#ececec',
-			},
-			blueGrey: {
-				contrastText: '#ececec',
-			},
 		},
 	});
 
