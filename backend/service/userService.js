@@ -203,7 +203,7 @@ async function getJob(_id) {
 
 async function acceptProposal(body) {
   if(body.status=='ACCEPTED'){
-    let jobs = await Job.updateOne({_id:body.jobId},{status:"PROPOSAL-ACCEPTED",acceptedProposal:body.jobProposalId, serviceProvider:body.serviceProviderId}).exec();
+    let jobs = await Job.updateOne({_id:body.jobId},{status:"Accepted",acceptedProposal:body.jobProposalId, serviceProvider:body.serviceProviderId}).exec();
     let jobProposal = await JobProposal.updateOne({_id:body.jobProposalId},{status:"ACCEPTED"}).exec();
     let sp = await ServiceProvider.updateOne({ _id: body.serviceProviderId }, { $addToSet: { jobs: body.jobId } })
     if(!jobs){
@@ -216,12 +216,23 @@ async function acceptProposal(body) {
     }
 
   }
-  sendMessage(body.toNumber,`Proposal for jobId: #${body.jobId} ${body.status} by the user`);
+  sendMessage(body.toNumber,`Proposal for job: ${body.name} ${body.status} by the user`);
   return `Proposal ${body.status} successfully`
 
 }
 
 
+async function updateStatus(body) {
+  let jobs = await Job.updateOne({ _id: body.jobId},{ status: body.status }).exec();
+  sendMessage(body.phone2,`Job: "${body.name}" moved to ${body.status} by the user`);
+  if (jobs) {
+    return jobs;
+  } else {
+    throw new Error("No Jobs found for the id");
+  }
+}
+
+
 module.exports = {
-  register, login, getProfile, getJobsByStatus,updateProfile, postJob, getJob, getJobs,acceptProposal,getJobsNEByStatus
+  register, login, getProfile, getJobsByStatus,updateProfile, postJob, getJob, getJobs,acceptProposal,getJobsNEByStatus,updateStatus
 }

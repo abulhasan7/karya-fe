@@ -11,7 +11,7 @@ module.exports = (Schema) =>
     },
     verified: {
         type: Boolean,
-        default: false
+        default: true
     },
     phone: {
         type: String,

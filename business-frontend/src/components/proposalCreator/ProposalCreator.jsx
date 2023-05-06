@@ -36,7 +36,8 @@ export default function ProposalCreator({ job,trigger }) {
 				hourlyRate:estimatedHourlyRate,
 				price:estimatedOverallRate,
 				job:job._id,
-				toNumber: job.user.phone
+				toNumber: job.user.phone,
+				name: job.name
 			}, {
 				headers: {
 					Authorization: token,

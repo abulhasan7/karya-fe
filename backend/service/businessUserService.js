@@ -157,7 +157,7 @@ async function postProposal(jobDetails) {
   let jobsaved = await job.save();
   let jobprop = await Job.updateOne({ _id: jobDetails.job }, { $push: { proposals: jobsaved._id } })
   let sp = await ServiceProvider.updateOne({ _id: jobDetails._id }, { $push: { proposals: jobDetails.job } })
-  sendMessage(jobDetails.toNumber,`New proposal submitted for your job: #"${jobDetails.job}"`);
+  sendMessage(jobDetails.toNumber,`New proposal submitted for your job: "${jobDetails.name}"`);
   return "Job proposal created successfully"
 }
 async function getServices() {
@@ -200,7 +200,8 @@ async function getAllOpenJobsByCategory(_id) {
   }
 }
 async function updateStatus(body) {
-  let jobs = await Job.updateOne({ _id: body.jobId, status: body.status }).exec();
+  let jobs = await Job.updateOne({ _id: body.jobId}, {status: body.status }).exec();
+  sendMessage(body.phone1,`Job: "${body.name}" moved to ${body.status} by the ServiceProvider`);
   if (jobs) {
     return jobs;
   } else {

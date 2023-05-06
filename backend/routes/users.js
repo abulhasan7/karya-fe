@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var {register,login,updateProfile,getProfile,acceptProposal,postJob,getJob,getJobs, getJobsByStatus}= require('../service/userService');
+var {register,login,updateProfile,getProfile,acceptProposal,postJob,getJob,getJobs, getJobsByStatus,updateStatus}= require('../service/userService');
 var {checkAuthenticationHeader} = require('../util/jwtUtil');
 var {getServices, getServiceProviders} = require('../service/businessUserService');
 var {generateSignedUrl} = require('../util/s3');
@@ -59,6 +59,19 @@ router.get('/get-jobs',checkAuthenticationHeader, async function(req, res, next)
     res.json({error:error.message})
   }
 });
+
+router.post('/update-status', checkAuthenticationHeader,async function(req, res, next) {
+  try{
+  console.log(req.body);
+  let resp = await updateStatus(req.body);
+  console.log('resp is',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred",error);
+    res.json({error:error.message})
+  }
+});
+
 
 router.get('/get-job',checkAuthenticationHeader, async function(req, res, next) {
   try{
