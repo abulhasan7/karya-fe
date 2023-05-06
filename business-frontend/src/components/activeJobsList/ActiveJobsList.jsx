@@ -20,7 +20,7 @@ export default function ActiveJobsList() {
 	const [trigger, setTrigger] = useState([]);
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/business/users/get-all-open-jobs`, {
+			.get(`${API_URL}/business/users/get-jobs`, {
 				headers: {
 					Authorization: token,
 				},

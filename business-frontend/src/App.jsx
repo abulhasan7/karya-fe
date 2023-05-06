@@ -69,7 +69,7 @@ function App() {
 			),
 		},
 		{
-			path: '/dev',
+			path: '/profile',
 			element: (
 				<ThemeProvider theme={theme}>
 					<Profile />
