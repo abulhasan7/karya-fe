@@ -1,24 +1,16 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-// import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import HomeIcon from '@mui/icons-material/Home';
 import IconButton from '@mui/material/IconButton';
-import { List, ListItem, ListItemText } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { List, ListItem } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
-import Menu from '@mui/icons-material/Menu';
 import HubIcon from '@mui/icons-material/Hub';
-import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router-dom';
 
 import './MenuBar.css';
@@ -126,31 +118,6 @@ export default function MenuBar() {
 								</ListItem>
 							</List>
 						</Drawer>
-						{/* <MenuItem onClick={handleClose}>
-							<Avatar /> Profile
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<Avatar /> My account
-						</MenuItem>
-						<Divider />
-						<MenuItem onClick={handleClose}>
-							<ListItemIcon>
-								<PersonAdd fontSize="small" />
-							</ListItemIcon>
-							Add another account
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<ListItemIcon>
-								<Settings fontSize="small" />
-							</ListItemIcon>
-							Settings
-						</MenuItem>
-						<MenuItem onClick={handleClose}>
-							<ListItemIcon>
-								<Logout fontSize="small" />
-							</ListItemIcon>
-							Logout
-						</MenuItem> */}
 					</div>
 				</div>
 			</AppBar>
