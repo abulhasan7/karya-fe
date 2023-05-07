@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import LoopIcon from '@mui/icons-material/Loop';
+import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import ProposalCreator from '../../components/proposalCreator/ProposalCreator';
 import TaskAlt from '@mui/icons-material/TaskAlt';
 
@@ -78,7 +79,13 @@ export default function JobOverview() {
 	const getStatusActions = (status) => {
 		if (status === 'Posted') return getCreateProposalButton();
 		if (status === 'Accepted') return getMarkInProgressButton();
-		if (status === 'In Progress') return getMarkCompletedButton();
+		if (status === 'In Progress')
+			return (
+				<div>
+					{getMarkCompletedButton()}
+					{getMarkDelayedButton()}
+				</div>
+			);
 	};
 
 	const getCreateProposalButton = () => {
@@ -123,24 +130,44 @@ export default function JobOverview() {
 		);
 	};
 
+	const getMarkDelayedButton = () => {
+		return (
+			<Button
+				size="small"
+				variant="contained"
+				sx={{
+					textTransform: 'unset',
+					backgroundColor: '#385170',
+					width: '100%',
+					mb: '10px',
+				}}
+				endIcon={<PauseCircleOutlineIcon />}
+				onClick={handleMarkDelayed}
+			>
+				Mark Delayed
+			</Button>
+		);
+	};
+
 	const handleMarkInProgress = () => {
-		updateStatus('In Progress')
+		updateStatus('In Progress');
 	};
 	const handleMarkCompleted = () => {
-		updateStatus('Completed')
-
+		updateStatus('Completed');
+	};
+	const handleMarkDelayed = () => {
+		updateStatus('Delayed');
 	};
 
-	
-	const updateStatus = (status) =>{
+	const updateStatus = (status) => {
 		axios
 			.post(
 				`${API_URL}/business/users/update-status`,
 				{
-					jobId:job._id,
+					jobId: job._id,
 					status,
 					phone1: job.user.phone,
-					name: job.name
+					name: job.name,
 				},
 				{
 					headers: {
@@ -153,8 +180,7 @@ export default function JobOverview() {
 				// setJobs(response.data.message);
 				setTrigger('z');
 			});
-	}
-
+	};
 
 	useEffect(() => {
 		axios

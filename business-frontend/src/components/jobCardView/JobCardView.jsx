@@ -124,7 +124,13 @@ export default function JobCardView({ job, trigger }) {
 	const getCardActions = (status) => {
 		if (status === 'Posted') return getCreateProposalButton();
 		if (status === 'Accepted') return getMarkInProgressButton();
-		if (status === 'In Progress') return getMarkCompletedButton();
+		if (status === 'In Progress')
+			return (
+				<div>
+					{getMarkCompletedButton()}
+					{getMarkDelayedButton()}
+				</div>
+			);
 		if (status === 'PROPOSAL-ACCEPTED') return getMarkCompletedButton();
 	};
 
@@ -140,26 +146,33 @@ export default function JobCardView({ job, trigger }) {
 		return <MenuItem onClick={markCompleted}>Mark 'Completed'</MenuItem>;
 	};
 
+	const getMarkDelayedButton = () => {
+		return <MenuItem onClick={markDelayed}>Mark 'Delayed'</MenuItem>;
+	};
+
 	const markInProgress = () => {
 		updateStatus('In Progress');
 	};
 	const markCompleted = () => {
 		updateStatus('Completed');
-
 	};
+	const markDelayed = () => {
+		updateStatus('Delayed');
+	};
+
 	const createProposal = () => {
 		handleClickOpenCP();
 	};
 
-	const updateStatus = (status) =>{
+	const updateStatus = (status) => {
 		axios
 			.post(
 				`${API_URL}/business/users/update-status`,
 				{
-					jobId:job._id,
+					jobId: job._id,
 					status,
 					phone1: job.user.phone,
-					name: job.name
+					name: job.name,
 				},
 				{
 					headers: {
@@ -172,7 +185,7 @@ export default function JobCardView({ job, trigger }) {
 				// setJobs(response.data.message);
 				trigger('z');
 			});
-	}
+	};
 	return (
 		<Card
 			sx={{
@@ -233,15 +246,12 @@ export default function JobCardView({ job, trigger }) {
 								}}
 								color="text.secondary"
 							>
-								{
-
-									'Estimated Time(hrs): ' +
-									job.estimatedTime + 
+								{'Estimated Time(hrs): ' +
+									job.estimatedTime +
 									'|| Estimated Hourly Budget($): ' +
 									job.estimatedHourlyBudget +
 									' || Estimated Budget($): ' +
-									job.estimatedBudget 
-									}
+									job.estimatedBudget}
 							</Typography>
 							<Typography
 								sx={{
