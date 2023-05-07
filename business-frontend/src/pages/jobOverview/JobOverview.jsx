@@ -59,14 +59,14 @@ export default function JobOverview() {
 					label="Completed"
 				/>
 			);
-		if (status === 'Closed - Complete')
+		if (status === 'Closed Complete')
 			return (
 				<Chip
 					sx={{ bgcolor: '#2e7d32', color: 'white' }}
 					label="Closed - Complete"
 				/>
 			);
-		if (status === 'Closed - Incomplete')
+		if (status === 'Closed Incomplete')
 			return (
 				<Chip
 					sx={{ bgcolor: '#607d8b', color: 'white' }}
@@ -123,8 +123,38 @@ export default function JobOverview() {
 		);
 	};
 
-	const handleMarkInProgress = () => {};
-	const handleMarkCompleted = () => {};
+	const handleMarkInProgress = () => {
+		updateStatus('In Progress')
+	};
+	const handleMarkCompleted = () => {
+		updateStatus('Completed')
+
+	};
+
+	
+	const updateStatus = (status) =>{
+		axios
+			.post(
+				`${API_URL}/business/users/update-status`,
+				{
+					jobId:job._id,
+					status,
+					phone1: job.user.phone,
+					name: job.name
+				},
+				{
+					headers: {
+						Authorization: token,
+					},
+				},
+			)
+			.then((response) => {
+				console.log('response is', response.data.message);
+				// setJobs(response.data.message);
+				setTrigger('z');
+			});
+	}
+
 
 	useEffect(() => {
 		axios
