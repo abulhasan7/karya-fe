@@ -36,96 +36,11 @@ export default function Chat() {
 					height: '100%',
 				}}
 			>
-				<Sidebar position="left" scrollable={false}>
-					<Search placeholder="Search..." />
-					<ConversationList>
-						<Conversation
-							name="Lilly"
-							lastSenderName="Lilly"
-							info="Yes i can do it for you"
-							style={{ justifyContent: 'start' }}
-						>
-							<Avatar
-								src={avatar}
-								name="Lilly"
-								status="available"
-							/>
-						</Conversation>
-
-						<Conversation
-							name="Joe"
-							lastSenderName="Joe"
-							info="Yes i can do it for you"
-						>
-							<Avatar src={avatar} name="Joe" status="dnd" />
-						</Conversation>
-
-						<Conversation
-							name="Emily"
-							lastSenderName="Emily"
-							info="Yes i can do it for you"
-							unreadCnt={3}
-						>
-							<Avatar
-								src={avatar}
-								name="Emily"
-								status="available"
-							/>
-						</Conversation>
-
-						<Conversation
-							name="Kai"
-							lastSenderName="Kai"
-							info="Yes i can do it for you"
-							unreadDot
-						>
-							<Avatar
-								src={avatar}
-								name="Kai"
-								status="unavailable"
-							/>
-						</Conversation>
-
-						<Conversation
-							name="Akane"
-							lastSenderName="Akane"
-							info="Yes i can do it for you"
-						>
-							<Avatar src={avatar} name="Akane" status="eager" />
-						</Conversation>
-
-						<Conversation
-							name="Eliot"
-							lastSenderName="Eliot"
-							info="Yes i can do it for you"
-						>
-							<Avatar src={avatar} name="Eliot" status="away" />
-						</Conversation>
-
-						<Conversation
-							name="Zoe"
-							lastSenderName="Zoe"
-							info="Yes i can do it for you"
-							active
-						>
-							<Avatar src={avatar} name="Zoe" status="dnd" />
-						</Conversation>
-
-						<Conversation
-							name="Patrik"
-							lastSenderName="Patrik"
-							info="Yes i can do it for you"
-						>
-							<Avatar
-								src={avatar}
-								name="Patrik"
-								status="invisible"
-							/>
-						</Conversation>
-					</ConversationList>
-				</Sidebar>
-
-				<ChatContainer>
+				<ChatContainer
+					style={{
+						height: '90vh',
+					}}
+				>
 					<ConversationHeader>
 						<ConversationHeader.Back />
 						<Avatar src={avatar} name="Zoe" />
@@ -133,19 +48,12 @@ export default function Chat() {
 							userName="Zoe"
 							info="Active 10 mins ago"
 						/>
-						<ConversationHeader.Actions>
-							<VoiceCallButton disabled/>
-							<VideoCallButton disabled/>
-							<InfoButton />
-						</ConversationHeader.Actions>
 					</ConversationHeader>
 					<MessageList
-						typingIndicator={
-							<TypingIndicator content="Zoe is typing" />
-						}
+						style={{
+							marginTop: '15px',
+						}}
 					>
-						<MessageSeparator content="Saturday, 30 November 2019" />
-
 						<Message
 							model={{
 								message: 'Hello my friend',
@@ -274,41 +182,9 @@ export default function Chat() {
 						value={messageInputValue}
 						onChange={(val) => setMessageInputValue(val)}
 						onSend={() => setMessageInputValue('')}
+						attachButton={<div></div>}
 					/>
 				</ChatContainer>
-
-				{/* <Sidebar position="right">
-			  <ExpansionPanel open title="INFO">
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-			  </ExpansionPanel>
-			  <ExpansionPanel title="LOCALIZATION">
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-			  </ExpansionPanel>
-			  <ExpansionPanel title="MEDIA">
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-			  </ExpansionPanel>
-			  <ExpansionPanel title="SURVEY">
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-			  </ExpansionPanel>
-			  <ExpansionPanel title="OPTIONS">
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-				<p>Lorem ipsum</p>
-			  </ExpansionPanel>
-			</Sidebar> */}
 			</MainContainer>
 		</div>
 	);

@@ -17,9 +17,12 @@ import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ChatIcon from '@mui/icons-material/Chat';
 
 export default function JobOverview() {
 	let { id } = useParams();
+	const navigate = useNavigate();
 	const token = useSelector((state) => state.user.token);
 	const [job, setJob] = useState('');
 	const [trigger, setTrigger] = useState('');
@@ -287,7 +290,33 @@ export default function JobOverview() {
 						</div>
 					)}
 				</div>
-				<div className="jo-side-card"></div>
+				<div className="jo-side-card">
+					<Paper
+						sx={{
+							width: '300px',
+							padding: '15px',
+						}}
+					>
+						<Button
+							onClick={() => {
+								navigate(`/chat/${job._id}`);
+							}}
+							size="small"
+							variant="contained"
+							endIcon={<ChatIcon />}
+							sx={{
+								mt: '15px',
+								mb: '5px',
+								width: '100%',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+								textTransform: 'unset',
+							}}
+						>
+							Open Chat
+						</Button>
+					</Paper>
+				</div>
 			</div>
 		</div>
 	);

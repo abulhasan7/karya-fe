@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { CardActionArea, CardHeader, Chip } from '@mui/material';
+import { CardActions, CardHeader, Chip } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -9,6 +9,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
+import ChatIcon from '@mui/icons-material/Chat';
 
 import './JobCardView.css';
 
@@ -177,6 +178,22 @@ export default function JobCardView({ job }) {
 					</div>
 				</div>
 			</CardContent>
+			<CardActions>
+				<Button
+					onClick={() => {
+						navigate(`/chat/${job._id}`);
+					}}
+					startIcon={<ChatIcon />}
+					sx={{
+						ml: '5px',
+						fontFamily:
+							"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+						textTransform: 'unset',
+					}}
+				>
+					Open Chat
+				</Button>
+			</CardActions>
 			<Menu
 				id="long-menu"
 				MenuListProps={{

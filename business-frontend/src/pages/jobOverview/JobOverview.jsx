@@ -317,17 +317,3 @@ export default function JobOverview() {
 		</div>
 	);
 }
-
-/*
-				<div className="jo-side-card">
-					<Paper
-						sx={{
-							width: '300px',
-							padding: '15px',
-						}}
-					>
-						<ProposalCreator />
-						<Divider />
-					</Paper>
-				</div>
-*/
