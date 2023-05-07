@@ -21,12 +21,28 @@ module.exports = (Schema) =>
         type: String,
     },
     workingHours: {
-        open: {
+        Monday: {
             type: String,
         },
-        close: {
-            type: String
-        }
+        Tuesday: {
+            type: String,
+        },
+        Wednesday: {
+            type: String,
+        },
+        Thursday: {
+            type: String,
+        },
+        
+        Friday: {
+            type: String,
+        },
+        Saturday: {
+            type: String,
+        },
+        Sunday: {
+            type: String,
+        },
     },
     avgRating: {
         type: Number,

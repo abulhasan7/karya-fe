@@ -95,28 +95,17 @@ async function updateProfile(serviceProviderDetails) {
     new: true,
     upsert: true // Make this update into an upsert
   })
-  const services1 = await ServiceToRate.insertMany(serviceProviderDetails.services, { ordered: false })
-  let services11 = [];
-  services1.forEach(service => services11.push(service._id))
-  console.log("services 1", services1);
   const datatoUpdate = {
     name: serviceProviderDetails.name,
     phone: serviceProviderDetails.phone,
     about: serviceProviderDetails.about,
     address: doc._id,
     workingHours: serviceProviderDetails.workingHours,
-    services: services11,
     primaryImage: serviceProviderDetails.primaryImage,
     secondaryImages: serviceProviderDetails.secondaryImages
   };
   // await ServiceProvider.collection.bulkWrite()
   const created = await ServiceProvider.updateOne({ _id: serviceProviderDetails._id }, datatoUpdate).exec();
-  console.log('services11', services11)
-  services1.forEach(ser => {
-    Service.updateOne({ _id: ser.service }, {
-      $addToSet: { serviceProviders: serviceProviderDetails._id }
-    }).exec()
-  });
   if (created.modifiedCount > 0) {
     return 'ServiceProvider Profile updated successfully';
   } else {
