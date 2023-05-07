@@ -26,32 +26,6 @@ function ProfileEdit() {
 	const [newPicture, setNewPicture] = useState('');
 	const [newPictureURL, setNewPictureURL] = useState('');
 	const token = useSelector((state) => state.user.token);
-	//const userId = window.location.pathname.split('/').slice(-1);
-	// useEffect(async () => {
-	// 	try {
-	// 		const req = await fetch(
-	// 			`${API_URL}/users/get-user-by-id/${userId}`,
-	// 			{
-	// 				method: 'GET',
-	// 				mode: 'cors',
-	// 				cache: 'no-cache',
-	// 				credentials: 'same-origin',
-	// 				headers: {
-	// 					'Content-Type': 'application/json',
-	// 					'x-auth-token': token,
-	// 					// 'Content-Type': 'application/x-www-form-urlencoded',
-	// 				},
-	// 				redirect: 'follow',
-	// 				referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-	// 			},
-	// 		);
-	// 		const resp = await req.json();
-	// 		console.log(resp.data);
-	// 		setUser(resp.data);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// }, []);
 
 	const handleFormSubmit = async function (e) {
 		e.preventDefault();
@@ -66,14 +40,14 @@ function ProfileEdit() {
 					credentials: 'same-origin',
 					headers: {
 						'Content-Type': 'application/json',
-						'Authorization': token,
+						Authorization: token,
 						// 'Content-Type': 'application/x-www-form-urlencoded',
 					},
 					redirect: 'follow',
 					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 				});
 				const resp = await req.json();
-				console.log('resp is',resp);
+				console.log('resp is', resp);
 				await fetch(resp.message, {
 					method: 'PUT',
 					headers: {
@@ -104,7 +78,7 @@ function ProfileEdit() {
 					credentials: 'same-origin',
 					headers: {
 						'Content-Type': 'application/json',
-						'Authorization': token,
+						Authorization: token,
 					},
 					redirect: 'follow',
 					referrerPolicy: 'no-referrer',
@@ -115,7 +89,7 @@ function ProfileEdit() {
 			setNewPicture('');
 			setNewPictureURL('');
 			console.log(userBody);
-			dispatch(updateUser({profile:userBody,token}));
+			dispatch(updateUser({ profile: userBody, token }));
 			setTimeout(window.location.assign('/profile'), 100);
 		} catch (err) {
 			console.log(err);
@@ -166,16 +140,6 @@ function ProfileEdit() {
 									});
 								}}
 							/>
-							{/*	<input
-								type="text"
-								value={user.name}
-								onChange={(e) => {
-									setUser({
-										...user,
-										name: e.target.value,
-									});
-								}}
-							/> */}
 						</div>
 						<hr />
 						<div className="input-group">
@@ -208,50 +172,6 @@ function ProfileEdit() {
 									label="Other"
 								/>
 							</RadioGroup>
-							{/*
-                             <input
-								type="radio"
-								id="male"
-								name="gender"
-								value="M"
-								checked={user.gender === 'M'}
-								onChange={(e) => {
-									setUser({
-										...user,
-										gender: e.target.value,
-									});
-								}}
-							/>
-							<label htmlFor="male"> Male </label>
-							<input
-								type="radio"
-								id="female"
-								name="gender"
-								value="F"
-								checked={user.gender === 'F'}
-								onChange={(e) => {
-									setUser({
-										...user,
-										gender: e.target.value,
-									});
-								}}
-							/>
-							<label htmlFor="female"> Female </label>
-							<input
-								type="radio"
-								id="other"
-								name="gender"
-								value="O"
-								checked={user.gender === 'O'}
-								onChange={(e) => {
-									setUser({
-										...user,
-										gender: e.target.value,
-									});
-								}}
-							/>
-							<label htmlFor="other"> Other </label>
-                             */}
 						</div>
 						<hr />
 						{/* <div className="input-group">
@@ -304,16 +224,6 @@ function ProfileEdit() {
 									});
 								}}
 							/>
-							{/* <input
-								type="phone"
-								value={user.phone_number}
-								onChange={(e) => {
-									setUser({
-										...user,
-										phone_number: e.target.value,
-									});
-								}}
-							/> */}
 						</div>
 						<hr />
 						<div className="input-group">
@@ -322,28 +232,20 @@ function ProfileEdit() {
 								margin="normal"
 								size="small"
 								required
-								value={user.address && (user.address.street || "")}
+								value={
+									user.address && (user.address.street || '')
+								}
 								onChange={(e) => {
 									const address = user.address || {};
-									const newaddress = {}
-									Object.assign(newaddress,address);
+									const newaddress = {};
+									Object.assign(newaddress, address);
 									newaddress.street = e.target.value;
 									setUser({
 										...user,
-										address:newaddress
+										address: newaddress,
 									});
 								}}
 							/>
-							{/* <input
-								type="text"
-								value={user.street_address}
-								onChange={(e) => {
-									setUser({
-										...user,
-										street_address: e.target.value,
-									});
-								}}
-							/> */}
 						</div>
 						<hr />
 						<div className="input-group">
@@ -362,16 +264,6 @@ function ProfileEdit() {
 									});
 								}}
 							/>
-							{/* <input
-								type="text"
-								value={user.street_address}
-								onChange={(e) => {
-									setUser({
-										...user,
-										street_address: e.target.value,
-									});
-								}}
-							/> */}
 						</div>
 						<hr />
 						<div className="input-group">
@@ -386,20 +278,10 @@ function ProfileEdit() {
 									address.state = e.target.value;
 									setUser({
 										...user,
-										address
+										address,
 									});
 								}}
 							/>
-							{/* <input
-								type="text"
-								value={user.street_address}
-								onChange={(e) => {
-									setUser({
-										...user,
-										street_address: e.target.value,
-									});
-								}}
-							/> */}
 						</div>
 						<hr />
 						<hr />
@@ -415,47 +297,12 @@ function ProfileEdit() {
 									address.zip = e.target.value;
 									setUser({
 										...user,
-										address
+										address,
 									});
 								}}
 							/>
-							{/* <input
-								type="text"
-								value={user.street_address}
-								onChange={(e) => {
-									setUser({
-										...user,
-										street_address: e.target.value,
-									});
-								}}
-							/> */}
 						</div>
-						<hr/>
-						{/* <div className="input-group">
-							<label className="label" value={user.country}>
-								Country
-							</label>
-							<Select
-								sx={{
-									width: '200px',
-								}}
-								size="small"
-								placeholder="--Please choose an option--"
-								onChange={(e) => {
-									setUser({
-										...user,
-										country: e.target.value,
-									});
-								}}
-							>
-								<MenuItem value="USA">USA</MenuItem>
-								<MenuItem value="India">India</MenuItem>
-								<MenuItem value="Russia">Russia</MenuItem>
-								<MenuItem value="Germany">Germany</MenuItem>
-								<MenuItem value="Canada">Canada</MenuItem>
-							</Select>
-						</div>
-						<hr /> */}
+						<hr />
 						<div className="input-group">
 							<label className="label"> About </label>
 							<TextField
@@ -476,16 +323,6 @@ function ProfileEdit() {
 									});
 								}}
 							/>
-							{/* <textarea
-								id="about"
-								value={user.about || ''}
-								onChange={(e) => {
-									setUser({
-										...user,
-										about: e.target.value,
-									});
-								}}
-							/> */}
 						</div>
 						<hr />
 						<Button

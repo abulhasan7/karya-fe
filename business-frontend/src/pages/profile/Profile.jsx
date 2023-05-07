@@ -30,7 +30,7 @@ export default function Profile() {
 						<IconButton
 							aria-label="edit"
 							onClick={() => {
-								window.location.assign(`/business-edit/`);
+								window.location.assign(`/profile-edit/`);
 							}}
 						>
 							<ModeEditOutlineTwoToneIcon />

@@ -14,6 +14,7 @@ import JobOverview from './pages/jobOverview/JobOverview';
 import ProposalCreator from './components/proposalCreator/ProposalCreator';
 import Profile from './pages/profile/Profile';
 import Chat from './pages/chat/Chat';
+import ProfileEdit from './pages/profileEdit/ProfileEdit';
 
 function App() {
 	const loggedIn = useSelector((state) => state.business.token);
@@ -82,6 +83,14 @@ function App() {
 			element: (
 				<ThemeProvider theme={theme}>
 					<Profile />
+				</ThemeProvider>
+			),
+		},
+		{
+			path: '/profile-edit',
+			element: (
+				<ThemeProvider theme={theme}>
+					<ProfileEdit />
 				</ThemeProvider>
 			),
 		},
