@@ -17,13 +17,16 @@ import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ChatIcon from '@mui/icons-material/Chat';
 
 export default function JobOverview() {
 	let { id } = useParams();
+	const navigate = useNavigate();
 	const token = useSelector((state) => state.user.token);
-	const [job,setJob] = useState('');
-	const [trigger,setTrigger] = useState('');
-	console.log('id is',id);
+	const [job, setJob] = useState('');
+	const [trigger, setTrigger] = useState('');
+	console.log('id is', id);
 
 	useEffect(() => {
 		axios
@@ -57,7 +60,8 @@ export default function JobOverview() {
 							sx={{
 								mr: 2,
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 900,
 								fontStyle: 'normal',
 								fontSize: '32px',
@@ -71,13 +75,15 @@ export default function JobOverview() {
 						<Typography
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontStyle: 'normal',
 								fontSize: '14px',
 							}}
 							color="text.secondary"
 						>
-							{job.proposals?job.proposals.length:0 } Active Proposals
+							{job.proposals ? job.proposals.length : 0} Active
+							Proposals
 						</Typography>
 					</div>
 					<Divider />
@@ -89,7 +95,8 @@ export default function JobOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -106,7 +113,8 @@ export default function JobOverview() {
 								variant="p"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 400,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -127,7 +135,8 @@ export default function JobOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -141,130 +150,173 @@ export default function JobOverview() {
 						<br />
 						<div>
 							<List dense>
-								
-									<ListItem>
-										<ListItemText
-											primaryTypographyProps={{
-												sx: {
-													fontFamily: 'National Bold',
-													fontWeight: 600,
-													fontStyle: 'normal',
-													fontSize: '15px',
-												},
-											}}
-											secondaryTypographyProps={{
-												sx: {
-													fontFamily: 'National Bold',
-													fontWeight: 400,
-													fontStyle: 'normal',
-													color: 'text.secondary',
-												},
-											}}
-											primary={"Estimated Time"}
-											secondary={job.estimatedTime+" hour(s)"}
-										/>
-									</ListItem>,
-									<ListItem>
-										<ListItemText
-											primaryTypographyProps={{
-												sx: {
-													fontFamily: 'National Bold',
-													fontWeight: 600,
-													fontStyle: 'normal',
-													fontSize: '15px',
-												},
-											}}
-											secondaryTypographyProps={{
-												sx: {
-													fontFamily: 'National Bold',
-													fontWeight: 400,
-													fontStyle: 'normal',
-													color: 'text.secondary',
-												},
-											}}
-											primary={"Estimated Hourly Budget"}
-											secondary={job.estimatedHourlyBudget+" $"}
-										/>
-									</ListItem>,
-									<ListItem>
-										<ListItemText
-											primaryTypographyProps={{
-												sx: {
-													fontFamily: 'National Bold',
-													fontWeight: 600,
-													fontStyle: 'normal',
-													fontSize: '15px',
-												},
-											}}
-											secondaryTypographyProps={{
-												sx: {
-													fontFamily: 'National Bold',
-													fontWeight: 400,
-													fontStyle: 'normal',
-													color: 'text.secondary',
-												},
-											}}
-											primary={"Estimated Budget"}
-											secondary={job.estimatedBudget+" $"}
-										/>
-									</ListItem>
-								
+								<ListItem>
+									<ListItemText
+										primaryTypographyProps={{
+											sx: {
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+												fontWeight: 600,
+												fontStyle: 'normal',
+												fontSize: '15px',
+											},
+										}}
+										secondaryTypographyProps={{
+											sx: {
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+												fontWeight: 400,
+												fontStyle: 'normal',
+												color: 'text.secondary',
+											},
+										}}
+										primary={'Estimated Time'}
+										secondary={
+											job.estimatedTime + ' hour(s)'
+										}
+									/>
+								</ListItem>
+								,
+								<ListItem>
+									<ListItemText
+										primaryTypographyProps={{
+											sx: {
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+												fontWeight: 600,
+												fontStyle: 'normal',
+												fontSize: '15px',
+											},
+										}}
+										secondaryTypographyProps={{
+											sx: {
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+												fontWeight: 400,
+												fontStyle: 'normal',
+												color: 'text.secondary',
+											},
+										}}
+										primary={'Estimated Hourly Budget'}
+										secondary={
+											job.estimatedHourlyBudget + ' $'
+										}
+									/>
+								</ListItem>
+								,
+								<ListItem>
+									<ListItemText
+										primaryTypographyProps={{
+											sx: {
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+												fontWeight: 600,
+												fontStyle: 'normal',
+												fontSize: '15px',
+											},
+										}}
+										secondaryTypographyProps={{
+											sx: {
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+												fontWeight: 400,
+												fontStyle: 'normal',
+												color: 'text.secondary',
+											},
+										}}
+										primary={'Estimated Budget'}
+										secondary={job.estimatedBudget + ' $'}
+									/>
+								</ListItem>
 							</List>
 						</div>
 					</div>
 					<Divider />
-					{
-					job.acceptedProposal &&
-
-					<div className="bso-details-highlights">
-					<div>
-						
-						<Typography
-							variant="h4"
-							noWrap
-							component="h4"
+					{job.acceptedProposal && (
+						<div className="bso-details-highlights">
+							<div>
+								<Typography
+									variant="h4"
+									noWrap
+									component="h4"
+									sx={{
+										display: { xs: 'none', md: 'flex' },
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+										fontWeight: 600,
+										fontStyle: 'normal',
+										fontSize: '18px',
+										// letterSpacing: '.3rem',
+										color: 'primary',
+									}}
+								>
+									{'Accepted Proposal'}
+								</Typography>
+							</div>
+							<JobProposalCard
+								proposal={job.acceptedProposal}
+								isAccepted={true}
+							/>
+						</div>
+					)}
+					{!job.acceptedProposal && (
+						<div className="bso-details-highlights">
+							<div>
+								<Typography
+									variant="h4"
+									noWrap
+									component="h4"
+									sx={{
+										display: { xs: 'none', md: 'flex' },
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+										fontWeight: 600,
+										fontStyle: 'normal',
+										fontSize: '18px',
+										// letterSpacing: '.3rem',
+										color: 'primary',
+									}}
+								>
+									{'Proposals'}
+								</Typography>
+							</div>
+							{job.proposals &&
+								job.proposals.map((j) => (
+									<JobProposalCard
+										proposal={j}
+										trigger={setTrigger}
+									/>
+								))}
+						</div>
+					)}
+				</div>
+				<div className="jo-side-card">
+					<Paper
+						sx={{
+							width: '300px',
+							padding: '15px',
+						}}
+					>
+						<Button
+							onClick={() => {
+								navigate(`/chat/${job._id}`);
+							}}
+							size="small"
+							variant="contained"
+							endIcon={<ChatIcon />}
 							sx={{
-								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
-								fontWeight: 600,
-								fontStyle: 'normal',
-								fontSize: '18px',
-								// letterSpacing: '.3rem',
-								color: 'primary',
+								mt: '15px',
+								mb: '5px',
+								width: '100%',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+								textTransform: 'unset',
 							}}
 						>
-							{'Accepted Proposal'}
-						</Typography>
-					</div>
-					<JobProposalCard proposal={job.acceptedProposal} isAccepted={true}/>
+							Open Chat
+						</Button>
+					</Paper>
 				</div>
-					}
-					{!job.acceptedProposal &&
-					<div className="bso-details-highlights">
-						<div>
-							
-							<Typography
-								variant="h4"
-								noWrap
-								component="h4"
-								sx={{
-									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
-									fontWeight: 600,
-									fontStyle: 'normal',
-									fontSize: '18px',
-									// letterSpacing: '.3rem',
-									color: 'primary',
-								}}
-							>
-								{'Proposals'}
-							</Typography>
-						</div>
-						{job.proposals && job.proposals.map(j=><JobProposalCard proposal={j} trigger={setTrigger}/>)}
-					</div>
-					}
-				</div>
-				<div className="jo-side-card"></div>
 			</div>
 		</div>
 	);

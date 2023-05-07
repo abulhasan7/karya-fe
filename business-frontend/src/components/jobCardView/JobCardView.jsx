@@ -8,9 +8,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import Button from '@mui/material/Button';
-import { CardActionArea, CardHeader, Chip } from '@mui/material';
+import { CardActions, CardHeader, Chip } from '@mui/material';
 import './JobCardView.css';
 import { useNavigate } from 'react-router-dom';
+import ChatIcon from '@mui/icons-material/Chat';
 import ProposalCreator from '../proposalCreator/ProposalCreator';
 
 export default function JobCardView({ job, trigger }) {
@@ -174,6 +175,22 @@ export default function JobCardView({ job, trigger }) {
 					</div> */}
 				</div>
 			</CardContent>
+			<CardActions>
+				<Button
+					onClick={() => {
+						navigate(`/chat/${job._id}`);
+					}}
+					startIcon={<ChatIcon />}
+					sx={{
+						ml: '5px',
+						fontFamily:
+							"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+						textTransform: 'unset',
+					}}
+				>
+					Open Chat
+				</Button>
+			</CardActions>
 			<Menu
 				id="long-menu"
 				MenuListProps={{

@@ -73,7 +73,7 @@ function App() {
 			),
 		},
 		{
-			path: '/chat',
+			path: '/chat/:id',
 			element: (
 				<ThemeProvider theme={theme}>
 					<Chat />

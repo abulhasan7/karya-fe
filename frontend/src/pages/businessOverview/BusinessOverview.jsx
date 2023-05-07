@@ -33,7 +33,7 @@ import { useLocation } from 'react-router-dom';
 export default function BusinessOverview() {
 	const location = useLocation();
 	const businessData = location.state;
-	console.log("businessdata is", businessData);
+	console.log('businessdata is', businessData);
 
 	const Item = styled(Paper)(({ theme }) => ({
 		backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -60,7 +60,10 @@ export default function BusinessOverview() {
 			<div className="bso-main-container">
 				<div className="bso-details">
 					<div className="bso-details-header">
-						<Avatar sx={{ height: '90px', width: '90px' }} src ={businessData.primaryImage}/>
+						<Avatar
+							sx={{ height: '90px', width: '90px' }}
+							src={businessData.primaryImage}
+						/>
 						<div>
 							<div className="bso-name">
 								<Typography
@@ -70,7 +73,8 @@ export default function BusinessOverview() {
 									sx={{
 										mr: 2,
 										display: { xs: 'none', md: 'flex' },
-										fontFamily: 'National Bold',
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 										fontWeight: 900,
 										fontStyle: 'normal',
 										fontSize: '48px',
@@ -96,7 +100,8 @@ export default function BusinessOverview() {
 								<Typography
 									sx={{
 										display: { xs: 'none', md: 'flex' },
-										fontFamily: 'National',
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 										fontStyle: 'normal',
 										fontSize: '14px',
 										// letterSpaci
@@ -109,86 +114,6 @@ export default function BusinessOverview() {
 						</div>
 					</div>
 					<Divider />
-					{/* <div className="bso-details-highlights">
-						<div>
-							<Typography
-								variant="h4"
-								noWrap
-								component="h4"
-								sx={{
-									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
-									fontWeight: 600,
-									fontStyle: 'normal',
-									fontSize: '18px',
-									// letterSpacing: '.3rem',
-									color: 'primary',
-								}}
-							>
-								Highlights from the Business
-							</Typography>
-						</div>
-						<div>
-							<div className="ls-services">
-								<Button
-									size="large"
-									startIcon={<BusinessCenterIcon />}
-									sx={{
-										display: 'flex',
-										flexDirection: 'column',
-										textTransform: 'unset',
-									}}
-								>
-									Handyperson
-								</Button>
-								<Button
-									size="large"
-									startIcon={<GrassIcon />}
-									sx={{
-										display: 'flex',
-										flexDirection: 'column',
-										textTransform: 'unset',
-									}}
-								>
-									Landscaping
-								</Button>
-								<Button
-									size="large"
-									startIcon={<PlumbingIcon />}
-									sx={{
-										display: 'flex',
-										flexDirection: 'column',
-										textTransform: 'unset',
-									}}
-								>
-									Plumbing
-								</Button>
-								<Button
-									size="large"
-									startIcon={<ElectricalServicesIcon />}
-									sx={{
-										display: 'flex',
-										flexDirection: 'column',
-										textTransform: 'unset',
-									}}
-								>
-									Electrical
-								</Button>
-								<Button
-									size="large"
-									startIcon={<RoofingIcon />}
-									sx={{
-										display: 'flex',
-										flexDirection: 'column',
-										textTransform: 'unset',
-									}}
-								>
-									Roofing
-								</Button>
-							</div>
-						</div>
-					</div> */}
-					<Divider />
 					<div className="bso-details-highlights">
 						<div>
 							<Typography
@@ -197,7 +122,8 @@ export default function BusinessOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -210,14 +136,14 @@ export default function BusinessOverview() {
 						</div>
 
 						<List dense>
-							{
-								businessData.services.map(i => (<ListItem>
+							{businessData.services.map((i) => (
+								<ListItem>
 									<ListItemText
 										primary={i.service.name}
-										secondary={i.rate+' $/hr'}
+										secondary={i.rate + ' $/hr'}
 									/>
-								</ListItem>))
-							}
+								</ListItem>
+							))}
 						</List>
 					</div>
 					<Divider />
@@ -229,7 +155,8 @@ export default function BusinessOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -246,14 +173,16 @@ export default function BusinessOverview() {
 								variant="p"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 400,
 									fontStyle: 'normal',
 									fontSize: '18px',
 									// letterSpacing: '.3rem',
 									color: 'text.secondary',
 								}}
-							>{ businessData.about }
+							>
+								{businessData.about}
 							</Typography>
 						</div>
 					</div>
@@ -266,7 +195,8 @@ export default function BusinessOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -331,11 +261,10 @@ function ItemImage(props) {
 		<Paper
 			sx={{
 				height: 500,
-				width: 500
-				
+				width: 500,
 			}}
 		>
-		<img src={props.item} height={500} width={500}></img>
+			<img src={props.item} height={500} width={500}></img>
 		</Paper>
 	);
 }

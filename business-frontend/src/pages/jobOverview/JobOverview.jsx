@@ -17,11 +17,14 @@ import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ChatIcon from '@mui/icons-material/Chat';
 import ProposalCreator from '../../components/proposalCreator/ProposalCreator';
 
 export default function JobOverview() {
 	let { id } = useParams();
-	const token = useSelector((state) => state.user.token);
+	const navigate = useNavigate();
+	const token = useSelector((state) => state.business.token);
 	const [job, setJob] = useState('');
 	const [trigger, setTrigger] = useState('');
 	console.log('id is', id);
@@ -52,7 +55,8 @@ export default function JobOverview() {
 							sx={{
 								mr: 2,
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 900,
 								fontStyle: 'normal',
 								fontSize: '32px',
@@ -66,7 +70,8 @@ export default function JobOverview() {
 						<Typography
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontStyle: 'normal',
 								fontSize: '14px',
 							}}
@@ -85,7 +90,8 @@ export default function JobOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -102,7 +108,8 @@ export default function JobOverview() {
 								variant="p"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 400,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -123,7 +130,8 @@ export default function JobOverview() {
 								component="h4"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 600,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -141,7 +149,8 @@ export default function JobOverview() {
 									<ListItemText
 										primaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 600,
 												fontStyle: 'normal',
 												fontSize: '15px',
@@ -149,7 +158,8 @@ export default function JobOverview() {
 										}}
 										secondaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 400,
 												fontStyle: 'normal',
 												color: 'text.secondary',
@@ -166,7 +176,8 @@ export default function JobOverview() {
 									<ListItemText
 										primaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 600,
 												fontStyle: 'normal',
 												fontSize: '15px',
@@ -174,9 +185,9 @@ export default function JobOverview() {
 										}}
 										secondaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 400,
-												fontStyle: 'normal',
 												color: 'text.secondary',
 											},
 										}}
@@ -191,7 +202,8 @@ export default function JobOverview() {
 									<ListItemText
 										primaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 600,
 												fontStyle: 'normal',
 												fontSize: '15px',
@@ -199,7 +211,8 @@ export default function JobOverview() {
 										}}
 										secondaryTypographyProps={{
 											sx: {
-												fontFamily: 'National Bold',
+												fontFamily:
+													"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 												fontWeight: 400,
 												fontStyle: 'normal',
 												color: 'text.secondary',
@@ -222,7 +235,8 @@ export default function JobOverview() {
 									component="h4"
 									sx={{
 										display: { xs: 'none', md: 'flex' },
-										fontFamily: 'National Bold',
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 										fontWeight: 600,
 										fontStyle: 'normal',
 										fontSize: '18px',
@@ -248,7 +262,8 @@ export default function JobOverview() {
 									component="h4"
 									sx={{
 										display: { xs: 'none', md: 'flex' },
-										fontFamily: 'National Bold',
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 										fontWeight: 600,
 										fontStyle: 'normal',
 										fontSize: '18px',
@@ -278,23 +293,27 @@ export default function JobOverview() {
 					>
 						<ProposalCreator job={job} />
 						<Divider />
+						<Button
+							onClick={() => {
+								navigate(`/chat/${job._id}`);
+							}}
+							size="small"
+							variant="contained"
+							endIcon={<ChatIcon />}
+							sx={{
+								mt: '15px',
+								mb: '5px',
+								width: '100%',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+								textTransform: 'unset',
+							}}
+						>
+							Open Chat
+						</Button>
 					</Paper>
 				</div>
 			</div>
 		</div>
 	);
 }
-
-/*
-				<div className="jo-side-card">
-					<Paper
-						sx={{
-							width: '300px',
-							padding: '15px',
-						}}
-					>
-						<ProposalCreator />
-						<Divider />
-					</Paper>
-				</div>
-*/

@@ -39,14 +39,10 @@ export default function JobsListingPage() {
 						component="h2"
 						sx={{
 							display: { xs: 'none', md: 'flex' },
-							//fontFamily: 'National Bold',
-							//fontWeight: 700,
-							//fontStyle: 'normal',
 							fontFamily:
 								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 							fontSize: '32px',
 							fontWeight: '700',
-							// letterSpacing: '.3rem',
 							color: '#2b4450',
 						}}
 					>

@@ -32,7 +32,13 @@ export default function MenuBar() {
 		<nav>
 			<AppBar position="static">
 				<div className="menu-container">
-					<div className="menu-title">
+					<div
+						className="menu-title"
+						role="button"
+						onClick={() => {
+							navigate(`/home`);
+						}}
+					>
 						<HubIcon
 							sx={{
 								display: { xs: 'none', md: 'flex' },

@@ -14,11 +14,19 @@ import { useNavigate } from 'react-router-dom';
 export default function BusinessCardView({ data }) {
 	const navigate = useNavigate();
 	return (
-		<Card sx={{ minWidth: 275, maxWidth: 888, height: 200, margin: 5 }} onClick={() => navigate('/business-overview', { state: data })}>
+		<Card
+			sx={{ minWidth: 275, maxWidth: 888, height: 200, margin: 5 }}
+			onClick={() => navigate('/business-overview', { state: data })}
+		>
 			<CardContent>
 				<div className="bv-card-container">
 					<div className="bv-img">
-						<img src={data.primaryImage} alt="img goes here" height={150} width={150}></img>
+						<img
+							src={data.primaryImage}
+							alt="img goes here"
+							height={150}
+							width={150}
+						></img>
 					</div>
 					<div>
 						<Typography
@@ -27,7 +35,8 @@ export default function BusinessCardView({ data }) {
 							component="h3"
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 700,
 								fontStyle: 'normal',
 								fontSize: '20px',
@@ -54,7 +63,8 @@ export default function BusinessCardView({ data }) {
 							<Typography
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontStyle: 'normal',
 									fontSize: '12px',
 									// letterSpaci
@@ -66,11 +76,15 @@ export default function BusinessCardView({ data }) {
 						</div>
 
 						<Typography sx={{ mb: 1.5 }} color="text.secondary">
-							{data.address.street + ", " + data.address.city + ", " + data.address.state + ", " + data.address.zip}
+							{data.address.street +
+								', ' +
+								data.address.city +
+								', ' +
+								data.address.state +
+								', ' +
+								data.address.zip}
 						</Typography>
-						<Typography variant="body2">
-							{data.about}
-						</Typography>
+						<Typography variant="body2">{data.about}</Typography>
 					</div>
 				</div>
 			</CardContent>

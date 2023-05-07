@@ -18,7 +18,7 @@ export default function SearchResults() {
 
 	const location = useLocation();
 	console.log('location is', location);
-	const searchText = location.state || "";
+	const searchText = location.state || '';
 	const [businesses, setBusinesses] = useState([]);
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
@@ -27,11 +27,14 @@ export default function SearchResults() {
 
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/users/get-service-providers?service=${searchText}`, {
-				headers: {
-					Authorization: token,
+			.get(
+				`${API_URL}/users/get-service-providers?service=${searchText}`,
+				{
+					headers: {
+						Authorization: token,
+					},
 				},
-			})
+			)
 			.then((response) => {
 				console.log('response is', response.data.message);
 				if (response.data.message) {
@@ -89,7 +92,8 @@ export default function SearchResults() {
 						component="h2"
 						sx={{
 							display: { xs: 'none', md: 'flex' },
-							fontFamily: 'National Bold',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 							fontWeight: 700,
 							fontStyle: 'normal',
 							fontSize: '28px',
@@ -97,11 +101,12 @@ export default function SearchResults() {
 							color: '#2b4450',
 						}}
 					>
-						Here are your matching service providers for {searchText} service
+						Here are your matching service providers for{' '}
+						{searchText} service
 					</Typography>
-					{
-						businesses.map(business => <BusinessCardView data={business}/>)
-					}
+					{businesses.map((business) => (
+						<BusinessCardView data={business} />
+					))}
 				</div>
 				<div>
 					{isLoaded && (

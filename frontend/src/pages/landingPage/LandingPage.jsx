@@ -20,7 +20,8 @@ export default function LandingPage() {
 						component="h2"
 						sx={{
 							display: { xs: 'none', md: 'flex' },
-							fontFamily: 'National Bold',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 							fontWeight: 700,
 							fontStyle: 'normal',
 							fontSize: '32px',
@@ -45,7 +46,8 @@ export default function LandingPage() {
 								component="h2"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National Bold',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 700,
 									fontStyle: 'normal',
 									fontSize: '18px',
@@ -63,7 +65,8 @@ export default function LandingPage() {
 								component="p"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 400,
 									fontStyle: 'normal',
 									fontSize: '16px',
@@ -87,7 +90,8 @@ export default function LandingPage() {
 							component="h2"
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 700,
 								fontStyle: 'normal',
 								fontSize: '18px',
@@ -103,7 +107,8 @@ export default function LandingPage() {
 								component="p"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 400,
 									fontStyle: 'normal',
 									fontSize: '16px',
@@ -127,7 +132,8 @@ export default function LandingPage() {
 							component="h2"
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 700,
 								fontStyle: 'normal',
 								fontSize: '18px',
@@ -143,7 +149,8 @@ export default function LandingPage() {
 								component="p"
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontWeight: 400,
 									fontStyle: 'normal',
 									fontSize: '16px',

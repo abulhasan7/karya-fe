@@ -19,7 +19,8 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 							component="h3"
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 700,
 								fontStyle: 'normal',
 								fontSize: '18px',
@@ -46,8 +47,8 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 							<Typography
 								sx={{
 									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'National',
-									fontStyle: 'normal',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 									fontSize: '12px',
 									// letterSpaci
 								}}
@@ -69,7 +70,8 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 						<Typography
 							sx={{
 								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'National Bold',
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
 								fontWeight: 400,
 								fontStyle: 'normal',
 								fontSize: '16px',

@@ -3,24 +3,14 @@ import * as React from 'react';
 import styles from '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
 	MainContainer,
-	Sidebar,
-	Search,
-	ConversationList,
-	Conversation,
 	Avatar,
 	ChatContainer,
 	ConversationHeader,
-	VoiceCallButton,
 	Message,
 	MessageInput,
-	VideoCallButton,
-	InfoButton,
-	MessageSeparator,
-	TypingIndicator,
 	MessageList,
 } from '@chatscope/chat-ui-kit-react';
 
-import { height } from '@mui/system';
 import avatar from './images/demo-user.png';
 import MenuBar from '../../components/menubar/MenuBar';
 
