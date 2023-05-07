@@ -84,6 +84,14 @@ function App() {
 				</ThemeProvider>
 			),
 		},
+		{
+			path: '/job-overview/:id',
+			element: (
+				<ThemeProvider theme={theme}>
+					<JobOverview />
+				</ThemeProvider>
+			),
+		},
 	]);
 	return <RouterProvider router={router} />;
 	// return router;
