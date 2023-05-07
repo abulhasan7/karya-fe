@@ -14,6 +14,7 @@ import HubIcon from '@mui/icons-material/Hub';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import JobCreator from '../jobCreator/JobCreator';
 import { logout } from '../../redux/slices/userStateSlice';
 import './MenuBar.css';
 
@@ -62,7 +63,11 @@ export default function MenuBar() {
 							karya
 						</Typography>
 					</div>
-					<div>
+					<div className="menubar-actions">
+						<div className="job-creator-mc">
+							<JobCreator />
+						</div>
+
 						<Tooltip title="Account settings">
 							<IconButton
 								edge="start"
