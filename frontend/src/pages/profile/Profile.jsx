@@ -19,7 +19,7 @@ export default function Profile() {
 				<div className="user-profile-header">
 					<div className="user-profile-image">
 						<Avatar
-							src={''}
+							src={profile.picture}
 							sx={{
 								width: 140,
 								height: 140,

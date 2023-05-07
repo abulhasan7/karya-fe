@@ -32,7 +32,7 @@ async function register(userDetails) {
 async function login(userDetails) {
   try {
     console.log('logincalled with ', userDetails);
-    const dbData = await User.findOne({ email: userDetails.email, isAdmin: false }, { __v: 0 }).exec();
+    const dbData = await User.findOne({ email: userDetails.email, isAdmin: false }, { __v: 0 }).populate('address').exec();
     console.log('dbdata', dbData);
     if (!dbData) {
       throw new Error('User not found');
@@ -62,7 +62,7 @@ async function login(userDetails) {
 async function getProfile(_id) {
   try {
     console.log('getProfile with _id', _id);
-    const dbData = await User.findOne({ _id }, { __v: 0 }).exec();
+    const dbData = await User.findOne({ _id }, { __v: 0 }).populate('address').exec();
     console.log('dbdata', dbData);
     if (!dbData) {
       throw new Error('User not found');
