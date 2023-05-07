@@ -12,22 +12,22 @@ import { List, ListItem } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import HubIcon from '@mui/icons-material/Hub';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
+import { logout } from '../../redux/slices/businessStateSlice';
 import './MenuBar.css';
 // import logo from '../../logo.png';
 
 export default function MenuBar() {
-	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-	const open = Boolean(anchorEl);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	const handleClick = (event) => {
-		setAnchorEl(event.currentTarget);
+	const handleLogout = () => {
+		dispatch(logout());
+		navigate('/login');
 	};
-	const handleClose = () => {
-		setAnchorEl(null);
-	};
+
 	return (
 		<nav>
 			<AppBar position="static">
@@ -118,6 +118,7 @@ export default function MenuBar() {
 										sx={{
 											textTransform: 'unset',
 										}}
+										onClick={handleLogout}
 									>
 										Logout
 									</Button>
