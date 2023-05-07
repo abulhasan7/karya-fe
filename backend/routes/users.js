@@ -44,7 +44,10 @@ router.get('/get-jobs',checkAuthenticationHeader, async function(req, res, next)
   try{
   console.log(req.query);
   let resp;
-  if(req.query.status){
+  if(req.query.status=='All'){
+    resp = await getJobs(req._id);
+  }
+  else if(req.query.status){
     resp = await getJobsByStatus(req._id,req.query.status);
   }else   if(req.query.notstatus){
     resp = await getJobsNEByStatus(req._id,req.query.status);
