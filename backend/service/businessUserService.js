@@ -175,7 +175,7 @@ async function getServiceProviders(service) {
 async function getJobs(_id) {
   console.log("_id is ", _id)
   //,status:{$nin:["Closed Complete","Closed Incomplete"]}
-  let jobs = await Job.find({ serviceProvider: _id}).exec();
+  let jobs = await Job.find({ serviceProvider: _id}).populate('user').exec();
   // if (jobs && jobs.length > 0) {
     return jobs;
   // } else {
@@ -193,7 +193,7 @@ async function getAllOpenJobs() {
 }
 async function getAllOpenJobsByCategory(body) {
   console.log("_id is ", body)
-  let jobs = await Job.find({ service:{$in:body.services},status:"Posted" }).exec();
+  let jobs = await Job.find({ service:{$in:body.services},status:"Posted" }).populate('user').exec();
   // if (jobs && jobs.length > 0) {
     return jobs;
   // } else {

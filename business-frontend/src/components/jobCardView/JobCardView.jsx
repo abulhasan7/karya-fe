@@ -97,14 +97,14 @@ export default function JobCardView({ job, trigger }) {
 					label="Completed"
 				/>
 			);
-		if (status === 'Closed - Complete')
+		if (status === 'Closed Complete')
 			return (
 				<Chip
 					sx={{ bgcolor: '#2e7d32', color: 'white' }}
 					label="Closed - Complete"
 				/>
 			);
-		if (status === 'Closed - Incomplete')
+		if (status === 'Closed Incomplete')
 			return (
 				<Chip
 					sx={{ bgcolor: '#607d8b', color: 'white' }}
@@ -140,12 +140,38 @@ export default function JobCardView({ job, trigger }) {
 		return <MenuItem onClick={markCompleted}>Mark 'Completed'</MenuItem>;
 	};
 
-	const markInProgress = () => {};
-	const markCompleted = () => {};
+	const markInProgress = () => {
+		updateStatus('In Progress');
+	};
+	const markCompleted = () => {
+		updateStatus('Completed');
+
+	};
 	const createProposal = () => {
 		handleClickOpenCP();
 	};
 
+	const updateStatus = (status) =>{
+		axios
+			.post(
+				`${API_URL}/business/users/update-status`,
+				{
+					jobId:job._id,
+					status,
+					phone1: job.user.phone
+				},
+				{
+					headers: {
+						Authorization: token,
+					},
+				},
+			)
+			.then((response) => {
+				console.log('response is', response.data.message);
+				// setJobs(response.data.message);
+				trigger();
+			});
+	}
 	return (
 		<Card
 			sx={{
