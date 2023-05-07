@@ -193,7 +193,10 @@ async function getAllOpenJobs() {
 }
 async function getAllOpenJobsByCategory(body) {
   console.log("_id is ", body)
-  let jobs = await Job.find({ service:{$in:body.services},status:"Posted" }).populate('user').exec();
+  let services = await ServiceToRate.find({_id:{$in:body.services}});
+  let serviceIds = services.map(s => s.service);
+
+  let jobs = await Job.find({ service:{$in:serviceIds},status:"Posted" }).populate('user').exec();
   // if (jobs && jobs.length > 0) {
     return jobs;
   // } else {
