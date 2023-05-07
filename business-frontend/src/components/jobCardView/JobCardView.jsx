@@ -90,7 +90,6 @@ export default function JobCardView({ job, trigger }) {
 
 	return (
 		<Card
-			onClick={() => navigate(`/job-overview/${job._id}`)}
 			sx={{
 				minWidth: 400,
 				maxWidth: 700,
@@ -135,7 +134,8 @@ export default function JobCardView({ job, trigger }) {
 				}
 				subheader={`${job.proposals.length} active proposals`}
 			/>
-			<CardContent>
+			<CardContent 			onClick={() => navigate(`/job-overview/${job._id}`)}
+>
 				<div className="job-card-container">
 					<div>
 						<div>

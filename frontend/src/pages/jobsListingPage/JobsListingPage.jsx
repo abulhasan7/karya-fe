@@ -17,7 +17,7 @@ export default function JobsListingPage() {
 	const [jobs, setJobs] = useState([]);
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/users/get-jobs?nostatus=Closed Complete`, {
+			.get(`${API_URL}/users/get-jobs?status=All`, {
 				headers: {
 					Authorization: token,
 				},
