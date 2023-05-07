@@ -38,8 +38,6 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 				},
 			)
 			.then((response) => {
-				console.log('response is', response.data.message);
-				console.log('status is', status);
 				setProposalState(status);
 				if (status == 'ACCEPTED') {
 					trigger('m');
@@ -48,7 +46,7 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 	};
 
 	return (
-		<Card sx={{ width: 750, maxWidth: 888, height: 200, margin: 5 }}>
+		<Card sx={{ width: 750, maxWidth: 888, height: 230, margin: 5 }}>
 			<CardContent>
 				<div className="jp-card-container">
 					<div>
@@ -98,7 +96,14 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 							</Typography>
 						</div>
 
-						<Typography sx={{ mb: 1.5 }} color="text.secondary">
+						<Typography
+							sx={{
+								mb: 1.5,
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+							}}
+							color="text.secondary"
+						>
 							{proposal.serviceProvider.address &&
 								proposal.serviceProvider.address.street +
 									', ' +
@@ -107,6 +112,20 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 									proposal.serviceProvider.address.state +
 									', ' +
 									proposal.serviceProvider.address.zip}
+						</Typography>
+						<Typography
+							sx={{
+								mb: 1.5,
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+							}}
+							color="text.secondary"
+						>
+							{'Hours: ' +
+								proposal.hours +
+								' | ' +
+								'Hourly Rate($): ' +
+								proposal.hourlyRate}
 						</Typography>
 						<Typography
 							sx={{
@@ -121,12 +140,6 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 							variant="body2"
 						>
 							{proposal.description}
-							{'hours: ' +
-								proposal.hours +
-								' :hourlyRate ' +
-								proposal.hourlyRate +
-								' hours ' +
-								proposal.hours}
 						</Typography>
 					</div>
 					<div className="jp-card-actions">

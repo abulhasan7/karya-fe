@@ -57,7 +57,7 @@ export default function JobOverview() {
 								display: { xs: 'none', md: 'flex' },
 								fontFamily:
 									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-								fontWeight: 900,
+								fontWeight: 700,
 								fontStyle: 'normal',
 								fontSize: '32px',
 								// letterSpacing: '.3rem',
@@ -171,7 +171,6 @@ export default function JobOverview() {
 										}
 									/>
 								</ListItem>
-								,
 								<ListItem>
 									<ListItemText
 										primaryTypographyProps={{
@@ -197,7 +196,6 @@ export default function JobOverview() {
 										}
 									/>
 								</ListItem>
-								,
 								<ListItem>
 									<ListItemText
 										primaryTypographyProps={{

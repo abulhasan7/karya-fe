@@ -70,15 +70,16 @@ export default function ActiveJobsList() {
 					>
 						Your Jobs.
 					</Typography>
-					{jobs
-						.filter(
-							(j) =>
-								profile.proposals &&
-								!profile.proposals.includes(j._id),
-						)
-						.map((j) => (
-							<JobCardView job={j} trigger={setTrigger} />
-						))}
+					{jobs &&
+						jobs
+							.filter(
+								(j) =>
+									profile.proposals &&
+									!profile.proposals.includes(j._id),
+							)
+							.map((j) => (
+								<JobCardView job={j} trigger={setTrigger} />
+							))}
 					{/* <JobCardView /> */}
 				</div>
 			</div>
