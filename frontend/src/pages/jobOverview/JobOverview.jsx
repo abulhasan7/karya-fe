@@ -1,6 +1,6 @@
 /* eslint-disable function-paren-newline */
 import * as React from 'react';
-import { Divider, Typography, Paper } from '@mui/material';
+import { Divider, Typography, Paper, Chip } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -29,6 +29,50 @@ export default function JobOverview() {
 	const [job, setJob] = useState('');
 	const [trigger, setTrigger] = useState('');
 	console.log('id is', id);
+
+	const getStatusChip = (status) => {
+		console.log(job.status);
+		if (status === 'Posted')
+			return (
+				<Chip
+					sx={{ bgcolor: '#9575cd', color: 'white' }}
+					label="Posted"
+				/>
+			);
+		if (status === 'Accepted')
+			return (
+				<Chip
+					size="small"
+					sx={{ bgcolor: '#26c6da' }}
+					label="Accepted"
+				/>
+			);
+		if (status === 'In Progress')
+			return <Chip sx={{ bgcolor: '#26a69a' }} label="In Progress" />;
+		if (status === 'Delayed')
+			return <Chip sx={{ bgcolor: '#ffe082' }} label="Delayed" />;
+		if (status === 'Completed')
+			return (
+				<Chip
+					sx={{ bgcolor: '#3f51b5', color: 'white' }}
+					label="Completed"
+				/>
+			);
+		if (status === 'Closed - Complete')
+			return (
+				<Chip
+					sx={{ bgcolor: '#2e7d32', color: 'white' }}
+					label="Closed - Complete"
+				/>
+			);
+		if (status === 'Closed - Incomplete')
+			return (
+				<Chip
+					sx={{ bgcolor: '#607d8b', color: 'white' }}
+					label="Closed - Incomplete"
+				/>
+			);
+	};
 
 	const getStatusActions = (status) => {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
@@ -100,25 +144,28 @@ export default function JobOverview() {
 			<MenuBar />
 			<div className="jo-main-container">
 				<div className="jo-details">
-					<div className="bso-name">
-						<Typography
-							variant="h2"
-							noWrap
-							component="h2"
-							sx={{
-								mr: 2,
-								display: { xs: 'none', md: 'flex' },
-								fontFamily:
-									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-								fontWeight: 700,
-								fontStyle: 'normal',
-								fontSize: '32px',
-								// letterSpacing: '.3rem',
-								color: 'primary',
-							}}
-						>
-							{job.name}
-						</Typography>
+					<div>
+						<div className="jo-name">
+							<Typography
+								variant="h2"
+								noWrap
+								component="h2"
+								sx={{
+									mr: 2,
+									display: { xs: 'none', md: 'flex' },
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									fontWeight: 700,
+									fontStyle: 'normal',
+									fontSize: '32px',
+									// letterSpacing: '.3rem',
+									color: 'primary',
+								}}
+							>
+								{job.name}
+							</Typography>
+							{getStatusChip(job.status)}
+						</div>
 
 						<Typography
 							sx={{

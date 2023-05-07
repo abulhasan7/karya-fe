@@ -12,3 +12,8 @@
 	margin-left: 20%;
 	margin-top: 25%;
 }
+
+.jo-name {
+	display: flex;
+	align-items: center;
+}
