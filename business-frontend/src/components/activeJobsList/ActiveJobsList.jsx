@@ -72,11 +72,6 @@ export default function ActiveJobsList() {
 					</Typography>
 					{jobs &&
 						jobs
-							.filter(
-								(j) =>
-									profile.proposals &&
-									!profile.proposals.includes(j._id),
-							)
 							.map((j) => (
 								<JobCardView job={j} trigger={setTrigger} />
 							))}
