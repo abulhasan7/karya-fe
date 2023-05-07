@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import * as React from 'react';
-import styles from '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
 	MainContainer,
 	Avatar,

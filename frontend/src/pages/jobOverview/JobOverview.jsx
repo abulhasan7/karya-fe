@@ -19,6 +19,8 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import UnpublishedIcon from '@mui/icons-material/Unpublished';
 
 export default function JobOverview() {
 	let { id } = useParams();
@@ -27,6 +29,52 @@ export default function JobOverview() {
 	const [job, setJob] = useState('');
 	const [trigger, setTrigger] = useState('');
 	console.log('id is', id);
+
+	const getStatusActions = (status) => {
+		if (status === 'Completed') return getMarkClosedCompleteButton();
+		return getMarkClosedIncompleteButton();
+	};
+
+	const getMarkClosedCompleteButton = () => {
+		return (
+			<Button
+				size="small"
+				variant="contained"
+				sx={{
+					textTransform: 'unset',
+					backgroundColor: '#385170',
+					width: '100%',
+					mb: '10px',
+				}}
+				endIcon={<DoneAllIcon />}
+				onClick={handleMarkClosedComplete}
+			>
+				Mark 'Closed - Complete'
+			</Button>
+		);
+	};
+
+	const getMarkClosedIncompleteButton = () => {
+		return (
+			<Button
+				size="small"
+				variant="contained"
+				sx={{
+					textTransform: 'unset',
+					backgroundColor: '#385170',
+					width: '100%',
+					mb: '10px',
+				}}
+				endIcon={<UnpublishedIcon />}
+				onClick={handleMarkClosedIncomplete}
+			>
+				Mark 'Closed - Incomplete'
+			</Button>
+		);
+	};
+
+	const handleMarkClosedComplete = () => {};
+	const handleMarkClosedIncomplete = () => {};
 
 	useEffect(() => {
 		axios
@@ -295,6 +343,8 @@ export default function JobOverview() {
 							padding: '15px',
 						}}
 					>
+						{getStatusActions(job.status)}
+						<Divider />
 						<Button
 							onClick={() => {
 								navigate(`/chat/${job._id}`);

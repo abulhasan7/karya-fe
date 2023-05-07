@@ -19,7 +19,9 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
+import LoopIcon from '@mui/icons-material/Loop';
 import ProposalCreator from '../../components/proposalCreator/ProposalCreator';
+import TaskAlt from '@mui/icons-material/TaskAlt';
 
 export default function JobOverview() {
 	let { id } = useParams();
@@ -28,6 +30,57 @@ export default function JobOverview() {
 	const [job, setJob] = useState('');
 	const [trigger, setTrigger] = useState('');
 	console.log('id is', id);
+
+	const getStatusActions = (status) => {
+		if (status === 'Posted') return getCreateProposalButton();
+		if (status === 'Accepted') return getMarkInProgressButton();
+		if (status === 'In Progress') return getMarkCompletedButton();
+	};
+
+	const getCreateProposalButton = () => {
+		return <ProposalCreator job={job} trigger={setTrigger} />;
+	};
+
+	const getMarkInProgressButton = () => {
+		return (
+			<Button
+				size="small"
+				variant="contained"
+				sx={{
+					textTransform: 'unset',
+					backgroundColor: '#385170',
+					width: '100%',
+					mb: '10px',
+				}}
+				endIcon={<LoopIcon />}
+				onClick={handleMarkInProgress}
+			>
+				Mark 'In Progress'
+			</Button>
+		);
+	};
+
+	const getMarkCompletedButton = () => {
+		return (
+			<Button
+				size="small"
+				variant="contained"
+				sx={{
+					textTransform: 'unset',
+					backgroundColor: '#385170',
+					width: '100%',
+					mb: '10px',
+				}}
+				endIcon={<TaskAlt />}
+				onClick={handleMarkCompleted}
+			>
+				Mark Completed
+			</Button>
+		);
+	};
+
+	const handleMarkInProgress = () => {};
+	const handleMarkCompleted = () => {};
 
 	useEffect(() => {
 		axios
@@ -289,7 +342,7 @@ export default function JobOverview() {
 							padding: '15px',
 						}}
 					>
-						<ProposalCreator job={job} trigger={setTrigger} />
+						{getStatusActions(job.status)}
 						<Divider />
 						<Button
 							onClick={() => {
