@@ -7,7 +7,7 @@ const message = require('./message');
 const service = require('./service');
 const serviceProvider = require('./serviceProvider');
 const serviceToRate = require('./serviceToRate');
-
+const enquiry = require('./enquiry');
 const { Schema } = mongoose;
 
 const options = {
@@ -76,6 +76,13 @@ messageSchema.set('toJSON', {
   },
 });
 
+const enquirySchema = new Schema(enquiry(Schema), { timestamps: true });
+enquirySchema.set('toJSON', {
+  transform(doc, ret, options) {
+    delete ret.__v;
+  },
+});
+
 const User = mongoose.model('User', userSchema);
 const Address = mongoose.model('Address', addressSchema);
 const ServiceProvider = mongoose.model('ServiceProvider', serviceProviderSchema);
@@ -84,7 +91,7 @@ const Job = mongoose.model('Job', jobSchema);
 const JobProposal = mongoose.model('JobProposal', jobProposalSchema);
 const Message = mongoose.model('Message', messageSchema);
 const ServiceToRate = mongoose.model('ServiceToRate',serviceToRateSchema);
-
+const Enquiry = mongoose.model('Enquiry',enquirySchema);
 module.exports = {
   User,
   Address,
@@ -93,5 +100,6 @@ module.exports = {
   Job,
   JobProposal,
   Message,
-  ServiceToRate
+  ServiceToRate,
+  Enquiry
 }

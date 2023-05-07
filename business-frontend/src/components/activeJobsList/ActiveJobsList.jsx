@@ -68,7 +68,7 @@ export default function ActiveJobsList() {
 							color: '#2b4450',
 						}}
 					>
-						Your Active Jobs.
+						Your Jobs.
 					</Typography>
 					{jobs
 						.filter(

@@ -29,6 +29,7 @@ import HubIcon from '@mui/icons-material/Hub';
 import './BusinessOverview.css';
 import MenuBar from '../../components/menubar/MenuBar';
 import { useLocation } from 'react-router-dom';
+import Enquiry from '../../components/enquiry/Enquiry';
 
 export default function BusinessOverview() {
 	const location = useLocation();
@@ -223,6 +224,7 @@ export default function BusinessOverview() {
 							padding: '15px',
 						}}
 					>
+						<Enquiry businessData = {businessData}/>
 						<Button
 							variant="contained"
 							size="small"

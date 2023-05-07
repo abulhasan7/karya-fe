@@ -74,12 +74,15 @@ export default function JobsListingPage() {
 					>
 						Relevant jobs near you.
 					</Typography>
-					{jobs
+					{/*
+					
 						.filter(
 							(j) =>
 								profile.proposals &&
 								!profile.proposals.includes(j._id),
 						)
+					*/}
+					{jobs
 						.map((j) => (
 							<JobCardView job={j} trigger={setTrigger} />
 						))}

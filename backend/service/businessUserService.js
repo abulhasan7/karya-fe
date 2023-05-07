@@ -174,7 +174,8 @@ async function getServiceProviders(service) {
 
 async function getJobs(_id) {
   console.log("_id is ", _id)
-  let jobs = await Job.find({ serviceProvider: _id,status:{$nin:["Closed Complete","Closed Incomplete"]}}).exec();
+  //,status:{$nin:["Closed Complete","Closed Incomplete"]}
+  let jobs = await Job.find({ serviceProvider: _id}).exec();
   // if (jobs && jobs.length > 0) {
     return jobs;
   // } else {

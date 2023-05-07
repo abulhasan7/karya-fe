@@ -291,7 +291,7 @@ export default function JobOverview() {
 							padding: '15px',
 						}}
 					>
-						<ProposalCreator job={job} />
+						<ProposalCreator job={job} trigger={setTrigger} />
 						<Divider />
 						<Button
 							onClick={() => {

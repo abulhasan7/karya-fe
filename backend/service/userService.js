@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { default: mongoose } = require('mongoose');
-const { User, Address, Job, JobProposal, ServiceProvider } = require('../model/index');
+const { User, Address, Job, JobProposal, ServiceProvider, Enquiry } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 const { sendMessage } = require('./twilioService');
 
@@ -221,6 +221,13 @@ async function acceptProposal(body) {
 
 }
 
+async function enquiry(body) {
+  const enquiry = new Enquiry({user:body.user,serviceProvider:body.serviceProvider,message:body.message});
+  const sa = await enquiry.save();
+  sendMessage(body.toNumber,`An enquiry has been posted by the user with the following content: ${body.message}`);
+  return `Proposal ${body.status} successfully`
+
+}
 
 async function updateStatus(body) {
   let jobs = await Job.updateOne({ _id: body.jobId},{ status: body.status }).exec();
@@ -234,5 +241,5 @@ async function updateStatus(body) {
 
 
 module.exports = {
-  register, login, getProfile, getJobsByStatus,updateProfile, postJob, getJob, getJobs,acceptProposal,getJobsNEByStatus,updateStatus
+  register, login, getProfile, getJobsByStatus,updateProfile, postJob, getJob, getJobs,acceptProposal,getJobsNEByStatus,updateStatus,enquiry
 }
