@@ -66,15 +66,15 @@ router.get('/get-jobs', checkBusinessAuthenticationHeaderForVerified,async funct
   }
 });
 
-router.get('/get-all-open-jobs', checkBusinessAuthenticationHeaderForVerified,async function(req, res, next) {
+router.post('/get-all-open-jobs', checkBusinessAuthenticationHeaderForVerified,async function(req, res, next) {
   try{
-  console.log(req.query);
+  console.log(req.body);
   let resp;
-  if(req.query.category){
-      resp = await getAllOpenJobsByCategory(req.query.category);
-  }else{
-      resp = await getAllOpenJobs();
-  }
+  // if(req.query.category){
+      resp = await getAllOpenJobsByCategory(req.body);
+  // }else{
+      // resp = await getAllOpenJobs();
+  // }
   console.log('resp is',resp);
   res.json({message:resp});
   }catch(error){

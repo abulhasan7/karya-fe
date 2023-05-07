@@ -175,29 +175,29 @@ async function getServiceProviders(service) {
 async function getJobs(_id) {
   console.log("_id is ", _id)
   let jobs = await Job.find({ serviceProvider: _id,status:{$nin:["Closed Complete","Closed Incomplete"]}}).exec();
-  if (jobs && jobs.length > 0) {
+  // if (jobs && jobs.length > 0) {
     return jobs;
-  } else {
-    throw new Error("No Jobs found for the service provider");
-  }
+  // } else {
+  //   throw new Error("No Jobs found for the service provider");
+  // }
 }
 
 async function getAllOpenJobs() {
-  let jobs = await Job.find({ status: "POSTED" }).populate('user').exec();
+  let jobs = await Job.find({ status: "Posted" }).populate('user').exec();
   if (jobs && jobs.length > 0) {
     return jobs;
   } else {
     throw new Error("No Open jobs found");
   }
 }
-async function getAllOpenJobsByCategory(_id) {
-  console.log("_id is ", _id)
-  let jobs = await Job.find({ service: _id }).exec();
-  if (jobs && jobs.length > 0) {
+async function getAllOpenJobsByCategory(body) {
+  console.log("_id is ", body)
+  let jobs = await Job.find({ service:{$in:body.services},status:"Posted" }).exec();
+  // if (jobs && jobs.length > 0) {
     return jobs;
-  } else {
-    throw new Error("No open jobs found for the category");
-  }
+  // } else {
+  //   ;
+  // }
 }
 async function updateStatus(body) {
   let jobs = await Job.updateOne({ _id: body.jobId}, {status: body.status }).exec();

@@ -71,7 +71,7 @@ export default function JobCardView({ job }) {
 	};
 
 	const getCardActions = (status) => {
-		if (status === 'Complete') return getMarkClosedCompleteButton();
+		if (status === 'Completed') return getMarkClosedCompleteButton();
 		return getMarkClosedIncompleteButton();
 	};
 
@@ -96,7 +96,6 @@ export default function JobCardView({ job }) {
 
 	return (
 		<Card
-			// onClick={() => navigate(`/job-overview/${job._id}`)}
 			sx={{
 				minWidth: 400,
 				maxWidth: 700,
@@ -141,7 +140,8 @@ export default function JobCardView({ job }) {
 				}
 				subheader={`${job.proposals.length} active proposals`}
 			/>
-			<CardContent>
+			<CardContent onClick={() => navigate(`/job-overview/${job._id}`)}
+>
 				<div className="job-card-container">
 					<div>
 						<div>

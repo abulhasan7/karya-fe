@@ -108,7 +108,7 @@ export default function SearchResults() {
 						<BusinessCardView data={business} />
 					))}
 				</div>
-				<div>
+				<div className='maps'>
 					{isLoaded && (
 						<GoogleMap
 							mapContainerStyle={containerStyle}
