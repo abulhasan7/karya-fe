@@ -79,15 +79,25 @@ export default function MenuBar() {
 							open={isDrawerOpen}
 							onClose={() => setIsDrawerOpen(false)}
 							anchor="right"
+							PaperProps={{
+								sx: {
+									bgcolor: '#ececec',
+									display: 'flex',
+									flexDirection: 'column',
+									alignContent: 'center',
+									justifyContent: 'space-between',
+								},
+							}}
 						>
 							<List>
 								<ListItem>
 									<Button
-										variant="outlined"
+										variant="contained"
 										size="small"
 										startIcon={<HomeIcon />}
 										sx={{
 											textTransform: 'unset',
+											width: '100%',
 										}}
 										onClick={() => navigate(`/home`)}
 									>
@@ -97,18 +107,20 @@ export default function MenuBar() {
 
 								<ListItem>
 									<Button
-										variant="outlined"
+										variant="contained"
 										size="small"
 										startIcon={<AccountBoxIcon />}
 										sx={{
 											textTransform: 'unset',
+											width: '100%',
 										}}
 										onClick={() => navigate(`/profile`)}
 									>
 										Profile
 									</Button>
 								</ListItem>
-
+							</List>
+							<List>
 								<ListItem>
 									<Button
 										variant="outlined"
@@ -117,6 +129,7 @@ export default function MenuBar() {
 										startIcon={<LogoutIcon />}
 										sx={{
 											textTransform: 'unset',
+											width: '100%',
 										}}
 										onClick={handleLogout}
 									>
