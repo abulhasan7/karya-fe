@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 	margin-top: 5%;
-	margin-left: 15%;
+	margin-left: 10%;
 	margin-right: 15%;
 }
 
@@ -18,7 +18,7 @@
 .business-profile-name {
 	flex: 95%;
 	margin-left: 15px;
-	font-family: Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria;
+	font-family: Guardian-EgypTT, Charter, Charter Bitstream, Cambria;
 	font-size: 32px;
 	font-weight: 300;
 	letter-spacing: 0.5px;
