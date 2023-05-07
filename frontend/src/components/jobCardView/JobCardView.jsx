@@ -99,7 +99,7 @@ export default function JobCardView({ job }) {
 			sx={{
 				minWidth: 400,
 				maxWidth: 700,
-				height: 225,
+				// height: 230,
 				margin: 5,
 				// backgroundColor: '#ececec',
 			}}
@@ -140,8 +140,7 @@ export default function JobCardView({ job }) {
 				}
 				subheader={`${job.proposals.length} active proposals`}
 			/>
-			<CardContent onClick={() => navigate(`/job-overview/${job._id}`)}
->
+			<CardContent onClick={() => navigate(`/job-overview/${job._id}`)}>
 				<div className="job-card-container">
 					<div>
 						<div>

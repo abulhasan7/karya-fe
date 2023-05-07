@@ -46,7 +46,7 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 	};
 
 	return (
-		<Card sx={{ width: 750, maxWidth: 888, height: 230, margin: 5 }}>
+		<Card sx={{ width: 750, maxWidth: 888, margin: 5 }}>
 			<CardContent>
 				<div className="jp-card-container">
 					<div>

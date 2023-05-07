@@ -6,18 +6,69 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContentText from '@mui/material/DialogContentText';
 
 import Button from '@mui/material/Button';
 import { CardActions, CardHeader, Chip } from '@mui/material';
 import './JobCardView.css';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
-import ProposalCreator from '../proposalCreator/ProposalCreator';
+import { ProposalCreationForm } from '../proposalCreator/ProposalCreator';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { useSelector } from 'react-redux';
 
 export default function JobCardView({ job, trigger }) {
 	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [openCreateProposal, setOpenCreateProposal] = React.useState(false);
 	const open = Boolean(anchorEl);
+	const [description, setDescription] = React.useState('');
+	const [estimatedHours, setEstimatedHours] = React.useState('');
+	const [estimatedHourlyRate, setEstimatedHourlyRate] = React.useState('');
+	const [estimatedOverallRate, setEstimatedOverallRate] = React.useState('');
+	const token = useSelector((state) => state.business.token);
+
+	const handleClickOpenCP = () => {
+		setOpenCreateProposal(true);
+	};
+
+	const handleCloseCP = () => {
+		setOpenCreateProposal(false);
+	};
+
+	const handleCreateProposalSubmit = () => {
+		axios
+			.post(
+				`${API_URL}/business/users/post-proposal`,
+				{
+					description,
+					hours: estimatedHours,
+					hourlyRate: estimatedHourlyRate,
+					price: estimatedOverallRate,
+					job: job._id,
+					toNumber: job.user.phone,
+					name: job.name,
+				},
+				{
+					headers: {
+						Authorization: token,
+					},
+				},
+			)
+			.then((response) => {
+				console.log('response is', response.data.message);
+				// setJobs(response.data.message);
+				handleCloseCP();
+				trigger();
+			});
+	};
+
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -72,9 +123,14 @@ export default function JobCardView({ job, trigger }) {
 	};
 
 	const getCardActions = (status) => {
+		if (status === 'Posted') return getCreateProposalButton();
 		if (status === 'Accepted') return getMarkInProgressButton();
 		if (status === 'In Progress') return getMarkCompletedButton();
 		if (status === 'PROPOSAL-ACCEPTED') return getMarkCompletedButton();
+	};
+
+	const getCreateProposalButton = () => {
+		return <MenuItem onClick={createProposal}>Create a Proposal</MenuItem>;
 	};
 
 	const getMarkInProgressButton = () => {
@@ -87,13 +143,16 @@ export default function JobCardView({ job, trigger }) {
 
 	const markInProgress = () => {};
 	const markCompleted = () => {};
+	const createProposal = () => {
+		handleClickOpenCP();
+	};
 
 	return (
 		<Card
 			sx={{
 				minWidth: 400,
 				maxWidth: 700,
-				height: 225,
+				// height: 230,
 				margin: 5,
 				// backgroundColor: '#ececec',
 			}}
@@ -134,8 +193,7 @@ export default function JobCardView({ job, trigger }) {
 				}
 				subheader={`${job.proposals.length} active proposals`}
 			/>
-			<CardContent 			onClick={() => navigate(`/job-overview/${job._id}`)}
->
+			<CardContent onClick={() => navigate(`/job-overview/${job._id}`)}>
 				<div className="job-card-container">
 					<div>
 						<div>
@@ -202,6 +260,29 @@ export default function JobCardView({ job, trigger }) {
 			>
 				{getCardActions(job.status)}
 			</Menu>
+			<Dialog open={openCreateProposal} onClose={handleClose}>
+				<DialogTitle>Create Proposal</DialogTitle>
+				<DialogContent
+					sx={{
+						width: '550px',
+					}}
+				>
+					<DialogContentText>
+						To express interest in this job, please enter below
+						details. We will send updates occasionally.
+					</DialogContentText>
+					<ProposalCreationForm
+						setDescription={setDescription}
+						setEstimatedHourlyRate={setEstimatedHourlyRate}
+						setEstimatedHours={setEstimatedHours}
+						setEstimatedOverallRate={setEstimatedOverallRate}
+					/>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleCloseCP}>Cancel</Button>
+					<Button onClick={handleCreateProposalSubmit}>Create</Button>
+				</DialogActions>
+			</Dialog>
 			{/* <Chip
 				sx={{
 					marginLeft: '20px',
