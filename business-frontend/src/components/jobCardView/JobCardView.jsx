@@ -206,12 +206,15 @@ export default function JobCardView({ job, trigger }) {
 								}}
 								color="text.secondary"
 							>
-								{'Estimated Budget($): ' +
-									job.estimatedBudget +
-									' || Estimated Hourly Budget($): ' +
+								{
+
+									'Estimated Time(hrs): ' +
+									job.estimatedTime + 
+									'|| Estimated Hourly Budget($): ' +
 									job.estimatedHourlyBudget +
-									' || Estimated Time(hrs): ' +
-									job.estimatedTime}
+									' || Estimated Budget($): ' +
+									job.estimatedBudget 
+									}
 							</Typography>
 							<Typography
 								sx={{

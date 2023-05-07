@@ -86,7 +86,10 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 								proposal.hours +
 								' | ' +
 								'Hourly Rate($): ' +
-								proposal.hourlyRate}
+								proposal.hourlyRate + 
+								' | Total Price($): ' +
+								proposal.price
+								}
 						</Typography>
 						<Typography
 							sx={{
