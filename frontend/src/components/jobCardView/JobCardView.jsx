@@ -10,10 +10,15 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { useSelector } from 'react-redux';
 
 import './JobCardView.css';
 
-export default function JobCardView({ job }) {
+export default function JobCardView({ job,trigger }) {
+	const token = useSelector((state) => state.user.token);
+
 	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
@@ -46,14 +51,14 @@ export default function JobCardView({ job }) {
 					label="Completed"
 				/>
 			);
-		if (status === 'Closed - Complete')
+		if (status === 'Closed Complete')
 			return (
 				<Chip
 					sx={{ bgcolor: '#2e7d32', color: 'white' }}
 					label="Closed - Complete"
 				/>
 			);
-		if (status === 'Closed - Incomplete')
+		if (status === 'Closed Incomplete')
 			return (
 				<Chip
 					sx={{ bgcolor: '#607d8b', color: 'white' }}
@@ -72,6 +77,7 @@ export default function JobCardView({ job }) {
 
 	const getCardActions = (status) => {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
+		else if (status ==='Closed Complete' || status ==='Closed Incomplete') return ;
 		return getMarkClosedIncompleteButton();
 	};
 
@@ -91,8 +97,37 @@ export default function JobCardView({ job }) {
 		);
 	};
 
-	const markClosedComplete = () => {};
-	const markClosedIncomplete = () => {};
+	const markClosedComplete = () => {
+		updateStatus('Closed Complete')
+	};
+	const markClosedIncomplete = () => {
+		updateStatus('Closed Incomplete')
+
+	};
+
+	
+	const updateStatus = (status) =>{
+		const phone2 = job.serviceProvider ? job.serviceProvider.phone : null;
+		axios
+			.post(
+				`${API_URL}/users/update-status`,
+				{
+					jobId:job._id,
+					status,
+					phone2: phone2
+				},
+				{
+					headers: {
+						Authorization: token,
+					},
+				},
+			)
+			.then((response) => {
+				console.log('response is', response.data.message);
+				// setJobs(response.data.message);
+				trigger();
+			});
+	}
 
 	return (
 		<Card

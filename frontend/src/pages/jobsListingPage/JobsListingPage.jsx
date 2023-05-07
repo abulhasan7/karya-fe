@@ -15,6 +15,8 @@ import { API_URL } from '../../constants';
 export default function JobsListingPage() {
 	const token = useSelector((state) => state.user.token);
 	const [jobs, setJobs] = useState([]);
+	const [trigger, setTrigger] = useState('');
+
 	useEffect(() => {
 		axios
 			.get(`${API_URL}/users/get-jobs?status=All`, {
@@ -26,7 +28,7 @@ export default function JobsListingPage() {
 				console.log('response is', response.data.message);
 				setJobs(response.data.message);
 			});
-	}, []);
+	}, [trigger]);
 
 	return (
 		<div>
@@ -49,7 +51,7 @@ export default function JobsListingPage() {
 						Jobs posted by you.
 					</Typography>
 					{jobs.map((j) => (
-						<JobCardView job={j} />
+						<JobCardView job={j} trigger={setTrigger}/>
 					))}
 				</div>
 			</div>
