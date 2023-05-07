@@ -13,6 +13,7 @@ import MenuBar from './components/menubar/MenuBar';
 import JobOverview from './pages/jobOverview/JobOverview';
 import ProposalCreator from './components/proposalCreator/ProposalCreator';
 import Profile from './pages/profile/Profile';
+import Chat from './pages/chat/Chat';
 
 function App() {
 	const loggedIn = useSelector((state) => state.business.token);
@@ -57,6 +58,14 @@ function App() {
 			element: (
 				<ThemeProvider theme={theme}>
 					<BusinessLogin />
+				</ThemeProvider>
+			),
+		},
+		{
+			path: '/chat/:id',
+			element: (
+				<ThemeProvider theme={theme}>
+					<Chat />
 				</ThemeProvider>
 			),
 		},
