@@ -140,7 +140,7 @@ async function postJob(jobDetails) {
     estimatedTime: jobDetails.estimatedTime,
     estimatedBudget: jobDetails.estimatedBudget,
     estimatedHourlyBudget: jobDetails.estimatedHourlyBudget,
-    status: "POSTED",
+    status: "Posted",
     // address: doc._id,
     user: jobDetails.user,
     service: jobDetails.service

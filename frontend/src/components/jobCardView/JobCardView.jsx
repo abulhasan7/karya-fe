@@ -96,7 +96,7 @@ export default function JobCardView({ job }) {
 
 	return (
 		<Card
-			onClick={() => navigate(`/job-overview/${job._id}`)}
+			// onClick={() => navigate(`/job-overview/${job._id}`)}
 			sx={{
 				minWidth: 400,
 				maxWidth: 700,

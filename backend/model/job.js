@@ -29,7 +29,7 @@ module.exports = (Schema) =>
     }],
     status: {
         type: String,
-        enum: ["Posted","Accepted","In Progress","Delayed","Completed","Closed","Closed Complete","Closed Incomplete"]
+        enum: ["Posted","Accepted","In Progress","Delayed","Completed","Closed Complete","Closed Incomplete"]
     },
     userRating: {
         type: Number,
