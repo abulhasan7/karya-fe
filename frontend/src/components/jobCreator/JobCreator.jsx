@@ -27,13 +27,13 @@ import { useNavigate } from 'react-router-dom';
 export default function JobCreator() {
 	const [open, setOpen] = React.useState(false);
 	const token = useSelector((state) => state.user.token);
-	const [title,setTitle] = React.useState('');
-	const [service,setService] = useState('');
-	const [services,setServices] = useState([]);
-	const [description,setDescription] = useState('');
-	const [hours,setHours] = useState('');
-	const [hourlyBudget,setHourlyBudget] = useState('');
-	const [overallBudget,setOverallBudget] = useState('');
+	const [title, setTitle] = React.useState('');
+	const [service, setService] = useState('');
+	const [services, setServices] = useState([]);
+	const [description, setDescription] = useState('');
+	const [hours, setHours] = useState('');
+	const [hourlyBudget, setHourlyBudget] = useState('');
+	const [overallBudget, setOverallBudget] = useState('');
 	const navigate = useNavigate();
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -43,10 +43,10 @@ export default function JobCreator() {
 		setOpen(false);
 	};
 
-	const handleService = (e) =>{
-		console.log('handleservice is',e);
+	const handleService = (e) => {
+		console.log('handleservice is', e);
 		setService(e.target.value);
-	}
+	};
 	useEffect(() => {
 		axios
 			.get(`${API_URL}/users/get-services`, {
@@ -60,38 +60,43 @@ export default function JobCreator() {
 			});
 	}, []);
 
-	const handleSubmit= ()=>{
-		console.log('service is',service);
-		console.log("title"+title+service+description+overallBudget);
-		const s = services.find(s=>s.name==service)
-			axios
-				.post(`${API_URL}/users/post-job`,{
-					name:title,
+	const handleSubmit = () => {
+		console.log('service is', service);
+		console.log('title' + title + service + description + overallBudget);
+		const s = services.find((s) => s.name == service);
+		axios
+			.post(
+				`${API_URL}/users/post-job`,
+				{
+					name: title,
 					description,
-					estimatedTime:hours,
+					estimatedTime: hours,
 					estimatedBudget: overallBudget,
 					estimatedHourlyBudget: hourlyBudget,
-					service: s._id
-				}, {
+					service: s._id,
+				},
+				{
 					headers: {
 						Authorization: token,
-					}
-					
-
-				})
-				.then((response) => {
-					console.log('response is', response.data.message);
-					if (response.data.message) {
-						navigate(`/job-overview/${response.data.message}`);
-					}
-				});
-	}
+					},
+				},
+			)
+			.then((response) => {
+				console.log('response is', response.data.message);
+				if (response.data.message) {
+					navigate(`/job-overview/${response.data.message}`);
+				}
+			});
+	};
 
 	return (
 		<div>
 			<Button
-				variant="outlined"
 				sx={{
+					bgcolor: 'honeydew',
+					':hover': {
+						color: 'black',
+					},
 					display: 'flex',
 					flexDirection: 'column',
 					textTransform: 'unset',
@@ -105,9 +110,16 @@ export default function JobCreator() {
 					Lets get things done. A few steps before that.
 				</DialogTitle>
 				<DialogContent>
-					<HorizontalLinearStepper setTitle={setTitle} setService={handleService} 
-					setDescription={setDescription} setHours={setHours} setHourlyBudget={setHourlyBudget} setOverallBudget={setOverallBudget}
-					handleSubmit={handleSubmit} services={services}/>
+					<HorizontalLinearStepper
+						setTitle={setTitle}
+						setService={handleService}
+						setDescription={setDescription}
+						setHours={setHours}
+						setHourlyBudget={setHourlyBudget}
+						setOverallBudget={setOverallBudget}
+						handleSubmit={handleSubmit}
+						services={services}
+					/>
 				</DialogContent>
 			</Dialog>
 		</div>
@@ -116,8 +128,16 @@ export default function JobCreator() {
 
 const steps = ['Some details.', 'More details please.', 'Estimates.'];
 
-export function HorizontalLinearStepper({setTitle,setService,setDescription,setHours,setHourlyBudget,setOverallBudget,handleSubmit,services}) {
-
+export function HorizontalLinearStepper({
+	setTitle,
+	setService,
+	setDescription,
+	setHours,
+	setHourlyBudget,
+	setOverallBudget,
+	handleSubmit,
+	services,
+}) {
 	const [activeStep, setActiveStep] = React.useState(0);
 
 	const handleNext = () => {
@@ -147,7 +167,7 @@ export function HorizontalLinearStepper({setTitle,setService,setDescription,setH
 			id="outlined-required"
 			label="Title"
 			placeholder="Give your job a nice descriptive title."
-			onChange={(e)=>setTitle(e.target.value)}
+			onChange={(e) => setTitle(e.target.value)}
 		/>
 	);
 
@@ -185,8 +205,7 @@ export function HorizontalLinearStepper({setTitle,setService,setDescription,setH
 				rows={6}
 				placeholder="Please provide as many details here are possible."
 				variant="standard"
-				onChange={(e)=>setDescription(e.target.value)}
-
+				onChange={(e) => setDescription(e.target.value)}
 			/>
 		</div>
 	);
@@ -202,7 +221,7 @@ export function HorizontalLinearStepper({setTitle,setService,setDescription,setH
 				id="outlined-required"
 				label="Estimated hours required."
 				placeholder="How many hours do you think the job requires?"
-				onChange={(e)=>setHours(e.target.value)}
+				onChange={(e) => setHours(e.target.value)}
 			/>
 			<br />
 			<br />
@@ -215,7 +234,7 @@ export function HorizontalLinearStepper({setTitle,setService,setDescription,setH
 				id="outlined-required"
 				label="Estimated hourly budget in $"
 				placeholder="What's your hourly budget in $?"
-				onChange={(e)=>setHourlyBudget(e.target.value)}
+				onChange={(e) => setHourlyBudget(e.target.value)}
 			/>
 			<br />
 			<br />
@@ -228,7 +247,7 @@ export function HorizontalLinearStepper({setTitle,setService,setDescription,setH
 				id="outlined-required"
 				label="Overall budget if applicable."
 				placeholder="What's your soft budget overall in $?"
-				onChange={(e)=>setOverallBudget(e.target.value)}
+				onChange={(e) => setOverallBudget(e.target.value)}
 			/>
 		</div>
 	);

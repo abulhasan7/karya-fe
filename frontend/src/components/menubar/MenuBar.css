@@ -15,3 +15,16 @@
 	justify-content: space-between;
 	padding: 20px;
 }
+
+.menubar-actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.menubar-actions > * {
+	margin-left: '5px';
+}
+
+.job-creator-mc {
+	margin-right: 15px;
+}
