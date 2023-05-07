@@ -35,7 +35,7 @@ async function register(ServiceProviderDetails) {
 async function login(ServiceProviderDetails) {
   try {
     console.log('logincalled with ', ServiceProviderDetails);
-    const dbData = await ServiceProvider.findOne({ email: ServiceProviderDetails.email }, { __v: 0 }).exec();
+    const dbData = await ServiceProvider.findOne({ email: ServiceProviderDetails.email }, { __v: 0 }).populate('address').exec();
     console.log('dbdata', dbData);
     if (!dbData) {
       throw new Error('User not found');
@@ -65,7 +65,7 @@ async function login(ServiceProviderDetails) {
 async function getProfile(_id) {
   try {
     console.log('getProfile with _id', _id);
-    const dbData = await ServiceProvider.findOne({ _id }, { __v: 0 }).exec();
+    const dbData = await ServiceProvider.findOne({ _id }, { __v: 0 }).populate('address').exec();
     const a = await dbData.populate({ path: 'services', model: 'ServiceToRate', populate: { path: 'service', model: 'Service' } });
     console.log('dbdata', a);
     if (!dbData) {
