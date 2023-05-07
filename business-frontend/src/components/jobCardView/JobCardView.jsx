@@ -158,7 +158,8 @@ export default function JobCardView({ job, trigger }) {
 				{
 					jobId:job._id,
 					status,
-					phone1: job.user.phone
+					phone1: job.user.phone,
+					name: job.name
 				},
 				{
 					headers: {
@@ -169,7 +170,7 @@ export default function JobCardView({ job, trigger }) {
 			.then((response) => {
 				console.log('response is', response.data.message);
 				// setJobs(response.data.message);
-				trigger();
+				trigger('z');
 			});
 	}
 	return (

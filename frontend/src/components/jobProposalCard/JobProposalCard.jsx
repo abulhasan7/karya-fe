@@ -15,7 +15,7 @@ import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
 
-export default function JobProposalCard({ proposal, isAccepted, trigger }) {
+export default function JobProposalCard({ proposal, isAccepted, trigger,name }) {
 	console.log('proposal is', proposal);
 	const [proposalState, setProposalState] = useState(proposal.status);
 	const token = useSelector((state) => state.user.token);
@@ -30,6 +30,7 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 					jobProposalId: proposal._id,
 					serviceProviderId: proposal.serviceProvider._id,
 					toNumber: proposal.serviceProvider.phone,
+					name
 				},
 				{
 					headers: {

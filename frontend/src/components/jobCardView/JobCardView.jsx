@@ -114,7 +114,8 @@ export default function JobCardView({ job,trigger }) {
 				{
 					jobId:job._id,
 					status,
-					phone2: phone2
+					phone2: phone2,
+					name: job.name
 				},
 				{
 					headers: {

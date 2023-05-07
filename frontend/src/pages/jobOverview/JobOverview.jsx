@@ -58,14 +58,14 @@ export default function JobOverview() {
 					label="Completed"
 				/>
 			);
-		if (status === 'Closed - Complete')
+		if (status === 'Closed Complete')
 			return (
 				<Chip
 					sx={{ bgcolor: '#2e7d32', color: 'white' }}
 					label="Closed - Complete"
 				/>
 			);
-		if (status === 'Closed - Incomplete')
+		if (status === 'Closed Incomplete')
 			return (
 				<Chip
 					sx={{ bgcolor: '#607d8b', color: 'white' }}
@@ -76,6 +76,7 @@ export default function JobOverview() {
 
 	const getStatusActions = (status) => {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
+		else if (status ==='Closed Complete' || status ==='Closed Incomplete') return ;
 		return getMarkClosedIncompleteButton();
 	};
 
@@ -117,8 +118,38 @@ export default function JobOverview() {
 		);
 	};
 
-	const handleMarkClosedComplete = () => {};
-	const handleMarkClosedIncomplete = () => {};
+	const handleMarkClosedComplete = () => {
+		updateStatus('Closed Complete')
+
+	};
+	const handleMarkClosedIncomplete = () => {
+		updateStatus('Closed Incomplete')
+	};
+
+	
+	const updateStatus = (status) =>{
+		const phone2 = job.serviceProvider ? job.serviceProvider.phone : null;
+		axios
+			.post(
+				`${API_URL}/users/update-status`,
+				{
+					jobId:job._id,
+					status,
+					phone2: phone2,
+					name: job.name
+				},
+				{
+					headers: {
+						Authorization: token,
+					},
+				},
+			)
+			.then((response) => {
+				console.log('response is', response.data.message);
+				// setJobs(response.data.message);
+				setTrigger('z');
+			});
+	}
 
 	useEffect(() => {
 		axios
@@ -378,6 +409,7 @@ export default function JobOverview() {
 									<JobProposalCard
 										proposal={j}
 										trigger={setTrigger}
+										name = {job.name}
 									/>
 								))}
 						</div>
