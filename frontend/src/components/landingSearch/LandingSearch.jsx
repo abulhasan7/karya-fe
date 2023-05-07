@@ -28,7 +28,6 @@ export default function LandingSearch() {
 	const [searchText, setSearchText] = useState("");
 
 	function setSearch(e){
-		console.log("values is",e.target.value);
 		setSearchText(e.target.value);
 	}
 	useEffect(() => {
@@ -146,7 +145,7 @@ export default function LandingSearch() {
 				</Button>
 				<Button
 				//TODO update this one
-																				onClick= {()=>navigate('/search-services', {state:'Carpenting' })}
+																				onClick= {()=>navigate('/search-services', {state:'Roofing' })}
 					size="large"
 					startIcon={<RoofingIcon />}
 					sx={{

@@ -2,7 +2,7 @@ module.exports =  (Schema) =>
    ({ name: {
         type: String,
     },
-    about : {
+    description : {
         type: String,
     },
     serviceProviders: [{
