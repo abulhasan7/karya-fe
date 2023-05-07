@@ -184,6 +184,7 @@ function ProfileEdit() {
 								aria-labelledby="demo-radio-buttons-group-label"
 								defaultValue="female"
 								name="radio-buttons-group"
+								value={user.gender}
 								onChange={(e) => {
 									setUser({
 										...user,
@@ -321,13 +322,15 @@ function ProfileEdit() {
 								margin="normal"
 								size="small"
 								required
-								value={user.address && user.address.street}
+								value={user.address && (user.address.street || "")}
 								onChange={(e) => {
 									const address = user.address || {};
-									address.street = e.target.value;
+									const newaddress = {}
+									Object.assign(newaddress,address);
+									newaddress.street = e.target.value;
 									setUser({
 										...user,
-										address
+										address:newaddress
 									});
 								}}
 							/>
@@ -428,7 +431,7 @@ function ProfileEdit() {
 							/> */}
 						</div>
 						<hr/>
-						<div className="input-group">
+						{/* <div className="input-group">
 							<label className="label" value={user.country}>
 								Country
 							</label>
@@ -451,27 +454,8 @@ function ProfileEdit() {
 								<MenuItem value="Germany">Germany</MenuItem>
 								<MenuItem value="Canada">Canada</MenuItem>
 							</Select>
-							{/* <select
-								name="pets"
-								id="pet-select"
-								onChange={(e) => {
-									setUser({
-										...user,
-										country: e.target.value,
-									});
-								}}
-							>
-								<option value="">
-									--Please choose an option--
-								</option>
-								<option value="USA">USA</option>
-								<option value="India">India</option>
-								<option value="Russia">Russia</option>
-								<option value="Germany">Germany</option>
-								<option value="Canada">Canada</option>
-							</select> */}
 						</div>
-						<hr />
+						<hr /> */}
 						<div className="input-group">
 							<label className="label"> About </label>
 							<TextField
