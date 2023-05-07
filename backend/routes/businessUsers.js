@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var {register,login,updateProfile,updateStatus,getJobs,getAllOpenJobs,getAllOpenJobsByCategory, getProfile,addService,getServices, postProposal}= require('../service/businessUserService');
+var {register,login,updateProfile,updateStatus,getJobs,getAllOpenJobs,getAllOpenJobsByCategory, getProfile,addServiceToServiceProvider,getServices, postProposal}= require('../service/businessUserService');
 var {checkBusinessAuthenticationHeader,checkBusinessAuthenticationHeaderForVerified} = require('../util/jwtUtil');
 var {generateSignedUrl} = require('../util/s3');
 
@@ -32,7 +32,7 @@ router.post('/add-service',checkBusinessAuthenticationHeaderForVerified, async f
   try{
   console.log(req.body);
 
-  let resp = await addService({...req.body,_id:req._id});
+  let resp = await addServiceToServiceProvider({...req.body,_id:req._id});
   console.log('resp iss ',resp);
   res.json({message:resp});
   }catch(error){
@@ -84,6 +84,20 @@ router.post('/get-all-open-jobs', checkBusinessAuthenticationHeaderForVerified,a
 });
 
 router.get('/get-services',checkBusinessAuthenticationHeaderForVerified, async function(req, res, next) {
+  try{
+  console.log(req.body);
+
+  let resp = await getServices();
+  console.log('resp iss ',resp);
+  res.json({message:resp});
+  }catch(error){
+    console.log("error occurred here",error);
+    res.json({error:error.message})
+  }
+});
+
+
+router.post('/add-service',checkBusinessAuthenticationHeaderForVerified, async function(req, res, next) {
   try{
   console.log(req.body);
 

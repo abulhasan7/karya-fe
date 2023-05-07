@@ -157,7 +157,7 @@ async function postProposal(jobDetails) {
   let jobsaved = await job.save();
   let jobprop = await Job.updateOne({ _id: jobDetails.job }, { $push: { proposals: jobsaved._id } })
   let sp = await ServiceProvider.updateOne({ _id: jobDetails._id }, { $push: { proposals: jobDetails.job } })
-  sendMessage(jobDetails.toNumber,`New proposal submitted for your job: "${jobDetails.name}"`);
+  sendMessage(jobDetails.toNumber, `New proposal submitted for your job: "${jobDetails.name}"`);
   return "Job proposal created successfully"
 }
 async function getServices() {
@@ -175,9 +175,9 @@ async function getServiceProviders(service) {
 async function getJobs(_id) {
   console.log("_id is ", _id)
   //,status:{$nin:["Closed Complete","Closed Incomplete"]}
-  let jobs = await Job.find({ serviceProvider: _id}).populate('user').exec();
+  let jobs = await Job.find({ serviceProvider: _id }).populate('user').exec();
   // if (jobs && jobs.length > 0) {
-    return jobs;
+  return jobs;
   // } else {
   //   throw new Error("No Jobs found for the service provider");
   // }
@@ -193,19 +193,19 @@ async function getAllOpenJobs() {
 }
 async function getAllOpenJobsByCategory(body) {
   console.log("_id is ", body)
-  let services = await ServiceToRate.find({_id:{$in:body.services}});
+  let services = await ServiceToRate.find({ _id: { $in: body.services } });
   let serviceIds = services.map(s => s.service);
 
-  let jobs = await Job.find({ service:{$in:serviceIds},status:"Posted" }).populate('user').exec();
+  let jobs = await Job.find({ service: { $in: serviceIds }, status: "Posted" }).populate('user').exec();
   // if (jobs && jobs.length > 0) {
-    return jobs;
+  return jobs;
   // } else {
   //   ;
   // }
 }
 async function updateStatus(body) {
-  let jobs = await Job.updateOne({ _id: body.jobId}, {status: body.status }).exec();
-  sendMessage(body.phone1,`Job: "${body.name}" moved to ${body.status} by the ServiceProvider`);
+  let jobs = await Job.updateOne({ _id: body.jobId }, { status: body.status }).exec();
+  sendMessage(body.phone1, `Job: "${body.name}" moved to ${body.status} by the ServiceProvider`);
   if (jobs) {
     return jobs;
   } else {
@@ -213,6 +213,24 @@ async function updateStatus(body) {
   }
 }
 
+async function addServiceToServiceProvider(body) {
+  for(const b of body.services){
+    let ser = new ServiceToRate({ rate: b.rate, service: b.service });
+    let ser2 = await ser.save();
+    let sep = await ServiceProvider.updateOne({ _id: body._id }, {
+      $addToSet: {
+        services: ser2._id
+      }
+    });
+    let sep2 = await Service.updateOne({ _id: b.service }, {
+      $addToSet: {
+        serviceProviders: body._id
+      }
+    })
+  }
+  return "added services successfully"
+}
+
 module.exports = {
-  register, login, getProfile, getAllOpenJobs, getServiceProviders, getAllOpenJobsByCategory, updateStatus, getJobs, postProposal, updateProfile, addService, getServices
+  register, login, getProfile, getAllOpenJobs, getServiceProviders, getAllOpenJobsByCategory, updateStatus, getJobs, postProposal, updateProfile, addService, getServices, addServiceToServiceProvider
 }
