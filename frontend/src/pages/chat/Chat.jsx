@@ -19,13 +19,86 @@ import {
 	TypingIndicator,
 	MessageList,
 } from '@chatscope/chat-ui-kit-react';
-
 import { height } from '@mui/system';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from '../../constants';
+import { useSelector } from 'react-redux';
 import avatar from './images/demo-user.png';
 import MenuBar from '../../components/menubar/MenuBar';
 
 export default function Chat() {
 	const [messageInputValue, setMessageInputValue] = React.useState('');
+	const [messages, setMessages] = React.useState([]);
+	const [jobProposal, setJobProposal] = React.useState([]);
+	const [refresh, setRefresh] = React.useState(false);
+	const token = useSelector((state) => state.user.token);
+	const profile = useSelector((state) => state.user.profile);
+
+	const location = useLocation();
+	const jobProposalId = location.jobProposal || '';
+
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/messages`, {
+				params: {
+					jobProposal: jobProposalId,
+				},
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				if (response.data.message) {
+					setMessages(response.data.message);
+				}
+			});
+	}, []);
+
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/get-job-proposal`, {
+				params: {
+					id: jobProposalId,
+				},
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				if (response.data.message) {
+					setJobProposal(response.data.message);
+				}
+			});
+	}, []);
+
+	const handleMessageSend = async () => {
+		const messageBody = {
+			from: profile._id,
+			to: jobProposal.serviceProvider,
+			message: messageInputValue,
+			jobProposal: jobProposalId,
+		};
+		const messageCreateRequest = await fetch(`${API_URL}/messages`, {
+			method: 'POST',
+			mode: 'cors',
+			cache: 'no-cache',
+			credentials: 'same-origin',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: token,
+			},
+			redirect: 'follow',
+			referrerPolicy: 'no-referrer',
+			body: JSON.stringify(messageBody),
+		});
+		const messageCreationResp = await messageCreateRequest.json();
+		setRefresh(!refresh);
+	};
 
 	return (
 		<div>
@@ -181,7 +254,7 @@ export default function Chat() {
 						placeholder="Type message here"
 						value={messageInputValue}
 						onChange={(val) => setMessageInputValue(val)}
-						onSend={() => setMessageInputValue('')}
+						onSend={handleMessageSend}
 						attachButton={<div></div>}
 					/>
 				</ChatContainer>

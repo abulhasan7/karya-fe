@@ -60,9 +60,9 @@ function App() {
 			path: '/home',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<LandingPage />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<LandingPage />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
@@ -70,19 +70,19 @@ function App() {
 			path: '/search',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<SearchResults />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<SearchResults />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
 		{
-			path: '/chat/:id',
+			path: '/chat/:jobProposal',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<Chat />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<Chat />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
@@ -90,9 +90,9 @@ function App() {
 			path: '/user-edit',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<ProfileEdit />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<ProfileEdit />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
@@ -100,9 +100,9 @@ function App() {
 			path: '/profile',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<Profile />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<Profile />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
@@ -111,9 +111,9 @@ function App() {
 			path: '/search-services',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<SearchResults />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<SearchResults />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
@@ -122,9 +122,9 @@ function App() {
 			path: '/business-overview',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<BusinessOverview />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<BusinessOverview />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
@@ -132,9 +132,9 @@ function App() {
 			path: '/create-job',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<JobCreator />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<JobCreator />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
@@ -142,9 +142,9 @@ function App() {
 			path: '/job-overview/:id',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<JobOverview />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<JobOverview />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
@@ -152,9 +152,9 @@ function App() {
 			path: '/jobs-listing',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
-				<ThemeProvider theme={theme}>
-					<JobsListingPage />
-				</ThemeProvider>
+					<ThemeProvider theme={theme}>
+						<JobsListingPage />
+					</ThemeProvider>
 				</Protected>
 			),
 		},
