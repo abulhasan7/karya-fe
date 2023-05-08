@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 
-export default function JobsListingPage() {
+export default function JobsListingPage({ filter }) {
 	const token = useSelector((state) => state.user.token);
 	const [jobs, setJobs] = useState([]);
 	const [trigger, setTrigger] = useState('');
@@ -43,16 +43,32 @@ export default function JobsListingPage() {
 							display: { xs: 'none', md: 'flex' },
 							fontFamily:
 								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-							fontSize: '32px',
-							fontWeight: '700',
+							fontSize: '28px',
+							fontWeight: '600',
 							color: '#2b4450',
 						}}
 					>
-						Jobs posted by you.
+						{jobs &&
+						jobs.filter((j) => {
+							if (filter !== 'All') {
+								return j.status === filter;
+							}
+							return true;
+						}).length === 0
+							? 'No jobs matching your criteria.'
+							: 'Your Jobs.'}
 					</Typography>
-					{jobs.map((j) => (
-						<JobCardView job={j} trigger={setTrigger}/>
-					))}
+					{jobs &&
+						jobs
+							.filter((j) => {
+								if (filter !== 'All') {
+									return j.status === filter;
+								}
+								return true;
+							})
+							.map((j) => (
+								<JobCardView job={j} trigger={setTrigger} />
+							))}
 				</div>
 			</div>
 		</div>

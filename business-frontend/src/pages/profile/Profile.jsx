@@ -23,7 +23,7 @@ import { API_URL } from '../../constants';
 
 import './Profile.css';
 import MenuBar from '../../components/menubar/MenuBar';
-import ActiveJobsList from '../../components/activeJobsList/ActiveJobsList';
+import JobsList from '../../components/activeJobsList/JobsList';
 import { updateBusiness } from '../../redux/slices/businessStateSlice';
 
 export default function Profile() {
@@ -36,6 +36,7 @@ export default function Profile() {
 	const [workingHours, setWorkingHours] = React.useState(
 		profile.workingHours,
 	);
+	const [filter, setFilter] = React.useState(null);
 
 	const [allServices, setAllServices] = React.useState([]);
 	useEffect(() => {
@@ -165,7 +166,34 @@ export default function Profile() {
 							</IconButton>
 						</div>
 					</div>
-					<ActiveJobsList />
+					<TextField
+						size="small"
+						variant="standard"
+						select
+						sx={{
+							mt: '15px',
+							mb: '15px',
+							mr: '10px',
+							width: '200px',
+						}}
+						label="Status Filter"
+						onChange={(e) => {
+							setFilter(e.target.value);
+						}}
+					>
+						<MenuItem value="All">All</MenuItem>
+						<MenuItem value="Accepted">Accepted</MenuItem>
+						<MenuItem value="In Progress">In Progress</MenuItem>
+						<MenuItem value="Delayed">Delayed</MenuItem>
+						<MenuItem value="Completed">Completed</MenuItem>
+						<MenuItem value="Closed Complete">
+							Closed Complete
+						</MenuItem>
+						<MenuItem value="Closed Incomplete">
+							Closed Incomplete
+						</MenuItem>
+					</TextField>
+					<JobsList filter={filter} />
 				</div>
 				<div className="bo-side-card">
 					<Paper

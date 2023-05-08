@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar, IconButton, TextField, MenuItem } from '@mui/material';
 import ModeEditOutlineTwoToneIcon from '@mui/icons-material/ModeEditOutlineTwoTone';
 import { useSelector } from 'react-redux';
 // import BACKEND_URL from '../../config/configBackend';
@@ -11,7 +11,7 @@ import JobsListingPage from '../jobsListingPage/JobsListingPage';
 export default function Profile() {
 	const profile = useSelector((state) => state.user.profile);
 	const token = useSelector((state) => state.user.token);
-	console.log('profile is',profile)
+	const [filter, setFilter] = React.useState(null);
 	return (
 		<div>
 			<MenuBar />
@@ -38,7 +38,34 @@ export default function Profile() {
 						</IconButton>
 					</div>
 				</div>
-				<JobsListingPage />
+				<br />
+				<TextField
+					size="small"
+					variant="standard"
+					select
+					sx={{
+						mt: '15px',
+						mb: '15px',
+						mr: '10px',
+						width: '200px',
+					}}
+					label="Status Filter"
+					onChange={(e) => {
+						setFilter(e.target.value);
+					}}
+				>
+					<MenuItem value="All">All</MenuItem>
+					<MenuItem value="Posted">Posted</MenuItem>
+					<MenuItem value="Accepted">Accepted</MenuItem>
+					<MenuItem value="In Progress">In Progress</MenuItem>
+					<MenuItem value="Delayed">Delayed</MenuItem>
+					<MenuItem value="Completed">Completed</MenuItem>
+					<MenuItem value="Closed Complete">Closed Complete</MenuItem>
+					<MenuItem value="Closed Incomplete">
+						Closed Incomplete
+					</MenuItem>
+				</TextField>
+				<JobsListingPage filter={filter} />
 			</div>
 		</div>
 	);

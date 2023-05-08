@@ -7,10 +7,10 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import JobCardView from '../jobCardView/JobCardView';
-import './ActiveJobsList.css';
-import { API_URL } from '../../../../business-frontend/src/constants';
+import './JobsList.css';
+import { API_URL } from '../../constants';
 
-export default function ActiveJobsList() {
+export default function JobsList({ filter }) {
 	const token = useSelector((state) => state.business.token);
 	const [profile, setProfile] = useState(
 		useSelector((state) => state.business.profile),
@@ -52,7 +52,6 @@ export default function ActiveJobsList() {
 	return (
 		<div>
 			<div className="ajl-main-container">
-				<div></div>
 				<div className="sr-result-cards">
 					<Typography
 						variant="h2"
@@ -68,14 +67,27 @@ export default function ActiveJobsList() {
 							color: '#2b4450',
 						}}
 					>
-						Your Jobs.
+						{jobs &&
+						jobs.filter((j) => {
+							if (filter !== 'All') {
+								return j.status === filter;
+							}
+							return true;
+						}).length === 0
+							? 'No jobs matching your criteria.'
+							: 'Your Jobs.'}
 					</Typography>
 					{jobs &&
 						jobs
+							.filter((j) => {
+								if (filter !== 'All') {
+									return j.status === filter;
+								}
+								return true;
+							})
 							.map((j) => (
 								<JobCardView job={j} trigger={setTrigger} />
 							))}
-					{/* <JobCardView /> */}
 				</div>
 			</div>
 		</div>
