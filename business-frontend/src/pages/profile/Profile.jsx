@@ -116,7 +116,7 @@ export default function Profile() {
 	const handleEditServicesSubmit = async function (e) {
 		try {
 			const userUpdateRequest = await fetch(
-				`${API_URL}/business/users/update-profile`,
+				`${API_URL}/business/users/add-service`,
 				{
 					method: 'POST',
 					mode: 'cors',
