@@ -32,19 +32,19 @@ import MenuBar from '../../components/menubar/MenuBar';
 export default function Chat() {
 	const [messageInputValue, setMessageInputValue] = React.useState('');
 	const [messages, setMessages] = React.useState([]);
-	const [jobProposal, setJobProposal] = React.useState([]);
+	const [job, setJob] = React.useState(null);
 	const [refresh, setRefresh] = React.useState(false);
 	const token = useSelector((state) => state.user.token);
 	const profile = useSelector((state) => state.user.profile);
 
 	const location = useLocation();
-	const jobProposalId = location.jobProposal || '';
+	const jobId = location.jobId || '';
 
 	useEffect(() => {
 		axios
 			.get(`${API_URL}/messages`, {
 				params: {
-					jobProposal: jobProposalId,
+					jobId: jobId,
 				},
 				headers: {
 					Authorization: token,
@@ -60,9 +60,9 @@ export default function Chat() {
 
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/get-job-proposal`, {
+			.get(`${API_URL}/get-job`, {
 				params: {
-					id: jobProposalId,
+					jobId: jobId,
 				},
 				headers: {
 					Authorization: token,
@@ -71,7 +71,7 @@ export default function Chat() {
 			.then((response) => {
 				console.log('response is', response.data.message);
 				if (response.data.message) {
-					setJobProposal(response.data.message);
+					setJob(response.data.message);
 				}
 			});
 	}, []);
@@ -79,9 +79,9 @@ export default function Chat() {
 	const handleMessageSend = async () => {
 		const messageBody = {
 			from: profile._id,
-			to: jobProposal.serviceProvider,
+			to: job.serviceProvider,
 			message: messageInputValue,
-			jobProposal: jobProposalId,
+			job: jobId,
 		};
 		const messageCreateRequest = await fetch(`${API_URL}/messages`, {
 			method: 'POST',

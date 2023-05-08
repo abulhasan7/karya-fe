@@ -77,7 +77,7 @@ function App() {
 			),
 		},
 		{
-			path: '/chat/:jobProposal',
+			path: '/chat/:jobId',
 			element: (
 				<Protected isLoggedIn={loggedIn}>
 					<ThemeProvider theme={theme}>
