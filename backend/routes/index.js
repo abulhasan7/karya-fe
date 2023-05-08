@@ -11,9 +11,6 @@ router.get('/', function (req, res, next) {
 	});
 });
 
-
-
-
 router.get('/messages', async function (req, res, next) {
 	try {
 		console.log(req.query);

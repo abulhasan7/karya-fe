@@ -20,7 +20,7 @@ import {
 	MessageList,
 } from '@chatscope/chat-ui-kit-react';
 import { height } from '@mui/system';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -37,15 +37,13 @@ export default function Chat() {
 	const token = useSelector((state) => state.user.token);
 	const profile = useSelector((state) => state.user.profile);
 
-	const location = useLocation();
-	const jobId = location.jobId || '';
+	const params = useParams();
+	const jobId = params.jobId || '';
+	// console.log(job);
 
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/messages`, {
-				params: {
-					jobId: jobId,
-				},
+			.get(`${API_URL}/messages?jobId=${jobId}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -60,10 +58,7 @@ export default function Chat() {
 
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/get-job`, {
-				params: {
-					jobId: jobId,
-				},
+			.get(`${API_URL}/users/get-job?jobId=${jobId}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -79,7 +74,7 @@ export default function Chat() {
 	const handleMessageSend = async () => {
 		const messageBody = {
 			from: profile._id,
-			to: job.serviceProvider,
+			to: job.serviceProvider._id,
 			message: messageInputValue,
 			job: jobId,
 		};
@@ -97,7 +92,19 @@ export default function Chat() {
 			body: JSON.stringify(messageBody),
 		});
 		const messageCreationResp = await messageCreateRequest.json();
-		setRefresh(!refresh);
+		setMessageInputValue('');
+		axios
+			.get(`${API_URL}/messages?jobId=${jobId}`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				if (response.data.message) {
+					setMessages(response.data.message);
+				}
+			});
 	};
 
 	return (
@@ -116,10 +123,12 @@ export default function Chat() {
 				>
 					<ConversationHeader>
 						<ConversationHeader.Back />
-						<Avatar src={avatar} name="Zoe" />
+						<Avatar
+							src={job && job.serviceProvider.primaryImage}
+							name={job && job.serviceProvider.name}
+						/>
 						<ConversationHeader.Content
-							userName="Zoe"
-							info="Active 10 mins ago"
+							userName={job && job.serviceProvider.name}
 						/>
 					</ConversationHeader>
 					<MessageList
@@ -127,128 +136,48 @@ export default function Chat() {
 							marginTop: '15px',
 						}}
 					>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Zoe',
-								direction: 'incoming',
-								position: 'single',
-							}}
-						>
-							<Avatar src={avatar} name="Zoe" />
-						</Message>
-
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Patrik',
-								direction: 'outgoing',
-								position: 'single',
-							}}
-							avatarSpacer
-						/>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Zoe',
-								direction: 'incoming',
-								position: 'first',
-							}}
-							avatarSpacer
-						/>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Zoe',
-								direction: 'incoming',
-								position: 'normal',
-							}}
-							avatarSpacer
-						/>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Zoe',
-								direction: 'incoming',
-								position: 'normal',
-							}}
-							avatarSpacer
-						/>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Zoe',
-								direction: 'incoming',
-								position: 'last',
-							}}
-						>
-							<Avatar src={avatar} name="Zoe" />
-						</Message>
-
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Patrik',
-								direction: 'outgoing',
-								position: 'first',
-							}}
-						/>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Patrik',
-								direction: 'outgoing',
-								position: 'normal',
-							}}
-						/>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Patrik',
-								direction: 'outgoing',
-								position: 'normal',
-							}}
-						/>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Patrik',
-								direction: 'outgoing',
-								position: 'last',
-							}}
-						/>
-
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Zoe',
-								direction: 'incoming',
-								position: 'first',
-							}}
-							avatarSpacer
-						/>
-						<Message
-							model={{
-								message: 'Hello my friend',
-								sentTime: '15 mins ago',
-								sender: 'Zoe',
-								direction: 'incoming',
-								position: 'last',
-							}}
-						>
-							<Avatar src={avatar} name="Zoe" />
-						</Message>
+						{messages &&
+							messages
+								.slice()
+								.reverse()
+								.map((message) => {
+									if (message.from === profile._id) {
+										return (
+											<Message
+												model={{
+													message: message.message,
+													direction: 'outgoing',
+													position: 'single',
+												}}
+											/>
+										);
+									}
+									if (
+										message.from === job.serviceProvider._id
+									) {
+										return (
+											<Message
+												model={{
+													message: message.message,
+													direction: 'incoming',
+													position: 'single',
+												}}
+											>
+												<Avatar
+													src={
+														job &&
+														job.serviceProvider
+															.primaryImage
+													}
+													name={
+														job &&
+														job.serviceProvider.name
+													}
+												/>
+											</Message>
+										);
+									}
+								})}
 					</MessageList>
 					<MessageInput
 						placeholder="Type message here"
