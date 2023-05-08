@@ -76,7 +76,8 @@ export default function JobOverview() {
 
 	const getStatusActions = (status) => {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
-		else if (status ==='Closed Complete' || status ==='Closed Incomplete') return ;
+		else if (status === 'Closed Complete' || status === 'Closed Incomplete')
+			return;
 		return getMarkClosedIncompleteButton();
 	};
 
@@ -119,24 +120,22 @@ export default function JobOverview() {
 	};
 
 	const handleMarkClosedComplete = () => {
-		updateStatus('Closed Complete')
-
+		updateStatus('Closed Complete');
 	};
 	const handleMarkClosedIncomplete = () => {
-		updateStatus('Closed Incomplete')
+		updateStatus('Closed Incomplete');
 	};
 
-	
-	const updateStatus = (status) =>{
+	const updateStatus = (status) => {
 		const phone2 = job.serviceProvider ? job.serviceProvider.phone : null;
 		axios
 			.post(
 				`${API_URL}/users/update-status`,
 				{
-					jobId:job._id,
+					jobId: job._id,
 					status,
 					phone2: phone2,
-					name: job.name
+					name: job.name,
 				},
 				{
 					headers: {
@@ -149,7 +148,7 @@ export default function JobOverview() {
 				// setJobs(response.data.message);
 				setTrigger('z');
 			});
-	}
+	};
 
 	useEffect(() => {
 		axios
@@ -409,7 +408,7 @@ export default function JobOverview() {
 									<JobProposalCard
 										proposal={j}
 										trigger={setTrigger}
-										name = {job.name}
+										name={job.name}
 									/>
 								))}
 						</div>
@@ -424,24 +423,26 @@ export default function JobOverview() {
 					>
 						{getStatusActions(job.status)}
 						<Divider />
-						<Button
-							onClick={() => {
-								navigate(`/chat/${job._id}`);
-							}}
-							size="small"
-							variant="contained"
-							endIcon={<ChatIcon />}
-							sx={{
-								mt: '15px',
-								mb: '5px',
-								width: '100%',
-								fontFamily:
-									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-								textTransform: 'unset',
-							}}
-						>
-							Open Chat
-						</Button>
+						{job && job.status !== 'Posted' && (
+							<Button
+								onClick={() => {
+									navigate(`/chat/${job._id}`);
+								}}
+								size="small"
+								variant="contained"
+								endIcon={<ChatIcon />}
+								sx={{
+									mt: '15px',
+									mb: '5px',
+									width: '100%',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									textTransform: 'unset',
+								}}
+							>
+								Open Chat
+							</Button>
+						)}
 					</Paper>
 				</div>
 			</div>

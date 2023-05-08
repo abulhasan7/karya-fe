@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 
 import './JobCardView.css';
 
-export default function JobCardView({ job,trigger }) {
+export default function JobCardView({ job, trigger }) {
 	const token = useSelector((state) => state.user.token);
 
 	const navigate = useNavigate();
@@ -77,7 +77,8 @@ export default function JobCardView({ job,trigger }) {
 
 	const getCardActions = (status) => {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
-		else if (status ==='Closed Complete' || status ==='Closed Incomplete') return ;
+		else if (status === 'Closed Complete' || status === 'Closed Incomplete')
+			return;
 		return getMarkClosedIncompleteButton();
 	};
 
@@ -98,24 +99,22 @@ export default function JobCardView({ job,trigger }) {
 	};
 
 	const markClosedComplete = () => {
-		updateStatus('Closed Complete')
+		updateStatus('Closed Complete');
 	};
 	const markClosedIncomplete = () => {
-		updateStatus('Closed Incomplete')
-
+		updateStatus('Closed Incomplete');
 	};
 
-	
-	const updateStatus = (status) =>{
+	const updateStatus = (status) => {
 		const phone2 = job.serviceProvider ? job.serviceProvider.phone : null;
 		axios
 			.post(
 				`${API_URL}/users/update-status`,
 				{
-					jobId:job._id,
+					jobId: job._id,
 					status,
 					phone2: phone2,
-					name: job.name
+					name: job.name,
 				},
 				{
 					headers: {
@@ -128,7 +127,7 @@ export default function JobCardView({ job,trigger }) {
 				// setJobs(response.data.message);
 				trigger();
 			});
-	}
+	};
 
 	return (
 		<Card
@@ -213,22 +212,24 @@ export default function JobCardView({ job,trigger }) {
 					</div>
 				</div>
 			</CardContent>
-			<CardActions>
-				<Button
-					onClick={() => {
-						navigate(`/chat/${job._id}`);
-					}}
-					startIcon={<ChatIcon />}
-					sx={{
-						ml: '5px',
-						fontFamily:
-							"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-						textTransform: 'unset',
-					}}
-				>
-					Open Chat
-				</Button>
-			</CardActions>
+			{job && job.status !== 'Posted' && (
+				<CardActions>
+					<Button
+						onClick={() => {
+							navigate(`/chat/${job._id}`);
+						}}
+						startIcon={<ChatIcon />}
+						sx={{
+							ml: '5px',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+							textTransform: 'unset',
+						}}
+					>
+						Open Chat
+					</Button>
+				</CardActions>
+			)}
 			<Menu
 				id="long-menu"
 				MenuListProps={{
