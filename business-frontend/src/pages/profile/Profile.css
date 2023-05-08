@@ -32,3 +32,8 @@
 .bo-side-card {
 	margin: 20%;
 }
+
+.s-list-item {
+	display: grid;
+	grid-template-columns: 2.5fr 1.5fr;
+}

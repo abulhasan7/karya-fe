@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar, IconButton, Select, MenuItem } from '@mui/material';
 import ModeEditOutlineTwoToneIcon from '@mui/icons-material/ModeEditOutlineTwoTone';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -13,7 +13,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 import TextField from '@mui/material/TextField';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Autocomplete from '@mui/material/Autocomplete';
 import axios from 'axios';
+import { useEffect } from 'react';
 import { API_URL } from '../../constants';
 // import BACKEND_URL from '../../config/configBackend';
 
@@ -26,17 +30,56 @@ export default function Profile() {
 	const dispatch = useDispatch();
 	const profile = useSelector((state) => state.business.profile);
 	const token = useSelector((state) => state.business.token);
+
 	const [openEditHours, setOpenEditHours] = React.useState(false);
+	const [openEditServices, setOpenEditServices] = React.useState(false);
 	const [workingHours, setWorkingHours] = React.useState(
 		profile.workingHours,
 	);
 
+	const [allServices, setAllServices] = React.useState([]);
+	useEffect(() => {
+		axios
+			.get(`${API_URL}/users/get-services`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((response) => {
+				console.log('response is', response.data.message);
+				setAllServices(response.data.message);
+			});
+	}, []);
+
+	const formattedServices = [];
+	profile.services.forEach((service) => {
+		formattedServices.push({
+			service: service.service._id,
+			name: service.service.name,
+			rate: service.rate,
+		});
+	});
+
+	const [newService, setNewService] = React.useState({});
+
+	const [displayServices, setDisplayServices] =
+		React.useState(formattedServices);
+
+	console.log(JSON.stringify(displayServices) + 'display services');
 	const handleEditHoursOpen = () => {
 		setOpenEditHours(true);
 	};
 
 	const handleEditHoursClose = () => {
 		setOpenEditHours(false);
+	};
+
+	const handleEditServicesOpen = () => {
+		setOpenEditServices(true);
+	};
+
+	const handleEditServicesClose = () => {
+		setOpenEditServices(false);
 	};
 
 	const handleEditHoursSubmit = async function (e) {
@@ -64,6 +107,31 @@ export default function Profile() {
 			);
 			const userUpdateResp = await userUpdateRequest.json();
 			dispatch(updateBusiness({ profile: userBody, token }));
+			setTimeout(window.location.assign('/profile'), 100);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const handleEditServicesSubmit = async function (e) {
+		try {
+			const userUpdateRequest = await fetch(
+				`${API_URL}/business/users/update-profile`,
+				{
+					method: 'POST',
+					mode: 'cors',
+					cache: 'no-cache',
+					credentials: 'same-origin',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: token,
+					},
+					redirect: 'follow',
+					referrerPolicy: 'no-referrer',
+					body: JSON.stringify(displayServices),
+				},
+			);
+			const userUpdateResp = await userUpdateRequest.json();
 			setTimeout(window.location.assign('/profile'), 100);
 		} catch (err) {
 			console.log(err);
@@ -128,6 +196,7 @@ export default function Profile() {
 								width: '100%',
 								mt: '10px',
 							}}
+							onClick={handleEditServicesOpen}
 							endIcon={<DesignServicesIcon />}
 						>
 							Edit Services
@@ -154,6 +223,37 @@ export default function Profile() {
 								Cancel
 							</Button>
 							<Button onClick={handleEditHoursSubmit}>
+								Edit
+							</Button>
+						</DialogActions>
+					</Dialog>
+					<Dialog
+						open={openEditServices}
+						onClose={handleEditServicesClose}
+					>
+						<DialogTitle>Edit Services</DialogTitle>
+						<DialogContent
+							sx={{
+								width: '500px',
+							}}
+						>
+							<DialogContentText>
+								These are the services offered that potential
+								clients see on your public profile.
+							</DialogContentText>
+							<EditServicesForm
+								services={displayServices}
+								setServices={setDisplayServices}
+								newService={newService}
+								setNewService={setNewService}
+								allServices={allServices}
+							/>
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={handleEditServicesClose}>
+								Cancel
+							</Button>
+							<Button onClick={handleEditServicesSubmit}>
 								Edit
 							</Button>
 						</DialogActions>
@@ -286,6 +386,138 @@ function EditHoursForm({ workingHours, setWorkingHours }) {
 					})
 				}
 			/>
+		</div>
+	);
+}
+
+function EditServicesForm({
+	services,
+	setServices,
+	newService,
+	setNewService,
+	allServices,
+}) {
+	console.log(services);
+	const servicesDOM = [];
+	services.forEach((service) => {
+		servicesDOM.push(
+			<div className="s-list-item">
+				<TextField
+					size="small"
+					sx={{
+						mt: '15px',
+						mb: '15px',
+						mr: '10px',
+						width: '100%',
+					}}
+					label="Service"
+					disabled
+					variant="standard"
+					defaultValue={service.name}
+				/>
+				<TextField
+					type={'number'}
+					size="small"
+					id={service.name}
+					sx={{
+						mt: '15px',
+						mb: '15px',
+						ml: '5px',
+						width: '100%',
+					}}
+					label="Rate ($)"
+					//disabled
+					variant="standard"
+					defaultValue={service.rate}
+					onChange={(e) => {
+						const tempServices = [...services];
+						for (let i = 0; i < tempServices.length; i++) {
+							if (tempServices[i].name === e.target.id) {
+								tempServices[i].rate = e.target.value;
+							}
+						}
+						setServices(tempServices);
+					}}
+				/>
+				<div></div>
+			</div>,
+		);
+	});
+
+	const getAllServicesDOM = () => {
+		const allServicesDOMArr = [];
+		allServices.forEach((service) => {
+			allServicesDOMArr.push(
+				<MenuItem value={service.name}>{service.name}</MenuItem>,
+			);
+		});
+		return allServicesDOMArr;
+	};
+	return (
+		<div>
+			{servicesDOM}
+			<br />
+			<div className="s-list-item">
+				<TextField
+					size="small"
+					variant="standard"
+					select
+					sx={{
+						mt: '15px',
+						mb: '15px',
+						mr: '10px',
+						width: '100%',
+					}}
+					label="Service"
+					onChange={(e) => {
+						console.log(e.target);
+						const newServiceName = e.target.value;
+						let newServiceId;
+						allServices.forEach((service) => {
+							if (service.name === newServiceName) {
+								newServiceId = service._id;
+							}
+						});
+						setNewService({
+							...newService,
+							name: newServiceName,
+							service: newServiceId,
+						});
+					}}
+				>
+					{getAllServicesDOM()}
+				</TextField>
+
+				<TextField
+					type={'number'}
+					size="small"
+					sx={{
+						mt: '15px',
+						mb: '15px',
+						ml: '5px',
+						width: '100%',
+					}}
+					label="Rate ($)"
+					//disabled
+					variant="standard"
+					onChange={(e) => {
+						setNewService({
+							...newService,
+							rate: e.target.value,
+						});
+					}}
+				/>
+				<IconButton
+					sx={{
+						marginLeft: '47%',
+					}}
+					onClick={() => {
+						setServices([...services, newService]);
+					}}
+				>
+					<AddCircleIcon fontSize="large" />
+				</IconButton>
+			</div>
 		</div>
 	);
 }
