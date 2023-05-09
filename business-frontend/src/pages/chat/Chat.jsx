@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux';
 import MenuBar from '../../components/menubar/MenuBar';
 
 export default function Chat() {
+	const [refreshCount, setRefreshCount] = React.useState(0);
 	const [messageInputValue, setMessageInputValue] = React.useState('');
 	const [messages, setMessages] = React.useState([]);
 	const [job, setJob] = React.useState(null);
@@ -26,6 +27,12 @@ export default function Chat() {
 
 	const params = useParams();
 	const jobId = params.jobId || '';
+
+	useEffect(() => {
+		setInterval(() => {
+			setRefreshCount((prevCount) => prevCount + 1);
+		}, 5000);
+	}, []);
 
 	useEffect(() => {
 		axios
@@ -40,7 +47,7 @@ export default function Chat() {
 					setMessages(response.data.message);
 				}
 			});
-	}, []);
+	}, [refreshCount]);
 
 	useEffect(() => {
 		axios
@@ -138,7 +145,7 @@ export default function Chat() {
 											/>
 										);
 									}
-									if (message.from === job.user) {
+									if (job && message.from === job.user) {
 										return (
 											<Message
 												model={{

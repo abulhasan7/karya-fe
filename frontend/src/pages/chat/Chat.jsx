@@ -19,6 +19,7 @@ import MenuBar from '../../components/menubar/MenuBar';
 
 export default function Chat() {
 	const [messageInputValue, setMessageInputValue] = React.useState('');
+	const [refreshCount, setRefreshCount] = React.useState(0);
 	const [messages, setMessages] = React.useState([]);
 	const [job, setJob] = React.useState(null);
 	const token = useSelector((state) => state.user.token);
@@ -27,6 +28,12 @@ export default function Chat() {
 	const params = useParams();
 	const jobId = params.jobId || '';
 	// console.log(job);
+
+	useEffect(() => {
+		setInterval(() => {
+			setRefreshCount((prevCount) => prevCount + 1);
+		}, 5000);
+	}, []);
 
 	useEffect(() => {
 		axios
@@ -41,7 +48,7 @@ export default function Chat() {
 					setMessages(response.data.message);
 				}
 			});
-	}, []);
+	}, [refreshCount]);
 
 	useEffect(() => {
 		axios
@@ -140,6 +147,7 @@ export default function Chat() {
 										);
 									}
 									if (
+										job &&
 										message.from === job.serviceProvider._id
 									) {
 										return (
