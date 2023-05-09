@@ -76,9 +76,9 @@ export default function BusinessOverview() {
 										display: { xs: 'none', md: 'flex' },
 										fontFamily:
 											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-										fontWeight: 900,
+										fontWeight: 600,
 										fontStyle: 'normal',
-										fontSize: '48px',
+										fontSize: '36px',
 										// letterSpacing: '.3rem',
 										color: 'primary',
 									}}
@@ -109,7 +109,7 @@ export default function BusinessOverview() {
 									}}
 									color="text.secondary"
 								>
-									//TODO 200 Reviews
+									200 Reviews
 								</Typography>
 							</div>
 						</div>
@@ -209,7 +209,13 @@ export default function BusinessOverview() {
 							</Typography>
 						</div>
 						<div className="bso-img-carousel">
-							<Carousel>
+							<Carousel
+								sx={{
+									width: '300px',
+									height: '300px',
+									margin: '15px',
+								}}
+							>
 								{businessData.secondaryImages.map((item, i) => (
 									<ItemImage item={item} />
 								))}
@@ -224,7 +230,7 @@ export default function BusinessOverview() {
 							padding: '15px',
 						}}
 					>
-						<Enquiry businessData = {businessData}/>
+						<Enquiry businessData={businessData} />
 						<Button
 							variant="contained"
 							size="small"
