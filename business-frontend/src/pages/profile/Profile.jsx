@@ -177,6 +177,7 @@ export default function Profile() {
 							width: '200px',
 						}}
 						label="Status Filter"
+						defaultValue="All"
 						onChange={(e) => {
 							setFilter(e.target.value);
 						}}
