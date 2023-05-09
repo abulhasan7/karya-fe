@@ -205,6 +205,68 @@ export default function BusinessOverview() {
 									color: 'primary',
 								}}
 							>
+								Hours
+							</Typography>
+						</div>
+						<List dense>
+							<ListItem>
+								<ListItemText
+									primary={'Monday'}
+									secondary={businessData.workingHours.Monday}
+								/>
+								<ListItemText
+									primary={'Tuesday'}
+									secondary={
+										businessData.workingHours.Tuesday
+									}
+								/>
+								<ListItemText
+									primary={'Wednesday'}
+									secondary={
+										businessData.workingHours.Wednesday
+									}
+								/>
+								<ListItemText
+									primary={'Thursday'}
+									secondary={
+										businessData.workingHours.Thursday
+									}
+								/>
+								<ListItemText
+									primary={'Friday'}
+									secondary={businessData.workingHours.Friday}
+								/>
+								<ListItemText
+									primary={'Saturday'}
+									secondary={
+										businessData.workingHours.Saturday
+									}
+								/>
+								<ListItemText
+									primary={'Sunday'}
+									secondary={businessData.workingHours.Sunday}
+								/>
+							</ListItem>
+						</List>
+					</div>
+					<Divider />
+					<div className="bso-details-highlights">
+						<div>
+							<Typography
+								variant="h4"
+								noWrap
+								component="h4"
+								sx={{
+									display: { xs: 'none', md: 'flex' },
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									fontWeight: 600,
+									fontStyle: 'normal',
+									fontSize: '18px',
+									// letterSpacing: '.3rem',
+									color: 'primary',
+								}}
+							>
 								Photos & Media
 							</Typography>
 						</div>
