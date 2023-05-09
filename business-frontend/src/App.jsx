@@ -63,7 +63,7 @@ function App() {
 			),
 		},
 		{
-			path: '/chat/:id',
+			path: '/chat/:jobId',
 			element: (
 				<ThemeProvider theme={theme}>
 					<Chat />

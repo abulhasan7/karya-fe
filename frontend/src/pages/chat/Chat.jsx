@@ -3,37 +3,24 @@ import * as React from 'react';
 import styles from '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
 	MainContainer,
-	Sidebar,
-	Search,
-	ConversationList,
-	Conversation,
 	Avatar,
 	ChatContainer,
 	ConversationHeader,
-	VoiceCallButton,
 	Message,
 	MessageInput,
-	VideoCallButton,
-	InfoButton,
-	MessageSeparator,
-	TypingIndicator,
 	MessageList,
 } from '@chatscope/chat-ui-kit-react';
-import { height } from '@mui/system';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
-import avatar from './images/demo-user.png';
 import MenuBar from '../../components/menubar/MenuBar';
 
 export default function Chat() {
 	const [messageInputValue, setMessageInputValue] = React.useState('');
 	const [messages, setMessages] = React.useState([]);
 	const [job, setJob] = React.useState(null);
-	const [refresh, setRefresh] = React.useState(false);
 	const token = useSelector((state) => state.user.token);
 	const profile = useSelector((state) => state.user.profile);
 

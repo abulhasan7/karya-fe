@@ -446,24 +446,26 @@ export default function JobOverview() {
 					>
 						{getStatusActions(job.status)}
 						<Divider />
-						<Button
-							onClick={() => {
-								navigate(`/chat/${job._id}`);
-							}}
-							size="small"
-							variant="contained"
-							endIcon={<ChatIcon />}
-							sx={{
-								mt: '15px',
-								mb: '5px',
-								width: '100%',
-								fontFamily:
-									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-								textTransform: 'unset',
-							}}
-						>
-							Open Chat
-						</Button>
+						{job && job.status !== 'Posted' && (
+							<Button
+								onClick={() => {
+									navigate(`/chat/${job._id}`);
+								}}
+								size="small"
+								variant="contained"
+								endIcon={<ChatIcon />}
+								sx={{
+									mt: '15px',
+									mb: '5px',
+									width: '100%',
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									textTransform: 'unset',
+								}}
+							>
+								Open Chat
+							</Button>
+						)}
 					</Paper>
 				</div>
 			</div>

@@ -272,22 +272,24 @@ export default function JobCardView({ job, trigger }) {
 					</div> */}
 				</div>
 			</CardContent>
-			<CardActions>
-				<Button
-					onClick={() => {
-						navigate(`/chat/${job._id}`);
-					}}
-					startIcon={<ChatIcon />}
-					sx={{
-						ml: '5px',
-						fontFamily:
-							"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-						textTransform: 'unset',
-					}}
-				>
-					Open Chat
-				</Button>
-			</CardActions>
+			{job && job.status !== 'Posted' && (
+				<CardActions>
+					<Button
+						onClick={() => {
+							navigate(`/chat/${job._id}`);
+						}}
+						startIcon={<ChatIcon />}
+						sx={{
+							ml: '5px',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+							textTransform: 'unset',
+						}}
+					>
+						Open Chat
+					</Button>
+				</CardActions>
+			)}
 			<Menu
 				id="long-menu"
 				MenuListProps={{
