@@ -11,7 +11,7 @@ import JobsListingPage from '../jobsListingPage/JobsListingPage';
 export default function Profile() {
 	const profile = useSelector((state) => state.user.profile);
 	const token = useSelector((state) => state.user.token);
-	const [filter, setFilter] = React.useState(null);
+	const [filter, setFilter] = React.useState('All');
 	return (
 		<div>
 			<MenuBar />

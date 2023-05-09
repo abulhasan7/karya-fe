@@ -36,7 +36,7 @@ export default function Profile() {
 	const [workingHours, setWorkingHours] = React.useState(
 		profile.workingHours,
 	);
-	const [filter, setFilter] = React.useState(null);
+	const [filter, setFilter] = React.useState('All');
 
 	const [allServices, setAllServices] = React.useState([]);
 	useEffect(() => {
