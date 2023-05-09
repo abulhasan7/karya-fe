@@ -84,7 +84,6 @@ export default function SearchResults() {
 		<div>
 			<MenuBar />
 			<div className="sr-main-container">
-				<div>Filters</div>
 				<div className="sr-result-cards">
 					<Typography
 						variant="h2"
@@ -108,7 +107,7 @@ export default function SearchResults() {
 						<BusinessCardView data={business} />
 					))}
 				</div>
-				<div className='maps'>
+				<div className="maps">
 					{isLoaded && (
 						<GoogleMap
 							mapContainerStyle={containerStyle}

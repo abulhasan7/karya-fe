@@ -15,7 +15,7 @@ export default function BusinessCardView({ data }) {
 	const navigate = useNavigate();
 	return (
 		<Card
-			sx={{ minWidth: 275, maxWidth: 888, height: 200, margin: 5 }}
+			sx={{ minWidth: 275, maxWidth: 888, margin: 5 }}
 			onClick={() => navigate('/business-overview', { state: data })}
 		>
 			<CardContent>
@@ -71,7 +71,7 @@ export default function BusinessCardView({ data }) {
 								}}
 								color="text.secondary"
 							>
-								//TODO 200 Reviews
+								129 Reviews
 							</Typography>
 						</div>
 
@@ -84,7 +84,18 @@ export default function BusinessCardView({ data }) {
 								', ' +
 								data.address.zip}
 						</Typography>
-						<Typography variant="body2">{data.about}</Typography>
+						<Typography
+							sx={{
+								display: { xs: 'none', md: 'flex' },
+								fontFamily:
+									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+								fontStyle: 'normal',
+								fontSize: '16px',
+								// letterSpaci
+							}}
+						>
+							{data.about}
+						</Typography>
 					</div>
 				</div>
 			</CardContent>
