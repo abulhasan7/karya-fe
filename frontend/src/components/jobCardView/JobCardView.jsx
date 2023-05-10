@@ -193,7 +193,7 @@ export default function JobCardView({ job, trigger }) {
 							{job.name}
 						</Typography>
 						
-						<Rating
+						{job.status=="Closed Complete" && <Rating
 									icon={
 										<FavoriteIcon
 											color="#f77367"
@@ -204,7 +204,7 @@ export default function JobCardView({ job, trigger }) {
 									// defaultValue={rating}
 									readOnly
 									value={rating}
-								/> 
+								/> }
 						{getStatusChip(job.status)}
 					</div>
 				}
