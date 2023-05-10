@@ -47,4 +47,7 @@ module.exports = (Schema) =>
     service: {
         type: Schema.Types.ObjectId, ref: 'Service',
     },
+    images: [{
+        type: String
+    }]
 });
