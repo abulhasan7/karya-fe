@@ -97,18 +97,18 @@ router.get('/get-services',checkBusinessAuthenticationHeaderForVerified, async f
 });
 
 
-router.post('/add-service',checkBusinessAuthenticationHeaderForVerified, async function(req, res, next) {
-  try{
-  console.log(req.body);
+// router.post('/add-service',checkBusinessAuthenticationHeaderForVerified, async function(req, res, next) {
+//   try{
+//   console.log(req.body);
 
-  let resp = await getServices();
-  console.log('resp iss ',resp);
-  res.json({message:resp});
-  }catch(error){
-    console.log("error occurred here",error);
-    res.json({error:error.message})
-  }
-});
+//   let resp = await getServices();
+//   console.log('resp iss ',resp);
+//   res.json({message:resp});
+//   }catch(error){
+//     console.log("error occurred here",error);
+//     res.json({error:error.message})
+//   }
+// });
 
 router.post('/update-status', checkBusinessAuthenticationHeaderForVerified,async function(req, res, next) {
   try{

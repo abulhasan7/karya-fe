@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 router.get('/messages', async function (req, res, next) {
 	try {
 		console.log(req.query);
-		let resp = await getMessages(req.query.jobId);
+		let resp = await getMessages(req.query._id);
 		console.log('resp is', resp);
 		res.json({
 			message: resp

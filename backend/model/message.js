@@ -11,8 +11,8 @@ module.exports = (Schema) =>
 		message: {
 			type: String,
 		},
-		job: {
+		jobProposalId: {
 			type: Schema.Types.ObjectId,
-			ref: 'Job',
+			ref: 'JobProposal',
 		},
 	});
