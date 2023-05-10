@@ -13,7 +13,7 @@ import './Review.css';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
-export default function Review({openReview,setOpenReview,job,serviceProvider,setReviewed }) {
+export default function Review({openReview,setOpenReview,job,serviceProvider,update }) {
 	const [rating, setRating] = React.useState('');
 	const [description, setDescription] = React.useState('');
 	const token = useSelector((state) => state.user.token);
@@ -23,6 +23,8 @@ export default function Review({openReview,setOpenReview,job,serviceProvider,set
 
 	const handleClose = () => {
 		setOpenReview(false);
+		update(rating);
+
 	};
 
 	const handleSubmit = ()=>{
@@ -41,7 +43,6 @@ export default function Review({openReview,setOpenReview,job,serviceProvider,set
 				console.log('response is', response.data.message);
 				// setJobs(response.data.message);
 				handleClose();
-				setReviewed(true);
 			});
 	};
 	return (
