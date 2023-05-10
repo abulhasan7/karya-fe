@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { Autocomplete, Input, InputAdornment } from '@mui/material';
+import { Autocomplete, Input, InputAdornment, Divider } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -27,6 +27,7 @@ import { useNavigate } from 'react-router-dom';
 export default function JobCreator() {
 	const [open, setOpen] = React.useState(false);
 	const token = useSelector((state) => state.user.token);
+	const profile = useSelector((state) => state.user.profile);
 	const [title, setTitle] = React.useState('');
 	const [service, setService] = useState('');
 	const [services, setServices] = useState([]);
@@ -34,6 +35,7 @@ export default function JobCreator() {
 	const [hours, setHours] = useState('');
 	const [hourlyBudget, setHourlyBudget] = useState('');
 	const [overallBudget, setOverallBudget] = useState('');
+	const [address, setAddress] = useState(profile.address);
 	const navigate = useNavigate();
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -74,6 +76,7 @@ export default function JobCreator() {
 					estimatedBudget: overallBudget,
 					estimatedHourlyBudget: hourlyBudget,
 					service: s._id,
+					address: address,
 				},
 				{
 					headers: {
@@ -109,7 +112,11 @@ export default function JobCreator() {
 				<DialogTitle>
 					Lets get things done. A few steps before that.
 				</DialogTitle>
-				<DialogContent>
+				<DialogContent
+					sx={{
+						width: '500px',
+					}}
+				>
 					<HorizontalLinearStepper
 						setTitle={setTitle}
 						setService={handleService}
@@ -119,6 +126,8 @@ export default function JobCreator() {
 						setOverallBudget={setOverallBudget}
 						handleSubmit={handleSubmit}
 						services={services}
+						setAddress={setAddress}
+						address={address}
 					/>
 				</DialogContent>
 			</Dialog>
@@ -137,6 +146,8 @@ export function HorizontalLinearStepper({
 	setOverallBudget,
 	handleSubmit,
 	services,
+	setAddress,
+	address,
 }) {
 	const [activeStep, setActiveStep] = React.useState(0);
 
@@ -186,26 +197,96 @@ export function HorizontalLinearStepper({
 						sx={{
 							width: '100%',
 						}}
+						variant="standard"
 						{...params}
-						label="Categories"
-						placeholder="Select categories which apply to your job."
+						label="Category"
+						placeholder="Select the category which applies to your job."
 						onSelect={setService}
 					/>
 				)}
 			/>
-			<br />
+
 			<TextField
 				size="small"
 				id="standard-multiline-static"
 				sx={{
 					width: '100%',
+					mb: '20px',
 				}}
 				label="Description"
 				multiline
-				rows={6}
+				rows={5}
 				placeholder="Please provide as many details here are possible."
 				variant="standard"
 				onChange={(e) => setDescription(e.target.value)}
+			/>
+
+			<TextField
+				size="small"
+				id="standard-multiline-static"
+				sx={{
+					width: '100%',
+					mb: '20px',
+				}}
+				defaultValue={address.street}
+				label="Street Address"
+				onChange={(e) =>
+					setAddress({
+						...address,
+						street: e.target.value,
+					})
+				}
+			/>
+
+			<TextField
+				size="small"
+				id="standard-multiline-static"
+				sx={{
+					width: '100%',
+					mb: '20px',
+				}}
+				label="City"
+				defaultValue={address.city}
+				onChange={(e) =>
+					setAddress({
+						...address,
+						city: e.target.value,
+					})
+				}
+			/>
+
+			<TextField
+				size="small"
+				id="standard-multiline-static"
+				sx={{
+					width: '100%',
+					mb: '20px',
+				}}
+				label="State"
+				defaultValue={address.state}
+				onChange={(e) =>
+					setAddress({
+						...address,
+						state: e.target.value,
+					})
+				}
+			/>
+
+			<TextField
+				size="small"
+				id="standard-multiline-static"
+				sx={{
+					width: '100%',
+					mb: '20px',
+				}}
+				label="Zip Code"
+				defaultValue={address.zip}
+				onChange={(e) =>
+					setAddress({
+						...address,
+						zip: e.target.value,
+					})
+				}
 			/>
 		</div>
 	);
@@ -253,7 +334,11 @@ export function HorizontalLinearStepper({
 	);
 
 	return (
-		<Box sx={{ width: '100%' }}>
+		<Box
+			sx={{
+				width: '100%',
+			}}
+		>
 			<Stepper activeStep={activeStep}>
 				{steps.map((label, index) => {
 					const stepProps = {};
@@ -268,8 +353,23 @@ export function HorizontalLinearStepper({
 			{activeStep === steps.length ? (
 				// eslint-disable-next-line react/jsx-fragments
 				<React.Fragment>
-					<Typography sx={{ mt: 2, mb: 1 }}>
-						All steps completed - you&apos;re finished
+					<Typography
+						sx={{
+							padding: '6%',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+							fontWeight: 400,
+							fontStyle: 'normal',
+							fontSize: '18px',
+							// letterSpacing: '.3rem',
+						}}
+					>
+						Sit back and relax! Our service matching algorithm will
+						find suitable pros near you that can handle all your
+						needs in a jiffy. Service Providers will be able to see
+						your posted job and reach out to you with their
+						proposals. You might also want to keep an eye on your
+						inbox for this new job.
 					</Typography>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Box sx={{ flex: '1 1 auto' }} />
