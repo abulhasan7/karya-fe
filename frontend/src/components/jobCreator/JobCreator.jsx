@@ -353,8 +353,23 @@ export function HorizontalLinearStepper({
 			{activeStep === steps.length ? (
 				// eslint-disable-next-line react/jsx-fragments
 				<React.Fragment>
-					<Typography sx={{ mt: 2, mb: 1 }}>
-						All steps completed - you&apos;re finished
+					<Typography
+						sx={{
+							padding: '6%',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+							fontWeight: 400,
+							fontStyle: 'normal',
+							fontSize: '18px',
+							// letterSpacing: '.3rem',
+						}}
+					>
+						Sit back and relax! Our service matching algorithm will
+						find suitable pros near you that can handle all your
+						needs in a jiffy. Service Providers will be able to see
+						your posted job and reach out to you with their
+						proposals. You might also want to keep an eye on your
+						inbox for this new job.
 					</Typography>
 					<Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
 						<Box sx={{ flex: '1 1 auto' }} />
