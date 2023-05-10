@@ -49,5 +49,8 @@ module.exports = (Schema) =>
     },
     images: [{
         type: String
-    }]
+    }],
+    review: {
+        type: Schema.Types.ObjectId, ref: 'Review',
+    },
 });
