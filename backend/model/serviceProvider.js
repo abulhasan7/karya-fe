@@ -58,6 +58,14 @@ module.exports = (Schema) =>
         type: Number,
         default: 0
     },
+    avgReview: {
+        type: Number,
+        default: 0
+    },
+    reviews:{
+        type: Number,
+        default: 0
+    },
     //todo tuple
     services: [{
         type: Schema.Types.ObjectId, ref: 'ServiceToRate' }

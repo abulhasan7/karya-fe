@@ -57,7 +57,7 @@ export default function BusinessCardView({ data }) {
 								emptyIcon={
 									<FavoriteBorderIcon fontSize="small" />
 								}
-								defaultValue={3}
+								defaultValue={data.avgReviews}
 								readOnly
 							/>
 							<Typography
@@ -71,7 +71,7 @@ export default function BusinessCardView({ data }) {
 								}}
 								color="text.secondary"
 							>
-								129 Reviews
+								{data.reviews} reviews
 							</Typography>
 						</div>
 

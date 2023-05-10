@@ -262,7 +262,9 @@ async function getJob(_id) {
 	}, {
 		path: 'service',
 		model: 'Service'
-	}
+	},
+	{path:'review',
+model:'Review'}
 	]).exec();
 
 	// let job = await Job.findOne({ _id }).populate(['proposals','acceptedProposal','address','serviceProvider','service']).exec();
@@ -336,6 +338,14 @@ async function review(body) {
 	});
 	const sa = await review.save();
 	const job = await Job.updateOne({ _id: body.job }, { review });
+	const allReviews = await Review.find({serviceProvider:body.serviceProvider});
+	let total = 0;
+	for(let rev of allReviews){
+		total+=rev.rating;
+	}
+	const avgReview = total/allReviews.length;
+	console.log('avgreview is',avgReview);
+	const sp = await ServiceProvider.updateOne({_id:body.serviceProvider},{avgReview,reviews:allReviews.length});
 	return `Proposal ${body.status} successfully`
 
 }

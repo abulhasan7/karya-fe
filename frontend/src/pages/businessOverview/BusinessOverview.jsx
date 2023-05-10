@@ -95,8 +95,9 @@ export default function BusinessOverview() {
 										/>
 									}
 									emptyIcon={<FavoriteBorderIcon />}
-									defaultValue={3}
+									defaultValue={businessData.avgReview}
 									readOnly
+									value={businessData.avgReview}
 								/>
 								<Typography
 									sx={{
@@ -109,7 +110,7 @@ export default function BusinessOverview() {
 									}}
 									color="text.secondary"
 								>
-									200 Reviews
+									{businessData.reviews} Reviews
 								</Typography>
 							</div>
 						</div>
