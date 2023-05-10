@@ -57,7 +57,7 @@ export default function BusinessCardView({ data }) {
 								emptyIcon={
 									<FavoriteBorderIcon fontSize="small" />
 								}
-								defaultValue={data.avgReviews}
+								defaultValue={data.avgReview}
 								readOnly
 							/>
 							<Typography

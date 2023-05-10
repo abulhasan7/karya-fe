@@ -190,7 +190,7 @@ async function postJob(jobDetails) {
 async function getJobs(_id) {
 	let jobs = await Job.find({
 		user: _id
-	}).populate('serviceProvider').exec();
+	}).populate('serviceProvider').populate('review').exec();
 	if (jobs) {
 		return jobs;
 	} else {
@@ -202,7 +202,7 @@ async function getJobsByStatus(_id, status) {
 	let jobs = await Job.find({
 		user: _id,
 		status
-	}).populate('serviceProvider').exec();
+	}).populate('serviceProvider').populate('review').exec();
 	if (jobs && jobs.length > 0) {
 		return jobs;
 	} else {
@@ -216,7 +216,7 @@ async function getJobsNEByStatus(_id, status) {
 		status: {
 			$ne: status
 		}
-	}).populate('serviceProvider').exec();
+	}).populate('serviceProvider').populate('review').exec();
 	if (jobs && jobs.length > 0) {
 		return jobs;
 	} else {

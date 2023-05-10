@@ -16,11 +16,14 @@ import { useSelector } from 'react-redux';
 import Review from '../review/Review';
 import './JobCardView.css';
 
+import Rating from '@mui/material/Rating';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 export default function JobCardView({ job, trigger }) {
 	const token = useSelector((state) => state.user.token);
 	const [openReview, setOpenReview] = React.useState(false);
-	const rev = job.review?true:false;
-	const [reviewed,setReviewed] = React.useState(rev);
+	const rev = job.review?job.review.rating : undefined;
+	const [rating,setRating] = React.useState(rev);
 	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
@@ -30,7 +33,10 @@ export default function JobCardView({ job, trigger }) {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-
+	const update = (rating) =>{
+		console.log('rating is',rating);
+		setRating(rating)
+	}
 	const getStatusChip = (status) => {
 		console.log(job.status);
 		if (status === 'Posted')
@@ -77,11 +83,11 @@ export default function JobCardView({ job, trigger }) {
 			);
 	};
 
-	const getCardActions = (status,review) => {
+	const getCardActions = (status) => {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
-		else if (status === 'Closed Complete' && !reviewed)
+		else if (status === 'Closed Complete' && !rating)
 			return getReviewButton();
-		else if (status === 'Closed Complete' && reviewed)
+		else if (status === 'Closed Complete' && rating)
 			return;
 		else if (status === 'Closed Incomplete')
 			return;
@@ -186,6 +192,19 @@ export default function JobCardView({ job, trigger }) {
 						>
 							{job.name}
 						</Typography>
+						
+						<Rating
+									icon={
+										<FavoriteIcon
+											color="#f77367"
+											sx={{ color: '#f77367' }}
+										/>
+									}
+									emptyIcon={<FavoriteBorderIcon />}
+									// defaultValue={rating}
+									readOnly
+									value={rating}
+								/> 
 						{getStatusChip(job.status)}
 					</div>
 				}
@@ -228,7 +247,7 @@ export default function JobCardView({ job, trigger }) {
 					</div>
 				</div>
 			</CardContent>
-			{!reviewed && <Review openReview={openReview} setOpenReview={setOpenReview} serviceProvider={job.serviceProvider} job={job._id} setReviewed={setReviewed}></Review>}
+			{!rating && <Review openReview={openReview} setOpenReview={setOpenReview} serviceProvider={job.serviceProvider} job={job._id} update={update}></Review>}
 			{job && job.status !== 'Posted' && (
 				<CardActions>
 					<Button
@@ -256,7 +275,7 @@ export default function JobCardView({ job, trigger }) {
 				open={open}
 				onClose={handleClose}
 			>
-				{getCardActions(job.status,job.review)}
+				{getCardActions(job.status)}
 			</Menu>
 		</Card>
 	);

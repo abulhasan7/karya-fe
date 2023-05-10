@@ -31,10 +31,6 @@ module.exports = (Schema) =>
         type: String,
         enum: ["Posted","Accepted","In Progress","Delayed","Completed","Closed Complete","Closed Incomplete"]
     },
-    userRating: {
-        type: Number,
-        default: 0
-    },
     address: {
         type: Schema.Types.ObjectId, ref: 'Address',
     },

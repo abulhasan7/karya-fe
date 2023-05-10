@@ -9,7 +9,7 @@ const {
 	ServiceToRate,
 	JobProposal,
 	Job,
-  Review
+	Review
 } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 const {
@@ -73,16 +73,16 @@ async function login(ServiceProviderDetails) {
 			if (!result) {
 				throw new Error('Invalid Password');
 			} else {
-        const reviews = await Review.find({serviceProvider:dbData._id});
-        let total = 0;
-        reviews.forEach(rev=>total+=rev.rating);
-        const avgReviews = total/reviews.length;
-        console.log("avgreviews",avgReviews);
+				const reviews = await Review.find({ serviceProvider: dbData._id });
+				let total = 0;
+				reviews.forEach(rev => total += rev.rating);
+				const avgReviews = total / reviews.length;
+				console.log("avgreviews", avgReviews);
 				const obj = {
 					token: jwtUtil.generateTokenForBusiness(
 						dbData._id, dbData.verified),
 					profile: dbData,
-          avgReviews
+					avgReviews
 				};
 				obj.profile.user_id = dbData._id;
 				return obj;
@@ -114,12 +114,12 @@ async function getProfile(_id) {
 		if (!dbData) {
 			throw new Error('ServiceProvider not found');
 		} else {
-      const reviews = await Review.find({serviceProvider:dbData._id});
-      let total = 0;
-      reviews.forEach(rev=>total+=rev.rating);
-      const avgReviews = total/reviews.length;
-      console.log("avgreviews",avgReviews);
-      const le = {profile:dbData,avgReviews};
+			const reviews = await Review.find({ serviceProvider: dbData._id });
+			let total = 0;
+			reviews.forEach(rev => total += rev.rating);
+			const avgReviews = total / reviews.length;
+			console.log("avgreviews", avgReviews);
+			const le = { profile: dbData, avgReviews };
 			return le;
 		}
 	} catch (error) {

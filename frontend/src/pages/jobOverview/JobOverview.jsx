@@ -6,6 +6,9 @@ import ListItem from '@mui/material/ListItem';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
+import Rating from '@mui/material/Rating';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import MenuBar from '../../components/menubar/MenuBar';
 
@@ -28,6 +31,7 @@ export default function JobOverview() {
 	const token = useSelector((state) => state.user.token);
 	const [job, setJob] = useState('');
 	const [trigger, setTrigger] = useState('');
+	const [review,setReview] = useState(0);
 	console.log('id is', id);
 
 	const getStatusChip = (status) => {
@@ -160,6 +164,7 @@ export default function JobOverview() {
 			.then((response) => {
 				console.log('response is', response.data.message);
 				setJob(response.data.message);
+				setReview(response.data.message.review.rating);
 			});
 	}, [trigger]);
 	function generate(element) {
@@ -196,7 +201,19 @@ export default function JobOverview() {
 							</Typography>
 							{getStatusChip(job.status)}
 						</div>
-
+						<Rating
+									icon={
+										<FavoriteIcon
+											color="#f77367"
+											sx={{ color: '#f77367' }}
+										/>
+									}
+									emptyIcon={<FavoriteBorderIcon />}
+									defaultValue={review}
+									readOnly
+									value={review}
+								/> 
+						
 						<Typography
 							sx={{
 								display: { xs: 'none', md: 'flex' },
