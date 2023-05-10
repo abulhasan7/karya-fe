@@ -2,7 +2,7 @@ const {
 	default: mongoose
 } = require('mongoose');
 const {
-	Message
+	Message, JobProposal, Job, ServiceProvider
 } = require('../model/index');
 
 async function getMessages(_id) {
@@ -16,14 +16,24 @@ async function getMessages(_id) {
 		'createdAt': "desc"
 	}).exec();
 	if (messages) {
-		console.log("messages are",messages);
+		// console.log("messages are",messages);
 		const newMessages = messages.reduce((map,obj)=>{
 			const arra = map[obj.jobProposalId] || [];
 			arra.push(obj);
 			map[obj.jobProposalId] = arra;
 			return map;
 		},{});
-		return newMessages;
+		const finalObj = {};
+		for(k of Object.keys(newMessages)){
+			const pr = await JobProposal.findOne({_id:k}).populate('serviceProvider').populate('job').exec();
+			const proposal = pr.toObject();
+			finalObj[k] = {
+				jobName: proposal.job.name,
+				serviceProvider:{name:proposal.serviceProvider.name,primaryImage:proposal.serviceProvider.primaryImage},
+				messages: newMessages[k]
+			};
+		}
+		return finalObj;
 	}
 	throw new Error('No messages found for the job proposal');
 }
