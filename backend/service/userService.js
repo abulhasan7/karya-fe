@@ -9,7 +9,7 @@ const {
 	JobProposal,
 	ServiceProvider,
 	Enquiry,
-  Review
+	Review
 } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 const {
@@ -126,8 +126,8 @@ async function updateProfile(userDetails) {
 				address: doc._id
 			};
 			User.updateOne({
-					_id: userDetails._id
-				}, datatoUpdate).exec()
+				_id: userDetails._id
+			}, datatoUpdate).exec()
 				.then((created) => {
 					console.log(created);
 					if (created.modifiedCount > 0) {
@@ -148,17 +148,17 @@ async function updateProfile(userDetails) {
 
 async function postJob(jobDetails) {
 	const address = {
-	  street: jobDetails.address.street,
-	  city: jobDetails.address.city,
-	  state: jobDetails.address.state,
-	  zip: jobDetails.address.zip
+		street: jobDetails.address.street,
+		city: jobDetails.address.city,
+		state: jobDetails.address.state,
+		zip: jobDetails.address.zip
 	}
 	const addressfilter = { _id: jobDetails.address._id || new mongoose.mongo.ObjectId() };
 	const doc = await Address.findOneAndUpdate(addressfilter, address, {
-	  new: true,
-	  upsert: true // Make this update into an upsert
+		new: true,
+		upsert: true // Make this update into an upsert
 	})
-	console.log("doc is",doc);
+	console.log("doc is", doc);
 
 	let job = new Job({
 		name: jobDetails.name,
@@ -171,7 +171,7 @@ async function postJob(jobDetails) {
 		address: doc._id,
 		user: jobDetails.user,
 		service: jobDetails.service,
-    images:jobDetails.images
+		images: jobDetails.images
 	})
 	let jobsaved = await job.save();
 	console.log("user", jobDetails.user)
@@ -231,38 +231,38 @@ async function getJob(_id) {
 	let job = await Job.findOne({
 		_id
 	}).populate([{
-			path: 'proposals',
-			model: 'JobProposal',
-			populate: {
-				path: 'serviceProvider',
-				model: 'ServiceProvider',
-				populate: {
-					path: 'address',
-					model: 'Address'
-				}
-			}
-		},
-		{
-			path: 'acceptedProposal',
-			model: 'JobProposal',
-			populate: {
-				path: 'serviceProvider',
-				model: 'ServiceProvider',
-				populate: {
-					path: 'address',
-					model: 'Address'
-				}
-			}
-		}, {
-			path: 'address',
-			model: 'Address'
-		}, {
+		path: 'proposals',
+		model: 'JobProposal',
+		populate: {
 			path: 'serviceProvider',
-			model: 'ServiceProvider'
-		}, {
-			path: 'service',
-			model: 'Service'
+			model: 'ServiceProvider',
+			populate: {
+				path: 'address',
+				model: 'Address'
+			}
 		}
+	},
+	{
+		path: 'acceptedProposal',
+		model: 'JobProposal',
+		populate: {
+			path: 'serviceProvider',
+			model: 'ServiceProvider',
+			populate: {
+				path: 'address',
+				model: 'Address'
+			}
+		}
+	}, {
+		path: 'address',
+		model: 'Address'
+	}, {
+		path: 'serviceProvider',
+		model: 'ServiceProvider'
+	}, {
+		path: 'service',
+		model: 'Service'
+	}
 	]).exec();
 
 	// let job = await Job.findOne({ _id }).populate(['proposals','acceptedProposal','address','serviceProvider','service']).exec();
@@ -329,13 +329,13 @@ async function enquiry(body) {
 async function review(body) {
 	const review = new Review({
 		user: body.user,
-    rating:body.rating,
-    description: body.description,
-    job:body.job,
+		rating: body.rating,
+		description: body.description,
+		job: body.job,
 		serviceProvider: body.serviceProvider
 	});
 	const sa = await review.save();
-	const job = await Job.updateOne({_id:body.job},{review});
+	const job = await Job.updateOne({ _id: body.job }, { review });
 	return `Proposal ${body.status} successfully`
 
 }
@@ -368,5 +368,5 @@ module.exports = {
 	getJobsNEByStatus,
 	updateStatus,
 	enquiry,
-  review
+	review
 }

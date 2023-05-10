@@ -65,7 +65,7 @@ export default function BusinessLogin() {
 						}, 3000);
 					} else {
 						console.log('payload is', response.data.message);
-						dispatch(updateBusiness(response.data.message));
+						dispatch(updateBusiness({profile:{...response.data.message.profile,avgReviews:response.data.message.avgReviews},token:response.data.message.token}));
 						navigate('/home');
 					}
 				})

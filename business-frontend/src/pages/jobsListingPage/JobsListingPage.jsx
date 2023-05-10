@@ -48,7 +48,10 @@ export default function JobsListingPage() {
 				);
 				// setJobs(response.data.message)
 				// setJobs(response.data.message.filter(d=>!profile.includes(d._id)));
-				setProfile(response.data.message);
+				setProfile({
+					...response.data.message.profile,
+					avgReviews:response.data.message.avgReviews
+				});
 			});
 	}, [trigger]);
 	return (
