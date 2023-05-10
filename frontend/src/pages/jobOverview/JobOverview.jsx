@@ -420,7 +420,7 @@ export default function JobOverview() {
 						</div>
 					</div>
 					<Divider />
-					{job && job.images.length > 0 && (
+					{job && job.images && job.images.length > 0 && (
 						<div>
 							<div className="bso-details-highlights">
 								<div>
@@ -486,7 +486,7 @@ export default function JobOverview() {
 							/>
 						</div>
 					)}
-					{!job.acceptedProposal && job.proposals.length > 0 && (
+					{!job.acceptedProposal && job.proposals && job.proposals.length > 0 && (
 						<div className="bso-details-highlights">
 							<div>
 								<Typography
