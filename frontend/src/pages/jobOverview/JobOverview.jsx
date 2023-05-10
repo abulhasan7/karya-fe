@@ -6,6 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
+import Carousel from 'react-material-ui-carousel';
 
 import MenuBar from '../../components/menubar/MenuBar';
 
@@ -229,6 +230,53 @@ export default function JobOverview() {
 									color: 'primary',
 								}}
 							>
+								Location
+							</Typography>
+						</div>
+						<br />
+						<div>
+							<Typography
+								variant="p"
+								sx={{
+									display: { xs: 'none', md: 'flex' },
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									fontWeight: 400,
+									fontStyle: 'normal',
+									fontSize: '18px',
+									// letterSpacing: '.3rem',
+									color: 'text.secondary',
+								}}
+							>
+								{job &&
+									job.address.street +
+										', ' +
+										job.address.city +
+										', ' +
+										job.address.state +
+										', ' +
+										job.address.zip}
+							</Typography>
+						</div>
+					</div>
+					<Divider />
+					<div className="bso-details-highlights">
+						<div>
+							<Typography
+								variant="h4"
+								noWrap
+								component="h4"
+								sx={{
+									display: { xs: 'none', md: 'flex' },
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									fontWeight: 600,
+									fontStyle: 'normal',
+									fontSize: '18px',
+									// letterSpacing: '.3rem',
+									color: 'primary',
+								}}
+							>
 								Description
 							</Typography>
 						</div>
@@ -355,6 +403,45 @@ export default function JobOverview() {
 						</div>
 					</div>
 					<Divider />
+					{job && job.images.length > 0 && (
+						<div>
+							<div className="bso-details-highlights">
+								<div>
+									<Typography
+										variant="h4"
+										noWrap
+										component="h4"
+										sx={{
+											display: { xs: 'none', md: 'flex' },
+											fontFamily:
+												"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+											fontWeight: 600,
+											fontStyle: 'normal',
+											fontSize: '18px',
+											// letterSpacing: '.3rem',
+											color: 'primary',
+										}}
+									>
+										Photos & Media
+									</Typography>
+								</div>
+								<div className="bso-img-carousel">
+									<Carousel
+										sx={{
+											width: '300px',
+											height: '300px',
+											margin: '15px',
+										}}
+									>
+										{job.images.map((item, i) => (
+											<ItemImage item={item} />
+										))}
+									</Carousel>
+								</div>
+							</div>
+							<Divider />
+						</div>
+					)}
 					{job.acceptedProposal && (
 						<div className="bso-details-highlights">
 							<div>
@@ -382,7 +469,7 @@ export default function JobOverview() {
 							/>
 						</div>
 					)}
-					{!job.acceptedProposal && (
+					{!job.acceptedProposal && job.proposals.length > 0 && (
 						<div className="bso-details-highlights">
 							<div>
 								<Typography
@@ -447,5 +534,18 @@ export default function JobOverview() {
 				</div>
 			</div>
 		</div>
+	);
+}
+
+function ItemImage(props) {
+	return (
+		<Paper
+			sx={{
+				height: 500,
+				width: 500,
+			}}
+		>
+			<img src={props.item} height={500} width={500}></img>
+		</Paper>
 	);
 }

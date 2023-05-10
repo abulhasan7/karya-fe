@@ -18,6 +18,7 @@ import Typography from '@mui/material/Typography';
 
 import './JobCreator.css';
 import { useSelector } from 'react-redux';
+import { MuiFileInput } from 'mui-file-input';
 import { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constants';
@@ -26,6 +27,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function JobCreator() {
 	const [open, setOpen] = React.useState(false);
+	const [files, setFiles] = React.useState([]);
 	const token = useSelector((state) => state.user.token);
 	const profile = useSelector((state) => state.user.profile);
 	const [title, setTitle] = React.useState('');
@@ -62,9 +64,38 @@ export default function JobCreator() {
 			});
 	}, []);
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		console.log('service is', service);
 		console.log('title' + title + service + description + overallBudget);
+		const filesArr = [];
+		if (files.length > 0) {
+			for (let i = 0; i < files.length; i++) {
+				const req = await fetch(`${API_URL}/users/get-signed-url`, {
+					method: 'GET',
+					mode: 'cors',
+					cache: 'no-cache',
+					credentials: 'same-origin',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: token,
+						// 'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					redirect: 'follow',
+					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+				});
+				const resp = await req.json();
+				console.log('resp is', resp);
+				await fetch(resp.message, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+					body: files[i],
+				});
+				filesArr.push(resp.message.split('?')[0]);
+			}
+		}
+
 		const s = services.find((s) => s.name == service);
 		axios
 			.post(
@@ -77,6 +108,7 @@ export default function JobCreator() {
 					estimatedHourlyBudget: hourlyBudget,
 					service: s._id,
 					address: address,
+					images: filesArr,
 				},
 				{
 					headers: {
@@ -100,6 +132,7 @@ export default function JobCreator() {
 					':hover': {
 						color: 'black',
 					},
+					fontWeight: '900',
 					display: 'flex',
 					flexDirection: 'column',
 					textTransform: 'unset',
@@ -112,11 +145,7 @@ export default function JobCreator() {
 				<DialogTitle>
 					Lets get things done. A few steps before that.
 				</DialogTitle>
-				<DialogContent
-					sx={{
-						width: '500px',
-					}}
-				>
+				<DialogContent>
 					<HorizontalLinearStepper
 						setTitle={setTitle}
 						setService={handleService}
@@ -128,6 +157,8 @@ export default function JobCreator() {
 						services={services}
 						setAddress={setAddress}
 						address={address}
+						files={files}
+						setFiles={setFiles}
 					/>
 				</DialogContent>
 			</Dialog>
@@ -135,7 +166,7 @@ export default function JobCreator() {
 	);
 }
 
-const steps = ['Some details.', 'More details please.', 'Estimates.'];
+const steps = ['Some details.', 'More details please.', 'Estimates & Photos.'];
 
 export function HorizontalLinearStepper({
 	setTitle,
@@ -148,6 +179,8 @@ export function HorizontalLinearStepper({
 	services,
 	setAddress,
 	address,
+	files,
+	setFiles,
 }) {
 	const [activeStep, setActiveStep] = React.useState(0);
 
@@ -330,15 +363,31 @@ export function HorizontalLinearStepper({
 				placeholder="What's your soft budget overall in $?"
 				onChange={(e) => setOverallBudget(e.target.value)}
 			/>
+			<br />
+			<br />
+			<MuiFileInput
+				multiple
+				sx={{
+					width: '100%',
+				}}
+				placeholder="Pictures >> Words"
+				size="small"
+				value={[...files]}
+				onChange={(newFile) => {
+					console.log(newFile);
+					if (newFile.length === 0) {
+						setFiles([]);
+						return;
+					}
+					setFiles([...files, ...newFile]);
+				}}
+				on
+			/>
 		</div>
 	);
 
 	return (
-		<Box
-			sx={{
-				width: '100%',
-			}}
-		>
+		<Box>
 			<Stepper activeStep={activeStep}>
 				{steps.map((label, index) => {
 					const stepProps = {};

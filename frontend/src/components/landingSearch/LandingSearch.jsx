@@ -27,8 +27,8 @@ export default function LandingSearch() {
 	const navigate = useNavigate();
 	const [searchText, setSearchText] = useState('');
 
-	function setSearch(e){
-		console.log("values is",e.target.value);
+	function setSearch(e) {
+		console.log('values is', e.target.value);
 		setSearchText(e.target.value);
 	}
 	useEffect(() => {
@@ -51,7 +51,6 @@ export default function LandingSearch() {
 					noWrap
 					component="h2"
 					sx={{
-						mr: 2,
 						display: { xs: 'none', md: 'flex' },
 						fontFamily:
 							"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
@@ -155,8 +154,10 @@ export default function LandingSearch() {
 					Electrical
 				</Button>
 				<Button
-				//TODO update this one
-																				onClick= {()=>navigate('/search-services', {state:'Roofing' })}
+					//TODO update this one
+					onClick={() =>
+						navigate('/search-services', { state: 'Roofing' })
+					}
 					size="large"
 					startIcon={<RoofingIcon />}
 					sx={{

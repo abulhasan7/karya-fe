@@ -7,21 +7,17 @@
 }
 
 .ls-search-container {
-	width: 40%;
+	width: 45%;
 	display: flex;
-	padding: 35px;
+	padding: 30px;
 }
 
 .ls-search-container > * {
 }
 .ls-search {
-	width: 80%;
+	width: 90%;
 }
 
 .ls-services {
 	display: flex;
-}
-
-.ls-services > * {
-	padding: 25px;
 }
