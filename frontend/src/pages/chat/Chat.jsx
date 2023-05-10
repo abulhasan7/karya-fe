@@ -9,6 +9,10 @@ import {
 	Message,
 	MessageInput,
 	MessageList,
+	Sidebar,
+	Conversation,
+	ConversationList,
+	Search,
 } from '@chatscope/chat-ui-kit-react';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -22,9 +26,11 @@ export default function Chat() {
 	const [refreshCount, setRefreshCount] = React.useState(0);
 	const [messages, setMessages] = React.useState([]);
 	const [job, setJob] = React.useState(null);
+	const [currentJobProposal, setCurrentJobProposal] = React.useState(null);
 	const token = useSelector((state) => state.user.token);
 	const profile = useSelector((state) => state.user.profile);
 
+	const avatar = profile.picture;
 	const params = useParams();
 	const jobId = params.jobId || '';
 	// console.log(job);
@@ -37,7 +43,7 @@ export default function Chat() {
 
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/messages?jobId=${jobId}`, {
+			.get(`${API_URL}/messages?_id=${profile._id}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -45,7 +51,15 @@ export default function Chat() {
 			.then((response) => {
 				console.log('response is', response.data.message);
 				if (response.data.message) {
-					setMessages(response.data.message);
+					const firstJobProposal = Object.keys(
+						response.data.message,
+					)[0];
+					setCurrentJobProposal(
+						response.data.message[firstJobProposal],
+					);
+					setMessages(
+						response.data.message[firstJobProposal].messages,
+					);
 				}
 			});
 	}, [refreshCount]);
@@ -110,6 +124,31 @@ export default function Chat() {
 					height: '100%',
 				}}
 			>
+				<Sidebar
+					position="left"
+					style={{
+						height: '90vh',
+					}}
+					scrollable={false}
+				>
+					<ConversationList>
+						<Conversation
+							name="Joe"
+							lastSenderName="Joe"
+							info="Yes i can do it for you"
+						>
+							<Avatar src={avatar} name="Joe" />
+						</Conversation>
+
+						<Conversation
+							name="Emily"
+							lastSenderName="Emily"
+							info="Yes i can do it for you"
+						>
+							<Avatar src={avatar} name="Emily" />
+						</Conversation>
+					</ConversationList>
+				</Sidebar>
 				<ChatContainer
 					style={{
 						height: '90vh',
