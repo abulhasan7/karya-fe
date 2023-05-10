@@ -78,9 +78,19 @@ export default function JobCardView({ job, trigger }) {
 	const getCardActions = (status) => {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
 		else if (status === 'Closed Complete' || status === 'Closed Incomplete')
-			return;
+			return ;
 		return getMarkClosedIncompleteButton();
 	};
+
+	const getReviewButton = () => {
+		return (
+			<MenuItem onClick={markClosedComplete}>
+				Post a Review
+			</MenuItem>
+		);
+	};
+	
+
 
 	const getMarkClosedCompleteButton = () => {
 		return (
