@@ -13,12 +13,14 @@ import ChatIcon from '@mui/icons-material/Chat';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
-
+import Review from '../review/Review';
 import './JobCardView.css';
 
 export default function JobCardView({ job, trigger }) {
 	const token = useSelector((state) => state.user.token);
-
+	const [openReview, setOpenReview] = React.useState(false);
+	const rev = job.review?true:false;
+	const [reviewed,setReviewed] = React.useState(rev);
 	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
@@ -75,21 +77,25 @@ export default function JobCardView({ job, trigger }) {
 			);
 	};
 
-	const getCardActions = (status) => {
+	const getCardActions = (status,review) => {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
-		else if (status === 'Closed Complete' || status === 'Closed Incomplete')
-			return ;
+		else if (status === 'Closed Complete' && !reviewed)
+			return getReviewButton();
+		else if (status === 'Closed Complete' && reviewed)
+			return;
+		else if (status === 'Closed Incomplete')
+			return;
 		return getMarkClosedIncompleteButton();
 	};
 
 	const getReviewButton = () => {
 		return (
-			<MenuItem onClick={markClosedComplete}>
+			<MenuItem onClick={()=>setOpenReview(true)}>
 				Post a Review
 			</MenuItem>
 		);
 	};
-	
+
 
 
 	const getMarkClosedCompleteButton = () => {
@@ -222,6 +228,7 @@ export default function JobCardView({ job, trigger }) {
 					</div>
 				</div>
 			</CardContent>
+			{!reviewed && <Review openReview={openReview} setOpenReview={setOpenReview} serviceProvider={job.serviceProvider} job={job._id} setReviewed={setReviewed}></Review>}
 			{job && job.status !== 'Posted' && (
 				<CardActions>
 					<Button
@@ -249,7 +256,7 @@ export default function JobCardView({ job, trigger }) {
 				open={open}
 				onClose={handleClose}
 			>
-				{getCardActions(job.status)}
+				{getCardActions(job.status,job.review)}
 			</Menu>
 		</Card>
 	);
