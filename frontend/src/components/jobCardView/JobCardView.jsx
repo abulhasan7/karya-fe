@@ -22,8 +22,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 export default function JobCardView({ job, trigger }) {
 	const token = useSelector((state) => state.user.token);
 	const [openReview, setOpenReview] = React.useState(false);
-	const rev = job.review?job.review.rating : undefined;
-	const [rating,setRating] = React.useState(rev);
+	const rev = job.review ? job.review.rating : undefined;
+	const [rating, setRating] = React.useState(rev);
 	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
@@ -33,10 +33,10 @@ export default function JobCardView({ job, trigger }) {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-	const update = (rating) =>{
-		console.log('rating is',rating);
-		setRating(rating)
-	}
+	const update = (rating) => {
+		console.log('rating is', rating);
+		setRating(rating);
+	};
 	const getStatusChip = (status) => {
 		console.log(job.status);
 		if (status === 'Posted')
@@ -87,22 +87,18 @@ export default function JobCardView({ job, trigger }) {
 		if (status === 'Completed') return getMarkClosedCompleteButton();
 		else if (status === 'Closed Complete' && !rating)
 			return getReviewButton();
-		else if (status === 'Closed Complete' && rating)
-			return;
-		else if (status === 'Closed Incomplete')
-			return;
+		else if (status === 'Closed Complete' && rating) return;
+		else if (status === 'Closed Incomplete') return;
 		return getMarkClosedIncompleteButton();
 	};
 
 	const getReviewButton = () => {
 		return (
-			<MenuItem onClick={()=>setOpenReview(true)}>
+			<MenuItem onClick={() => setOpenReview(true)}>
 				Post a Review
 			</MenuItem>
 		);
 	};
-
-
 
 	const getMarkClosedCompleteButton = () => {
 		return (
@@ -192,19 +188,21 @@ export default function JobCardView({ job, trigger }) {
 						>
 							{job.name}
 						</Typography>
-						
-						{job.status=="Closed Complete" && <Rating
-									icon={
-										<FavoriteIcon
-											color="#f77367"
-											sx={{ color: '#f77367' }}
-										/>
-									}
-									emptyIcon={<FavoriteBorderIcon />}
-									// defaultValue={rating}
-									readOnly
-									value={rating}
-								/> }
+
+						{job.status == 'Closed Complete' && (
+							<Rating
+								icon={
+									<FavoriteIcon
+										color="#f77367"
+										sx={{ color: '#f77367' }}
+									/>
+								}
+								emptyIcon={<FavoriteBorderIcon />}
+								// defaultValue={rating}
+								readOnly
+								value={rating}
+							/>
+						)}
 						{getStatusChip(job.status)}
 					</div>
 				}
@@ -247,12 +245,20 @@ export default function JobCardView({ job, trigger }) {
 					</div>
 				</div>
 			</CardContent>
-			{!rating && <Review openReview={openReview} setOpenReview={setOpenReview} serviceProvider={job.serviceProvider} job={job._id} update={update}></Review>}
+			{!rating && (
+				<Review
+					openReview={openReview}
+					setOpenReview={setOpenReview}
+					serviceProvider={job.serviceProvider}
+					job={job._id}
+					update={update}
+				></Review>
+			)}
 			{job && job.status !== 'Posted' && (
 				<CardActions>
 					<Button
 						onClick={() => {
-							navigate(`/chat/${job._id}`);
+							navigate(`/chat/${job.acceptedProposal}`);
 						}}
 						startIcon={<ChatIcon />}
 						sx={{
