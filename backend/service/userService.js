@@ -8,7 +8,8 @@ const {
 	Job,
 	JobProposal,
 	ServiceProvider,
-	Enquiry
+	Enquiry,
+  Review
 } = require('../model/index');
 const jwtUtil = require('../util/jwtUtil');
 const {
@@ -325,6 +326,20 @@ async function enquiry(body) {
 
 }
 
+async function review(body) {
+	const review = new Review({
+		user: body.user,
+    rating:body.rating,
+    description: body.description,
+    job:body.job,
+		serviceProvider: body.serviceProvider
+	});
+	const sa = await review.save();
+	const job = await Job.updateOne({_id:body.job},{review});
+	return `Proposal ${body.status} successfully`
+
+}
+
 async function updateStatus(body) {
 	let jobs = await Job.updateOne({
 		_id: body.jobId
@@ -352,5 +367,6 @@ module.exports = {
 	acceptProposal,
 	getJobsNEByStatus,
 	updateStatus,
-	enquiry
+	enquiry,
+  review
 }

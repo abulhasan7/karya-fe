@@ -11,7 +11,8 @@ var {
 	getJobs,
 	getJobsByStatus,
 	updateStatus,
-	enquiry
+	enquiry,
+  review
 } = require('../service/userService');
 var {
 	checkAuthenticationHeader
@@ -122,6 +123,25 @@ router.post('/enquiry', checkAuthenticationHeader, async function (req, res, nex
 	try {
 		console.log(req.body);
 		let resp = await enquiry({
+			...req.body,
+			user: req._id
+		});
+		console.log('resp is', resp);
+		res.json({
+			message: resp
+		});
+	} catch (error) {
+		console.log("error occurred", error);
+		res.json({
+			error: error.message
+		})
+	}
+});
+
+router.post('/review', checkAuthenticationHeader, async function (req, res, next) {
+	try {
+		console.log(req.body);
+		let resp = await review({
 			...req.body,
 			user: req._id
 		});
