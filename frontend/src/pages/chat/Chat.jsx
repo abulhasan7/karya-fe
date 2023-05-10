@@ -25,6 +25,8 @@ export default function Chat() {
 	const [messageInputValue, setMessageInputValue] = React.useState('');
 	const [refreshCount, setRefreshCount] = React.useState(0);
 	const [messages, setMessages] = React.useState([]);
+	const [messagesData, setMessagesData] = React.useState(null);
+	const [proposals, setProposals] = React.useState([]);
 	const [job, setJob] = React.useState(null);
 	const [currentJobProposal, setCurrentJobProposal] = React.useState(null);
 	const token = useSelector((state) => state.user.token);
@@ -51,6 +53,8 @@ export default function Chat() {
 			.then((response) => {
 				console.log('response is', response.data.message);
 				if (response.data.message) {
+					setMessagesData(response.data.message);
+					setProposals(Object.keys(response.data.message));
 					const firstJobProposal = Object.keys(
 						response.data.message,
 					)[0];
@@ -132,21 +136,25 @@ export default function Chat() {
 					scrollable={false}
 				>
 					<ConversationList>
-						<Conversation
-							name="Joe"
-							lastSenderName="Joe"
-							info="Yes i can do it for you"
-						>
-							<Avatar src={avatar} name="Joe" />
-						</Conversation>
-
-						<Conversation
-							name="Emily"
-							lastSenderName="Emily"
-							info="Yes i can do it for you"
-						>
-							<Avatar src={avatar} name="Emily" />
-						</Conversation>
+						{proposals &&
+							proposals.map((proposal) => {
+								const msg = messagesData[proposal];
+								console.log('proposal : ' + proposal);
+								console.log(msg);
+								return (
+									<Conversation
+										name={msg.jobName}
+										info={msg.serviceProvider.name}
+									>
+										<Avatar
+											src={
+												msg.serviceProvider.primaryImage
+											}
+											name={msg.serviceProvider.name}
+										/>
+									</Conversation>
+								);
+							})}
 					</ConversationList>
 				</Sidebar>
 				<ChatContainer
