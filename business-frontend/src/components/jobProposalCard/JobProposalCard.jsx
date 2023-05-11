@@ -1,13 +1,18 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Rating from '@mui/material/Rating';
+import ChatIcon from '@mui/icons-material/Chat';
 import './JobProposalCard.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function JobProposalCard({ proposal, isAccepted, trigger }) {
+	const navigate = useNavigate();
 	return (
 		<Card sx={{ width: 750, maxWidth: 888, margin: 5 }}>
 			<CardContent>
@@ -86,10 +91,9 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 								proposal.hours +
 								' | ' +
 								'Hourly Rate($): ' +
-								proposal.hourlyRate + 
+								proposal.hourlyRate +
 								' | Total Price($): ' +
-								proposal.price
-								}
+								proposal.price}
 						</Typography>
 						<Typography
 							sx={{
@@ -108,6 +112,24 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 					</div>
 				</div>
 			</CardContent>
+			{proposal && (
+				<CardActions>
+					<Button
+						onClick={() => {
+							navigate(`/chat/${proposal._id}`);
+						}}
+						startIcon={<ChatIcon />}
+						sx={{
+							ml: '5px',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+							textTransform: 'unset',
+						}}
+					>
+						Open Chat
+					</Button>
+				</CardActions>
+			)}
 		</Card>
 	);
 }

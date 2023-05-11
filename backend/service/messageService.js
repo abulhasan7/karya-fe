@@ -42,6 +42,9 @@ async function getMessages(_id) {
 					name: proposal.serviceProvider.name,
 					primaryImage: proposal.serviceProvider.primaryImage
 				},
+				user: {
+					_id: proposal.job.user,
+				},
 				messages: newMessages[k]
 			};
 		}

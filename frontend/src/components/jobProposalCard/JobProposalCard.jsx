@@ -8,17 +8,25 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Rating from '@mui/material/Rating';
+import ChatIcon from '@mui/icons-material/Chat';
 import './JobProposalCard.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-export default function JobProposalCard({ proposal, isAccepted, trigger,name }) {
+export default function JobProposalCard({
+	proposal,
+	isAccepted,
+	trigger,
+	name,
+}) {
 	console.log('proposal is', proposal);
 	const [proposalState, setProposalState] = useState(proposal.status);
 	const token = useSelector((state) => state.user.token);
+	const navigate = useNavigate();
 
 	const update = (status) => {
 		axios
@@ -30,7 +38,7 @@ export default function JobProposalCard({ proposal, isAccepted, trigger,name }) 
 					jobProposalId: proposal._id,
 					serviceProviderId: proposal.serviceProvider._id,
 					toNumber: proposal.serviceProvider.phone,
-					name
+					name,
 				},
 				{
 					headers: {
@@ -129,8 +137,7 @@ export default function JobProposalCard({ proposal, isAccepted, trigger,name }) 
 								proposal.hourlyRate +
 								' | ' +
 								'Total Price($): ' +
-								proposal.price
-								}
+								proposal.price}
 						</Typography>
 						<Typography
 							sx={{
@@ -175,6 +182,24 @@ export default function JobProposalCard({ proposal, isAccepted, trigger,name }) 
 					</div>
 				</div>
 			</CardContent>
+			{proposal && (
+				<CardActions>
+					<Button
+						onClick={() => {
+							navigate(`/chat/${proposal._id}`);
+						}}
+						startIcon={<ChatIcon />}
+						sx={{
+							ml: '5px',
+							fontFamily:
+								"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+							textTransform: 'unset',
+						}}
+					>
+						Open Chat
+					</Button>
+				</CardActions>
+			)}
 		</Card>
 	);
 }

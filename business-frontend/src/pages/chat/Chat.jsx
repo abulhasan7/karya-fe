@@ -9,67 +9,66 @@ import {
 	Message,
 	MessageInput,
 	MessageList,
+	Sidebar,
+	Conversation,
+	ConversationList,
+	Search,
 } from '@chatscope/chat-ui-kit-react';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
 import MenuBar from '../../components/menubar/MenuBar';
 
 export default function Chat() {
-	const [refreshCount, setRefreshCount] = React.useState(0);
 	const [messageInputValue, setMessageInputValue] = React.useState('');
+	const [refreshCount, setRefreshCount] = React.useState(0);
 	const [messages, setMessages] = React.useState([]);
+	const [messagesData, setMessagesData] = React.useState(null);
+	const [proposals, setProposals] = React.useState([]);
+
 	const [job, setJob] = React.useState(null);
+	const [currentJobProposal, setCurrentJobProposal] = React.useState(null);
 	const token = useSelector((state) => state.business.token);
 	const profile = useSelector((state) => state.business.profile);
-
+	const navigate = useNavigate();
+	const avatar = profile.picture;
 	const params = useParams();
-	const jobId = params.jobId || '';
+
+	const [activeProposal, setActiveProposal] = React.useState(
+		params.jobId || '',
+	);
 
 	useEffect(() => {
 		setInterval(() => {
 			setRefreshCount((prevCount) => prevCount + 1);
-		}, 5000);
+		}, 7000);
 	}, []);
 
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/messages?jobId=${jobId}`, {
+			.get(`${API_URL}/messages?_id=${profile._id}`, {
 				headers: {
 					Authorization: token,
 				},
 			})
 			.then((response) => {
-				console.log('response is', response.data.message);
 				if (response.data.message) {
-					setMessages(response.data.message);
+					setMessagesData(response.data.message);
+					setProposals(Object.keys(response.data.message));
+					setMessages(response.data.message[activeProposal].messages);
 				}
 			});
 	}, [refreshCount]);
 
-	useEffect(() => {
-		axios
-			.get(`${API_URL}/users/get-job?jobId=${jobId}`, {
-				headers: {
-					Authorization: token,
-				},
-			})
-			.then((response) => {
-				console.log('response is', response.data.message);
-				if (response.data.message) {
-					setJob(response.data.message);
-				}
-			});
-	}, []);
-
 	const handleMessageSend = async () => {
 		const messageBody = {
 			from: profile._id,
-			to: job.user,
+			to: messagesData[activeProposal].user._id,
 			message: messageInputValue,
-			job: jobId,
+			jobProposalId: activeProposal,
 		};
 		const messageCreateRequest = await fetch(`${API_URL}/messages`, {
 			method: 'POST',
@@ -86,18 +85,7 @@ export default function Chat() {
 		});
 		const messageCreationResp = await messageCreateRequest.json();
 		setMessageInputValue('');
-		axios
-			.get(`${API_URL}/messages?jobId=${jobId}`, {
-				headers: {
-					Authorization: token,
-				},
-			})
-			.then((response) => {
-				console.log('response is', response.data.message);
-				if (response.data.message) {
-					setMessages(response.data.message);
-				}
-			});
+		//refresh messages
 	};
 
 	return (
@@ -109,6 +97,40 @@ export default function Chat() {
 					height: '100%',
 				}}
 			>
+				<Sidebar
+					position="left"
+					style={{
+						height: '90vh',
+					}}
+					scrollable={false}
+				>
+					<ConversationList>
+						{proposals &&
+							proposals.map((proposal) => {
+								const msg = messagesData[proposal];
+								return (
+									<Conversation
+										name={msg.jobName}
+										active={proposal === activeProposal}
+										onClick={() => {
+											navigate(`/chat/${proposal}`);
+											setActiveProposal(proposal);
+											setRefreshCount(
+												(prevCount) => prevCount + 1,
+											);
+										}}
+									>
+										{/* <Avatar
+											src={
+												msg.serviceProvider.primaryImage
+											}
+											name={msg.serviceProvider.name}
+										/> */}
+									</Conversation>
+								);
+							})}
+					</ConversationList>
+				</Sidebar>
 				<ChatContainer
 					style={{
 						height: '90vh',
@@ -117,11 +139,22 @@ export default function Chat() {
 					<ConversationHeader>
 						<ConversationHeader.Back />
 						{/* <Avatar
-							src={job && job.user.picture}
-							name={job && job.user.name}
+							src={
+								messagesData &&
+								messagesData[activeProposal].serviceProvider
+									.primaryImage
+							}
+							name={
+								messagesData &&
+								messagesData[activeProposal].serviceProvider
+									.name
+							}
 						/> */}
 						<ConversationHeader.Content
-							userName={job && job.name}
+							userName={
+								messagesData &&
+								messagesData[activeProposal].jobName
+							}
 						/>
 					</ConversationHeader>
 					<MessageList
@@ -145,7 +178,12 @@ export default function Chat() {
 											/>
 										);
 									}
-									if (job && message.from === job.user) {
+									if (
+										messagesData &&
+										message.from ===
+											messagesData[activeProposal].user
+												._id
+									) {
 										return (
 											<Message
 												model={{
@@ -156,9 +194,18 @@ export default function Chat() {
 											>
 												{/* <Avatar
 													src={
-														job && job.user.picture
+														messagesData &&
+														messagesData[
+															activeProposal
+														].serviceProvider
+															.primaryImage
 													}
-													name={job && job.user.name}
+													name={
+														messagesData &&
+														messagesData[
+															activeProposal
+														].serviceProvider.name
+													}
 												/> */}
 											</Message>
 										);

@@ -276,7 +276,7 @@ export default function JobCardView({ job, trigger }) {
 				<CardActions>
 					<Button
 						onClick={() => {
-							navigate(`/chat/${job._id}`);
+							navigate(`/chat/${job.acceptedProposal}`);
 						}}
 						startIcon={<ChatIcon />}
 						sx={{

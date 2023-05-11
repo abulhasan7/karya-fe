@@ -66,7 +66,7 @@ export default function Chat() {
 	const handleMessageSend = async () => {
 		const messageBody = {
 			from: profile._id,
-			to: job.serviceProvider._id,
+			to: messagesData[activeProposal].serviceProvider._id,
 			message: messageInputValue,
 			jobProposalId: activeProposal,
 		};
