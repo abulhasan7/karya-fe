@@ -493,7 +493,7 @@ export default function JobOverview() {
 							/>
 						</div>
 					)}
-					{!job.acceptedProposal && job.proposals.length > 0 && (
+					{!job.acceptedProposal && job.proposals && job.proposals.length > 0 && (
 						<div className="bso-details-highlights">
 							<div>
 								<Typography
