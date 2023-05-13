@@ -49,7 +49,7 @@ export default function Chat() {
 
 	useEffect(() => {
 		axios
-			.get(`${API_URL}/messages?_id=${profile._id}`, {
+			.get(`${API_URL}/messages?_id=${profile._id}&isServiceProvider=true`, {
 				headers: {
 					Authorization: token,
 				},

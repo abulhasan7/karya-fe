@@ -22,4 +22,8 @@ module.exports = (Schema) =>
     serviceProvider: {
         type: Schema.Types.ObjectId, ref: 'ServiceProvider',
     },
+    
+    user: {
+        type: Schema.Types.ObjectId, ref: 'User',
+    },
 });

@@ -196,7 +196,8 @@ async function postProposal(jobDetails) {
 		price: jobDetails.price,
 		status: "POSTED",
 		serviceProvider: jobDetails._id,
-		job: jobDetails.job
+		job: jobDetails.job,
+		user: jobDetails.user
 	})
 	let jobsaved = await job.save();
 	let jobprop = await Job.updateOne({
