@@ -137,7 +137,11 @@ export default function JobCardView({ job, trigger }) {
 					{getMarkDelayedButton()}
 				</div>
 			);
-		if (status === 'PROPOSAL-ACCEPTED') return getMarkCompletedButton();
+	};
+
+	const canShowCardActions = (status) => {
+		if (['Posted', 'Accepted', 'In Progress'].indexOf(status) >= 0)
+			return true;
 	};
 
 	const getCreateProposalButton = () => {
@@ -204,16 +208,19 @@ export default function JobCardView({ job, trigger }) {
 		>
 			<CardHeader
 				action={
-					<IconButton
-						aria-label="more"
-						id="long-button"
-						aria-controls={open ? 'long-menu' : undefined}
-						aria-expanded={open ? 'true' : undefined}
-						aria-haspopup="true"
-						onClick={handleClick}
-					>
-						<MoreVertIcon />
-					</IconButton>
+					job &&
+					canShowCardActions(job.status) && (
+						<IconButton
+							aria-label="more"
+							id="long-button"
+							aria-controls={open ? 'long-menu' : undefined}
+							aria-expanded={open ? 'true' : undefined}
+							aria-haspopup="true"
+							onClick={handleClick}
+						>
+							<MoreVertIcon />
+						</IconButton>
+					)
 				}
 				title={
 					<div className="job-title">

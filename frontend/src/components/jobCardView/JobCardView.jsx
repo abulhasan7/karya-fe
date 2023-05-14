@@ -38,6 +38,13 @@ export default function JobCardView({ job, trigger }) {
 		console.log('rating is', rating);
 		setRating(rating);
 	};
+
+	const canShowCardActions = (status) => {
+		if (['Closed Complete', 'Closed Incomplete'].indexOf(status) >= 0)
+			return false;
+		return true;
+	};
+
 	const getStatusChip = (status) => {
 		console.log(job.status);
 		if (status === 'Posted')
@@ -160,16 +167,19 @@ export default function JobCardView({ job, trigger }) {
 		>
 			<CardHeader
 				action={
-					<IconButton
-						aria-label="more"
-						id="long-button"
-						aria-controls={open ? 'long-menu' : undefined}
-						aria-expanded={open ? 'true' : undefined}
-						aria-haspopup="true"
-						onClick={handleClick}
-					>
-						<MoreVertIcon />
-					</IconButton>
+					job &&
+					canShowCardActions(job.status) && (
+						<IconButton
+							aria-label="more"
+							id="long-button"
+							aria-controls={open ? 'long-menu' : undefined}
+							aria-expanded={open ? 'true' : undefined}
+							aria-haspopup="true"
+							onClick={handleClick}
+						>
+							<MoreVertIcon />
+						</IconButton>
+					)
 				}
 				title={
 					<div className="job-title">
