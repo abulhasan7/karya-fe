@@ -254,7 +254,7 @@ export default function JobCardView({ job, trigger }) {
 					update={update}
 				></Review>
 			)}
-			{job && job.status !== 'Posted' && (
+			{job && job.status !== 'Posted' && job.proposals.length > 0 && (
 				<CardActions>
 					<Button
 						onClick={() => {

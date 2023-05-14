@@ -230,52 +230,53 @@ export default function JobOverview() {
 						</Typography>
 					</div>
 					<Divider />
-					<div className="bso-details-highlights">
-						<div>
-							<Typography
-								variant="h4"
-								noWrap
-								component="h4"
-								sx={{
-									display: { xs: 'none', md: 'flex' },
-									fontFamily:
-										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-									fontWeight: 600,
-									fontStyle: 'normal',
-									fontSize: '18px',
-									// letterSpacing: '.3rem',
-									color: 'primary',
-								}}
-							>
-								Location
-							</Typography>
-						</div>
-						<br />
-						<div>
-							<Typography
-								variant="p"
-								sx={{
-									display: { xs: 'none', md: 'flex' },
-									fontFamily:
-										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-									fontWeight: 400,
-									fontStyle: 'normal',
-									fontSize: '18px',
-									// letterSpacing: '.3rem',
-									color: 'text.secondary',
-								}}
-							>
-								{job &&
-									job.address.street +
+					{job && job.address && (
+						<div className="bso-details-highlights">
+							<div>
+								<Typography
+									variant="h4"
+									noWrap
+									component="h4"
+									sx={{
+										display: { xs: 'none', md: 'flex' },
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+										fontWeight: 600,
+										fontStyle: 'normal',
+										fontSize: '18px',
+										// letterSpacing: '.3rem',
+										color: 'primary',
+									}}
+								>
+									Location
+								</Typography>
+							</div>
+							<br />
+							<div>
+								<Typography
+									variant="p"
+									sx={{
+										display: { xs: 'none', md: 'flex' },
+										fontFamily:
+											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+										fontWeight: 400,
+										fontStyle: 'normal',
+										fontSize: '18px',
+										// letterSpacing: '.3rem',
+										color: 'text.secondary',
+									}}
+								>
+									{job.address.street +
 										', ' +
 										job.address.city +
 										', ' +
 										job.address.state +
 										', ' +
 										job.address.zip}
-							</Typography>
+								</Typography>
+							</div>
 						</div>
-					</div>
+					)}
 					<Divider />
 					<div className="bso-details-highlights">
 						<div>
@@ -486,37 +487,39 @@ export default function JobOverview() {
 							/>
 						</div>
 					)}
-					{!job.acceptedProposal && job.proposals && job.proposals.length > 0 && (
-						<div className="bso-details-highlights">
-							<div>
-								<Typography
-									variant="h4"
-									noWrap
-									component="h4"
-									sx={{
-										display: { xs: 'none', md: 'flex' },
-										fontFamily:
-											"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-										fontWeight: 600,
-										fontStyle: 'normal',
-										fontSize: '18px',
-										// letterSpacing: '.3rem',
-										color: 'primary',
-									}}
-								>
-									{'Proposals'}
-								</Typography>
+					{!job.acceptedProposal &&
+						job.proposals &&
+						job.proposals.length > 0 && (
+							<div className="bso-details-highlights">
+								<div>
+									<Typography
+										variant="h4"
+										noWrap
+										component="h4"
+										sx={{
+											display: { xs: 'none', md: 'flex' },
+											fontFamily:
+												"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+											fontWeight: 600,
+											fontStyle: 'normal',
+											fontSize: '18px',
+											// letterSpacing: '.3rem',
+											color: 'primary',
+										}}
+									>
+										{'Proposals'}
+									</Typography>
+								</div>
+								{job.proposals &&
+									job.proposals.map((j) => (
+										<JobProposalCard
+											proposal={j}
+											trigger={setTrigger}
+											name={job.name}
+										/>
+									))}
 							</div>
-							{job.proposals &&
-								job.proposals.map((j) => (
-									<JobProposalCard
-										proposal={j}
-										trigger={setTrigger}
-										name={job.name}
-									/>
-								))}
-						</div>
-					)}
+						)}
 				</div>
 				<div className="jo-side-card">
 					<Paper
@@ -530,7 +533,9 @@ export default function JobOverview() {
 						{job && job.status !== 'Posted' && (
 							<Button
 								onClick={() => {
-									navigate(`/chat/${job._id}`);
+									navigate(
+										`/chat/${job.acceptedProposal._id}`,
+									);
 								}}
 								size="small"
 								variant="contained"
