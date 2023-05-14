@@ -73,7 +73,9 @@ async function login(ServiceProviderDetails) {
 			if (!result) {
 				throw new Error('Invalid Password');
 			} else {
-				const reviews = await Review.find({ serviceProvider: dbData._id });
+				const reviews = await Review.find({
+					serviceProvider: dbData._id
+				});
 				let total = 0;
 				reviews.forEach(rev => total += rev.rating);
 				const avgReviews = total / reviews.length;
@@ -114,12 +116,17 @@ async function getProfile(_id) {
 		if (!dbData) {
 			throw new Error('ServiceProvider not found');
 		} else {
-			const reviews = await Review.find({ serviceProvider: dbData._id });
+			const reviews = await Review.find({
+				serviceProvider: dbData._id
+			});
 			let total = 0;
 			reviews.forEach(rev => total += rev.rating);
 			const avgReviews = total / reviews.length;
 			console.log("avgreviews", avgReviews);
-			const le = { profile: dbData, avgReviews };
+			const le = {
+				profile: dbData,
+				avgReviews
+			};
 			return le;
 		}
 	} catch (error) {
@@ -250,7 +257,7 @@ async function getJobs(_id) {
 	//,status:{$nin:["Closed Complete","Closed Incomplete"]}
 	let jobs = await Job.find({
 		serviceProvider: _id
-	}).populate('user').exec();
+	}).populate('user').populate('review').exec();
 	// if (jobs && jobs.length > 0) {
 	return jobs;
 	// } else {

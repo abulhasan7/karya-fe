@@ -49,18 +49,6 @@ export default function JobProposalCard({ proposal, isAccepted, trigger }) {
 								defaultValue={3}
 								readOnly
 							/>
-							<Typography
-								sx={{
-									display: { xs: 'none', md: 'flex' },
-									fontFamily:
-										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-									fontSize: '12px',
-									// letterSpaci
-								}}
-								color="text.secondary"
-							>
-								200 Reviews
-							</Typography>
 						</div>
 
 						<Typography

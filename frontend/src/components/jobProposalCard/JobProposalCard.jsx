@@ -90,19 +90,6 @@ export default function JobProposalCard({
 								defaultValue={3}
 								readOnly
 							/>
-							<Typography
-								sx={{
-									display: { xs: 'none', md: 'flex' },
-									fontFamily:
-										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-									fontStyle: 'normal',
-									fontSize: '12px',
-									// letterSpaci
-								}}
-								color="text.secondary"
-							>
-								200 Reviews
-							</Typography>
 						</div>
 
 						<Typography

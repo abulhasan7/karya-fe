@@ -13,12 +13,13 @@ import ChatIcon from '@mui/icons-material/Chat';
 import axios from 'axios';
 import { API_URL } from '../../constants';
 import { useSelector } from 'react-redux';
-import Review from '../review/Review';
-import './JobCardView.css';
-
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
+import Review from '../review/Review';
+import './JobCardView.css';
+
 export default function JobCardView({ job, trigger }) {
 	const token = useSelector((state) => state.user.token);
 	const [openReview, setOpenReview] = React.useState(false);
@@ -172,37 +173,40 @@ export default function JobCardView({ job, trigger }) {
 				}
 				title={
 					<div className="job-title">
-						<Typography
-							variant="h3"
-							noWrap
-							component="h3"
-							sx={{
-								display: { xs: 'none', md: 'flex' },
-								fontFamily:
-									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-								fontWeight: 600,
-								fontStyle: 'normal',
-								fontSize: '22px',
-								// letterSpacing: '.3rem',
-							}}
-						>
-							{job.name}
-						</Typography>
+						<div>
+							<Typography
+								variant="h3"
+								noWrap
+								component="h3"
+								sx={{
+									display: { xs: 'none', md: 'flex' },
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									fontWeight: 600,
+									fontStyle: 'normal',
+									fontSize: '22px',
+									// letterSpacing: '.3rem',
+								}}
+							>
+								{job.name}
+							</Typography>
 
-						{job.status == 'Closed Complete' && (
-							<Rating
-								icon={
-									<FavoriteIcon
-										color="#f77367"
-										sx={{ color: '#f77367' }}
-									/>
-								}
-								emptyIcon={<FavoriteBorderIcon />}
-								// defaultValue={rating}
-								readOnly
-								value={rating}
-							/>
-						)}
+							{job.status == 'Closed Complete' && (
+								<Rating
+									icon={
+										<FavoriteIcon
+											color="#f77367"
+											sx={{ color: '#f77367' }}
+										/>
+									}
+									emptyIcon={<FavoriteBorderIcon />}
+									// defaultValue={rating}
+									readOnly
+									value={rating}
+								/>
+							)}
+						</div>
+
 						{getStatusChip(job.status)}
 					</div>
 				}

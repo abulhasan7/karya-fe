@@ -11,6 +11,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
+import Rating from '@mui/material/Rating';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import Button from '@mui/material/Button';
 import { CardActions, CardHeader, Chip } from '@mui/material';
@@ -25,6 +28,9 @@ import { useSelector } from 'react-redux';
 export default function JobCardView({ job, trigger }) {
 	const navigate = useNavigate();
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const rev = job.review ? job.review.rating : undefined;
+	console.log(job);
+	const [rating, setRating] = React.useState(rev);
 	const [openCreateProposal, setOpenCreateProposal] = React.useState(false);
 	const open = Boolean(anchorEl);
 	const [description, setDescription] = React.useState('');
@@ -211,22 +217,39 @@ export default function JobCardView({ job, trigger }) {
 				}
 				title={
 					<div className="job-title">
-						<Typography
-							variant="h3"
-							noWrap
-							component="h3"
-							sx={{
-								display: { xs: 'none', md: 'flex' },
-								fontFamily:
-									"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
-								fontWeight: 600,
-								fontStyle: 'normal',
-								fontSize: '22px',
-								// letterSpacing: '.3rem',
-							}}
-						>
-							{job.name}
-						</Typography>
+						<div>
+							<Typography
+								variant="h3"
+								noWrap
+								component="h3"
+								sx={{
+									display: { xs: 'none', md: 'flex' },
+									fontFamily:
+										"Guardian-EgypTT, Charter, 'Charter Bitstream', Cambria",
+									fontWeight: 600,
+									fontStyle: 'normal',
+									fontSize: '22px',
+									// letterSpacing: '.3rem',
+								}}
+							>
+								{job.name}
+							</Typography>
+
+							{job.status == 'Closed Complete' && (
+								<Rating
+									icon={
+										<FavoriteIcon
+											color="#f77367"
+											sx={{ color: '#f77367' }}
+										/>
+									}
+									emptyIcon={<FavoriteBorderIcon />}
+									// defaultValue={rating}
+									readOnly
+									value={rating}
+								/>
+							)}
+						</div>
 						{getStatusChip(job.status)}
 					</div>
 				}

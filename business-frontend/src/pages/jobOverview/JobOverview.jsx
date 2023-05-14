@@ -6,6 +6,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
 import Carousel from 'react-material-ui-carousel';
+import Rating from '@mui/material/Rating';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import MenuBar from '../../components/menubar/MenuBar';
 
@@ -222,6 +225,20 @@ export default function JobOverview() {
 							</Typography>
 							{getStatusChip(job.status)}
 						</div>
+						{job && job.review && job.review.rating && (
+							<Rating
+								icon={
+									<FavoriteIcon
+										color="#f77367"
+										sx={{ color: '#f77367' }}
+									/>
+								}
+								emptyIcon={<FavoriteBorderIcon />}
+								defaultValue={job.review.rating}
+								readOnly
+								value={job.review.rating}
+							/>
+						)}
 						<Typography
 							sx={{
 								display: { xs: 'none', md: 'flex' },
