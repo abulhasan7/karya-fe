@@ -19,7 +19,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import Review from '../review/Review';
 import './JobCardView.css';
-import { flushSync } from 'react-dom';
 
 export default function JobCardView({ job, trigger }) {
 	const token = useSelector((state) => state.user.token);
@@ -38,6 +37,7 @@ export default function JobCardView({ job, trigger }) {
 	const update = (rating) => {
 		console.log('rating is', rating);
 		setRating(rating);
+		trigger('d');
 	};
 
 	const canShowCardActions = (status) => {
