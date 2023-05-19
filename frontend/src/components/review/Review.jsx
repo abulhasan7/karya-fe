@@ -22,8 +22,8 @@ export default function Review({openReview,setOpenReview,job,serviceProvider,upd
 	};
 
 	const handleClose = () => {
-		setOpenReview(false);
 		update(rating);
+		setOpenReview(false);
 
 	};
 
