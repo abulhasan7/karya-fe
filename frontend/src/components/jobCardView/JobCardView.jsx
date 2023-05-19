@@ -19,6 +19,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import Review from '../review/Review';
 import './JobCardView.css';
+import { flushSync } from 'react-dom';
 
 export default function JobCardView({ job, trigger }) {
 	const token = useSelector((state) => state.user.token);
@@ -40,7 +41,9 @@ export default function JobCardView({ job, trigger }) {
 	};
 
 	const canShowCardActions = (status) => {
-		if (['Closed Complete', 'Closed Incomplete'].indexOf(status) >= 0)
+		if (['Closed Incomplete'].indexOf(status) >= 0)
+			return false;
+		if(status=="Closed Complete" && job.review)
 			return false;
 		return true;
 	};
